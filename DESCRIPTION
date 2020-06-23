@@ -1,6 +1,6 @@
-Package: 
+Package: hySpc.read.Witec
 Type: Package
-Title: 
+Title: Distill hyperSpec for Use with Witec Files
 Version: 0.0.0.9000
 Maintainer: Erick Oduniyi <eeoduniyi@gmail.com>
 Authors@R: c(
@@ -16,10 +16,13 @@ LazyData: yes
 Depends:
     hyperSpec
 Imports: 
-    hySpc.testthat
+    testthat
 Suggests:
     knitr,
 VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Collate: 
+    'read.mat.Witec.R'
+    'unittestdata.R'
+    'read.txt.Witec.R'
