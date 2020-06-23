@@ -16,6 +16,7 @@
 #' @param ...,quiet handed to \code{\link[base]{scan}}
 #' @return a hyperSpec object
 #' @author Claudia Beleites and Marcel Dahms
+#' @include unittestdata.R
 #' @seealso \code{vignette ("fileio")} for more information on file import and
 #'
 #' \code{\link{options}} for details on options.
