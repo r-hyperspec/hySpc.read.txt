@@ -1,4 +1,4 @@
-library(hySpc.testthat)
-library(SKELETON)
+# library(hySpc.testthat)
+library(hySpc.read.Witec)
 
-test_check("SKELETON")
+test_check("hySpc.read.Witec")
