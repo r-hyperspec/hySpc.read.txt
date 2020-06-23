@@ -13,4 +13,4 @@
     read token
    
     # Pass the skeleton labels to the derived package repo
-    labels -c hypSpc.skeleton.labels.json pkg_repo -t token
+    labels -c hySpc.skeleton.labels.json pkg_repo -t token
