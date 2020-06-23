@@ -1,4 +1,5 @@
-# hyperSpec Package Skeleton
+# hySpc.read.Witec
+Distill package for managing files produced by Witec instruments
 <!-- badges: start -->
 <!--
 [![CRAN
@@ -9,19 +10,3 @@ status](https://www.r-pkg.org/badges/version/SKELETON)](https://cran.r-project.o
 [![Codecov test coverage](https://codecov.io/gh/r-hyperspec/SKELETON/branch/master/graph/badge.svg) (master)](https://codecov.io/gh/r-hyperspec/SKELETON?branch=master)
 -->
 <!-- badges: end -->
-
-package skeleton for hyperSpec ecosystem
-
-When creating a repo, 
-
-- replace `SKELETON` with new package name
-  - [ ] `LICENSE`
-  - [ ] `NEWS.md`
-  - [ ] `README.md`
-    - appveyor badge needs appveyor code
-  - [ ] `tests/testthat.R`
-  - [ ] `tests/testthat/test_attached.R`
-
-- create issue labels
-  - [ ] apply github labels (in `github-helpers/`), 
-  - [ ] delete `github-helpers/`
