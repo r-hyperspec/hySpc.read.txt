@@ -1,4 +1,4 @@
-#' Import Raman Spectra/Maps from Witec Instrument via ASCII files
+2#' Import Raman Spectra/Maps from Witec Instrument via ASCII files
 #'
 #' \code{read.txt.Witec} reads Witec ASCII files where the first column gives the wavelength
 #' axes and the other columns the spectra. \code{read.dat.Witec} reads Witec's ASCII exported data
