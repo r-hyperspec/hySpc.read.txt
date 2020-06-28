@@ -16,7 +16,7 @@ LazyData: yes
 Depends:
     hyperSpec
 Imports: 
-    testthat
+    hySpc.testthat
 Suggests:
     knitr,
     covr
@@ -24,7 +24,7 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Collate: 
-    'read.mat.Witec.R'
-    'unittestdata.R'
-    'read.txt.Witec.R'
     'read.Witec.R'
+    'read.mat.Witec.R'
+    'read.txt.Witec.R'
+    'read_txt_Witec_ASCII.R'
