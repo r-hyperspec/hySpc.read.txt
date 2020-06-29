@@ -8,7 +8,7 @@ Authors@R: c(
     person("Erick",     "Oduniyi", role = c("aut","cre"), email = "eeoduniyi@gmail.com"),
     person("Vilmantas", "Gegzna", role = c("aut")),
     person("Bryan",     "Hanson", role = c("aut")))
-Description:
+Description: File import functions for spectra from Witec spectrometers
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyLoad: yes
