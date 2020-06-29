@@ -8,14 +8,14 @@ Authors@R: c(
     person("Erick",     "Oduniyi", role = c("aut","cre"), email = "eeoduniyi@gmail.com"),
     person("Vilmantas", "Gegzna", role = c("aut")),
     person("Bryan",     "Hanson", role = c("aut")))
-Description: 
+Description: File import functions for spectra from Witec spectrometers
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes
 Depends:
     hyperSpec
-Imports: 
+Imports:
     hySpc.testthat
 Suggests:
     knitr,
@@ -23,7 +23,10 @@ Suggests:
 VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
-Collate: 
+Collate:
     'read.Witec.R'
     'read.mat.Witec.R'
     'read.txt.Witec.R'
+    'read.Witec.R'
+    'fileio.optional.R'
+    'options.R'
