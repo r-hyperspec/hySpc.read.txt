@@ -27,3 +27,5 @@ Collate:
     'unittestdata.R'
     'read.txt.Witec.R'
     'read.Witec.R'
+    'fileio.optional.R'
+    'options.R'
