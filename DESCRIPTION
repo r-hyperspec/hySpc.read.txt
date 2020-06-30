@@ -24,9 +24,9 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Collate:
+    'unittest.R'
+    'fileio.optional.R'
+    'options.R'
     'read.Witec.R'
     'read.mat.Witec.R'
     'read.txt.Witec.R'
-    'read.Witec.R'
-    'fileio.optional.R'
-    'options.R'
