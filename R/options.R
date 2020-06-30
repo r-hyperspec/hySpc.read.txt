@@ -58,7 +58,7 @@ hy.getOptions <- function(...) {
 }
 
 #' @include unittest.R
-.test(hy.getOptions) <- function() {
+test(hy.getOptions) <- function() {
   context("hy.getOptions")
 
   test_that("proper return", {
@@ -119,7 +119,7 @@ hy.setOptions <- function(...) {
   opt
 }
 
-.test(hy.setOptions) <- function() {
+test(hy.setOptions) <- function() {
   context("hy.setOptions")
 
   old <- hy.getOptions()
