@@ -1,5 +1,12 @@
-## ' @export
-#' @importFrom utils maintainer
+#' Import Matlab file exported by Witec Project software
+#'
+#' @param file file or connection from which to import
+#'
+#' @export
+#' @importClassesFrom hyperSpec hyperSpec
+#' @importFrom methods new
+#' @importFrom utils packageDescription
+#' @import hyperSpec
 read.mat.Witec <- function(file = stop("filename or connection needed")) {
   if (!requireNamespace("R.matlab")) {
     stop("package 'R.matlab' needed.")
@@ -10,8 +17,10 @@ read.mat.Witec <- function(file = stop("filename or connection needed")) {
   if (length(data) > 1L) {
     stop(
       "Matlab file contains more than 1 object. This should not happen.\n",
-      "If it is nevertheless a WITec exported .mat file, please contact the ",
-      "maintainer (", maintainer("hyperSpec"), ") with\n",
+      "If it is nevertheless a WITec exported .mat file, ",
+      "please open an issue at ",
+      packageDescription("hySpc.read.Witec")$BugReports,
+      " with\n",
       "- output of `sessionInfo ()` and\n",
       "- an example file"
     )
