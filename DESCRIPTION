@@ -11,6 +11,10 @@ Authors@R: c(
 Description: This package provides file import filters for a number of file formats produced by Witec instruments. 
     The imported data are returned as hyperSpec objects. 
 License: MIT + file LICENSE
+URL: 
+    https://r-hyperspecgithub.io/hySpc.read.Witec/,
+    https://github.com/r-hyperspec/hySpc.read.Witec/
+BugReports: https://github.com/r-hyperspec/hySpc.read.Witec/issues
 Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes
