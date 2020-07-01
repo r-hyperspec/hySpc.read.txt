@@ -12,7 +12,7 @@ Description: This package provides file import filters for a number of file form
     The imported data are returned as hyperSpec objects. 
 License: MIT + file LICENSE
 URL: 
-    https://r-hyperspecgithub.io/hySpc.read.Witec/,
+    https://r-hyperspec.github.io/hySpc.read.Witec/,
     https://github.com/r-hyperspec/hySpc.read.Witec/
 BugReports: https://github.com/r-hyperspec/hySpc.read.Witec/issues
 Encoding: UTF-8
