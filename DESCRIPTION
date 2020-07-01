@@ -19,9 +19,11 @@ Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes
 Depends:
-    hyperSpec
+    hyperSpec,
+    methods
 Imports:
-    hySpc.testthat
+    hySpc.testthat,
+    utils
 Suggests:
     R.matlab,
     testthat,
