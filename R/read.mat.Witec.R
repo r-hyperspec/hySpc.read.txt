@@ -1,5 +1,9 @@
-## ' @export
+#' @param file
+#'
+#' @export
 #' @importFrom utils maintainer
+#' @importClassesFrom hyperSpec hyperSpec
+#' @import hyperSpec
 read.mat.Witec <- function(file = stop("filename or connection needed")) {
   if (!requireNamespace("R.matlab")) {
     stop("package 'R.matlab' needed.")

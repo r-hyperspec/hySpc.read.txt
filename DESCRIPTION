@@ -23,6 +23,8 @@ Depends:
 Imports:
     hySpc.testthat
 Suggests:
+    R.matlab,
+    testthat,
     knitr,
     covr
 VignetteBuilder: knitr
