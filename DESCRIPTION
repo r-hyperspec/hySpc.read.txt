@@ -1,6 +1,6 @@
 Package: hySpc.read.Witec
 Type: Package
-Title: Distill hyperSpec for Use with Witec Files
+Title: File import functions for spectra from Witec spectrometers
 Version: 0.0.0.9000
 Maintainer: Erick Oduniyi <eeoduniyi@gmail.com>
 Authors@R: c(
@@ -8,7 +8,8 @@ Authors@R: c(
     person("Erick",     "Oduniyi", role = c("aut","cre"), email = "eeoduniyi@gmail.com"),
     person("Vilmantas", "Gegzna", role = c("aut")),
     person("Bryan",     "Hanson", role = c("aut")))
-Description: File import functions for spectra from Witec spectrometers
+Description: This package provides file import filters for a number of file formats produced by Witec instruments. 
+    The imported data are returned as hyperSpec objects. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyLoad: yes
@@ -21,12 +22,5 @@ Suggests:
     knitr,
     covr
 VignetteBuilder: knitr
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
-Collate:
-    'unittest.R'
-    'fileio.optional.R'
-    'options.R'
-    'read.Witec.R'
-    'read.mat.Witec.R'
-    'read.txt.Witec.R'
