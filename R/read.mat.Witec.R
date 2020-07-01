@@ -3,7 +3,6 @@
 #' @param file file or connection from which to import
 #'
 #' @export
-#' @importFrom utils maintainer
 #' @importClassesFrom hyperSpec hyperSpec
 #' @importFrom methods new
 #' @importFrom utils packageDescription
