@@ -1,10 +1,14 @@
-#' Title
+#' Import function for reading in ini-specific Witec .txt files
+#'
+#' \code{read_txt_ini_Witec} reads Witec ASCII files where the first column gives the wavelength
+#' axes and the other columns the spectra. \code{read_txt_ini_Witec} reads Witec's ASCII exported data
+#' meta data.
 #'
 #' @param file
 #'
 #' @return hyperSpec object
 #' @export
-read_txt_Witec_ASCII <- function(file) {
+read_txt_ini_Witec <- function(file) {
 
   file <- read.ini(file)
 
@@ -25,6 +29,7 @@ read_txt_Witec_ASCII <- function(file) {
   spc <- matrix(NA_real_, nrow = length(i_spectra), ncol = nwl)
   wl <- NA
 
+  #
   if (!all(names(file[i_spectra + 2]) == "SpectrumData"))
     stop("This file does not contain the SpectrumData at the expected positions,\n",
           "please report an issue at:\n",
@@ -32,12 +37,13 @@ read_txt_Witec_ASCII <- function(file) {
           " including\n",
           "- the output of `sessionInfo()` and\n",
           "- an example file.")
-
+  #
   for (s in seq_along(i_spectra)) {
     data <- unlist(file[[i_spectra[s] + 2]])
     data <- scan(text = data, quiet = TRUE)
     data <- matrix(data, nrow = nwl, ncol = 2L, byrow = TRUE)
 
+    #
     if (s == 1)
       wl <- data[, 1]
     else
@@ -47,12 +53,14 @@ read_txt_Witec_ASCII <- function(file) {
     spc[s,] <- data[, 2]
   }
 
+  #
   spc <- new("hyperSpec", spc = spc, wavelength = wl)
 
+  #
   .fileio.optional(spc)
 }
 
-test(read_txt_Witec_ASCII) <- function() {
+test(read_txt_ini_Witec) <- function() {
   context("read_txt_Witec_ASCII")
 
   test_that("example file", {
