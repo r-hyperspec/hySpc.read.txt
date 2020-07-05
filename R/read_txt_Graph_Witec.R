@@ -1,7 +1,7 @@
 #' @rdname read.txt.Witec
 #' @param headerfile filename or connection to ASCII file with header information
 #' @export
-read.txt.Witec.Graph <- function(headerfile = stop("filename or connection needed"),
+read_txt_Witec_Graph <- function(headerfile = stop("filename or connection needed"),
                                  filex = gsub("Header", "X-Axis", headerfile),
                                  filey = gsub("Header", "Y-Axis", headerfile),
                                  type = c("single", "map"), encoding = "unknown",
@@ -48,8 +48,8 @@ read.txt.Witec.Graph <- function(headerfile = stop("filename or connection neede
   .fileio.optional(spc, filey)
 }
 
-test(read.txt.Witec.Graph) <- function() {
-  context("read.txt.Witec.Graph")
+test(read_txt_Witec_Graph) <- function() {
+  context("read_txt_Witec_Graph")
 
   tmpdir <- paste0(tempdir(), "/Witec_GraphASCII")
   untar("Witec_GraphASCII.tar.gz", exdir = tmpdir)
@@ -57,7 +57,7 @@ test(read.txt.Witec.Graph) <- function() {
   on.exit(unlink(tmpdir))
 
   test_that("defaults and (X-Axis)/(Y-Axis) file guessing", {
-    spc <- read.txt.Witec.Graph(paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"))
+    spc <- read_txt_Witec_Graph(paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"))
 
     expect_equal(dim(spc), c(nrow = 3L, ncol = 4L, nwl = 1024L))
 
@@ -75,36 +75,36 @@ test(read.txt.Witec.Graph) <- function() {
 
   test_that("encoding", {
     skip("TODO: adapt to new package")
-    expect_warning(read.txt.Witec.Graph("fileio/txt.Witec/nofilename (Header).txt"))
+    expect_warning(read_txt_Witec_Graph("fileio/txt.Witec/nofilename (Header).txt"))
 
-    spc <- read.txt.Witec.Graph("fileio/txt.Witec/nofilename (Header).txt", encoding = "latin1")
+    spc <- read_txt_Witec_Graph("fileio/txt.Witec/nofilename (Header).txt", encoding = "latin1")
     expect_known_hash(spc, "2bad36adb3")
   })
 
   test_that("Time Series", {
     skip("TODO: adapt to new package")
-    spc <- read.txt.Witec.Graph("fileio/txt.Witec/Witec-timeseries (Header).txt", type = "single")
+    spc <- read_txt_Witec_Graph("fileio/txt.Witec/Witec-timeseries (Header).txt", type = "single")
     expect_known_hash(spc, "295499c43c")
   })
 
   test_that("Map", {
     skip("TODO: adapt to new package")
-    expect_warning(read.txt.Witec.Graph("fileio/txt.Witec/Witec-Map (Header).txt"))
-    expect_warning(read.txt.Witec.Graph("fileio/txt.Witec/Witec-Map (Header).txt", type = "single"))
+    expect_warning(read_txt_Witec_Graph("fileio/txt.Witec/Witec-Map (Header).txt"))
+    expect_warning(read_txt_Witec_Graph("fileio/txt.Witec/Witec-Map (Header).txt", type = "single"))
 
-    spc <- read.txt.Witec.Graph("fileio/txt.Witec/Witec-Map (Header).txt", type = "map")
+    spc <- read_txt_Witec_Graph("fileio/txt.Witec/Witec-Map (Header).txt", type = "map")
     expect_known_hash(spc, "cb9cd9757a")
   })
 
   test_that("missing filename", {
     skip("TODO: adapt to new package")
-    spc <- read.txt.Witec.Graph("fileio/txt.Witec/nofilename (Header).txt", encoding = "latin1")
+    spc <- read_txt_Witec_Graph("fileio/txt.Witec/nofilename (Header).txt", encoding = "latin1")
     expect_known_hash(spc, "2bad36adb3")
   })
 
   test_that("wrong combination of file names", {
     skip("TODO: adapt to new package")
-    expect_error(read.txt.Witec.Graph("fileio/txt.Witec/Witec-timeseries (Header).txt", "fileio/txt.Witec/Witec-timeseries (Y-Axis).txt"))
+    expect_error(read_txt_Witec_Graph("fileio/txt.Witec/Witec-timeseries (Header).txt", "fileio/txt.Witec/Witec-timeseries (Y-Axis).txt"))
   })
 }
 
