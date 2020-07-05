@@ -45,16 +45,32 @@ read.txt.Witec.Graph <- function(headerfile = stop("filename or connection neede
   }
 
   ## consistent file import behaviour across import functions
-  .fileio.optional(spc, filex)
+  .fileio.optional(spc, filey)
 }
 
 test(read.txt.Witec.Graph) <- function() {
   context("read.txt.Witec.Graph")
 
+  tmpdir <- paste0(tempdir(), "/Witec_GraphASCII")
+  untar("Witec_GraphASCII.tar.gz", exdir = tmpdir)
+
+  on.exit(unlink(tmpdir))
+
   test_that("defaults and (X-Axis)/(Y-Axis) file guessing", {
-    skip("TODO: adapt to new package")
-    spc <- read.txt.Witec.Graph("fileio/txt.Witec/Witec-timeseries (Header).txt")
-    expect_known_hash(spc, "295499c43c")
+    spc <- read.txt.Witec.Graph(paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"))
+
+    expect_equal(dim(spc), c(nrow = 3L, ncol = 4L, nwl = 1024L))
+
+    expect_equal(spc$filename,
+                 rep(paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Y-Axis).txt"), 3))
+
+    expect_equal(spc$WIPname,
+                 rep("F:\\Acetamidophenol samples_20200703.wip", 3))
+
+    expect_equal(spc$spcname,
+                 rep("4Acetamidophenol_timeseries3x_20200703_001_Spec.Data 1", 3))
+
+    expect_equivalent(spc[[2,,1650]], 2427)
   })
 
   test_that("encoding", {
