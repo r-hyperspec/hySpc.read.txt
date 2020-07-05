@@ -12,6 +12,7 @@
 #' @export
 read_txt_Witec_TrueMatch <- function(file) {
 
+  filename <- file
   file <- read.ini(file)
 
   i_spectra <- which(names(file) == "SpectrumHeader")
@@ -59,7 +60,7 @@ read_txt_Witec_TrueMatch <- function(file) {
   spc <- new("hyperSpec", spc = spc, wavelength = wl)
 
   #
-  .fileio.optional(spc)
+  .fileio.optional(spc, filename)
 }
 
 test(read_txt_Witec_TrueMatch) <- function() {
@@ -67,5 +68,10 @@ test(read_txt_Witec_TrueMatch) <- function() {
 
   test_that("Witec TrueMatch example file", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+
+    expect_equal(dim(spc), c(nrow = 2L, ncol = 2L, nwl = 1024L))
+    expect_equal(spc$filename, rep("Witec_TrueMatch.txt", 2))
+
+    expect_equivalent(spc [[,, 610]], c(902, 732))
   })
 }
