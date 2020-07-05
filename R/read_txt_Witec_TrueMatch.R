@@ -1,14 +1,16 @@
-#' Import function for reading in ini-specific Witec .txt files
+#' Read Witec ASCII/txt files exported by Witec TrueMatch
 #'
-#' \code{read_txt_ini_Witec} reads Witec ASCII files where the first column gives the wavelength
-#' axes and the other columns the spectra. \code{read_txt_ini_Witec} reads Witec's ASCII exported data
-#' meta data.
+#' `read_txt_Witec_TrueMatch()` reads Witec ASCII files exported by Witec
+#' TrueMatch. These files are ini-like ASCII files with meta data sections and
+#' spectra data sections.
 #'
-#' @param file
+#' TODO: import also meta data
+#'
+#' @param file file name or connection to file
 #'
 #' @return hyperSpec object
 #' @export
-read_txt_ini_Witec <- function(file) {
+read_txt_Witec_TrueMatch <- function(file) {
 
   file <- read.ini(file)
 
@@ -60,10 +62,10 @@ read_txt_ini_Witec <- function(file) {
   .fileio.optional(spc)
 }
 
-test(read_txt_ini_Witec) <- function() {
-  context("read_txt_Witec_ASCII")
+test(read_txt_Witec_TrueMatch) <- function() {
+  context("read_txt_Witec_TrueMatch")
 
-  test_that("example file", {
-    f <- readLines("Example_ASCII_export.txt")
+  test_that("Witec TrueMatch example file", {
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
   })
 }
