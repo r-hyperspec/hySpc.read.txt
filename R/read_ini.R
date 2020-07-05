@@ -1,13 +1,13 @@
 #' Read INI files.
 #'
-#' `read.ini` reads ini files of the form
+#' `read_ini` reads ini files of the form
 #' \cr\cr
 #' `[section]`\cr
 #' `key = value`
 #' \cr\cr
 #' into a list.
 #'
-#' `read.ini` sanitizes the element names and tries to convert scalars and comma separated
+#' `read_ini` sanitizes the element names and tries to convert scalars and comma separated
 #' numeric vectors to numeric.
 #' @export
 #' @rdname read-ini
@@ -19,7 +19,7 @@
 #' for the key-value-pairs.
 #' @keywords IO file
 
-read.ini <- function(con = stop("Connection con needed."), skip = NULL, encoding = "unknown") {
+read_ini <- function(con = stop("Connection con needed."), skip = NULL, encoding = "unknown") {
   Lines <- readLines(con, encoding = encoding)
   ## remove leading lines, if they are not a section
   if (!is.null(skip)) {

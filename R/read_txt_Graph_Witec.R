@@ -10,7 +10,7 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
   .check.con(headerfile, filex, filey)
 
   ## processing headerfile
-  hdr <- read.ini(headerfile, skip = 1, encoding = encoding)
+  hdr <- read_ini(headerfile, skip = 1, encoding = encoding)
   hdr <- sapply(hdr, function(x) unlist(x, recursive = FALSE)) # returns a matrix with colnames and rownames for better adressing
 
   ## check valid input

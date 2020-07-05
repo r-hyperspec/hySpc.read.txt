@@ -13,7 +13,7 @@
 read_txt_Witec_TrueMatch <- function(file) {
 
   filename <- file
-  file <- read.ini(file)
+  file <- read_ini(file)
 
   i_spectra <- which(names(file) == "SpectrumHeader")
 
