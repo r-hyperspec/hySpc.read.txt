@@ -6,21 +6,28 @@ read_Witec <- function(){
 }
 
 #
-read_Witec_read.csv <- function(){
+read_Witec_read_csv <- function(){
+
+  # Swap the reading function with read_csv
 
 }
 
 #
-read_Witec_read.table <- function(){
+read_Witec_read_table <- function(){
+
+  # Swap the reading function with read_table
 
 }
 
 #
 read_Witec_scan <- function(){
 
+  # Swap the reading function with read_table
 }
 
 #
-read_Wite_fread <- function(){
+read_Witec_fread <- function(){
+
+  # Swap the reading function with read_table
 
 }
