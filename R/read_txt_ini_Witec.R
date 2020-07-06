@@ -10,11 +10,44 @@
 #' @export
 read_txt_ini_Witec <- function(file) {
 
+  print("Let the debugging begin")
   file <- read.ini(file)
 
+  # Get header information
   i_spectra <- which(names(file) == "SpectrumHeader")
 
+  # Titles
+  title <- sapply(file[i_spectra], function(hdr) hdr$Title)
+
+  # Excitation wavelength
+  ewl <- sapply(file[i_spectra], function(hdr) hdr$ExcitationWavelength)
+
+  # Spectrum size
   nwl <- sapply(file[i_spectra], function(hdr) hdr$SpectrumSize)
+
+  # Data kind
+  units <- sapply(file[i_spectra], function(hdr) hdr$XDataKind)
+
+  Length <-
+  Width <-
+  Aspect Ratio <-
+  Num Pixels <-
+  Area <-
+  Convex Area <-
+  Perimeter <-
+  Convex Perimeter <-
+  Feret Max <-
+  Feret Min <-
+  CE Diameter <-
+  Circularity <-
+  Convexity <-
+  Solidity <-
+  SE Volume <-
+  IsOversaturated <-
+  RamanSignal <-
+  FluorescenceSignal <-
+
+
 
   if (!all(nwl == nwl[1]))
     stop("This file contains spectra with unequal length.\n",
@@ -53,11 +86,22 @@ read_txt_ini_Witec <- function(file) {
     spc[s,] <- data[, 2]
   }
 
-  #
-  spc <- new("hyperSpec", spc = spc, wavelength = wl)
+  # Meta data
+  for(d in seq_along(names(file))) {
+    name <- names(file)[d]
+
+  }
+  # name <- names(file$SpectrumHeader)
+  # value <- file$SpectrumHeader$Title
+
 
   #
-  .fileio.optional(spc)
+  spc <- new("hyperSpec", spc = spc, wavelength = wl)
+  spc
+
+  #
+  # .fileio.optional(spc, filename = file)
+
 }
 
 test(read_txt_ini_Witec) <- function() {
@@ -65,5 +109,9 @@ test(read_txt_ini_Witec) <- function() {
 
   test_that("example file", {
     f <- readLines("Example_ASCII_export.txt")
+  })
+
+  test_that("example file", {
+
   })
 }
