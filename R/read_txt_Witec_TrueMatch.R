@@ -1,7 +1,7 @@
 #' Read Witec ASCII/txt files exported by Witec TrueMatch
 #'
 #' `read_txt_Witec_TrueMatch()` reads Witec ASCII files exported by Witec
-#' TrueMatch. These files are ini-like ASCII files with meta data sections and
+#' TrueMatch. These files are ini-like: ASCII files with meta data sections and
 #' spectra data sections.
 #'TODO: implement keys2header param
 #'TODO: order additional data columns
@@ -104,16 +104,27 @@ test(read_txt_Witec_TrueMatch) <- function() {
   test_that("multiple spectra with varying wavelengths return error", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
 
+    expect_equivalent(length(spc@data[1, c("spc")]),length(spc@data[2, c("spc")]))
+
   })
 
   test_that("spectra are in correct positions", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
 
+    expect_equivalent(is.matrix(spc@data[1, c("spc")]), is.matrix(spc@data[2, c("spc")]))
   })
 
   test_that("spectra data is correctly parsed", {
+    file <- hyperSpec::read.ini("Witec_TrueMatch.txt")
+    ini_spc <- file[which(names(file) == "SpectrumData")]
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
 
+    for(s in seq_along(ini_spc)) {
+      data <- unlist(file[which(names(file) == "SpectrumData")][s])
+      data <- scan(text = data, quiet = TRUE)
+      expect_equivalent(data[c(TRUE, FALSE)], spc@wavelength) # wavelength
+      expect_equivalent(data[c(FALSE, TRUE)], spc@data[s, c("spc")]) # intensity
+    }
   })
 
   test_that("spectra meta data is correctly parsed", {
@@ -123,12 +134,10 @@ test(read_txt_Witec_TrueMatch) <- function() {
 
   test_that("spectra header is correctly parsed", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
-
   })
 
   test_that("a valid hyperSpec object is returned", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
-
   })
 
 }
