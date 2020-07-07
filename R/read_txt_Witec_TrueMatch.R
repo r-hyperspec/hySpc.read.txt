@@ -75,7 +75,6 @@ read_txt_Witec_TrueMatch <- function(file) {
   header_meta_data <- file$SampleMetaData
   header_meta_data <- header_meta_data[which(nzchar(names(header_meta_data)))]
   for (d in seq_along(names(header_meta_data))) {
-    paste0(print(header_meta_data[d]))
     spc[,names(header_meta_data)[d]] <- header_meta_data[[d]]
   }
 
@@ -86,7 +85,7 @@ read_txt_Witec_TrueMatch <- function(file) {
     spc[,names(header)[d]] <- header[[d]]
   }
 
-  spc
+  # Return hyperSpec object
   .fileio.optional(spc, filename)
 }
 
@@ -96,7 +95,7 @@ test(read_txt_Witec_TrueMatch) <- function() {
   test_that("Witec TrueMatch example file", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
 
-    expect_equal(dim(spc), c(nrow = 2L, ncol = 2L, nwl = 1024L))
+    expect_equal(dim(spc), c(nrow = 2L, ncol = length(colnames(spc)), nwl = 1024L))
     expect_equal(spc$filename, rep("Witec_TrueMatch.txt", 2))
 
     expect_equivalent(spc [[,, 610]], c(902, 732))
