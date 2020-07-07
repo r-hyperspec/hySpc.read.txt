@@ -3,7 +3,10 @@
 #' `read_txt_Witec_TrueMatch()` reads Witec ASCII files exported by Witec
 #' TrueMatch. These files are ini-like ASCII files with meta data sections and
 #' spectra data sections.
-#'
+#'TODO: implement keys2header param
+#'TODO: order additional data columns
+#'TODO: prepare labels of spc
+#'TODO: create hyperSpec object after parsing header information
 #'
 #' @param file file name or connection to file
 #'
@@ -99,7 +102,34 @@ test(read_txt_Witec_TrueMatch) <- function() {
     expect_equivalent(spc [[,, 610]], c(902, 732))
   })
 
-  test_that("example file", {
+  test_that("multiple spectra with varying wavelengths return error", {
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
 
   })
+
+  test_that("spectra are in correct positions", {
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+
+  })
+
+  test_that("spectra data is correctly parsed", {
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+
+  })
+
+  test_that("spectra meta data is correctly parsed", {
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+
+  })
+
+  test_that("spectra header is correctly parsed", {
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+
+  })
+
+  test_that("a valid hyperSpec object is returned", {
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+
+  })
+
 }
