@@ -4,7 +4,6 @@
 #' TrueMatch. These files are ini-like ASCII files with meta data sections and
 #' spectra data sections.
 #'
-#' TODO: import also meta data
 #'
 #' @param file file name or connection to file
 #'
@@ -12,46 +11,18 @@
 #' @export
 read_txt_Witec_TrueMatch <- function(file) {
 
+  # Get file
   filename <- file
-  file <- read_ini(file)
+  file <- hyperSpec::read.ini(filename)
 
   # Get header information
   i_spectra <- which(names(file) == "SpectrumHeader")
 
-  # Titles
-  title <- sapply(file[i_spectra], function(hdr) hdr$Title)
-
-  # Excitation wavelength
-  ewl <- sapply(file[i_spectra], function(hdr) hdr$ExcitationWavelength)
-
-  # Spectrum size
+  # Calculate spectrum size
   nwl <- sapply(file[i_spectra], function(hdr) hdr$SpectrumSize)
 
-  # Data kind
-  units <- sapply(file[i_spectra], function(hdr) hdr$XDataKind)
-
-  Length <-
-  Width <-
-  Aspect Ratio <-
-  Num Pixels <-
-  Area <-
-  Convex Area <-
-  Perimeter <-
-  Convex Perimeter <-
-  Feret Max <-
-  Feret Min <-
-  CE Diameter <-
-  Circularity <-
-  Convexity <-
-  Solidity <-
-  SE Volume <-
-  IsOversaturated <-
-  RamanSignal <-
-  FluorescenceSignal <-
-
-
-
-  if (!all(nwl == nwl[1]))
+  # Check if the number of wavelengths is the same for all the spectra
+  if (!all(nwl == nwl[1])) {
     stop("This file contains spectra with unequal length.\n",
          "This is not yet supported by read_txt_Witec_ASCII, ",
          "please report an issue at:\n",
@@ -59,20 +30,26 @@ read_txt_Witec_TrueMatch <- function(file) {
          " including\n",
          "- the output of `sessionInfo()` and\n",
          "- an example file.")
+  }
+
+  # Otherwise, set the first wavelength to the first wavelength
   nwl <- nwl[1]
 
+  # Create spectra
   spc <- matrix(NA_real_, nrow = length(i_spectra), ncol = nwl)
   wl <- NA
 
-  #
-  if (!all(names(file[i_spectra + 2]) == "SpectrumData"))
+  # Check if the SpectrumData is in the correct position (should appear 2 header positions after the SpectrumHeader)
+  if (!all(names(file[i_spectra + 2]) == "SpectrumData")) {
     stop("This file does not contain the SpectrumData at the expected positions,\n",
-          "please report an issue at:\n",
-          packageDescription("hySpc.read.Witec")$BugReport,
-          " including\n",
-          "- the output of `sessionInfo()` and\n",
-          "- an example file.")
-  #
+         "please report an issue at:\n",
+         packageDescription("hySpc.read.Witec")$BugReport,
+         " including\n",
+         "- the output of `sessionInfo()` and\n",
+         "- an example file.")
+  }
+
+  # Parse SpectrumData
   for (s in seq_along(i_spectra)) {
     data <- unlist(file[[i_spectra[s] + 2]])
     data <- scan(text = data, quiet = TRUE)
@@ -88,20 +65,25 @@ read_txt_Witec_TrueMatch <- function(file) {
     spc[s,] <- data[, 2]
   }
 
-  # Meta data
-  for(d in seq_along(names(file))) {
-    name <- names(file)[d]
-
-  }
-  # name <- names(file$SpectrumHeader)
-  # value <- file$SpectrumHeader$Title
-
-
-  #
+  # Create hyperSpec object
   spc <- new("hyperSpec", spc = spc, wavelength = wl)
-  spc
 
-  #
+  # Parse SampleMetaData
+  header_meta_data <- file$SampleMetaData
+  header_meta_data <- header_meta_data[which(nzchar(names(header_meta_data)))]
+  for (d in seq_along(names(header_meta_data))) {
+    paste0(print(header_meta_data[d]))
+    spc[,names(header_meta_data)[d]] <- header_meta_data[[d]]
+  }
+
+  # Parse SpectrumHeader
+  header <- file$SpectrumHeader
+  header <- header[which(nzchar(names(header)))]
+  for(d in seq_along(names(header))) {
+    spc[,names(header)[d]] <- header[[d]]
+  }
+
+  spc
   .fileio.optional(spc, filename)
 }
 
