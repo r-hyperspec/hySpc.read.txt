@@ -16,7 +16,7 @@ read_txt_Witec_TrueMatch <- function(file) {
 
   # Get file
   filename <- file
-  file <- hyperSpec::read.ini(filename)
+  file <- read.ini(filename)
 
   # Get header information
   i_spectra <- which(names(file) == "SpectrumHeader")
@@ -75,14 +75,14 @@ read_txt_Witec_TrueMatch <- function(file) {
   header_meta_data <- file$SampleMetaData
   header_meta_data <- header_meta_data[which(nzchar(names(header_meta_data)))]
   for (d in seq_along(names(header_meta_data))) {
-    spc[,names(header_meta_data)[d]] <- header_meta_data[[d]]
+    spc[, names(header_meta_data)[d]] <- header_meta_data[[d]]
   }
 
   # Parse SpectrumHeader
   header <- file$SpectrumHeader
   header <- header[which(nzchar(names(header)))]
   for(d in seq_along(names(header))) {
-    spc[,names(header)[d]] <- header[[d]]
+    spc[, names(header)[d]] <- header[[d]]
   }
 
   # Return hyperSpec object
@@ -105,7 +105,6 @@ test(read_txt_Witec_TrueMatch) <- function() {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
 
     expect_equivalent(length(spc@data[1, c("spc")]),length(spc@data[2, c("spc")]))
-
   })
 
   test_that("spectra are in correct positions", {
@@ -119,8 +118,8 @@ test(read_txt_Witec_TrueMatch) <- function() {
     ini_spc <- file[which(names(file) == "SpectrumData")]
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
 
-    for(s in seq_along(ini_spc)) {
-      data <- unlist(file[which(names(file) == "SpectrumData")][s])
+    for (s in seq_along(ini_spc)) {
+      data <- unlist(ini_spc[s])
       data <- scan(text = data, quiet = TRUE)
       expect_equivalent(data[c(TRUE, FALSE)], spc@wavelength) # wavelength
       expect_equivalent(data[c(FALSE, TRUE)], spc@data[s, c("spc")]) # intensity
@@ -128,16 +127,30 @@ test(read_txt_Witec_TrueMatch) <- function() {
   })
 
   test_that("spectra meta data is correctly parsed", {
+    file <- read.ini("Witec_TrueMatch.txt")
+    ini_meta <- file[which(names(file) == "SampleMetaData")]
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
-
+    A <- names(file$SampleMetaData)
+    A <- A[A != ""]
+    A <- intersect(names(spc@data), A)
+    expect_equivalent(A, gsub("SampleMetaData.", "", names(unlist(ini_meta[1]))))
+    expect_equivalent(A, gsub("SampleMetaData.", "", names(unlist(ini_meta[2]))))
   })
 
   test_that("spectra header is correctly parsed", {
+    file <- read.ini("Witec_TrueMatch.txt")
+    ini_meta <- file[which(names(file) == "SpectrumHeader")]
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+    A <- names(file$SpectrumHeader)
+    A <- A[A != ""]
+    A <- intersect(names(spc@data), A)
+    expect_equivalent(A, gsub("SpectrumHeader.", "", names(unlist(ini_meta[1]))))
+    expect_equivalent(A, gsub("SpectrumHeader.", "", names(unlist(ini_meta[2]))))
   })
 
   test_that("a valid hyperSpec object is returned", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+    expect(chk.hy(spc))
   })
 
 }
