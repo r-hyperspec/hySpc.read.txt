@@ -1,13 +1,18 @@
-#' Read Witec ASCII/txt files exported by Witec TrueMatch
+#' Import Witec ASCII/txt files exported by Witec TrueMatch
 #'
-#' `read_txt_Witec_TrueMatch()` reads Witec ASCII files exported by Witec
+#' \code{read_txt_Witec_TrueMatch()} reads Witec ASCII files exported by Witec
 #' TrueMatch. These files are ini-like: ASCII files with meta data sections and
 #' spectra data sections.
-#'TODO: prepare labels of spc
 #'
-#' @param file file name or connection to file
-#'
-#' @return hyperSpec object
+#' @title File Import Witec TrueMatch
+#' @param file filename or connection to ASCII TrueMatch file
+#' @param keys_2header all meta data will be perserved if `key_2header="all"` (default); only `spc`
+#' filename will be perserved if `key_2header="none"`; only specified header information will be saved otherwise
+#' e.g., `key_2header=c("key1", "key2", ...)`
+#' @return a hyperSpec object
+#' @author Claudia Beleites and Erick Oduniyi
+#' @importFrom hySpc.testthat test<-
+#' @seealso \code{vignette ("fileio")} for more information on file import
 #' @export
 read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
