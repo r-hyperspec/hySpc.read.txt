@@ -3,26 +3,23 @@
 #' `read_txt_Witec_TrueMatch()` reads Witec ASCII files exported by Witec
 #' TrueMatch. These files are ini-like: ASCII files with meta data sections and
 #' spectra data sections.
-#'TODO: implement keys2header param
-#'TODO: order additional data columns
 #'TODO: prepare labels of spc
-#'TODO: create hyperSpec object after parsing header information
 #'
 #' @param file file name or connection to file
 #'
 #' @return hyperSpec object
 #' @export
-read_txt_Witec_TrueMatch <- function(file) {
+read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
   # Get file
   filename <- file
   file <- read.ini(filename)
 
   # Get header information
-  i_spectra <- which(names(file) == "SpectrumHeader")
+  spc_hdr <- which(names(file) == "SpectrumHeader")
 
-  # Calculate spectrum size
-  nwl <- sapply(file[i_spectra], function(hdr) hdr$SpectrumSize)
+  # Calculate spectrum size (number of wavelengths)
+  nwl <- sapply(file[spc_hdr], function(hdr) hdr$SpectrumSize)
 
   # Check if the number of wavelengths is the same for all the spectra
   if (!all(nwl == nwl[1])) {
@@ -34,16 +31,14 @@ read_txt_Witec_TrueMatch <- function(file) {
          "- the output of `sessionInfo()` and\n",
          "- an example file.")
   }
-
-  # Otherwise, set the first wavelength to the first wavelength
   nwl <- nwl[1]
 
   # Create spectra
-  spc <- matrix(NA_real_, nrow = length(i_spectra), ncol = nwl)
+  spc <- matrix(NA_real_, nrow = length(spc_hdr), ncol = nwl)
   wl <- NA
 
   # Check if the SpectrumData is in the correct position (should appear 2 header positions after the SpectrumHeader)
-  if (!all(names(file[i_spectra + 2]) == "SpectrumData")) {
+  if (!all(names(file[spc_hdr + 2]) == "SpectrumData")) {
     stop("This file does not contain the SpectrumData at the expected positions,\n",
          "please report an issue at:\n",
          packageDescription("hySpc.read.Witec")$BugReport,
@@ -53,12 +48,12 @@ read_txt_Witec_TrueMatch <- function(file) {
   }
 
   # Parse SpectrumData
-  for (s in seq_along(i_spectra)) {
-    data <- unlist(file[[i_spectra[s] + 2]])
+  for (s in seq_along(spc_hdr)) {
+    data <- unlist(file[[spc_hdr[s] + 2]])
     data <- scan(text = data, quiet = TRUE)
     data <- matrix(data, nrow = nwl, ncol = 2L, byrow = TRUE)
 
-    #
+    # Compare spectra
     if (s == 1)
       wl <- data[, 1]
     else
@@ -71,6 +66,28 @@ read_txt_Witec_TrueMatch <- function(file) {
   # Create hyperSpec object
   spc <- new("hyperSpec", spc = spc, wavelength = wl)
 
+  # Update labels
+  # By default, the wavelength is assumed to be measured in lambda/nm
+  # However, the user has the options to specify different units at object creation
+  if (file$SpectrumHeader$XDataKind == "nm") {
+    labels(spc, ".wavelength") <- paste0("lambda/", file$SpectrumHeader$XDataKind)
+  } else {
+    choice <- tolower(readline(prompt="Do you want to enter units for x-axis (wavelength)?: "))
+      if (choice == "yes" || choice == "y") {
+        label <- readline(prompt="Enter x-axis (wavelength) units: ")
+        labels(spc, ".wavelength") <- label
+      } else {
+        labels(spc, ".wavelength") <- file$SpectrumHeader$XDataKind
+      }
+  }
+
+  # Parse SpectrumHeader
+  header <- file$SpectrumHeader
+  header <- header[which(nzchar(names(header)))]
+  for (d in seq_along(names(header))) {
+    spc[, names(header)[d]] <- header[[d]]
+  }
+
   # Parse SampleMetaData
   header_meta_data <- file$SampleMetaData
   header_meta_data <- header_meta_data[which(nzchar(names(header_meta_data)))]
@@ -78,15 +95,16 @@ read_txt_Witec_TrueMatch <- function(file) {
     spc[, names(header_meta_data)[d]] <- header_meta_data[[d]]
   }
 
-  # Parse SpectrumHeader
-  header <- file$SpectrumHeader
-  header <- header[which(nzchar(names(header)))]
-  for(d in seq_along(names(header))) {
-    spc[, names(header)[d]] <- header[[d]]
+  # Collect the keys_2header information
+  if ("all" %in% keys_2header) {
+    .fileio.optional(spc, filename)
+  } else if ("none" %in% keys_2header) {
+    .fileio.optional(spc[, c("spc")], filename)
+  } else if (!"all" %in% keys_2header && !"none" %in% keys_2header) {
+    .fileio.optional(spc[, c("spc", keys_2header)], filename)
+  } else {
+      .fileio.optional(spc, filename)
   }
-
-  # Return hyperSpec object
-  .fileio.optional(spc, filename)
 }
 
 test(read_txt_Witec_TrueMatch) <- function() {
@@ -148,9 +166,30 @@ test(read_txt_Witec_TrueMatch) <- function() {
     expect_equivalent(A, gsub("SpectrumHeader.", "", names(unlist(ini_meta[2]))))
   })
 
+  test_that("users can specify extra data to keep", {
+    file <- read.ini("Witec_TrueMatch.txt")
+
+    A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
+    A <- A[A != ""]
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt", keys_2header="all")
+    expect_equal(sort(colnames(spc)), sort(c("filename", "spc", A)))
+
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt", keys_2header="none")
+    expect_equivalent(sort(colnames(spc)), c("filename", "spc"))
+
+    A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
+    A <- A[A != ""]
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt", keys_2header=c("Length"))
+    expect_equivalent(sort(colnames(spc)), sort(c("filename", "spc", A[which(A == "Length")])))
+  })
+
+  test_that("labels are correctly assigned to wavelength", {
+    spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
+    expect_equivalent(labels(spc, ".wavelength"), "lambda/nm")
+  })
+
   test_that("a valid hyperSpec object is returned", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
     expect(chk.hy(spc))
   })
-
 }
