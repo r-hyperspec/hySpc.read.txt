@@ -195,6 +195,6 @@ test(read_txt_Witec_TrueMatch) <- function() {
 
   test_that("a valid hyperSpec object is returned", {
     spc <- read_txt_Witec_TrueMatch("Witec_TrueMatch.txt")
-    expect(chk.hy(spc))
+    expect(chk.hy(spc), failure_message = "hyperSpec object was not returned")
   })
 }
