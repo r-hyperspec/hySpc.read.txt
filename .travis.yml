@@ -8,10 +8,9 @@ os:
   - osx
 
 r:
-  - oldrel
   - release
   - devel
-  
+
 jobs:
   exclude:
   - os: osx
