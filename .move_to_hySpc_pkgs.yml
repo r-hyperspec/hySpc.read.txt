@@ -1,0 +1,20 @@
+name: move_to_hySpc_pkgs
+on: gollum
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: move_to_hySpc_pkgs
+      uses: andstor/copycat-action@v3
+      with:
+        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        src_path: 
+        dst_path: 
+        dst_owner:
+        dst_repo_name: hySpc.pkgs.github.io
+        dst_branch: master
+        src_branch: develop
+        src_wiki: false
+        dst_wiki: false
+        username: 
+        email:
