@@ -2,11 +2,11 @@ on:
   push:
     branches:
       - master
-      - devel
+      - develop
   pull_request:
     branches:
       - master
-      - devel
+      - develop
 
 name: R-CMD-build-check
 
