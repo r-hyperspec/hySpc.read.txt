@@ -8,13 +8,13 @@ jobs:
       uses: andstor/copycat-action@v3
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        src_path: 
-        dst_path: 
+        src_path: ./move_to_hySpc_pkgs
+        dst_path: ./src/contrib
         dst_owner:
         dst_repo_name: hySpc.pkgs.github.io
         dst_branch: master
         src_branch: develop
         src_wiki: false
         dst_wiki: false
-        username: 
-        email:
+        username: eoduniyi
+        email: eeoduniyi@gmail.com
