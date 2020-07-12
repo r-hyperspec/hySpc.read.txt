@@ -69,20 +69,30 @@ jobs:
     - name: Clone_hySpc.pkgs
       run: git clone https://github.com/r-hyperspec/hySpc.pkgs.git
 
-    - name: Move_into_dir
+    - name: *
       run: |
         mkdir archive
         mv hySpc.pkgs archive
         pwd
         ls
         cd archive
-        echo Light at the end of the tunnel...could be a train...or somone with a flashlight > test.txt
+        cd hySpc.pkgs
+        echo listing dir
+        ls
+        git checkout master
+        echo Light at the end of the tunnel...could be a train...or someone with a flashlight...or GOD > test.txt
         pwd
         ls
-        mv test.txt hySpc.pkgs/src/contrib
-        cd hySpc.pkgs/src/contrib
+        mv test.txt src/contrib
+        cd src/contrib
         pwd
         ls
+        git add -A
+        git commit -m "Am I committed yet?"
+        git push https://$eoduniyi:$HYSPC_EO_TOKEN@github.com/r-hyperspec/hySpc.pkgs.git
+      env:
+        REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
+        USERNAME: eoduniyi
 
     - name: Checkout_repo
       uses: actions/checkout@v2
