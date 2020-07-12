@@ -84,7 +84,7 @@ jobs:
         ls
         git config --global user.email "eeoduniyi@gmail.com"
         git config --global user.name "eoduniyi"
-        ssh -T git@github.com
+        ssh-keygen -t rsa -C eoduniyi@gmai.com
         git add -A
         git commit -m "Am I committed yet?"
         git push https://$eoduniyi:$HYSPC_EO_TOKEN@github.com/r-hyperspec/hySpc.pkgs.git
