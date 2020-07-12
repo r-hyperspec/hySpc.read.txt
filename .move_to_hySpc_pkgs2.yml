@@ -1,8 +1,0 @@
-run: |
-     mkdir archive
-     git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com:r-hyperspec/hySpc.pkgs.git archive
-     cp .move_to_hySpc_pkgs.yml ./archive/hySpc.pkgs/src/contrib
-     git add hySpc.pkgs
-     git commit -m "Automatic publish from hySpc.read.Witec"
-     git push hySpc.pkgs master
-     rm -rf archive
