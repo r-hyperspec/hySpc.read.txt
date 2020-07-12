@@ -89,7 +89,7 @@ jobs:
         ls
         git version
         mkdir test
-
+        ls
     # - name: Commit_changes
     #   uses: EndBug/add-and-commit@v4
     #   with:
