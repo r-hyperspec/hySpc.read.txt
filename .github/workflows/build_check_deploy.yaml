@@ -99,19 +99,22 @@ jobs:
         run: |
           rm -rf archive
           git clone https://github.com/r-hyperspec/hySpc.pkgs.git archive
+          #cd archive
+          #git checkout master
 
       - name: Deploy -- insert
         if: success()
         run: |
+          setwd("..")
           print(list.files())
-          targz <- list.files(pattern = "\\.tar\\.gz")[1]
-          drat::insertPackage(targz, repodir = ".")
+          #targz <- list.files(pattern = "\\.tar\\.gz")[1]
+          #drat::insertPackage(targz, repodir = ".")
         shell: Rscript {0}
 
       - name: Deploy -- commit and push
         if: success()
         run: |
-          cd archive # move into the subdir, which is git controlled
+          #cd archive # move into the subdir, which is git controlled
           git add *
           git commit -m "Automated publish from hySpc.read.Witec"
           git push origin master
