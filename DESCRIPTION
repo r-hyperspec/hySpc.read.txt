@@ -1,7 +1,7 @@
 Package: hySpc.read.Witec
 Type: Package
 Title: File import functions for spectra from Witec spectrometers
-Version: 0.0.0.0001
+Version: 0.0.0.9000
 Maintainer: Erick Oduniyi <eeoduniyi@gmail.com>
 Authors@R: c(
     person("Claudia",   "Beleites",  role = c("aut"), email = "Claudia.Beleites@chemometrix.gmbh"),
