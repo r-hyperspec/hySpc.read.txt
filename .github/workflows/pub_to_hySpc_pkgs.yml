@@ -90,6 +90,7 @@ jobs:
     # Repository name with owner. For example, actions/checkout
     # Default: ${{ github.repository }}
         repository: 'r-hyperspec/hySpc.pkgs'
+        token: ${{ secrets.HYSPC_EO_TOKEN }}
 
     # - name: Commit_changes
     #   uses: EndBug/add-and-commit@v4
@@ -136,10 +137,17 @@ jobs:
 
       env:
         # This is necessary in order to push a commit to the repo
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+        GITHUB_TOKEN: ${{ secrets.HYSPC_EO_TOKEN }} # Leave this line unchanged
     - name: Push_to_Github
-      uses: ad-m/github-push-action@master
-      with:
-        repository: 'r-hyperspec/hySpc.pkgs'
-        branch: 'develop'
-        github_token: ${{ secrets.HYSPC_EO_TOKEN }}
+      run: |
+        echo Ọlọrun yoo tọ ọfà rẹ
+        git push https::/$eoduniyi:$HYSPC_EO_TOKEN@github.com/r-hyperspec/hySpc.pkgs.git $GITHUB_REF
+      env:
+          REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
+          USERNAME: eoduniyi
+      # uses: ad-m/github-push-action@master
+      # with:
+      #   repository: 'r-hyperspec/hySpc.pkgs'
+      #   branch: 'develop'
+      #   github_token: ${{ secrets.HYSPC_EO_TOKEN }}
+
