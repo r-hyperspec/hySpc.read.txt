@@ -93,11 +93,11 @@ jobs:
         REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
         USERNAME: eoduniyi
     - name: Push
-      uses: actions/checkout@master
+      uses: ad-m/github-push-action@master
       with:
         repository: 'r-hyperspec/hySpc.pkgs'
-        # ssh-key: ${{ secrets.HYSPC_EO_KEY }} 
-        token: ${{ secrets.HYSPC_EO_TOKEN }}
+        # ssh-key: ${{ secrets.HYSPC_EO_KEY }}
+        github_token: ${{ secrets.HYSPC_EO_TOKEN }}
     # - name: Checkout_repo
     #   uses: actions/checkout@v2
     #   with:
