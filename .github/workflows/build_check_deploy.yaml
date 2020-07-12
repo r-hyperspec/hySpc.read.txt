@@ -107,7 +107,8 @@ jobs:
         run: |
           setwd("../..")
           print(getwd())
-          print(list.files(recursive = TRUE))
+          print(list.files(recursive = TRUE),
+            pattern = "\\.tar\\.gz")
           #targz <- list.files(
           #  path = "hySpc.pkgs/src/contrib",
           #  pattern = "\\.tar\\.gz",
