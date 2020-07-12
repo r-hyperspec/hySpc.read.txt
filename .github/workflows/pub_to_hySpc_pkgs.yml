@@ -87,7 +87,7 @@ jobs:
         echo "eo_key" | ssh-keygen -t rsa -C eoduniyi@gmai.com
         git add -A
         git commit -m "Am I committed yet?"
-        git push https://$eoduniyi:$HYSPC_EO_TOKEN@github.com/r-hyperspec/hySpc.pkgs.git
+        git push 
       env:
         REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
         USERNAME: eoduniyi
