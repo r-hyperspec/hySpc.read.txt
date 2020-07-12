@@ -58,12 +58,12 @@
 #           install.packages('remotes')
 #           dir.create("archive")
 #         shell: Rscript {0}
-name: Strategy-6
+name: Strategy-7-fix-2
 on: push
 
 jobs:
   run:
-    name: Strategy-6
+    name: Strategy-7-fix-2
     runs-on: ubuntu-latest
     steps:
     - name: Clone_hySpc.pkgs
@@ -73,7 +73,7 @@ jobs:
       run: cd hySpc.pkgs
 
     - name: Checkout_repo
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
       with:
     # Repository name with owner. For example, actions/checkout
     # Default: ${{ github.repository }}
