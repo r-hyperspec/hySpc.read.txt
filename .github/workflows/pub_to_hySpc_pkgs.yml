@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Clone_hySpc.pkgs
-      run: git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com:r-hyperspec/hySpc.pkgs.git
+      run: git clone https://github.com/r-hyperspec/hySpc.pkgs.git
 
     - name: Move_into_dir
       run: cd hySpc.pkgs
