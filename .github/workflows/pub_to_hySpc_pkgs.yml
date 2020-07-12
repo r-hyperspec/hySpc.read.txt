@@ -7,4 +7,4 @@ name: pub_to_hySpc_pkgs
 jobs:
     - name: Move procedure
       run: |
-        mkdir archive
+        echo hi there
