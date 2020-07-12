@@ -88,6 +88,12 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
+# the following from https://stackoverflow.com/a/60548651/633251
+      - name: Configure git
+        env:
+          TOKEN: ${{ secrets.HYSPC_EO_TOKEN }}
+        run: git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+
       - name: Deploy -- clone
         if: success()
         run: |
