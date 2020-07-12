@@ -69,7 +69,7 @@ jobs:
     - name: Clone_hySpc.pkgs
       run: git clone https://github.com/r-hyperspec/hySpc.pkgs.git
 
-    - name: Move_Checkout_Add_Commit_&_Push
+    - name: Move_Checkout_Add_&_Commit
       run: |
         mkdir archive
         mv hySpc.pkgs archive
@@ -92,7 +92,12 @@ jobs:
       env:
         REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
         USERNAME: eoduniyi
-
+    - name: Push
+      uses: ad-m/github-push-action@master
+      with:
+        repository: 'r-hyperspec/hySpc.pkgs'
+        force: T
+        github_token: ${{ secrets.HYSPC_EO_KEY }}
     # - name: Checkout_repo
     #   uses: actions/checkout@v2
     #   with:
