@@ -88,7 +88,11 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-# the following from https://stackoverflow.com/a/60548651/633251
+# Everything above is standard build & check steps
+# Now the steps to deploy to hySpc.pkgs
+
+# The following configure step is
+# from https://stackoverflow.com/a/60548651/633251
       - name: Configure git
         env:
           TOKEN: ${{ secrets.HYSPC_EO_TOKEN }}
@@ -105,29 +109,31 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
-          hySpc.pkgs_dir <- getwd()
           setwd("../hySpc.read.Witec")
-          print(getwd())
-          print(list.files(recursive = TRUE,
-            pattern = "\\.tar\\.gz"))
+          # print(getwd())
+          # print(list.files(recursive = TRUE,
+          #  pattern = "\\.tar\\.gz"))
           targz <- list.files(
             path = "check",
             pattern = "\\.tar\\.gz",
             full.names = TRUE)[1] # there will be only one!
-          print(targz)
+          # print(targz)
           drat::insertPackage(targz,
             repodir = "hySpc.pkgs",
             action = "archive")
-          print(list.files(recursive = TRUE,
-            pattern = "\\.tar\\.gz"))
+          # print(list.files(recursive = TRUE,
+          #  pattern = "\\.tar\\.gz"))
         shell: Rscript {0}
 
       - name: Deploy -- commit and push
         if: success()
         run: |
-          git config --global user.email "hanson@depauw.edu"
-          git config --global user.name "Bryan Deploy Bot"
+          git config --global user.email "hySpc_Deploy_Bot@example.com"
+          git config --global user.name "hySpc Deploy Bot"
           cd hySpc.pkgs # move into the subdir, which is git controlled
           git add *
           git commit -m "Automated deploy from hySpc.read.Witec"
           git push origin master
+          git checkout gh-pages # keep the branches should be identical
+          git merge master
+          git push origin gh-pages
