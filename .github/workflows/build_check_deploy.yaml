@@ -103,6 +103,7 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
+          print(list.files())
           targz <- list.files(pattern = "\\.tar\\.gz")[1]
           drat::insertPackage(targz, repodir = ".")
         shell: Rscript {0}
