@@ -84,7 +84,6 @@ jobs:
         ls
         git config --global user.email "eeoduniyi@gmail.com"
         git config --global user.name "eoduniyi"
-        ls -al ~/.ssh
         ssh -T git@github.com
         git add -A
         git commit -m "Am I committed yet?"
