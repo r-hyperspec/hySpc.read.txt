@@ -125,8 +125,7 @@ jobs:
       - name: Deploy -- commit and push
         if: success()
         run: |
-          #cd hySpc.pkgs # move into the subdir, which is git controlled
-          #git add *
-          #git commit -m "Automated publish from hySpc.read.Witec"
-          #git push origin master
-          #rm -rf hySpc.pkgs
+          cd hySpc.pkgs # move into the subdir, which is git controlled
+          git add *
+          git commit -m "Automated deploy from hySpc.read.Witec"
+          git push origin master
