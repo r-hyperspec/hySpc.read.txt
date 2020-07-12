@@ -75,7 +75,9 @@ jobs:
         mv hySpc.pkgs archive
         pwd
         ls
-        cd archive/hySpc.pkgs
+        cd archive
+        echo Das Kind ist fortgeschritten > test.txt
+        pwd
         ls
 
     - name: Checkout_repo
@@ -85,11 +87,10 @@ jobs:
     # Default: ${{ github.repository }}
         repository: 'r-hyperspec/hySpc.pkgs'
 
-    - name: Create_file
-      run: |
-        mkdir archive
-        cd archive
-        echo je ne perdrai pas > test.txt
+    # - name: Create_file
+    #   run: |
+    #     pwd
+    #     echo je ne perdrai pas > test.txt
 
     # - name: Commit_changes
     #   uses: EndBug/add-and-commit@v4
