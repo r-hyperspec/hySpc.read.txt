@@ -14,7 +14,7 @@ jobs:
         mkdir archive
         mv hySpc.pkgs archive
         cd archive/hySpc.pkgs
-        echo I want to thank God, my family/siblings, the r-hyperspec team, all my mentors, and my K-12 teachers for putting up with me, and the U.S education system for helping me understand that while K-12 + higher ed is intellectually priceless is mostly a scam. > test.txt
+        echo I want to thank God, my family/siblings, the r-hyperspec team, Big Brother Google, all my mentors, and my K-12 teachers for putting up with me, and the U.S education system for helping me understand that while K-12 + higher ed is intellectually priceless is mostly a scam. > test.txt
         mv test.txt src/contrib
         cd src/contrib
         git config --global user.email "eeoduniyi@gmail.com"
@@ -23,7 +23,7 @@ jobs:
         git commit -m "Automatic publish from hySpc.read.Witec"
       env:
         REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
-        USERNAME: eoduniyi
+        USERNAME: r-hyperspec
     - name: Push
       uses: ad-m/github-push-action@master
       with:
