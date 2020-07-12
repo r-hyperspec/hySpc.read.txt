@@ -58,22 +58,22 @@
 #           install.packages('remotes')
 #           dir.create("archive")
 #         shell: Rscript {0}
-name: Strategy-5
+name: Strategy-6
 on: push
 
 jobs:
   run:
-    name: Strategy-5
+    name: Strategy-6
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout_repo
-      uses: actions/checkout@v2
-
-    - name: Create_dir
-      run: mkdir archive
+    - name: Clone_hySpc.pkgs
+      run: git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com:r-hyperspec/hySpc.pkgs.git
 
     - name: Move_into_dir
-      run: cd archive
+      run: cd hySpc.pkgs
+
+    - name: Checkout_repo
+      uses: actions/checkout@v2
 
     - name: Create_file
       run: echo je ne perdrai pas > test.txt
@@ -83,6 +83,6 @@ jobs:
       with:
         author_name: eoduniyi
         author_email: eeoduniyi@gmail.com
-        message: "Created archive folder and moved test file into it"
+        message: "Cloned hySpc.pkgs and move test file into it"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
