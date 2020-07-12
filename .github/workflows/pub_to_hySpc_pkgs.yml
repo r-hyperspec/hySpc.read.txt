@@ -30,5 +30,3 @@ jobs:
         repository: 'r-hyperspec/hySpc.pkgs'
         directory: './archive/hySpc.pkgs'
         github_token: ${{ secrets.HYSPC_EO_TOKEN }}
-
-
