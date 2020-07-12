@@ -97,7 +97,6 @@ jobs:
           drat::insertPackage(targz, repodir = ".")
         shell: Rscript {0}
         run: |
-#          cp *.tar.gz archive
           cd archive # move into the subdir, which is git controlled
           git add *
           git commit -m "Automated publish from hySpc.read.Witec"
