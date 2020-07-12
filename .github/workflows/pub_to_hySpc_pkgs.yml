@@ -96,6 +96,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         repository: 'r-hyperspec/hySpc.pkgs'
+        directory: './archive/hySpc.pkgs'
         # ssh-key: ${{ secrets.HYSPC_EO_KEY }}
         github_token: ${{ secrets.HYSPC_EO_TOKEN }}
     # - name: Checkout_repo
