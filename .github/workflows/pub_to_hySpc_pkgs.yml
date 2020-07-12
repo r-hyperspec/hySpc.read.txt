@@ -1,11 +1,10 @@
-name: pub_to_hySpc_pkgs
-
 on:
   schedule:
-    # * is a special character in YAML so you have to quote this string
     - cron:  '*/1 * * * *'
 
+name: pub_to_hySpc_pkgs
+
 jobs:
-      - name: Move procedure
-        run: |
-          mkdir archive
+    - name: Move procedure
+      run: |
+        mkdir archive
