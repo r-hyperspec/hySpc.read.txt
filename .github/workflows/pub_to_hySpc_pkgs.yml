@@ -76,7 +76,7 @@ jobs:
         pwd
         ls
         cd archive
-        echo Light at the end of the tunnel...could be a train > test.txt
+        echo Light at the end of the tunnel...could be a train...or somone with a flashlight > test.txt
         pwd
         ls
         mv test.txt hySpc.pkgs/src/contrib
@@ -113,11 +113,11 @@ jobs:
 
         # The email of the user that will be displayed as the author of the commit
         # Default: author of the commit that triggered the run
-        author_email: eeoduniyi@example.com
+        author_email: eeoduniyi@egmail.com
 
         # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
         # Default: '.'
-        cwd: '.'
+        cwd: '/home/runner/work/hySpc.read.Witec/hySpc.read.Witec/archive/hySpc.pkgs'
 
         # Whether to use the --force option on `git add`, in order to bypass eventual gitignores
         # Default: false
