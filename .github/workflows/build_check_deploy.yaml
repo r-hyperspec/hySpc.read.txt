@@ -105,6 +105,7 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
+          setwd("../..")
           print(getwd())
           print(list.files(recursive = TRUE))
           #targz <- list.files(
