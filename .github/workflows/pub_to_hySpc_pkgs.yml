@@ -130,10 +130,10 @@ jobs:
         # Default: the branch that triggered the workflow (from GITHUB_REF)
         ref: 'develop'
 
-       # Name of the tag to add to the new commit (see the paragraph below for more info)
-       # Default: ''
-       tag: "v1.0.0"
+        # Name of the tag to add to the new commit (see the paragraph below for more info)
+        # Default: ''
+        tag: "v1.0.0"
 
-    env:
-      # This is necessary in order to push a commit to the repo
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+      env:
+        # This is necessary in order to push a commit to the repo
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
