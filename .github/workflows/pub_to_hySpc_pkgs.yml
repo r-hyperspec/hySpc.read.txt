@@ -96,7 +96,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         repository: 'r-hyperspec/hySpc.pkgs'
-        force: T
+        force: true
         github_token: ${{ secrets.HYSPC_EO_KEY }}
     # - name: Checkout_repo
     #   uses: actions/checkout@v2
