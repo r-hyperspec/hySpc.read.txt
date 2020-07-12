@@ -88,6 +88,7 @@ jobs:
         git add -A
         git commit -m "Am I committed yet?"
         echo where is exit code 128??
+        git remote -v
       env:
         REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
         USERNAME: eoduniyi
