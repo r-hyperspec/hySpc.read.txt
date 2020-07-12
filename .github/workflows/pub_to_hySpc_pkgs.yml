@@ -14,9 +14,9 @@
 #         git add hySpc.pkgs
 #         git commit -m "Automatic publish from hySpc.read.Witec"
 #         git push hySpc.pkgs master
-on:
-  schedule:
-    - cron:  '*/1 * * * *'
+# on:
+#   schedule:
+#     - cron:  '*/1 * * * *'
   # push:
   #   branches:
   #     - master
@@ -26,35 +26,57 @@ on:
   #     - master
   #     - develop
 
-name: move-to-hySpc_pkgs
+# name: move-to-hySpc_pkgs
+#
+# jobs:
+#   R-CMD-check:
+#     runs-on: ${{ matrix.config.os }}
+#
+#     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+#
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         config:
+# #        - {os: windows-latest, r: 'release'}
+# #        - {os: macOS-latest, r: 'release'}
+# #        - {os: macOS-latest, r: 'devel'}
+#         - {os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+#
+#     env:
+#       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+#       RSPM: ${{ matrix.config.rspm }}
+#
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: r-lib/actions/setup-r@master
+#         with:
+#           r-version: ${{ matrix.config.r }}
+#       - uses: r-lib/actions/setup-pandoc@master
+#       - name: Query dependencies
+#         run: |
+#           install.packages('remotes')
+#           dir.create("archive")
+#         shell: Rscript {0}
+name: Strategy-3
+on: push
 
 jobs:
-  R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
-
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-#        - {os: windows-latest, r: 'release'}
-#        - {os: macOS-latest, r: 'release'}
-#        - {os: macOS-latest, r: 'devel'}
-        - {os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
-
+  run:
+    name: Strategy-3
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
-        with:
-          r-version: ${{ matrix.config.r }}
-      - uses: r-lib/actions/setup-pandoc@master
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          dir.create("archive")
-        shell: Rscript {0}
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Create dir
+      run: mkdir archive
+
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v4
+      with:
+        author_name: eoduniyi
+        author_email: eeoduniyi@gmail.com
+        message: "Created arhive folder"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
