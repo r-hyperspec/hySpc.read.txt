@@ -110,14 +110,16 @@ jobs:
           print(getwd())
           print(list.files(recursive = TRUE,
             pattern = "\\.tar\\.gz"))
-          #targz <- list.files(
-          #  path = "hySpc.pkgs/src/contrib",
-          #  pattern = "\\.tar\\.gz",
-          #  full.names = TRUE)
-          #print(targz)
-          #drat::insertPackage(targz,
-          #  repodir = "hySpc.pkgs",
-          #  action = "archive")
+          targz <- list.files(
+            path = "check",
+            pattern = "\\.tar\\.gz",
+            full.names = TRUE)[1] # there will be only one!
+          print(targz)
+          drat::insertPackage(targz,
+            repodir = "hySpc.pkgs",
+            action = "archive")
+          print(list.files(recursive = TRUE,
+            pattern = "\\.tar\\.gz"))
         shell: Rscript {0}
 
       - name: Deploy -- commit and push
