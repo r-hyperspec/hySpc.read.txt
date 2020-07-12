@@ -139,6 +139,10 @@ jobs:
       env:
         # This is necessary in order to push a commit to the repo
         GITHUB_TOKEN: ${{ secrets.HYSPC_EO_TOKEN }} # Leave this line unchanged
+      run: |
+        echo ...
+        pwd
+        ls
     - name: Push_to_Github
       run: |
         echo Ọlọrun yoo tọ ọfà rẹ
