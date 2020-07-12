@@ -1,63 +1,3 @@
-# on:
-#   schedule:
-#     - cron:  '*/1 * * * *'
-#
-# name: pub_to_hySpc_pkgs
-#
-# jobs:
-#     - name: Move procedure
-#       run: |
-#         echo hi there
-#         Rscript -e "dir.create('archive')"
-#         git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com:r-hyperspec/hySpc.pkgs.git archive
-#         cp .move_to_hySpc_pkgs.yml ./archive/hySpc.pkgs/src/contrib
-#         git add hySpc.pkgs
-#         git commit -m "Automatic publish from hySpc.read.Witec"
-#         git push hySpc.pkgs master
-# on:
-#   schedule:
-#     - cron:  '*/1 * * * *'
-  # push:
-  #   branches:
-  #     - master
-  #     - develop
-  # pull_request:
-  #   branches:
-  #     - master
-  #     - develop
-
-# name: move-to-hySpc_pkgs
-#
-# jobs:
-#   R-CMD-check:
-#     runs-on: ${{ matrix.config.os }}
-#
-#     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-#
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         config:
-# #        - {os: windows-latest, r: 'release'}
-# #        - {os: macOS-latest, r: 'release'}
-# #        - {os: macOS-latest, r: 'devel'}
-#         - {os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-#
-#     env:
-#       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-#       RSPM: ${{ matrix.config.rspm }}
-#
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: r-lib/actions/setup-r@master
-#         with:
-#           r-version: ${{ matrix.config.r }}
-#       - uses: r-lib/actions/setup-pandoc@master
-#       - name: Query dependencies
-#         run: |
-#           install.packages('remotes')
-#           dir.create("archive")
-#         shell: Rscript {0}
 name: pub_to_hySpc_pkgs
 on: push
 
@@ -73,22 +13,14 @@ jobs:
       run: |
         mkdir archive
         mv hySpc.pkgs archive
-        pwd
-        ls
         cd archive/hySpc.pkgs
-        ls
-        echo Light at the end of the tunnel...could be a train...or someone with a flashlight...or GOD > test.txt
+        echo I want to thank God, my family/siblings, the r-hyperspec team, all my mentors, and my K-12 teachers for putting up with me, and the U.S education system for helping me understand that while K-12 + higher ed is intellectually priceless is mostly a scam. > test.txt
         mv test.txt src/contrib
         cd src/contrib
-        pwd
-        ls
         git config --global user.email "eeoduniyi@gmail.com"
         git config --global user.name "eoduniyi"
-        echo "eo_key" | ssh-keygen -t rsa -C eoduniyi@gmai.com
         git add -A
-        git commit -m "Am I committed yet?"
-        echo where is exit code 128??
-        git remote -v
+        git commit -m "Automatic publish from hySpc.read.Witec"
       env:
         REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
         USERNAME: eoduniyi
@@ -97,74 +29,6 @@ jobs:
       with:
         repository: 'r-hyperspec/hySpc.pkgs'
         directory: './archive/hySpc.pkgs'
-        # ssh-key: ${{ secrets.HYSPC_EO_KEY }}
         github_token: ${{ secrets.HYSPC_EO_TOKEN }}
-    # - name: Checkout_repo
-    #   uses: actions/checkout@v2
-    #   with:
-    # Repository name with owner. For example, actions/checkout
-    # Default: ${{ github.repository }}
-        # repository: 'r-hyperspec/hySpc.pkgs'
-        # token: ${{ secrets.HYSPC_EO_TOKEN }}
 
-    # - name: Commit_changes
-    #   uses: EndBug/add-and-commit@v4
-    #   with:
-    #     author_name: eoduniyi
-    #     author_email: eeoduniyi@gmail.com
-    #     message: "Cloned hySpc.pkgs and moved test file into it"
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.HYSPC_EO_TOKEN }}
-    # - name: Add_&_commit
-    #   uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
-    #   with:
-    #     # The arguments for the `git add` command (see the paragraph below for more info)
-    #     # Default: '.'
-    #     add: '.'
-    #
-    #     # The name of the user that will be displayed as the author of the commit
-    #     # Default: author of the commit that triggered the run
-    #     author_name: eoduniyi
-    #
-    #     # The email of the user that will be displayed as the author of the commit
-    #     # Default: author of the commit that triggered the run
-    #     author_email: eeoduniyi@egmail.com
-    #
-    #     # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
-    #     # Default: '.'
-    #     # cwd: '/home/runner/work/hySpc.read.Witec/hySpc.read.Witec/archive/hySpc.pkgs'
-    #     path: /home/runner/work/hySpc.read.Witec/hySpc.read.Witec/archive/hySpc.pkgs
-    #
-    #     # Whether to use the --force option on `git add`, in order to bypass eventual gitignores
-    #     # Default: false
-    #     force: true
-    #
-    #     # The message for the commit
-    #     # Default: 'Commit from GitHub Actions'
-    #     message: 'Add test.txt'
-    #
-    #     # Name of the branch to use, if different from the one that triggered the workflow
-    #     # Default: the branch that triggered the workflow (from GITHUB_REF)
-    #     ref: 'develop'
-    #
-    #     # Name of the tag to add to the new commit (see the paragraph below for more info)
-    #     # Default: ''
-    #     tag: "v1.0.0"
-    #
-    #   env:
-    #     # This is necessary in order to push a commit to the repo
-    #     GITHUB_TOKEN: ${{ secrets.HYSPC_EO_TOKEN }} # Leave this line unchanged
-    #
-    # - name: Push_to_Github
-    #   run: |
-    #     echo Ọlọrun yoo tọ ọfà rẹ
-    #     git push https://$eoduniyi:$HYSPC_EO_TOKEN@github.com/r-hyperspec/hySpc.pkgs.git
-    #   env:
-    #       REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
-    #       USERNAME: eoduniyi
-    #   # uses: ad-m/github-push-action@master
-    #   # with:
-    #   #   repository: 'r-hyperspec/hySpc.pkgs'
-    #   #   branch: 'develop'
-    #   #   github_token: ${{ secrets.HYSPC_EO_TOKEN }}
 
