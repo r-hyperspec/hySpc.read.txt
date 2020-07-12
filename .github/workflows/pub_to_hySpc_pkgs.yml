@@ -6,6 +6,6 @@ on:
     - cron:  '*/1 * * * *'
 
 jobs:
-        - name: Move procedure
-        run: |
-          mkdir archive
+- name: Move procedure
+  run: |
+   mkdir archive
