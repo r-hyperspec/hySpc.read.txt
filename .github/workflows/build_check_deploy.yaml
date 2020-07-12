@@ -105,13 +105,14 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
-          print(getwd())
-          print(list.files(recursive = TRUE))
+          #print(getwd())
+          #print(list.files(recursive = TRUE))
           targz <- list.files(
             path = "hySpc.pkgs/src/contrib",
-            pattern = "\\.tar\\.gz")[1]
-          print(targz)
-          #drat::insertPackage(targz, repodir = ".")
+            pattern = "\\.tar\\.gz",
+            full.names = TRUE)[1]
+          #print(targz)
+          drat::insertPackage(targz, repodir = "hySpc.pkgs")
         shell: Rscript {0}
 
       - name: Deploy -- commit and push
