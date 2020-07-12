@@ -36,6 +36,7 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
       - uses: r-lib/actions/setup-pandoc@master
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -73,7 +74,7 @@ jobs:
           roxygen2::roxygenize()
         shell: Rscript {0}
 
-      - name: Check
+      - name: Build and Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning",
@@ -87,15 +88,21 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Deploy
+      - name: Deploy -- clone
         if: success()
         run: |
           rm -rf archive
           git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com:r-hyperspec/hySpc.pkgs.git archive
+
+      - name: Deploy -- insert
+        if: success()
         run: |
           targz <- list.files(pattern = "\\.tar\\.gz")[1]
           drat::insertPackage(targz, repodir = ".")
         shell: Rscript {0}
+
+      - name: Deploy -- commit and push
+        if: success()
         run: |
           cd archive # move into the subdir, which is git controlled
           git add *
