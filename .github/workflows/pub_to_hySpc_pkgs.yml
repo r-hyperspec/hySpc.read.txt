@@ -141,7 +141,7 @@ jobs:
     - name: Push_to_Github
       run: |
         echo Ọlọrun yoo tọ ọfà rẹ
-        git push https::/$eoduniyi:$HYSPC_EO_TOKEN@github.com/r-hyperspec/hySpc.pkgs.git $GITHUB_REF
+        git push https://$eoduniyi:$HYSPC_EO_TOKEN@github.com/r-hyperspec/hySpc.pkgs.git $GITHUB_REF
       env:
           REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
           USERNAME: eoduniyi
