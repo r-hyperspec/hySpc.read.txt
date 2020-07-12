@@ -125,6 +125,8 @@ jobs:
       - name: Deploy -- commit and push
         if: success()
         run: |
+          git config --global user.email "hanson@depauw.edu"
+          git config --global user.name "Bryan Deploy Bot"
           cd hySpc.pkgs # move into the subdir, which is git controlled
           git add *
           git commit -m "Automated deploy from hySpc.read.Witec"
