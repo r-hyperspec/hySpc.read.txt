@@ -87,7 +87,7 @@ jobs:
         echo "eo_key" | ssh-keygen -t rsa -C eoduniyi@gmai.com
         git add -A
         git commit -m "Am I committed yet?"
-        git push 
+        echo where is exit code 128??
       env:
         REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
         USERNAME: eoduniyi
