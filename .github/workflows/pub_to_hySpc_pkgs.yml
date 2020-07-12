@@ -87,7 +87,7 @@ jobs:
         echo je ne perdrai pas > test.txt
         pwd
         ls
-        git config user.name
+        git version
 
     - name: Commit_changes
       uses: EndBug/add-and-commit@v4
