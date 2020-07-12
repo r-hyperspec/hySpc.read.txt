@@ -105,7 +105,7 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
-          setwd("..")
+          setwd("../..")
           print(list.files())
           #targz <- list.files(pattern = "\\.tar\\.gz")[1]
           #drat::insertPackage(targz, repodir = ".")
