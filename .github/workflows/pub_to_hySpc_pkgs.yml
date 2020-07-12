@@ -58,19 +58,22 @@
 #           install.packages('remotes')
 #           dir.create("archive")
 #         shell: Rscript {0}
-name: Strategy-8
+name: pub_to_hySpc_pkgs
 on: push
 
 jobs:
   run:
-    name: Strategy-8
+    name: pub_to_hySpc_pkgs
     runs-on: ubuntu-latest
     steps:
     - name: Clone_hySpc.pkgs
       run: git clone https://github.com/r-hyperspec/hySpc.pkgs.git
 
     - name: Move_into_dir
-      run: cd hySpc.pkgs
+      run: |
+        cd hySpc.pkgs
+        pwd
+        ls
 
     - name: Checkout_repo
       uses: actions/checkout@v2
@@ -80,13 +83,16 @@ jobs:
         repository: 'r-hyperspec/hySpc.pkgs'
 
     - name: Create_file
-      run: echo je ne perdrai pas > test.txt
+      run: |
+        echo je ne perdrai pas > test.txt
+        pwd
+        ls
 
     - name: Commit_changes
       uses: EndBug/add-and-commit@v4
       with:
         author_name: eoduniyi
         author_email: eeoduniyi@gmail.com
-        message: "Cloned hySpc.pkgs and move test file into it"
+        message: "Cloned hySpc.pkgs and moved test file into it"
       env:
         GITHUB_TOKEN: ${{ secrets.HYSPC_EO_TOKEN }}
