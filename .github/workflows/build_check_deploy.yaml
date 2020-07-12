@@ -92,7 +92,12 @@ jobs:
         run: |
           rm -rf archive
           git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com:r-hyperspec/hySpc.pkgs.git archive
-          cp *.tar.gz archive
+        run: |
+          targz <- list.files(pattern = "\\.tar\\.gz")[1]
+          drat::insertPackage(targz, repodir = ".")
+        shell: Rscript {0}
+        run: |
+#          cp *.tar.gz archive
           cd archive # move into the subdir, which is git controlled
           git add *
           git commit -m "Automated publish from hySpc.read.Witec"
