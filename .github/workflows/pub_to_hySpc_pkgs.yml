@@ -66,19 +66,19 @@ jobs:
     name: Strategy-4
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
+    - name: Checkout_repo
       uses: actions/checkout@v2
 
-    - name: Create dir
+    - name: Create_dir
       run: mkdir archive
 
-    - name: Move into dir
+    - name: Move_into_dir
       run: cd archive
 
-    - name: Create file
+    - name: Create_file
       run: echo je ne perdrai pas > test.txt
 
-    - name: Commit changes
+    - name: Commit_changes
       uses: EndBug/add-and-commit@v4
       with:
         author_name: eoduniyi
