@@ -89,4 +89,4 @@ jobs:
         author_email: eeoduniyi@gmail.com
         message: "Cloned hySpc.pkgs and move test file into it"
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.HYSPC_EO_TOKEN }}
