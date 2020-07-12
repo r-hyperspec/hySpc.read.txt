@@ -73,10 +73,14 @@ jobs:
       run: cd hySpc.pkgs
 
     - name: Checkout_repo
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+        with:
+    # Repository name with owner. For example, actions/checkout
+    # Default: ${{ github.repository }}
+          repository: 'r-hyperspec/hySpc.pkgs'
 
     - name: Create_file
-      run: echo je ne perdrai pas > test.txt
+      run: echo je ne perdrai pas > ./test.txt/hySpc.pkgs
 
     - name: Commit_changes
       uses: EndBug/add-and-commit@v4
