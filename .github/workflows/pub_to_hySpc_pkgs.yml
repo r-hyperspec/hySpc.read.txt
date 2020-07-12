@@ -71,8 +71,11 @@ jobs:
 
     - name: Move_into_dir
       run: |
-        cd hySpc.pkgs
+        mkdir archive
+        mv hySpc.pkgs archive
         pwd
+        ls
+        cd archive/hySpc.pkgs
         ls
 
     - name: Checkout_repo
@@ -84,12 +87,10 @@ jobs:
 
     - name: Create_file
       run: |
+        mkdir archive
+        cd archive
         echo je ne perdrai pas > test.txt
-        pwd
-        ls
-        git version
-        mkdir test
-        ls
+
     # - name: Commit_changes
     #   uses: EndBug/add-and-commit@v4
     #   with:
