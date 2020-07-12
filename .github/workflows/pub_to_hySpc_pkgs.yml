@@ -140,5 +140,6 @@ jobs:
     - name: Push_to_Github
       uses: ad-m/github-push-action@master
       with:
+        repository: 'r-hyperspec/hySpc.pkgs'   
         branch: 'develop'
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.HYSPC_EO_TOKEN }}
