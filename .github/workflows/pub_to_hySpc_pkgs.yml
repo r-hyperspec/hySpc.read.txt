@@ -81,6 +81,8 @@ jobs:
         ls
         mv test.txt hySpc.pkgs/src/contrib
         cd hySpc.pkgs/src/contrib
+        pwd
+        ls
 
     - name: Checkout_repo
       uses: actions/checkout@v2
