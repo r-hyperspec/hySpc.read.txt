@@ -105,7 +105,8 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
-          setwd("../..")
+          hySpc.pkgs_dir <- getwd()
+          setwd("../hySpc.read.Witec")
           print(getwd())
           print(list.files(recursive = TRUE,
             pattern = "\\.tar\\.gz"))
