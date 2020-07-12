@@ -111,7 +111,7 @@ jobs:
             path = "hySpc.pkgs/src/contrib",
             pattern = "\\.tar\\.gz",
             full.names = TRUE)[1]
-          #print(targz)
+          print(targz)
           drat::insertPackage(targz, repodir = "hySpc.pkgs")
         shell: Rscript {0}
 
