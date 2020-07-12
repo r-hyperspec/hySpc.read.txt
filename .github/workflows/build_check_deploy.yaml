@@ -108,10 +108,10 @@ jobs:
           print(getwd())
           print(list.files(recursive = TRUE))
           #targz <- list.files(
-            path = "hySpc.pkgs/src/contrib",
-            pattern = "\\.tar\\.gz",
-            full.names = TRUE)
-          print(targz)
+          #  path = "hySpc.pkgs/src/contrib",
+          #  pattern = "\\.tar\\.gz",
+          #  full.names = TRUE)
+          #print(targz)
           #drat::insertPackage(targz,
           #  repodir = "hySpc.pkgs",
           #  action = "archive")
