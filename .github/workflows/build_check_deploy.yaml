@@ -1,17 +1,18 @@
 on:
   push:
     branches:
-      - master
-      - develop
+#      - master
+#      - develop
+      - feature/deploy-pkg
   pull_request:
     branches:
       - master
       - develop
 
-name: R-CMD-build-check
+name: R-CMD-build-check-deploy
 
 jobs:
-  R-CMD-check:
+  R-CMD-build-check-deploy:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -85,3 +86,15 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+      - name: Deploy
+        if: success()
+        run: |
+          rm -rf archive
+          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com:r-hyperspec/hySpc.pkgs.git archive
+          cp *.tar.gz archive
+          cd archive # move into the subdir, which is git controlled
+          git add *
+          git commit -m "Automated publish from hySpc.read.Witec"
+          git push origin master
+          rm -rf archive
