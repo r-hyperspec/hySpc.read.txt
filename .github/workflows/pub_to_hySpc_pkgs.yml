@@ -96,7 +96,7 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: 'r-hyperspec/hySpc.pkgs'
-        ssh-key: ${{ secrets.HYSPC_EO_KEY }} 
+        # ssh-key: ${{ secrets.HYSPC_EO_KEY }} 
         token: ${{ secrets.HYSPC_EO_TOKEN }}
     # - name: Checkout_repo
     #   uses: actions/checkout@v2
