@@ -98,7 +98,7 @@ jobs:
         if: success()
         run: |
           rm -rf archive
-          git clone https://.:${{ secrets.HYSPC_EO_TOKEN }}@github.com:r-hyperspec/hySpc.pkgs.git archive
+          git clone https://r-hyperspec/hySpc.pkgs.git archive
 
       - name: Deploy -- insert
         if: success()
