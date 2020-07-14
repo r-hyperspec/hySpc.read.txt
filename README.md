@@ -1,5 +1,9 @@
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+
 # hySpc.read.Witec
-Distill package for managing files produced by Witec instruments
+
+Functions to import data from Witec instruments into `hyperSpec`.
+
 <!-- badges: start -->
 <!--
 [![CRAN
