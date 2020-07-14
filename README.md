@@ -11,3 +11,5 @@ status](https://www.r-pkg.org/badges/version/SKELETON)](https://cran.r-project.o
 -->
 [![Codecov test coverage](https://codecov.io/gh/r-hyperspec/hySpc.read.Witec/branch/master/graph/badge.svg)](https://codecov.io/gh/r-hyperspec/hySpc.read.Witec?branch=master)
 <!-- badges: end -->
+<hr>
+Developers can find information about automatic deployment from this repo to `hySpc.pkgs` [here](https://github.com/r-hyperspec/hySpc.pkgs) in `CONTRIBUTING.md`.
