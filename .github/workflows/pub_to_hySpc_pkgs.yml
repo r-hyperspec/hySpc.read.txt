@@ -1,5 +1,7 @@
 name: pub_to_hySpc_pkgs
-on: pull_request_review
+# Toggle to change deploy trigger
+# on: pull_request_review
+on: push
 
 jobs:
   run:
