@@ -21,4 +21,5 @@ The `hyperSpec` team gratefully acknowledges support from the Google Summer of C
 Erick and the team carried out a significant overhaul of `hyperSpec` which led to this release.
 
 <hr>
+
 Developers can find information about automatic deployment from this repo to `hySpc.pkgs` [here](https://github.com/r-hyperspec/hySpc.pkgs) in `CONTRIBUTING.md`.
