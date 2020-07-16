@@ -2,16 +2,14 @@ on:
   push:
     branches:
       - master
-      - develop
   pull_request:
     branches:
       - master
-      - develop
 
-name: R-CMD-build-check
+name: R-CMD-build-check-deploy
 
 jobs:
-  R-CMD-check:
+  R-CMD-build-check-deploy:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -35,6 +33,7 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
       - uses: r-lib/actions/setup-pandoc@master
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -72,7 +71,7 @@ jobs:
           roxygen2::roxygenize()
         shell: Rscript {0}
 
-      - name: Check
+      - name: Build and Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning",
@@ -85,3 +84,53 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+# Everything above is standard build & check steps
+# Now the steps to deploy to hySpc.pkgs
+
+# The following configure step is
+# from https://stackoverflow.com/a/60548651/633251
+      - name: Configure git
+        env:
+          TOKEN: ${{ secrets.HYSPC_EO_TOKEN }}
+        run: git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+
+      - name: Deploy -- clone
+        if: success()
+        run: |
+          rm -rf hySpc.pkgs
+          git clone https://github.com/r-hyperspec/hySpc.pkgs.git hySpc.pkgs
+          cd hySpc.pkgs
+          git checkout master
+
+# Please leave commented lines below, they are very helpful in troubleshooting.
+
+      - name: Deploy -- insert
+        if: success()
+        run: |
+          setwd("../hySpc.read.Witec")
+          # print(getwd())
+          # print(list.files(recursive = TRUE,
+          #  pattern = "\\.tar\\.gz"))
+          targz <- list.files(
+            path = "check",
+            pattern = "\\.tar\\.gz",
+            full.names = TRUE)[1] # there will be only one!
+          # print(targz)
+          drat::insertPackage(targz,
+            repodir = "hySpc.pkgs",
+            action = "archive")
+        shell: Rscript {0}
+
+      - name: Deploy -- commit and push
+        if: success()
+        run: |
+          git config --global user.email "hySpc_Deploy_Bot@example.com"
+          git config --global user.name "hySpc Deploy Bot"
+          cd hySpc.pkgs # move into the subdir, which is git controlled
+          git add *
+          git commit -m "Automated deploy from hySpc.read.Witec"
+          git push origin master
+          git checkout gh-pages # always keep the branches identical!
+          git merge master
+          git push origin gh-pages
