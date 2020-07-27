@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - master
+      - feature/deploy-pkg
   pull_request:
     branches:
       - master
@@ -104,6 +105,10 @@ jobs:
           git checkout master
 
 # Please leave commented lines below, they are very helpful in troubleshooting.
+      - name: Deploy -- update README.md
+        if: success()
+        run: |
+           ls -lhR  --time-style=long-iso *.tar.gz | awk '{print $5, "   "$6, $7, $9, "   "$10}'
 
       - name: Deploy -- insert
         if: success()
