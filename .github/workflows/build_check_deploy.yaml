@@ -108,6 +108,7 @@ jobs:
       - name: Deploy -- update README.md
         if: success()
         run: |
+           ls -lR
            ls -lhR  --time-style=long-iso *.tar.gz | awk '{print $5, "   "$6, $7, $9, "   "$10}'
 
       - name: Deploy -- insert
