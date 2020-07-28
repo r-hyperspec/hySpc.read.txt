@@ -114,7 +114,7 @@ jobs:
            # append the listing of .tar.gz present, along
            # a little formating (appending to .md that will be parsed
            # and displayed by GH)
-           ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$6, "\t"$8}' >> README.tmp
+           ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$6, "      "$8}' >> README.tmp
            mv README.tmp README.md
 
       - name: Deploy -- insert
