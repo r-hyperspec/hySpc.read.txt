@@ -112,7 +112,7 @@ jobs:
            # grab the portion of the file we want to re-use
            awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
            # append the listing of .tar.gz present
-           ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print $5, "\t"$6, "\t"$8\n}' >> README.tmp
+           ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print $5, "\t"$6, "\t"$8"\n"}' >> README.tmp
            mv README.tmp README.md
 
       - name: Deploy -- insert
