@@ -1,3 +1,4 @@
 # C. Beleites
 # run all tests attached to objects
-hySpc.testthat::unittest("hySpc.read.Witec")
+library(hySpc.testthat)
+unittest("hySpc.read.Witec", standalone = FALSE)
