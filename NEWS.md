@@ -1,4 +1,9 @@
-# hySpc.read.Witec x.x.x 2020-xx-xx
+# hySpc.read.Witec 0.0.x 2020-xx-xx
 
-## Misc.
-* First release!
+## User-visible changes
+
+* moved functions from **hyperSpec** to **hySpc.read.Witec**: 
+  - `hyperSpec::read.txt.Witec()` -> `hySpc.read.Witec::read_txt_Witec()`
+  - `hyperSpec::read.dat.Witec()` -> `hySpc.read.Witec::read_dat_Witec()`
+  - `hyperSpec::read.txt.Witec.Graph()` -> `hySpc.read.Witec::read_txt_Witec_Graph()`
+* new function `read_txt_Witec_TrueMatch()` to import text exports from Witec TrueMatch
