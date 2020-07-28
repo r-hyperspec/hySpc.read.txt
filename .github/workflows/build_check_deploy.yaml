@@ -109,7 +109,9 @@ jobs:
         if: success()
         run: |
            cd hySpc.pkgs
-           ls -lhR  --time-style=long-iso | grep .+\.tar\.gz | awk '{print $5, "\t"$6, "\t"$8}'
+           ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print $5, "\t"$6, "\t"$8}'
+           # ls -lhR  --time-style=long-iso | grep .+\.tar\.gz | awk '{print $5, "\t"$6, "\t"$8}'
+
       - name: Deploy -- insert
         if: success()
         run: |
