@@ -1,5 +1,4 @@
 
-
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version-last-release/hySpc.read.txt)](https://cran.r-project.org/package=hySpc.read.txt)
 [![R-CMD-check](https://github.com/r-hyperspec/hySpc.read.txt/workflows/R-CMD-check/badge.svg)](https://github.com/r-hyperspec/hySpc.read.txt/actions)
