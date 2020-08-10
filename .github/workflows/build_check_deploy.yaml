@@ -1,11 +1,11 @@
 on:
   push:
     branches:
-      - develop # if more than one branch given one may stomp on the other
+      - develop
   pull_request:
     branches:
       - develop
-
+# note above: if more than one branch given one may stomp on the other
 name: R-CMD-build-check-deploy
 
 jobs:
