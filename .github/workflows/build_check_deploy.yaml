@@ -120,7 +120,7 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
-          setwd("../hySpc.read.Witec")
+          setwd("../hySpc.read.txt")
           # print(getwd())
           # print(list.files(recursive = TRUE,
           #  pattern = "\\.tar\\.gz"))
@@ -141,7 +141,7 @@ jobs:
           git config --global user.name "hySpc Deploy Bot"
           cd hySpc.pkgs # move into the subdir, which is git controlled
           git add *
-          git commit -m "Automated deploy from hySpc.read.Witec"
+          git commit -m "Automated deploy from hySpc.read.txt"
           git push origin master
           git checkout gh-pages # always keep the branches identical!
           git merge master
