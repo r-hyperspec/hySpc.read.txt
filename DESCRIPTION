@@ -1,17 +1,17 @@
 Package: hySpc.read.txt
 Type: Package
 Title: File import Functions for Spectra in various ASCII/text file formats
-Version: 0.0.0.9000
+Version: 0.0.0.1000
 Maintainer: Erick Oduniyi <eeoduniyi@gmail.com>
 Authors@R: c(
     person("Claudia",   "Beleites",  role = c("aut"), email = "Claudia.Beleites@chemometrix.gmbh"),
     person("Erick",     "Oduniyi", role = c("aut","cre"), email = "eeoduniyi@gmail.com"),
     person("Vilmantas", "Gegzna", role = c("aut")),
     person("Bryan",     "Hanson", role = c("aut")))
-Description: File import filters for a number of file formats produced by Witec instruments. 
-    The imported data are returned as hyperSpec objects. 
+Description: File import filters for a number of file formats produced by Witec instruments.
+    The imported data are returned as hyperSpec objects.
 License: MIT + file LICENSE
-URL: 
+URL:
     https://r-hyperspec.github.io/hySpc.read.txt/,
     https://github.com/r-hyperspec/hySpc.read.txt/
 BugReports: https://github.com/r-hyperspec/hySpc.read.txt/issues
