@@ -136,8 +136,8 @@ jobs:
       - name: Deploy -- commit and push
         if: success()
         run: |
-          git config --global user.email "hySpc_Deploy_Bot@example.com"
-          git config --global user.name "hySpc Deploy Bot"
+          git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
+          git config --global user.name "hySpc.read.txt Deploy Bot"
           cd hySpc.pkgs # move into the subdir, which is git controlled
           git add *
           git commit -m "Automated deploy from hySpc.read.txt"
