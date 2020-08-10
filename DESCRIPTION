@@ -1,6 +1,6 @@
-Package: hySpc.read.Witec
+Package: hySpc.read.txt
 Type: Package
-Title: File import Functions for Spectra from Witec Raman Spectrometers
+Title: File import Functions for Spectra in various ASCII/text file formats
 Version: 0.0.0.9000
 Maintainer: Erick Oduniyi <eeoduniyi@gmail.com>
 Authors@R: c(
@@ -12,9 +12,9 @@ Description: File import filters for a number of file formats produced by Witec 
     The imported data are returned as hyperSpec objects. 
 License: MIT + file LICENSE
 URL: 
-    https://r-hyperspec.github.io/hySpc.read.Witec/,
-    https://github.com/r-hyperspec/hySpc.read.Witec/
-BugReports: https://github.com/r-hyperspec/hySpc.read.Witec/issues
+    https://r-hyperspec.github.io/hySpc.read.txt/,
+    https://github.com/r-hyperspec/hySpc.read.txt/
+BugReports: https://github.com/r-hyperspec/hySpc.read.txt/issues
 Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes

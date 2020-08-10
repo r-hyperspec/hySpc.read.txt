@@ -19,7 +19,7 @@ read.mat.Witec <- function(file = stop("filename or connection needed")) {
       "Matlab file contains more than 1 object. This should not happen.\n",
       "If it is nevertheless a WITec exported .mat file, ",
       "please open an issue at ",
-      packageDescription("hySpc.read.Witec")$BugReports,
+      packageDescription("hySpc.read.txt")$BugReports,
       " with\n",
       "- output of `sessionInfo ()` and\n",
       "- an example file"

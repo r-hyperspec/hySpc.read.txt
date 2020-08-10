@@ -1,4 +1,4 @@
 library(testthat)
-library(hySpc.read.Witec)
+library(hySpc.read.txt)
 
-test_check("hySpc.read.Witec")
+test_check("hySpc.read.txt")

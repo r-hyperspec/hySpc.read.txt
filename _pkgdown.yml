@@ -25,9 +25,9 @@ navbar:
       menu:
       - text: "Documentation for version of package:"
       - text: Released
-        href: https://r-hyperspec.github.io/hySpc.read.Witec/
+        href: https://r-hyperspec.github.io/hySpc.read.txt/
       - text: In-development
-        href: https://r-hyperspec.github.io/hySpc.read.Witec/dev/
+        href: https://r-hyperspec.github.io/hySpc.read.txt/dev/
 
 # -------------------------------------------------------------------------
 # # If you need custom webpage for articles, modify this section:
@@ -58,7 +58,7 @@ navbar:
 # # If you need custom webpage for reference, modify this section:
 
 # reference:
-# - title: 'Package "hySpc.read.Witec"'
+# - title: 'Package "hySpc.read.txt"'
 # - contents:
 #   - has_keyword("package")
 

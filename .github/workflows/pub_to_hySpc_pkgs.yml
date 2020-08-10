@@ -15,13 +15,13 @@ jobs:
         mkdir archive
         mv hySpc.pkgs archive
         cd archive/hySpc.pkgs
-        echo This file was generated from r-hyperspec/hySpc.read.Witec > test.txt
+        echo This file was generated from r-hyperspec/hySpc.read.txt > test.txt
         mv test.txt src/contrib
         cd src/contrib
         git config --global user.email "eeoduniyi@gmail.com"
         git config --global user.name "eoduniyi"
         git add -A
-        git commit -m "Automatic publish from hySpc.read.Witec"
+        git commit -m "Automatic publish from hySpc.read.txt"
       env:
         REPO_KEY: ${{ secrets.HYSPC_EO_TOKEN }}
         USERNAME: r-hyperspec
