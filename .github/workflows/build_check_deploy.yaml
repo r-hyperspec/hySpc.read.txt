@@ -1,11 +1,10 @@
 on:
   push:
     branches:
-      - master
-      - feature/deploy-pkg
+      - develop # if more than one branch given one may stomp on the other
   pull_request:
     branches:
-      - master
+      - develop
 
 name: R-CMD-build-check-deploy
 
