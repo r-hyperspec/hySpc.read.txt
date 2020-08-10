@@ -1,4 +1,5 @@
 
+
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version-last-release/hySpc.read.txt)](https://cran.r-project.org/package=hySpc.read.txt)
 [![R-CMD-check](https://github.com/r-hyperspec/hySpc.read.txt/workflows/R-CMD-check/badge.svg)](https://github.com/r-hyperspec/hySpc.read.txt/actions)
@@ -52,7 +53,7 @@ install.packages("hySpc.read.txt")
 
 You can install the development version of the package from [GitHub](https://github.com/r-hyperspec/hySpc.read.txt):
 
-```r 
+```r
 if (!require(remotes)) {install.packages("remotes")}
 remotes::install_github("r-hyperspec/hySpc.read.txt")
 ```
@@ -60,7 +61,7 @@ remotes::install_github("r-hyperspec/hySpc.read.txt")
 **NOTE 1:**
 Usually, "Windows" users need to download, install and properly configure **Rtools** (see [these instructions](https://cran.r-project.org/bin/windows/Rtools/)) to make the code above work.
 
-**NOTE 2:** 
+**NOTE 2:**
 This method will **not** install package's documentation (help pages and vignettes) into your computer.
 So you can either use the [online documentation](https://r-hyperspec.github.io/) or build the package from source (see the next section).
 
@@ -107,4 +108,3 @@ Usually, "Windows" users need to download, install and properly configure **Rtoo
 ## For Developers
 
 Developers can find information about automatic deployment from this repo to `hySpc.pkgs` [here](https://github.com/r-hyperspec/hySpc.pkgs) in `CONTRIBUTING.md`.
-
