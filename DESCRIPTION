@@ -1,7 +1,7 @@
 Package: hySpc.read.txt
 Type: Package
 Title: File import Functions for Spectra in various ASCII/text file formats
-Version: 0.0.0.1000
+Version: 0.0.0.9000
 Maintainer: Erick Oduniyi <eeoduniyi@gmail.com>
 Authors@R: c(
     person("Claudia",   "Beleites",  role = c("aut"), email = "Claudia.Beleites@chemometrix.gmbh"),
