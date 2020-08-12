@@ -1,5 +1,8 @@
 # Load the microbenchmark library
+library(hyperSpec)
 library(microbenchmark)
+library(readtext)
+
 
 # Set file to be tested
 file <- "/Users/erickoduniyi/Documents/Projects/open-source/hyperspec/hySpc.read.txt/tests/testthat/Witec_TrueMatch.txt"
@@ -11,7 +14,6 @@ res <- microbenchmark(
   read.table ("txt.t/Triazine 5_31.txt", header = TRUE, dec = ",", sep = "\t"),
   read.table(file, header = FALSE, sep="", dec="."),
   readtext(file),
-  scan.txt.Witec(file),
   readLines(file, encoding = encoding)
 )
 
