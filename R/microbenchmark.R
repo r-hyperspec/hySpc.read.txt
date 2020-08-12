@@ -10,11 +10,10 @@ file <- "/Users/erickoduniyi/Documents/Projects/open-source/hyperspec/hySpc.read
 # Switch between io packages
 # Calculate performance with microbenchmark
 res <- microbenchmark(
+  read.table (file, header = TRUE, dec = ",", sep = "\t"),
+  readLines(file, encoding = encoding),
   read.ini(file),
-  read.table ("txt.t/Triazine 5_31.txt", header = TRUE, dec = ",", sep = "\t"),
-  read.table(file, header = FALSE, sep="", dec="."),
   readtext(file),
-  readLines(file, encoding = encoding)
 )
 
 # Throw the Kitchen Sink at it
