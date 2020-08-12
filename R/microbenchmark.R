@@ -7,14 +7,12 @@ file <- "/Users/erickoduniyi/Documents/Projects/open-source/hyperspec/hySpc.read
 # Switch between io packages
 # Calculate performance with microbenchmark
 res <- microbenchmark(
-
-  # read.ini
-  read.ini(file)
-
-  #
-
+  read.ini(file),
+  read.table(file, colClasses),
+  read.table(file, header = FALSE, sep="", dec="."),
+  readtext(),
 )
 
-# Release data frame
+# Release data
 res
 
