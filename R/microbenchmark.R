@@ -10,7 +10,7 @@ res <- microbenchmark(
   read.ini(file),
   read.table(file, colClasses),
   read.table(file, header = FALSE, sep="", dec="."),
-  readtext(),
+  readtext(file)
 )
 
 # Release data
