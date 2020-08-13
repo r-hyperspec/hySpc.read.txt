@@ -10,7 +10,7 @@ file <- "/Users/erickoduniyi/Documents/Projects/open-source/hyperspec/hySpc.read
 # Switch between io packages
 # Calculate performance with microbenchmark
 res <- microbenchmark(
-  read.table (file, header = TRUE, dec = ",", sep = "\t"),
+  read.table(file, header = TRUE, dec = ",", sep = "\t"),
   readLines(file),
   read.ini(file),
   readtext(file),
