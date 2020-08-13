@@ -11,7 +11,7 @@ file <- "/Users/erickoduniyi/Documents/Projects/open-source/hyperspec/hySpc.read
 # Calculate performance with microbenchmark
 res <- microbenchmark(
   read.table (file, header = TRUE, dec = ",", sep = "\t"),
-  readLines(file, encoding = encoding),
+  readLines(file),
   read.ini(file),
   readtext(file),
 )
