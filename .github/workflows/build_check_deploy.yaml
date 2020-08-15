@@ -112,7 +112,6 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
-          cd hySpc.pkgs
           setwd("../hySpc.read.txt") #CUST
           # print(getwd())
           # print(list.files(recursive = TRUE,
