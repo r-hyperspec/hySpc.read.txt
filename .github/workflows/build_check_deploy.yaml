@@ -109,21 +109,10 @@ jobs:
           git checkout master
 
 # Please leave commented lines below, they are very helpful in troubleshooting.
-      - name: Deploy -- update README.md
-        if: success()
-        run: |
-           cd hySpc.pkgs
-           # grab the portion of the file we want to re-use
-           awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
-           # append the listing of .tar.gz present, along
-           # a little formating (appending to .md that will be parsed
-           # and displayed by GH)
-           ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$8, " ("$6")"}' >> README.tmp
-           mv README.tmp README.md
-
       - name: Deploy -- insert
         if: success()
         run: |
+          cd hySpc.pkgs
           setwd("../hySpc.read.txt") #CUST
           # print(getwd())
           # print(list.files(recursive = TRUE,
@@ -131,12 +120,23 @@ jobs:
           targz <- list.files(
             path = "check",
             pattern = "\\.tar\\.gz",
-            full.names = TRUE)[1] # there will be only one!
+            full.names = TRUE)[1] # there will be only one in this directory!
           # print(targz)
           drat::insertPackage(targz,
             repodir = "hySpc.pkgs",
             action = "archive")
         shell: Rscript {0}
+
+      - name: Deploy -- update README.md
+        if: success()
+        run: |
+           # grab the portion of the file we want to re-use
+           awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
+           # append the listing of .tar.gz present, along
+           # a little formating (appending to .md that will be parsed
+           # and displayed by GH)
+           ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$8, " ("$6")"}' >> README.tmp
+           mv README.tmp README.md
 
       - name: Deploy -- commit and push
         if: success()
