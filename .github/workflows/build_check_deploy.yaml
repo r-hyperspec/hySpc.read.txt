@@ -1,3 +1,9 @@
+# Note: where customization is needed I have added a #CUST comment
+# so that when this file is replicated elsewhere it is easier to make
+# ALL the necessary changes.  This applies primarily to the deploy section;
+# clearly one has to make changes to build and check as well if
+# you move this file to another pkg repo.  Bryan
+
 on:
   push:
     branches:
@@ -6,6 +12,7 @@ on:
     branches:
       - develop
 # Note on the above: if more than one branch given one may stomp on the other
+# during deployment, so use only one branch.
 name: R-CMD-build-check-deploy
 
 jobs:
@@ -18,9 +25,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-#        - {os: windows-latest, r: 'release'}
-#        - {os: macOS-latest, r: 'release'}
-#        - {os: macOS-latest, r: 'devel'}
         - {os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
 
     env:
@@ -90,6 +94,7 @@ jobs:
 
 # The following configure step is
 # from https://stackoverflow.com/a/60548651/633251
+# #CUST token is a secret in the repo to which one deploys
       - name: Configure git
         env:
           TOKEN: ${{ secrets.HYSPC_EO_TOKEN }}
@@ -119,7 +124,7 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
-          setwd("../hySpc.read.txt")
+          setwd("../hySpc.read.txt") #CUST
           # print(getwd())
           # print(list.files(recursive = TRUE,
           #  pattern = "\\.tar\\.gz"))
@@ -135,12 +140,12 @@ jobs:
 
       - name: Deploy -- commit and push
         if: success()
-        run: |
+        run: | #CUST update the name of the local repo
           git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
           git config --global user.name "hySpc.read.txt Deploy Bot"
           cd hySpc.pkgs # move into the subdir, which is git controlled
           git add *
-          git commit -m "Automated deploy from hySpc.read.txt"
+          git commit -m "Automated deploy from hySpc.read.txt" #CUST
           git push origin master
           git checkout gh-pages # always keep the branches identical!
           git merge master
