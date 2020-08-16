@@ -4,7 +4,6 @@
 # clearly one has to make changes to build and check as well if
 # you move this file to another pkg repo.  Bryan
 
-
 on:
   push:
     branches:
@@ -34,7 +33,6 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
-      - uses: r-lib/actions/setup-pandoc@master
 
       - name: Query dependencies
         run: |
