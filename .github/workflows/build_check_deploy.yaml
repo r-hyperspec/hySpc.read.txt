@@ -102,8 +102,8 @@ jobs:
       - name: Deploy -- edit SOURCE_REPO
         if: success()
         run: |
-          SOURCE_REPO=$( echo "$SOURCE_REPO" | awk '{sub("r-hyperspec/", "", $0); print $0}' )
-          echo $SOURCE_REPO
+          SOURCE_STR = $( echo "$SOURCE_REPO" | awk '{sub("r-hyperspec/", "", $0); print $0}' )
+          echo $SOURCE_STR
 
 # The following configure step is
 # from https://stackoverflow.com/a/60548651/633251
@@ -149,7 +149,7 @@ jobs:
       - name: Deploy -- move the .tar.gz
         if: success()
         run: | #CUST update the name of the local repo
-          cp ../${SOURCE_REPO}/check/*.tar.gz hySpc.pkgs/src/contrib/
+          cp ../${SOURCE_STR}/check/*.tar.gz hySpc.pkgs/src/contrib/
           cd hySpc.pkgs
 
       - name: Deploy -- commit and push
