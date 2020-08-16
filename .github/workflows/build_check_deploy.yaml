@@ -9,9 +9,6 @@ on:
   push:
     branches:
       - feature/issue-16
-  pull_request:
-    branches:
-      - develop
 # Note on the above: if more than one branch given one may stomp on the other
 # during deployment, so use only one branch.
 name: R-CMD-build-check-deploy
