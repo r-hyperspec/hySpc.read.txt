@@ -122,11 +122,10 @@ jobs:
             pattern = "\\.tar\\.gz",
             full.names = TRUE)[1] # there will be only one in this directory!
           # print(targz)
-          list.files()
           drat::insertPackage(targz,
             repodir = "hySpc.pkgs",
             action = "archive")
-          list.files("hySpc.pkgs", recursive = TRUE)
+          # list.files("hySpc.pkgs", recursive = TRUE)
         shell: Rscript {0}
 
       - name: Deploy -- update README.md
@@ -138,6 +137,7 @@ jobs:
            # a little formating (appending to .md that will be parsed
            # and displayed by GH)
            ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$8, " ("$6")"}' >> README.tmp
+           cat README.tmp
            mv README.tmp README.md
 
       - name: Deploy -- commit and push
