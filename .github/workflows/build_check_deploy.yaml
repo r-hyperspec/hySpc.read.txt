@@ -150,17 +150,23 @@ jobs:
            ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$8, " ("$6")"}' >> README.tmp
            mv README.tmp README.md
 
+      - name: Deploy -- move the .tar.gz
+        if: success()
+        run: | #CUST update the name of the local repo
+          pwd
+          # ls -l ../hySpc.read.txt/check
+          cp ../hySpc.read.txt/check/*.tar.gz hySpc.pkgs/src/contrib/
+          cd hySpc.pkgs
+          ls -l src/contrib
+
       - name: Deploy -- commit and push
         if: success()
         run: | #CUST update the name of the local repo
           pwd
-          ls -l ../hySpc.read.txt/check
-          cp ../hySpc.read.txt/check/*.tar.gz hySpc.pkgs/src/contrib/
-          cd hySpc.pkgs
-          ls -l src/contrib
-          git status
           git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
           git config --global user.name "hySpc.read.txt Deploy Bot"
+          git status
           git add *
+          git status
           git commit -m "Automated deploy from hySpc.read.txt" #CUST
           git push origin gh-pages
