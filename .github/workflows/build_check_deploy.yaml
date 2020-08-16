@@ -126,7 +126,7 @@ jobs:
           drat::insertPackage(targz,
             repodir = "hySpc.pkgs",
             action = "archive")
-
+          list.files("hySpc.pkgs")
         shell: Rscript {0}
 
       - name: Deploy -- update README.md
