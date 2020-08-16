@@ -156,7 +156,7 @@ jobs:
           pwd
           ls -l
           ls -l ..
-          cp ..check/src/contrib/*.tar.gz ../hySpc.pkgs/src/contrib/
+          cp check/src/contrib/*.tar.gz hySpc.pkgs/src/contrib/
           cd hySpc.pkgs
           git status
           git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
