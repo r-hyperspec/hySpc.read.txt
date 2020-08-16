@@ -4,14 +4,11 @@
 # clearly one has to make changes to build and check as well if
 # you move this file to another pkg repo.  Bryan
 
-
 on:
   push:
     branches:
       - feature/issue-16
-  pull_request:
-    branches:
-      - develop
+
 # Note on the above: if more than one branch given one may stomp on the other
 # during deployment, so use only one branch.
 name: R-CMD-build-check-deploy
