@@ -157,6 +157,7 @@ jobs:
           ls -l ../hySpc.read.txt/check
           cp ../hySpc.read.txt/check/*.tar.gz hySpc.pkgs/src/contrib/
           cd hySpc.pkgs
+          ls -l src/contrib
           git status
           git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
           git config --global user.name "hySpc.read.txt Deploy Bot"
