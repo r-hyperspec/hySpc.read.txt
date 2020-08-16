@@ -93,6 +93,12 @@ jobs:
 # Everything above is standard build & check steps
 # Now the steps to deploy to hySpc.pkgs
 
+# Very Important Note: Each "- name:" task below starts from the same
+# directory, which in this case is
+# /home/runner/work/hySpc.read.txt/hySpc.read.txt
+# Each task is apparently run in it's own shell starting from this directory.
+# This means you have to navigate to the desired directory for each task.
+
 # The following configure step is
 # from https://stackoverflow.com/a/60548651/633251
 # #CUST token is a secret in the repo to which one deploys
@@ -116,7 +122,7 @@ jobs:
         if: success()
         run: |
           getwd()
-          setwd("../hySpc.read.txt") #CUST
+          setwd("../hySpc.read.txt") #CUST # maybe not needed
           # print(getwd())
           # print(list.files(recursive = TRUE,
           #  pattern = "\\.tar\\.gz"))
@@ -148,6 +154,7 @@ jobs:
         if: success()
         run: | #CUST update the name of the local repo
           pwd
+          cd hySpc.pkgs
           git status
           git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
           git config --global user.name "hySpc.read.txt Deploy Bot"
