@@ -104,15 +104,18 @@ jobs:
       - name: Deploy -- clone
         if: success()
         run: |
+          pwd
           rm -rf hySpc.pkgs
           git clone https://github.com/r-hyperspec/hySpc.pkgs.git hySpc.pkgs
           cd hySpc.pkgs
           git checkout gh-pages
 
+
 # Please leave commented lines below, they are very helpful in troubleshooting.
       - name: Deploy -- insert
         if: success()
         run: |
+          pwd
           setwd("../hySpc.read.txt") #CUST
           # print(getwd())
           # print(list.files(recursive = TRUE,
@@ -131,6 +134,7 @@ jobs:
       - name: Deploy -- update README.md
         if: success()
         run: |
+           pwd
            cd hySpc.pkgs # move into the subdir, which is git controlled
            # grab the portion of the file we want to re-use
            awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
