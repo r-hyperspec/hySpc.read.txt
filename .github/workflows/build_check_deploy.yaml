@@ -115,8 +115,8 @@ jobs:
         run: |
           setwd("../hySpc.read.txt") #CUST
           # print(getwd())
-          # print(list.files(recursive = TRUE,
-          #  pattern = "\\.tar\\.gz"))
+          print(list.files(recursive = TRUE,
+           pattern = "\\.tar\\.gz"))
           targz <- list.files(
             path = "check",
             pattern = "\\.tar\\.gz",
