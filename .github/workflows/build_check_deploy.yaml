@@ -154,7 +154,8 @@ jobs:
         if: success()
         run: | #CUST update the name of the local repo
           pwd
-          cd hySpc.pkgs
+          cd ..
+          ls -lR
           git status
           git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
           git config --global user.name "hySpc.read.txt Deploy Bot"
