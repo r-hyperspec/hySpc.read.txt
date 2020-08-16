@@ -102,7 +102,7 @@ jobs:
       - name: Deploy -- edit SOURCE_REPO
         if: success()
         run: |
-          SOURCE_REPO=$( echo "$SOURCE_REPO" | awk '{sub(|r-hyperspec/|, "", $0); print $0}' )
+          SOURCE_REPO=$( echo "$SOURCE_REPO" | awk '{sub("r-hyperspec/", "", $0); print $0}' )
           echo $SOURCE_REPO
 
 # The following configure step is
