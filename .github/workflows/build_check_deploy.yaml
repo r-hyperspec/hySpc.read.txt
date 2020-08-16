@@ -143,7 +143,8 @@ jobs:
       - name: Deploy -- commit and push
         if: success()
         run: | #CUST update the name of the local repo
-          cd ..
+          pwd
+          git status
           git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
           git config --global user.name "hySpc.read.txt Deploy Bot"
           git add *
