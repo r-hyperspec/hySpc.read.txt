@@ -121,7 +121,7 @@ jobs:
             path = "check",
             pattern = "\\.tar\\.gz",
             full.names = TRUE)[1] # there will be only one in this directory!
-          # print(targz)
+          print(targz)
           drat::insertPackage(targz,
             repodir = "hySpc.pkgs",
             action = "archive")
