@@ -155,7 +155,7 @@ jobs:
         run: | #CUST update the name of the local repo
           pwd
           ls -l
-          ls -l ..
+          ls -l check/src/contrib
           cp check/src/contrib/*.tar.gz hySpc.pkgs/src/contrib/
           cd hySpc.pkgs
           git status
