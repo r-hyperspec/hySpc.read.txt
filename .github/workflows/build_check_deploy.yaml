@@ -106,7 +106,7 @@ jobs:
           rm -rf hySpc.pkgs
           git clone https://github.com/r-hyperspec/hySpc.pkgs.git hySpc.pkgs
           cd hySpc.pkgs
-          git checkout master
+          git checkout gh-pages
 
 # Please leave commented lines below, they are very helpful in troubleshooting.
       - name: Deploy -- insert
@@ -145,7 +145,7 @@ jobs:
           cd hySpc.pkgs # move into the subdir, which is git controlled
           git add *
           git commit -m "Automated deploy from hySpc.read.txt" #CUST
-          git push origin master
+#          git push origin master
           # git checkout gh-pages # always keep the branches identical!
           # git merge master
-          # git push origin gh-pages
+          git push origin gh-pages
