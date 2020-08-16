@@ -115,7 +115,7 @@ jobs:
       - name: Deploy -- insert
         if: success()
         run: |
-          pwd
+          getwd()
           setwd("../hySpc.read.txt") #CUST
           # print(getwd())
           # print(list.files(recursive = TRUE,
