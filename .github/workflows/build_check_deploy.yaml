@@ -133,6 +133,7 @@ jobs:
         run: |
            # grab the portion of the file we want to re-use
            awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
+           cat README.tmp
            # append the listing of .tar.gz present, along
            # a little formating (appending to .md that will be parsed
            # and displayed by GH)
@@ -148,7 +149,4 @@ jobs:
           cd hySpc.pkgs # move into the subdir, which is git controlled
           git add *
           git commit -m "Automated deploy from hySpc.read.txt" #CUST
-          # git push origin master
-          # git checkout gh-pages # always keep the branches identical!
-          # git merge master
           git push origin gh-pages
