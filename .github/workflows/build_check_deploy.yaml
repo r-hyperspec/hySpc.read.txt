@@ -97,6 +97,13 @@ jobs:
 # Each task is apparently run in its own shell starting from this directory.
 # This means you have to navigate to the desired directory for each task.
 
+# This edit step is needed because SOURCE_REPO is a string like
+# "r-hyperspec/hySpc.read.txt" and we only need the 2nd part later
+      - name: Deploy -- edit SOURCE_REPO
+        if: success()
+        run: |
+          SOURCE_REPO=$( echo "$SOURCE_REPO" | awk '{sub(|r-hyperspec/|, "", $0); print $0}' )
+          echo $SOURCE_REPO
 
 # The following configure step is
 # from https://stackoverflow.com/a/60548651/633251
