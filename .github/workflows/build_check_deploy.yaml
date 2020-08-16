@@ -115,16 +115,18 @@ jobs:
         run: |
           setwd("../hySpc.read.txt") #CUST
           # print(getwd())
-          print(list.files(recursive = TRUE,
-           pattern = "\\.tar\\.gz"))
+          # print(list.files(recursive = TRUE,
+          #  pattern = "\\.tar\\.gz"))
           targz <- list.files(
             path = "check",
             pattern = "\\.tar\\.gz",
             full.names = TRUE)[1] # there will be only one in this directory!
-          print(targz)
+          # print(targz)
+          ls()
           drat::insertPackage(targz,
             repodir = "hySpc.pkgs",
             action = "archive")
+
         shell: Rscript {0}
 
       - name: Deploy -- update README.md
