@@ -133,20 +133,17 @@ jobs:
         run: |
            cd hySpc.pkgs # move into the subdir, which is git controlled
            # grab the portion of the file we want to re-use
-           cat README.md
            awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
-           cat README.tmp
            # append the listing of .tar.gz present, along
            # a little formating (appending to .md that will be parsed
            # and displayed by GH)
            ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$8, " ("$6")"}' >> README.tmp
-           cat README.tmp
            mv README.tmp README.md
-           cat README.md
 
       - name: Deploy -- commit and push
         if: success()
         run: | #CUST update the name of the local repo
+          cd ..
           git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
           git config --global user.name "hySpc.read.txt Deploy Bot"
           git add *
