@@ -116,24 +116,16 @@ jobs:
           cd hySpc.pkgs
           git checkout gh-pages
 
-
-# Please leave commented lines below, they are very helpful in troubleshooting.
       - name: Deploy -- insert
         if: success()
         run: |
-          # setwd("../hySpc.read.txt") #CUST # maybe not needed
-          # print(getwd())
-          # print(list.files(recursive = TRUE,
-          #  pattern = "\\.tar\\.gz"))
           targz <- list.files(
             path = "check",
             pattern = "\\.tar\\.gz",
             full.names = TRUE)[1] # there will be only one in this directory!
-          # print(targz)
           drat::insertPackage(targz,
             repodir = "hySpc.pkgs",
             action = "archive")
-          # list.files("hySpc.pkgs", recursive = TRUE)
         shell: Rscript {0}
 
       - name: Deploy -- update README.md
@@ -150,7 +142,7 @@ jobs:
       - name: Deploy -- move the .tar.gz
         if: success()
         run: | #CUST update the name of the local repo
-          cp ../hySpc.read.txt/check/*.tar.gz hySpc.pkgs/src/contrib/
+          cp ../${SOURCE_REPO}/check/*.tar.gz hySpc.pkgs/src/contrib/
           cd hySpc.pkgs
 
       - name: Deploy -- commit and push
