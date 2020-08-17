@@ -150,7 +150,7 @@ jobs:
       - name: Deploy -- move the .tar.gz
         if: success()
         run: | #CUST update the name of the local repo
-          cp ../${SOURCE_STR}/check/*.tar.gz hySpc.pkgs/src/contrib/
+          cp ../${SOURCE_REPO}/check/*.tar.gz hySpc.pkgs/src/contrib/
           cd hySpc.pkgs
 
       - name: Deploy -- commit and push
