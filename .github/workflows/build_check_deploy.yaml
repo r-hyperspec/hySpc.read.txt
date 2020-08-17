@@ -3,7 +3,6 @@
 # one may need to install additional packages according to the needs.
 # Also: one needs to provide the secret token (we'll eliminate this soon)
 
-
 on:
   push:
     branches:
