@@ -31,7 +31,7 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
     stop("This file contains spectra with unequal length.\n",
          "This is not yet supported by read_txt_Witec_ASCII, ",
          "please report an issue at:\n",
-         packageDescription("hySpc.read.Witec")$BugReport,
+         packageDescription("hySpc.read.txt")$BugReport,
          " including\n",
          "- the output of `sessionInfo()` and\n",
          "- an example file.")
@@ -46,7 +46,7 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   if (!all(names(file[spc_hdr + 2]) == "SpectrumData")) {
     stop("This file does not contain the SpectrumData at the expected positions,\n",
          "please report an issue at:\n",
-         packageDescription("hySpc.read.Witec")$BugReport,
+         packageDescription("hySpc.read.txt")$BugReport,
          " including\n",
          "- the output of `sessionInfo()` and\n",
          "- an example file.")
