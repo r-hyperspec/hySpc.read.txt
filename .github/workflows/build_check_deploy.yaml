@@ -105,7 +105,12 @@ jobs:
       - name: Configure git
         env:
           TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-        run: git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+        run: |
+          git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+
+          # CUST update the name of the local repo "bot"
+          git config --global user.email "${REPO}_Deploy_Bot@example.com"
+          git config --global user.name "${REPO} Deploy Bot"
 
       - name: Deploy -- clone
         if: success()
@@ -150,9 +155,7 @@ jobs:
 
       - name: Deploy -- commit and push
         if: success()
-        run: | #CUST update the name of the local repo "bot"
-          git config --global user.email "${REPO}_Deploy_Bot@example.com"
-          git config --global user.name "${REPO} Deploy Bot"
+        run: |
           cd hySpc.pkgs
           git add *
           # .tar.gz files are globally blocked by git, must add manually
