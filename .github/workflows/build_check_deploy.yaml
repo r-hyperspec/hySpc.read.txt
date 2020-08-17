@@ -141,19 +141,18 @@ jobs:
       - name: Deploy -- move the .tar.gz
         if: success()
         run: | #CUST update the name of the local repo
-          echo $REPO
           cp ../${REPO}/check/*.tar.gz hySpc.pkgs/src/contrib/
           cd hySpc.pkgs
 
       - name: Deploy -- commit and push
         if: success()
         run: | #CUST update the name of the local repo "bot"
-          git config --global user.email "hySpc_read_txt_Deploy_Bot@example.com"
-          git config --global user.name "hySpc.read.txt Deploy Bot"
+          git config --global user.email "${REPO}_Deploy_Bot@example.com"
+          git config --global user.name "${REPO} Deploy Bot"
           cd hySpc.pkgs
           git add *
           # .tar.gz files are globally blocked by git, must add manually
           # and force it
           git add -f *.tar.gz
-          git commit -m "Automated deploy from hySpc.read.txt" #CUST
+          git commit -m "Automated deploy from ${REPO}" #CUST
           git push origin gh-pages
