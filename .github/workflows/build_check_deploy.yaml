@@ -27,8 +27,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
-      SOURCE_REPO_LONG: ${{ github.repository }}
-      SOURCE_REPO_SHORT: $( echo $SOURCE_REPO_LONG | awk '{sub("r-hyperspec/", "", $0); print $0}' )
+      OWNER_REPO: ${{ github.repository }}
 
     steps:
       - uses: actions/checkout@v2
@@ -100,11 +99,11 @@ jobs:
 
 # This edit step is needed because SOURCE_REPO is a string like
 # "r-hyperspec/hySpc.read.txt" and we only need the 2nd part later
-      # - name: Deploy -- edit SOURCE_REPO
-      #   if: success()
-      #   run: |
-      #     SOURCE_STR = $( echo "$SOURCE_REPO" | awk '{sub("r-hyperspec/", "", $0); print $0}' )
-      #     echo $SOURCE_STR
+      - name: Deploy -- edit OWNER_REPO
+        run: |
+          echo '::set-env name=REPO::$( echo "$OWNER_REPO" | awk '{sub("r-hyperspec/", "", $0); print $0}' )'
+          # REPO = $( echo "$OWNER_REPO" | awk '{sub("r-hyperspec/", "", $0); print $0}' )
+          # echo $REPO
 
 # The following configure step is
 # from https://stackoverflow.com/a/60548651/633251
@@ -150,7 +149,7 @@ jobs:
       - name: Deploy -- move the .tar.gz
         if: success()
         run: | #CUST update the name of the local repo
-          cp ../${SOURCE_REPO_SHORT}/check/*.tar.gz hySpc.pkgs/src/contrib/
+          cp ../${REPO}/check/*.tar.gz hySpc.pkgs/src/contrib/
           cd hySpc.pkgs
 
       - name: Deploy -- commit and push
