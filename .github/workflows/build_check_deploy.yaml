@@ -27,7 +27,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
-      SOURCE_REPO: ${{ github.repository }}
+      SOURCE_REPO: $( echo ${{ github.repository }} | awk '{sub("r-hyperspec/", "", $0); print $0}' )
 
     steps:
       - uses: actions/checkout@v2
@@ -99,11 +99,11 @@ jobs:
 
 # This edit step is needed because SOURCE_REPO is a string like
 # "r-hyperspec/hySpc.read.txt" and we only need the 2nd part later
-      - name: Deploy -- edit SOURCE_REPO
-        if: success()
-        run: |
-          SOURCE_STR = $( echo "$SOURCE_REPO" | awk '{sub("r-hyperspec/", "", $0); print $0}' )
-          echo $SOURCE_STR
+      # - name: Deploy -- edit SOURCE_REPO
+      #   if: success()
+      #   run: |
+      #     SOURCE_STR = $( echo "$SOURCE_REPO" | awk '{sub("r-hyperspec/", "", $0); print $0}' )
+      #     echo $SOURCE_STR
 
 # The following configure step is
 # from https://stackoverflow.com/a/60548651/633251
