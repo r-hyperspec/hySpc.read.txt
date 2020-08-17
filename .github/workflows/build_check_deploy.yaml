@@ -130,7 +130,8 @@ jobs:
             full.names = TRUE
           )[1] # there will be only one in this directory!
 
-          drat::insertPackage(targz,
+          drat::insertPackage(
+            file = targz,
             repodir = "hySpc.pkgs",
             action = "archive"
           )
