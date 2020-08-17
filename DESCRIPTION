@@ -11,7 +11,7 @@ Authors@R: c(
 Description: File import filters for a number of file formats produced by Witec instruments.
     The imported data are returned as hyperSpec objects.
 License: MIT + file LICENSE
-URL:
+URL: 
     https://r-hyperspec.github.io/hySpc.read.txt/,
     https://github.com/r-hyperspec/hySpc.read.txt/
 BugReports: https://github.com/r-hyperspec/hySpc.read.txt/issues
