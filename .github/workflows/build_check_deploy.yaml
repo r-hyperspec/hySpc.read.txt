@@ -1,8 +1,7 @@
-# Note: where customization is needed I have added a #CUST comment
-# so that when this file is replicated elsewhere it is easier to make
-# ALL the necessary changes.  This applies primarily to the deploy section;
-# clearly one has to make changes to build and check as well if
-# you move this file to another pkg repo.  Bryan
+# Note: This script automatically detects the repository in which it is run.
+# No edits are needed except in the "Install Dependencies" section where
+# one may need to install additional packages according to the needs.
+# Also: one needs to provide the secret token (we'll eliminate this soon)
 
 on:
   push:
@@ -27,7 +26,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
-      REPO: ${{ github.event.repository.name }} # this repository, w/o owner appended
+      REPO: ${{ github.event.repository.name }}
 
     steps:
       - uses: actions/checkout@v2
@@ -94,7 +93,7 @@ jobs:
 # Very Important Note: Each "- name:" task below starts from the same
 # directory, which in this case is
 # /home/runner/work/hySpc.read.txt/hySpc.read.txt
-# Each task is apparently run in its own shell starting from this directory.
+# Each task is run in its own shell starting from this directory.
 # This means you have to navigate to the desired directory for each task.
 
 # The following configure step is
