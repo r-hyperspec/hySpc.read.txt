@@ -30,7 +30,7 @@ read_ini <- function(con = stop("Connection con needed."), skip = NULL, encoding
 
   content <- Lines [-sections]
   ini <- as.list(gsub("^.*=[[:blank:]]*", "", content)) # removes blanks behind equal sign
-  names(ini) <- .sanitize.name(gsub("[[:blank:]]*=.*$", "", content)) # see above: removes in front of equal sign
+  names(ini) <- sanitize_name(gsub("[[:blank:]]*=.*$", "", content)) # see above: removes in front of equal sign
 
   # try converting to numeric
   tmp <- lapply(ini, function(x) strsplit(x, ",")[[1]])
@@ -48,6 +48,6 @@ read_ini <- function(con = stop("Connection con needed."), skip = NULL, encoding
   ini
 }
 
-.sanitize.name <- function(name) {
+sanitize_name <- function(name) {
   gsub("[^a-zA-Z0-9._]", ".", name)
 }
