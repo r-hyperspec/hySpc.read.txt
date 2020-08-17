@@ -1,6 +1,6 @@
 Package: hySpc.read.txt
 Type: Package
-Title: File import Functions for Spectra in various ASCII/text file formats
+Title: File Import Functions for Spectra in Various ASCII or Text File Formats
 Version: 0.0.0.9000
 Maintainer: Erick Oduniyi <eeoduniyi@gmail.com>
 Authors@R: c(
