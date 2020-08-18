@@ -156,20 +156,20 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   context("read_txt_Renishaw")
 
   test_that("single spectrum", {
-    skip_if_not_fileio_available()
+    skip("TODO: adapt to new package")
     tmp <- read_txt_Renishaw("fileio/txt.Renishaw/paracetamol.txt", "spc")
     expect_equal(dim(tmp), c(nrow = 1L, ncol = 2L, nwl = 4064L))
   })
 
   test_that("time series spectrum, gzipped", {
-    skip_if_not_fileio_available()
+    skip("TODO: adapt to new package")
     tmp <- read_txt_Renishaw("fileio/txt.Renishaw/laser.txt.gz", "ts")
     expect_equal(dim(tmp), c(nrow = 84L, ncol = 3L, nwl = 140L))
     expect_equal(colnames(tmp), c("t", "spc", "filename"))
   })
 
   test_that("map (= default)", {
-    skip_if_not_fileio_available()
+    skip("TODO: adapt to new package")
     tmp <- read_txt_Renishaw("fileio/txt.Renishaw/chondro.txt", "xyspc")
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
@@ -180,7 +180,7 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   })
 
   test_that("chunked reading", {
-    skip_if_not_fileio_available()
+    skip("TODO: adapt to new package")
 
     ## error on too small chunk size
     expect_error(
@@ -193,7 +193,7 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   })
 
   test_that("compressed files", {
-    skip_if_not_fileio_available()
+    skip("TODO: adapt to new package")
 
     files <- Sys.glob("fileio/txt.Renishaw/chondro.*")
     files <- grep("[.]zip", files, invert = TRUE, value = TRUE) # .zip is tested with read_zip_Renishaw
