@@ -39,6 +39,7 @@
 #' @aliases read_txt_long import export
 #' @param file filename or connection
 #' @param cols the column names specifying the column order.
+#' @param sep,row.names,check.names,... further parameters are handed over to [hySpc.read.txt::read_txt_long()]
 #'
 #' For data import, a list with elements `colname = label`; for export a
 #'   character vector with the colnames.  Use `wavelength` to specify the
@@ -46,7 +47,7 @@
 #' @param header the file has (shall have) a header line
 #' @param ... arguments handed to [utils::read.table()] and
 #'   [utils::write.table()], respectively.
-#' @param decreasing logical vector giving the sort order
+#' param decreasing logical vector giving the sort order
 #' @author C. Beleites
 #' @seealso
 #'
@@ -54,7 +55,7 @@
 #' - [R.matlab::R.matlab()] for `.mat` files,
 #' - [hyperSpec::read.ENVI()] for ENVI data,
 #' - [hyperSpec::read.spc()] for `.spc` files,
-#' - Manufacturer specific file formats: [read.txt.Renishaw()].
+#' - Manufacturer specific file formats: [read_txt_Renishaw()].
 #'
 #' @rdname textio
 #'
