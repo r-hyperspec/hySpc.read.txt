@@ -4,6 +4,7 @@ on:
       - release
       - master
       - develop
+      - feature/more-unittest-data
 
   pull_request:
     branches:
