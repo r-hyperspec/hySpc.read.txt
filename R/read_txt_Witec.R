@@ -1,7 +1,7 @@
 #' Import Raman Spectra/Maps from Witec Instrument via ASCII files
 #'
 #' \code{read_txt_Witec} reads Witec ASCII files where the first column gives the wavelength
-#' axes and the other columns the spectra. \code{read.dat.Witec} reads Witec's ASCII exported data
+#' axes and the other columns the spectra. \code{read_dat_Witec} reads Witec's ASCII exported data
 #' which comes in separate files with x and y data.
 #'
 #' @title File Import Witec Raman
@@ -17,7 +17,6 @@
 #' @author Claudia Beleites and Marcel Dahms
 #' @importFrom hySpc.testthat test<-
 #' @seealso \code{vignette ("fileio")} for more information on file import and
-#'
 #' \code{\link{options}} for details on options.
 #' @export
 #' @importFrom utils head

@@ -42,7 +42,7 @@ read_ini <- function(con = stop("Connection con needed."), skip = NULL, encoding
   ini <- split(ini, tmp)
 
   sections <- Lines [sections]
-  sections <- .sanitize.name(gsub("^.(.*).$", "\\1", sections))
+  sections <- sanitize_name(gsub("^.(.*).$", "\\1", sections))
   names(ini) <- sections
 
   ini
