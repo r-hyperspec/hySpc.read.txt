@@ -1,4 +1,4 @@
-#' @rdname read.txt.Witec
+#' @rdname read_txt_Witec
 #' @param headerfile filename or connection to ASCII file with header information
 #' @export
 read_txt_Witec_Graph <- function(headerfile = stop("filename or connection needed"),
