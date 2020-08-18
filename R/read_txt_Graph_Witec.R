@@ -1,4 +1,4 @@
-#' @rdname read.txt.Witec
+#' @rdname read_txt_Witec
 #' @param headerfile filename or connection to ASCII file with header information
 #' @export
 read_txt_Witec_Graph <- function(headerfile = stop("filename or connection needed"),
@@ -7,14 +7,14 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
                                  type = c("single", "map"), encoding = "unknown",
                                  ..., quiet = TRUE) {
   ## check for valid data connection
-  .check.con(headerfile, filex, filey)
+  check_con(headerfile, filex, filey)
 
   ## processing headerfile
   hdr <- read_ini(headerfile, skip = 1, encoding = encoding)
   hdr <- sapply(hdr, function(x) unlist(x, recursive = FALSE)) # returns a matrix with colnames and rownames for better adressing
 
   ## check valid input
-  type <- .check.valid(
+  type <- check_valid(
     type = type, hdr = hdr,
     ...
   )
@@ -37,11 +37,11 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
   }
 
   ## add header information
-  spc <- .parse.hdr(spc, hdr)
+  spc <- parse_hdr(spc, hdr)
 
   ## add map information
   if (type == "map") {
-    spc <- .parse.xy(spc, hdr, ...)
+    spc <- parse_xy(spc, hdr, ...)
   }
 
   ## consistent file import behaviour across import functions

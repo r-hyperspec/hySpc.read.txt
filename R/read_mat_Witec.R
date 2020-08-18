@@ -7,7 +7,7 @@
 #' @importFrom methods new
 #' @importFrom utils packageDescription
 #' @import hyperSpec
-read.mat.Witec <- function(file = stop("filename or connection needed")) {
+read_mat_Witec <- function(file = stop("filename or connection needed")) {
   if (!requireNamespace("R.matlab")) {
     stop("package 'R.matlab' needed.")
   }
