@@ -4,7 +4,7 @@
 #'
 #' The file may be of any file type that can be read by
 #' [base::gzfile()] (i.e. text, or zipped by gzip, bzip2, xz or
-#' lzma). .zip zipped files need to be read using `read.zip.Renishaw`.
+#' lzma). .zip zipped files need to be read using `read_zip_Renishaw`.
 #'
 #' Renishaw .wxd files are converted to .txt ASCII files by their batch
 #' converter. They come in a "long" format with columns (y x | time | z)?
@@ -20,10 +20,10 @@
 #' on files with missing values (`NA`s are allowed).
 #'
 #' If the file is so large that it sould be read in chunks and `nspc` is
-#' not given, `read.txt.Renishaw` tries to guess it by using `wc`
+#' not given, `read_txt_Renishaw` tries to guess it by using `wc`
 #' (if installed).
 #'
-#' @aliases read.txt.Renishaw read.zip.Renishaw
+#' @aliases read_txt_Renishaw read_zip_Renishaw
 #' @param file file name or connection
 #' @param data type of file, one of "spc", "xyspc", "zspc", "depth", "ts", see
 #'   details.
@@ -34,18 +34,18 @@
 #'   must be at least the number of data points per spectrum. Reasonable
 #'   values start at `1e6`.
 #' @param nspc number of spectra in the file
-#' @param ... Arguments for `read.txt.Renishaw`
+#' @param ... Arguments for `read_txt_Renishaw`
 #' @return the `hyperSpec` object
 #' @export
 #' @author C. Beleites
-#' @seealso [read.txt.long()], [read.txt.wide()],
+#' @seealso [read_txt_long()], [read_txt_wide()],
 #'   [base::scan()]
 #'
 #' @keywords IO file
 #' @concept io
 #'
 #' @importFrom utils head
-read.txt.Renishaw <- function(file = stop("file is required"),
+read_txt_Renishaw <- function(file = stop("file is required"),
                               data = "xyspc", nlines = 0, nspc = NULL) {
   cols <- switch(data,
     spc = NULL,
@@ -152,29 +152,29 @@ read.txt.Renishaw <- function(file = stop("file is required"),
   .fileio.optional(spc, file)
 }
 
-hySpc.testthat::test(read.txt.Renishaw) <- function() {
-  context("read.txt.Renishaw")
+hySpc.testthat::test(read_txt_Renishaw) <- function() {
+  context("read_txt_Renishaw")
 
   test_that("single spectrum", {
     skip_if_not_fileio_available()
-    tmp <- read.txt.Renishaw("fileio/txt.Renishaw/paracetamol.txt", "spc")
+    tmp <- read_txt_Renishaw("fileio/txt.Renishaw/paracetamol.txt", "spc")
     expect_equal(dim(tmp), c(nrow = 1L, ncol = 2L, nwl = 4064L))
   })
 
   test_that("time series spectrum, gzipped", {
     skip_if_not_fileio_available()
-    tmp <- read.txt.Renishaw("fileio/txt.Renishaw/laser.txt.gz", "ts")
+    tmp <- read_txt_Renishaw("fileio/txt.Renishaw/laser.txt.gz", "ts")
     expect_equal(dim(tmp), c(nrow = 84L, ncol = 3L, nwl = 140L))
     expect_equal(colnames(tmp), c("t", "spc", "filename"))
   })
 
   test_that("map (= default)", {
     skip_if_not_fileio_available()
-    tmp <- read.txt.Renishaw("fileio/txt.Renishaw/chondro.txt", "xyspc")
+    tmp <- read_txt_Renishaw("fileio/txt.Renishaw/chondro.txt", "xyspc")
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
 
-    tmp <- read.txt.Renishaw("fileio/txt.Renishaw/chondro.txt")
+    tmp <- read_txt_Renishaw("fileio/txt.Renishaw/chondro.txt")
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
   })
@@ -184,11 +184,11 @@ hySpc.testthat::test(read.txt.Renishaw) <- function() {
 
     ## error on too small chunk size
     expect_error(
-      read.txt.Renishaw("fileio/txt.Renishaw/chondro.txt", nlines = 10),
+      read_txt_Renishaw("fileio/txt.Renishaw/chondro.txt", nlines = 10),
       "Wavelengths do not correspond"
     )
 
-    tmp <- read.txt.Renishaw("fileio/txt.Renishaw/chondro.txt", nlines = 1e5)
+    tmp <- read_txt_Renishaw("fileio/txt.Renishaw/chondro.txt", nlines = 1e5)
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
   })
 
@@ -196,9 +196,9 @@ hySpc.testthat::test(read.txt.Renishaw) <- function() {
     skip_if_not_fileio_available()
 
     files <- Sys.glob("fileio/txt.Renishaw/chondro.*")
-    files <- grep("[.]zip", files, invert = TRUE, value = TRUE) # .zip is tested with read.zip.Renishaw
+    files <- grep("[.]zip", files, invert = TRUE, value = TRUE) # .zip is tested with read_zip_Renishaw
     for (f in files) {
-      expect_equal(dim(read.txt.Renishaw(!!f)), c(nrow = 875L, ncol = 4L, nwl = 1272L))
+      expect_equal(dim(read_txt_Renishaw(!!f)), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     }
   })
 }
@@ -206,23 +206,23 @@ hySpc.testthat::test(read.txt.Renishaw) <- function() {
 #' @export
 #' @param txt.file name of the .txt file in the .zip archive. Defaults to zip
 #'   file's name with suffix .txt instead of .zip
-#' @rdname read.txt.Renishaw
+#' @rdname read_txt_Renishaw
 #'
 #' @concept io
 #'
-read.zip.Renishaw <- function(file = stop("filename is required"),
+read_zip_Renishaw <- function(file = stop("filename is required"),
                               txt.file = sub("[.]zip", ".txt", basename(file)), ...) {
-  read.txt.Renishaw(file = unz(file, filename = txt.file, "r"), ...)
+  read_txt_Renishaw(file = unz(file, filename = txt.file, "r"), ...)
 }
 
-hySpc.testthat::test(read.zip.Renishaw) <- function() {
-  context("read.zip.Renishaw")
+hySpc.testthat::test(read_zip_Renishaw) <- function() {
+  context("read_zip_Renishaw")
 
   test_that("compressed files", {
     skip_if_not_fileio_available()
 
     expect_equal(
-      dim(read.zip.Renishaw("fileio/txt.Renishaw/chondro.zip")),
+      dim(read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")),
       c(nrow = 875L, ncol = 4L, nwl = 1272L))
   })
 }
