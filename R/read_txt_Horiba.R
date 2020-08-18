@@ -4,13 +4,11 @@
 #'
 #' @title Import Horiba Labspec exported ASCII files
 #' @param file connection (file name and path) to the `.txt` file
-#' @param cols,header,sep,row.names,check.names,... further parameters are handed over to [hyperSpec::read_txt_wide()]
+#' @param cols,header,sep,row.names,check.names,... further parameters are handed over to [hySpc.read.txt::read_txt_wide()]
 #' @rdname read_txt_Horiba
 #' @author C. Beleites
 #' @return hyperSpec object
-#'
 #' @concept io
-#'
 #' @export
 read_txt_Horiba <- function(file, cols = c(
                               spc = "I / a.u.",
