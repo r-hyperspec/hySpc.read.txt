@@ -14,7 +14,7 @@
 #'
 #' @export
 #' @importFrom utils read.table
-read.txt.Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
+read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
 
   # A file consists of several sections ([Headers])
   # Each Section consists of:
