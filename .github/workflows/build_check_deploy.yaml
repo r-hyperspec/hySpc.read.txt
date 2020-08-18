@@ -14,7 +14,7 @@ jobs:
   R-CMD-build-check-deploy:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: "Drat: ${{ matrix.config.os }} (${{ matrix.config.r }})"
 
     strategy:
       fail-fast: false
@@ -76,7 +76,8 @@ jobs:
         run: rcmdcheck::rcmdcheck(
                args = c("--no-manual", "--as-cran"),
                error_on = "warning",
-               check_dir = "check")
+               check_dir = "check"
+             )
         shell: Rscript {0}
 
       - name: Upload check results
@@ -100,7 +101,11 @@ jobs:
       - name: Configure git
         env:
           TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-        run: git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+        run: |
+          git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+
+          git config --global user.email "${REPO}_Deploy_Bot@example.com"
+          git config --global user.name "${REPO} Deploy Bot"
 
       - name: Deploy -- clone
         if: success()
@@ -117,34 +122,30 @@ jobs:
           targz <- list.files(
             path = "check",
             pattern = "\\.tar\\.gz",
-            full.names = TRUE)[1] # there will be only one in this directory!
-          drat::insertPackage(targz,
+            full.names = TRUE
+          )[1] # there will be only one in this directory!
+
+          drat::insertPackage(
+            file = targz,
             repodir = "hySpc.pkgs",
-            action = "archive")
+            action = "archive"
+          )
         shell: Rscript {0}
 
       - name: Deploy -- update README.md
         if: success()
         run: |
-           cd hySpc.pkgs # move into the subdir, which is git controlled
-           # grab the portion of the file we want to re-use
-           awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
-           # append the listing of .tar.gz present, along with
-           # a little md formating
-           ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$8, " ("$6")"}' >> README.tmp
-           mv README.tmp README.md
-
-      - name: Deploy -- move the .tar.gz
-        if: success()
-        run: |
-          cp ../${REPO}/check/*.tar.gz hySpc.pkgs/src/contrib/
-          cd hySpc.pkgs
+          cd hySpc.pkgs # move into the subdir, which is git controlled
+          # grab the portion of the file we want to re-use
+          awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
+          # append the listing of .tar.gz present, along with
+          # a little md formating
+          ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$8, " ("$6")"}' >> README.tmp
+          mv README.tmp README.md
 
       - name: Deploy -- commit and push
         if: success()
         run: |
-          git config --global user.email "${REPO}_Deploy_Bot@example.com"
-          git config --global user.name "${REPO} Deploy Bot"
           cd hySpc.pkgs
           git add *
           # .tar.gz files are globally blocked by git, must add manually
