@@ -1,7 +1,7 @@
 # some internal helper functions
 
 # checking file connection
-.check.con <- function(headerfile, filex, filey, file) {
+check_con <- function(headerfile, filex, filey, file) {
   ## check for valid data connection
   if (!missing(headerfile) && !file.exists(headerfile)) {
     stop("Header file not found!")
@@ -21,7 +21,7 @@
 }
 
 ### checking for valid input
-.check.valid <- function(type, hdr, points.per.line, lines.per.image) {
+check_valid <- function(type, hdr, points.per.line, lines.per.image) {
   ## check valid input
   type <- match.arg(type, c("single", "map"))
 
@@ -41,7 +41,7 @@
 }
 
 ### parsing header information
-.parse.hdr <- function(spc, hdr, hdr.label) {
+parse_hdr <- function(spc, hdr, hdr.label) {
   if (!missing(hdr) && !missing(hdr.label)) {
     hdr <- strsplit(hdr, "\t")
 
@@ -68,7 +68,7 @@
 }
 
 ### parsing map information
-.parse.xy <- function(spc, hdr, hdr.label, points.per.line, lines.per.image, ...) {
+parse_xy <- function(spc, hdr, hdr.label, points.per.line, lines.per.image, ...) {
 
   ## set points.per.line and lines.per.image, if at least one is set unequal NULL
   if (xor(
