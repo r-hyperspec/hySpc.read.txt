@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hySpc.read.txt</title>
+<title>Import Horiba Labspec exported ASCII files — read_txt_Horiba • hySpc.read.txt</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Import Horiba Labspec exported ASCII files — read_txt_Horiba" />
+<meta property="og:description" content="Read ASCII (.txt) files exported by Horiba's Labspec software (LabRAM spectrometers)." />
 
 
 
@@ -60,7 +61,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -127,84 +128,62 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Import Horiba Labspec exported ASCII files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_txt_Horiba.R'><code>R/read_txt_Horiba.R</code></a></small>
+    <div class="hidden name"><code>read_txt_Horiba.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Read ASCII (<code>.txt</code>) files exported by Horiba's Labspec software (LabRAM spectrometers).</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>read_txt_Horiba</span>(
+  <span class='kw'>file</span>,
+  cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(spc = <span class='st'>"I / a.u."</span>, .wavelength = <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='kw'>Delta</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/tilde.html'>tilde</a></span>(<span class='kw'>nu</span>)<span class='op'>/</span><span class='kw'>cm</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>1</span>)),
+  header = <span class='fl'>TRUE</span>,
+  sep = <span class='st'>"\t"</span>,
+  row.names = <span class='kw'>NULL</span>,
+  check.names = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
+)
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="read-ini.html">read_ini()</a></code> </p>
-        </td>
-        <td><p>Read INI files.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_mat_Witec.html">read_mat_Witec()</a></code> </p>
-        </td>
-        <td><p>Import Matlab file exported by Witec Project software</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_Horiba.html">read_txt_Horiba()</a></code> <code><a href="read_txt_Horiba.html">read_txt_Horiba_xy()</a></code> <code><a href="read_txt_Horiba.html">read_txt_Horiba_t()</a></code> </p>
-        </td>
-        <td><p>Import Horiba Labspec exported ASCII files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_Renishaw.html">read_txt_Renishaw()</a></code> <code><a href="read_txt_Renishaw.html">read_zip_Renishaw()</a></code> </p>
-        </td>
-        <td><p>Import Raman measurements from Renishaw ASCII-files.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_Shimadzu.html">read_txt_Shimadzu()</a></code> </p>
-        </td>
-        <td><p>Reads Shimadzu GCxGC-qMS - Spectra Files (<code>.txt</code>).</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_Witec.html">read_dat_Witec()</a></code> <code><a href="read_txt_Witec.html">read_txt_Witec_Graph()</a></code> <code><a href="read_txt_Witec.html">read_txt_Witec()</a></code> </p>
-        </td>
-        <td><p>File Import Witec Raman</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_Witec_TrueMatch.html">read_txt_Witec_TrueMatch()</a></code> </p>
-        </td>
-        <td><p>File Import Witec TrueMatch</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="textio.html">read_txt_long()</a></code> <code><a href="textio.html">read_txt_wide()</a></code> </p>
-        </td>
-        <td><p>Import and Export of <code>hyperSpec</code> objects.</p></td>
-      </tr>
-    </tbody>
+<span class='fu'>read_txt_Horiba_xy</span>(<span class='kw'>file</span>, <span class='kw'>...</span>)
+
+<span class='fu'>read_txt_Horiba_t</span>(
+  <span class='kw'>file</span>,
+  header = <span class='fl'>TRUE</span>,
+  sep = <span class='st'>"\t"</span>,
+  row.names = <span class='kw'>NULL</span>,
+  check.names = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
+)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>file</th>
+      <td><p>connection (file name and path) to the <code>.txt</code> file</p></td>
+    </tr>
+    <tr>
+      <th>cols, header, sep, row.names, check.names, ...</th>
+      <td><p>further parameters are handed over to <code>read_txt_wide()</code></p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>hyperSpec object</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>read_txt_Horiba_xy</code> reads maps, i.e. <code>.txt</code> files where the first two columns give x and y coordinates.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>C. Beleites</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
