@@ -1,6 +1,6 @@
 ### ---------------------------------------------------------------------------
 ###
-###  read.txt.long: import measurements from .txt file
+###  read_txt_long: import measurements from .txt file
 ###
 ###  Format:
 ###  (y x) wl int
@@ -36,7 +36,7 @@
 #' For further information, see the examples below and the documentation of
 #' [R.matlab::R.matlab()].
 #'
-#' @aliases read.txt.long import export
+#' @aliases read_txt_long import export
 #' @param file filename or connection
 #' @param cols the column names specifying the column order.
 #'
@@ -97,7 +97,7 @@
 #'   decreasing = c(FALSE, TRUE)
 #' )
 #'
-#' read.txt.long(
+#' read_txt_long(
 #'   file = paste0(tempdir(), "/flu.txt"),
 #'   cols = list(
 #'     .wavelength = expression(lambda / nm),
@@ -129,7 +129,7 @@
 #'   header = TRUE
 #' )
 
-read.txt.long <- function(file = stop("file is required"),
+read_txt_long <- function(file = stop("file is required"),
                           cols = list(
                             .wavelength = expression(lambda / nm),
                             spc = "I / a.u."
