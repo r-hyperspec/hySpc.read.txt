@@ -57,7 +57,7 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
 
   ## add header information
   if (hdr.label | hdr.units) {
-    spc <- .parse.hdr(spc, hdr, hdr.label)
+    spc <- parse_hdr(spc, hdr, hdr.label)
   }
 
   ## add map information
