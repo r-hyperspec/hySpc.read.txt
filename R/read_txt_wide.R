@@ -1,6 +1,6 @@
 ### -----------------------------------------------------------------------------
 ###
-###  read.txt.wide
+###  read_txt_wide
 ###
 ###  Format:
 ###  x y ... int (wl1)  int (wl2) ... int (wl p) z ...
@@ -41,7 +41,7 @@
 #' For further information, see the examples below, `vignette("fileio")` and the documentation
 #' of [R.matlab::R.matlab()].
 #' @seealso `vignette("fileio")`
-#' @aliases read.txt.wide
+#' @aliases read_txt_wide
 #' @rdname textio
 #' @param check.names handed to [utils::read.table()]. Make sure this is `FALSE`, if
 #' the column names of the spectra are the wavelength values.
@@ -50,7 +50,7 @@
 #'
 #' @export
 #' @importFrom utils read.table head
-read.txt.wide <- function(file = stop("file is required"),
+read_txt_wide <- function(file = stop("file is required"),
                           cols = list(
                             spc = "I / a.u.",
                             .wavelength = expression(lambda / nm)
