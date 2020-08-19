@@ -132,17 +132,6 @@ jobs:
           )
         shell: Rscript {0}
 
-      - name: Deploy -- update README.md
-        if: success()
-        run: |
-          cd hySpc.pkgs # move into the subdir, which is git controlled
-          # grab the portion of the file we want to re-use
-          awk '/^# hySpc\.pkgs$/, /^Packages currently residing here:$/' README.md > README.tmp
-          # append the listing of .tar.gz present, along with
-          # a little md formating
-          ls -lhR  --time-style=long-iso | grep \.tar\.gz$ | awk '{print "\n* "$8, " ("$6")"}' >> README.tmp
-          mv README.tmp README.md
-
       - name: Deploy -- commit and push
         if: success()
         run: |
