@@ -833,11 +833,11 @@ read.spc("fileio/spc.Witec/Witec-Map.spc")
 For imaging data, no spatial information for the set of spectra is provided (in version 2.10, this export option is not supported).
 
 Imaging data (but also single spectra and time series) can be exported as ASCII X and Y files (Save ASCII X and Save ASCII Y, not supported in version 4).
-These can be read by `read.dat.Witec()`{.r}:
+These can be read by `read_dat_WitecWitec()`{.r}:
 
 ```{r witec-dat, results='hide'}
-read.dat.Witec("fileio/txt.Witec/Witec-timeseries-x.dat")
-read.dat.Witec(
+read_dat_WitecWitec("fileio/txt.Witec/Witec-timeseries-x.dat")
+read_dat_WitecWitec(
   filex = "fileio/txt.Witec/Witec-Map-x.dat",
   points.per.line = 5, lines.per.image = 5, type = "map"
 )
@@ -1003,43 +1003,6 @@ imports the spectra.
 
 The **hyperSpec** package does not export this function: while it is already useful for importing files, it is not general enough to work immediately with new data, e.g., completely ignoring the file header.
 Thus information like the excitation wavelength is lost.
-
-
-## Deriving a More Specific Function: `read.ENVI.Nicolet()`{.r}
-
-\index{Infrared!ENVI}
-\index{Infrared!Map}
-\index{Infrared!Nicolet}
-\index{ENVI!Infrared!Nicolet}
-\index{ENVI!Map}
-\index{ENVI!Nicolet}
-\index{Nicolet!ENVI}
-\index{Nicolet!Map}
-\index{Nicolet!Infrared}
-
-The function `read.ENVI.Nicolet()`{.r} is an excellent example of a more specific import filter derived from a generic filter for the particular file type.
-Nicolet FT-IR Imaging software saves some non-standard keywords in the header file of the ENVI data.
-This information can be used to reconstruct the $x$ and $y$ axes of the images.
-The units of the spectra are saved as well.
-
-Function `read.ENVI.Nicolet()`{.r} thus first adjusts the parameters for `read.ENVI()`{.r}.
-Then `read.ENVI()`{.r} does the main work of importing the file.
-The resulting `hyperSpec`{.r} object is post-processed according to the special header entries.
-
-For using the function, see section \@ref(sec:read-ENVI-Nicolet)<!--(p. \pageref{sec:read-ENVI-Nicolet})-->.
-
-
-<!-- \VerbatimInput[frame=single, label={read.ENVI.Nicolet.R}, formatcom=\footnotesize]{read.ENVI.Nicolet.R} -->
-
-```{r comment="", eval=TRUE, echo=FALSE, class.output="add-border sourceCode r"}
-writeLines(readLines("read.ENVI.Nicolet.R"))
-```
-
-## Deriving import filters for `spc` files
-
-Please note that future changes inside the `read.spc()`{.r} function are likely to occur.
-However, if you just post-process the `hyperSpec`{.r} object returned by `read.spc()`{.r}, you should be fine.
-
 
 
 # **Appendix A:** File Import Functions {#appendix-a}
