@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Import Raman measurements from Renishaw ASCII-files. — read_txt_Renishaw • hySpc.read.txt</title>
+<title>File import filter PerkinElmer ASCII spectra. — read_asc_PerkinElmer • hySpc.read.txt</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Import Raman measurements from Renishaw ASCII-files. — read_txt_Renishaw" />
-<meta property="og:description" content="Import Raman measurements from Renishaw (possibly compressed) .txt file." />
+<meta property="og:title" content="File import filter PerkinElmer ASCII spectra. — read_asc_PerkinElmer" />
+<meta property="og:description" content="Imports a single spectrum in PerkinElmer's ASCII format. This function is experimental." />
 
 
 
@@ -130,94 +130,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Import Raman measurements from Renishaw ASCII-files.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_txt_Renishaw.R'><code>R/read_txt_Renishaw.R</code></a></small>
-    <div class="hidden name"><code>read_txt_Renishaw.Rd</code></div>
+    <h1>File import filter PerkinElmer ASCII spectra.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_asc_PerkinElmer.R'><code>R/read_asc_PerkinElmer.R</code></a></small>
+    <div class="hidden name"><code>read_asc_PerkinElmer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Import Raman measurements from Renishaw (possibly compressed) <code>.txt</code> file.</p>
+    <p>Imports a single spectrum in PerkinElmer's ASCII format. This function is experimental.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_txt_Renishaw</span>(
-  file = <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"file is required"</span>),
-  data = <span class='st'>"xyspc"</span>,
-  nlines = <span class='fl'>0</span>,
-  nspc = <span class='kw'>NULL</span>
-)
-
-<span class='fu'>read_zip_Renishaw</span>(
-  file = <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"filename is required"</span>),
-  txt.file = <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span>(<span class='st'>"[.]zip"</span>, <span class='st'>".txt"</span>, <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='kw'>file</span>)),
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>read_asc_PerkinElmer</span>(file = <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"filename or connection needed"</span>), <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>file name or connection</p></td>
-    </tr>
-    <tr>
-      <th>data</th>
-      <td><p>type of file, one of "spc", "xyspc", "zspc", "depth", "ts", see
-details.</p></td>
-    </tr>
-    <tr>
-      <th>nlines</th>
-      <td><p>number of lines to read in each chunk, if 0 or less read
-whole file at once.</p>
-<p><code>nlines</code> must cover at least one complete spectrum,i.e. <code>nlines</code>
-must be at least the number of data points per spectrum. Reasonable
-values start at <code>1e6</code>.</p></td>
-    </tr>
-    <tr>
-      <th>nspc</th>
-      <td><p>number of spectra in the file</p></td>
-    </tr>
-    <tr>
-      <th>txt.file</th>
-      <td><p>name of the .txt file in the .zip archive. Defaults to zip
-file's name with suffix .txt instead of .zip</p></td>
+      <td><p>filename (or connection)</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments for <code>read_txt_Renishaw</code></p></td>
+      <td><p>further parameters are handed to <code>read_txt_long()</code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the <code>hyperSpec</code> object</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The file may be of any file type that can be read by
-<code><a href='https://rdrr.io/r/base/connections.html'>base::gzfile()</a></code> (i.e. text, or zipped by gzip, bzip2, xz or
-lzma). .zip zipped files need to be read using <code>read_zip_Renishaw</code>.</p>
-<p>Renishaw .wxd files are converted to .txt ASCII files by their batch
-converter. They come in a "long" format with columns (y x | time | z)?
-wavelength intensity.  The first columns depend on the data type.</p>
-<p>The corresponding possibilities for the <code>data</code> argument are:</p><table class='table'>
-<tr><td><code>data</code></td><td>columns</td><td></td></tr>
-<tr><td><code>"spc"</code></td><td>wl int</td><td>single spectrum</td></tr>
-<tr><td><code>"zspc"</code>, <code>"depth"</code></td><td>z wl int</td><td>depth profile</td></tr>
-<tr><td><code>"ts"</code></td><td>t wl int</td><td>time series</td></tr>
-<tr><td><code>"xyspc"</code></td><td>y x wl int</td><td>2d map</td></tr>
-</table>
-
-
-<p>This function allows reading very large ASCII files, but it does not work
-on files with missing values (<code>NA</code>s are allowed).</p>
-<p>If the file is so large that it sould be read in chunks and <code>nspc</code> is
-not given, <code>read_txt_Renishaw</code> tries to guess it by using <code>count_lines()</code>.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code>read_txt_long()</code>, <code>read_txt_wide()</code>,
-<code><a href='https://rdrr.io/r/base/scan.html'>base::scan()</a></code></p></div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>C. Beleites</p>
+    <p>hyperSpec object</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
