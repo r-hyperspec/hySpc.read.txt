@@ -731,8 +731,8 @@ Imaging data (but also single spectra and time series) can be exported as ASCII 
 These can be read by `read_dat_Witec()`{.r}:
 
 ```{r witec-dat, results='hide'}
-read_dat_WitecWitec("fileio/txt.Witec/Witec-timeseries-x.dat")
-read_dat_WitecWitec(
+read_dat_Witec("fileio/txt.Witec/Witec-timeseries-x.dat")
+read_dat_Witec(
   filex = "fileio/txt.Witec/Witec-Map-x.dat",
   points.per.line = 5, lines.per.image = 5, type = "map"
 )
