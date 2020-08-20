@@ -744,7 +744,7 @@ Another option is Witec's txt table ASCII export (Export $\rightarrow$ Table), w
 The first column contains the wavelength axis; all further columns contain one spectrum each column.
 Such files can be read with `read_txt_Witec()`{.r}:
 
-```{r witec-txt, include=FALSE}
+```{r witec-txt, include=FALSE, eval=FALSE}
 read_txt_Witec("fileio/txt.Witec/Witec-timeseries_no.txt")
 ```
 `read_txt_Witec()`{.r} determines the number of wavelengths automatically.
@@ -763,7 +763,7 @@ or the one or two wavelengths will be skipped.
 
 Depending on the used export options the header files should look like:
 
-```{r witec-txt-textfiles, include=FALSE}
+```{block, type="note-t", echo=show_reviewers_notes}
 headline <- c(
   "with exported labels and units headerlines:",
   "\nwith exported labels headerline:",
@@ -814,12 +814,12 @@ read_txt_Witec("fileio/txt.Witec/Witec-Map_no.txt",
 
 For line scans and z-stacks use `type = "single"`{.r} because the provided information is looking the same as for time series, so no further information can be extracted from the header files.
 
-Since version 4 WITec Project offers the Graph ASCII export (Export $\rightarrow$ Graph ASCII), which produces three ASCII files, named Header containing additional information, X-Axis containing the wavelength values and Y-Axis containing the spectra one spectrum in each column. Data exported in this way can be read with `read_txt_Witec.Graph()`{.r}:
+Since version 4 WITec Project offers the Graph ASCII export (Export $\rightarrow$ Graph ASCII), which produces three ASCII files, named Header containing additional information, X-Axis containing the wavelength values and Y-Axis containing the spectra one spectrum in each column. Data exported in this way can be read with `read_txt_Witec_Graph()`{.r}:
 
-```{r witec-txt-Graph, results='hide'}
-read_txt_Witec.Graph("fileio/txt.Witec/Witec-timeseries (Header).txt")
-read_txt_Witec.Graph("fileio/txt.Witec/Witec-Map (Header).txt", type = "map")
-read_txt_Witec.Graph("fileio/txt.Witec/nofilename (Header).txt", encoding = "latin1")
+```{block, r witec-txt-Graph, results='hide'}
+read_txt_Witec_Graph("fileio/txt.Witec/Witec-timeseries (Header).txt")
+read_txt_Witec_Graph("fileio/txt.Witec/Witec-Map (Header).txt", type = "map")
+read_txt_Witec_Graph("fileio/txt.Witec/nofilename (Header).txt", encoding = "latin1")
 ```
 
 This function reads the spectra files automatically, if they are appropriately named and extracts additional information of the header file. As for the other Witec functions, it is possible to read image data by selecting `type = "map"`{.r}. Line scans and z-stacks should be read as single spectra.
@@ -889,7 +889,7 @@ The spectra are always in a data column called `spc`{.r}.
 
 Thus,
 
-```{r read_txt_PerkinElmer, message=FALSE}
+```{block, r read_txt_PerkinElmer, message=FALSE}
 source("read_txt_PerkinElmer.R")
 read_txt_PerkinElmer(Sys.glob("fileio/txt.PerkinElmer/flu?.txt"), skip = 54)
 ```
