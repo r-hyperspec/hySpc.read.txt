@@ -557,64 +557,7 @@ However, it may be convenient to transform the saved data according to how it is
 The functions `as.long.df()`{.r} and `as.wide.df()`{.r} may prove useful for reshaping the data.
 
 
-### Import of Matlab files written by Cytospec {#sec:read-mat-Cytospec}
 
-\index{Cytospec}\index{Cytospec!Matlab}\index{Matlab!Cytospec}
-
-A custom import function for `.mat` files written by [Cytospec](http://www.cytospec.com/){target="_blank"} is available:
-
-Note that Cytospec files can contain multiple versions of the data, the so-called blocks.
-The block to be read can be specified with the `block`{.r} argument.
-With `block = TRUE`{.r}, the function will read all blocks into a list:
-
-```{r read.mat.Cytospec-blocks}
-read.mat.Cytospec("fileio/mat.cytospec/cytospec.mat", blocks = TRUE)
-```
-
-otherwise, select a block:
-
-```{r read.mat.Cytospec}
-read.mat.Cytospec("fileio/mat.cytospec/cytospec.mat", blocks = 1)
-```
-
-
-```{block, type="redbox", echo=TRUE}
-**Function `read.cytomat`{.r} is now _defunct_**.
-
-Function `read.cytomat()`{.r} has been renamed to  `read.mat.Cytospec()`{.r} to be more
-consistent with the general naming scheme of the file import functions.
-
-Please use `read.mat.Cytospec()`{.r} instead.
-```
-
-
-## ENVI Files {#sec:read-ENVI}
-
-\index{ENVI!Map} \index{ENVI!Infrared} \index{ENVI!Bruker} \index{ENVI!Varian} \index{Map!ENVI}
-\index{Infrared!ENVI} \index{Bruker!ENVI} \index{Varian!ENVI} \index{FT-IR|see{Infrared}}
-\index{Image|see{Map}}
-
-ENVI files are binary data accompanied by an ASCII header file.
-Package **hyperSpec**'s function `read.ENVI()`{.r} can be used to import them.
-Usually, the header file name is the same as the binary data file name, with the suffix replaced by `.hdr`. Otherwise, the header file name can be given via parameter **header file`{.r}**.
-
-As we experienced missing header files (Bruker's Opus software frequently produced header files without any content), the data that would usually be read from the header file can also be handed to `read.ENVI()`{.r} as a list in parameter **`header**`{.r}.
-Arguments are given in `header`{.r} replace corresponding entries of the header file.
-The help page gives details on what elements the list should contain, see also the discussion of ENVI files written by Bruker's OPUS software (section \@ref(sec:read-ENVI-Bruker)<!--, p. \pageref{sec:read-ENVI-Bruker})-->.
-
-Here is how to use `read.ENVI()`{.r}:
-
-```{r read.ENVI}
-spc <- read.ENVI("fileio/ENVI/example2.img")
-spc
-```
-
-Please see also the manufacturer specific notes in section \@ref(sec:manuf-spec-import)<!--, p. \pageref{sec:manuf-spec-import}-->.
-
-
-### ENVI Export {#sec:envi-export}
-
-Use package package **caTools** or package **rgdal** with GDAL for writing ENVI files.
 
 
 ## spc Files {#sec:read-spc}
