@@ -680,7 +680,7 @@ spc
 ```
 
 ```{r testHoriba-2}
-spc <- read_txt_horiba_t("fileio/txt.HoribaJobinYvon/ts.txt")
+spc <- read_txt_Horiba_t("fileio/txt.HoribaJobinYvon/ts.txt")
 if (any(dim(spc) != c(100, 3, 1024)) ||
   is.null(spc$t) || any(is.na(spc$t)) ||
   length(setdiff(wl(spc), 1:1024)) == 0L) {
