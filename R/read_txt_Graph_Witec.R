@@ -110,7 +110,8 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
   test_that("Map", {
     expect_warning(
       read_txt_Witec_Graph(
-        paste0(tmpdir, "/image2x3_GraphASCII.Data 1_F (Header).txt")),
+        paste0(tmpdir, "/image2x3_GraphASCII.Data 1_F (Header).txt"),
+        encoding = "latin1"),
       "header provides spatial information in y direction for single spectra")
 
     expect_warning(
