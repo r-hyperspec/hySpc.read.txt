@@ -16,10 +16,10 @@
 #' @return a hyperSpec object
 #' @author Claudia Beleites and Marcel Dahms
 #' @importFrom hySpc.testthat test<-
+#' @importFrom utils head
 #' @seealso \code{vignette ("fileio")} for more information on file import and
 #' \code{\link{options}} for details on options.
 #' @export
-#' @importFrom utils head
 read_txt_Witec <- function(file = stop("filename or connection needed"),
                            points.per.line = NULL,
                            lines.per.image = NULL,
@@ -65,7 +65,7 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
     spc <- parse_xy(spc, hdr, hdr.label, points.per.line, lines.per.image)
   }
 
-  ## consistent file import behaviour across import functions
+  ## consistent file import behavior across import functions
   .fileio.optional(spc, file)
 }
 
@@ -124,7 +124,6 @@ test(read_txt_Witec) <- function() {
     expect_null(spc$x)
     expect_null(spc$y)
   })
-
 
   test_that("parameter default type = 'single'", {
     skip("TODO: adapt to new package")
