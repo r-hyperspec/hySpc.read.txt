@@ -85,7 +85,8 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
 
   test_that("encoding", {
     expect_warning(
-      read_txt_Witec_Graph(paste0(tmpdir, "/nofilename (Header).txt")),
+      read_txt_Witec_Graph(paste0(tmpdir, "/nofilename (Header).txt"),
+                           encoding = "Bytes"),
       "invalid in this locale"
     )
 
