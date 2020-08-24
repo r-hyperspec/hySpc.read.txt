@@ -1,8 +1,8 @@
 vignette-default-settingsR.R
 vignette-functions.R
 fileio--fileformats.txt
-read.txt.PerkinElmer.R
-read.ENVI.Nicolet.R
+read_txt_PerkinElmer.R
+read_ENVI_Nicolet.R
 elsevier-with-titles.csl
 fileio.bib
 style.css
