@@ -394,7 +394,7 @@ Import is straightforward, and just the spectra matrix needs to be transposed to
 
 
 ```{r read_txt_t}
-file <- read.table("fileio/txt.t/Triazine 5_31.txt", header = TRUE, dec = ",", sep = "\t")
+file <- read.table("fileio/txt.t/Triazine_5_31.txt", header = TRUE, dec = ",", sep = "\t")
 
 triazine <- new("hyperSpec",
   wavelength = file[, 1], spc = t(file[, -1]),

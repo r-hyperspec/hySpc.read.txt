@@ -28,6 +28,8 @@ Imports:
 Suggests:
     R.matlab,
     testthat,
+    kableExtra,
+    sessioninfo,
     styler,
     knitr,
     covr
