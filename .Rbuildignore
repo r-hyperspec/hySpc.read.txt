@@ -5,3 +5,9 @@
 ^appveyor\.yml$
 ^\.github$
 ^docs
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^CONTRIBUTING\.md$
+^github-helpers$
+^_tmp
