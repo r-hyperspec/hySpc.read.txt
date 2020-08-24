@@ -37,7 +37,7 @@ read_dat_Witec <- function(filex = stop("filename or connection needed"),
   .fileio.optional(spc, filey)
 }
 
-test(read_dat_Witec) <- function() {
+hySpc.testthat::test(read_dat_Witec) <- function() {
   context("read_dat_Witec")
 
   test_that("-y file guessing", {

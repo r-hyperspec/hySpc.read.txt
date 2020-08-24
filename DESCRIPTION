@@ -9,7 +9,8 @@ Authors@R: c(
     person("Vilmantas", "Gegzna", role = c("aut")),
     person("Bryan", "Hanson", role = c("aut")),
     person("Marcel", "Dahms", role = c("aut")),
-    person("Bjoern", "Egert", role = c("aut")))
+    person("Bjoern", "Egert", role = c("aut"))
+  )
 Description: File import filters for a number of file formats produced by Witec instruments.
     The imported data are returned as hyperSpec objects.
 License: MIT + file LICENSE
@@ -21,20 +22,23 @@ Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes
 Depends:
-    hyperSpec,
-    methods
+    hyperSpec
 Imports:
     hySpc.testthat,
+    methods,
+    stats,
     utils
 Suggests:
     R.matlab,
     testthat,
     knitr,
+    pkgdown,
     covr
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
+    'hySpc.read.txt-package.R'
     '0temp_fileio_optional.R'
     'count_lines.R'
     'helpers.R'

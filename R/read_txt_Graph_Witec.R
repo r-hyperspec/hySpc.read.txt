@@ -48,7 +48,7 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
   .fileio.optional(spc, filey)
 }
 
-test(read_txt_Witec_Graph) <- function() {
+hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
   context("read_txt_Witec_Graph")
 
   tmpdir <- paste0(tempdir(), "/Witec_GraphASCII")
