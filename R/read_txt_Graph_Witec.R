@@ -51,8 +51,18 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
 test(read_txt_Witec_Graph) <- function() {
   context("read_txt_Witec_Graph")
 
-  tmpdir <- paste0(tempdir(), "/Witec_GraphASCII")
-  untar("Witec_GraphASCII.tar.gz", exdir = tmpdir)
+  tmpdir <- paste0(tempdir(), "/test_Witec_txt_Graph")
+  untar("testfiles_Witec.tar.gz",
+        files = c("nofilename (Header).txt",
+                  "nofilename (X-Axis).txt",
+                  "nofilename (Y-Axis).txt",
+                  "timeseries3x_GraphASCII.Data 1 (Header).txt",
+                  "timeseries3x_GraphASCII.Data 1 (X-Axis).txt",
+                  "timeseries3x_GraphASCII.Data 1 (Y-Axis).txt",
+                  "image2x3_GraphASCII.Data 1_F (Header).txt",
+                  "image2x3_GraphASCII.Data 1_F (X-Axis).txt",
+                  "image2x3_GraphASCII.Data 1_F (Y-Axis).txt"),
+        exdir = tmpdir)
 
   on.exit(unlink(tmpdir))
 
@@ -74,36 +84,61 @@ test(read_txt_Witec_Graph) <- function() {
   })
 
   test_that("encoding", {
-    skip("TODO: adapt to new package")
-    expect_warning(read_txt_Witec_Graph("fileio/txt.Witec/nofilename (Header).txt"))
+    expect_warning(
+      read_txt_Witec_Graph(paste0(tmpdir, "/nofilename (Header).txt")),
+      "invalid in this locale"
+    )
 
-    spc <- read_txt_Witec_Graph("fileio/txt.Witec/nofilename (Header).txt", encoding = "latin1")
-    expect_known_hash(spc, "2bad36adb3")
+    spc <- read_txt_Witec_Graph(
+      paste0(tmpdir, "/nofilename (Header).txt"),
+      encoding = "latin1")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "b273847b9c")
   })
 
   test_that("Time Series", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec_Graph("fileio/txt.Witec/Witec-timeseries (Header).txt", type = "single")
-    expect_known_hash(spc, "295499c43c")
+    spc <- read_txt_Witec_Graph(
+      paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"),
+      type = "single")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "a5ff28fc8b")
   })
 
   test_that("Map", {
-    skip("TODO: adapt to new package")
-    expect_warning(read_txt_Witec_Graph("fileio/txt.Witec/Witec-Map (Header).txt"))
-    expect_warning(read_txt_Witec_Graph("fileio/txt.Witec/Witec-Map (Header).txt", type = "single"))
+    expect_warning(
+      read_txt_Witec_Graph(
+        paste0(tmpdir, "/image2x3_GraphASCII.Data 1_F (Header).txt")),
+      "header provides spatial information in y direction for single spectra")
 
-    spc <- read_txt_Witec_Graph("fileio/txt.Witec/Witec-Map (Header).txt", type = "map")
-    expect_known_hash(spc, "cb9cd9757a")
+    expect_warning(
+      read_txt_Witec_Graph(
+        paste0(tmpdir, "/image2x3_GraphASCII.Data 1_F (Header).txt"),
+        type = "single"),
+      "header provides spatial information in y direction for single spectra")
+
+    spc <- read_txt_Witec_Graph(
+      paste0(tmpdir, "/image2x3_GraphASCII.Data 1_F (Header).txt"),
+      type = "map", encoding = "latin1")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "1e92447516")
   })
 
   test_that("missing filename", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec_Graph("fileio/txt.Witec/nofilename (Header).txt", encoding = "latin1")
-    expect_known_hash(spc, "2bad36adb3")
+    spc <- read_txt_Witec_Graph(paste0(tmpdir, "/nofilename (Header).txt"),
+                                encoding = "latin1")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "b273847b9c")
   })
 
   test_that("wrong combination of file names", {
-    skip("TODO: adapt to new package")
-    expect_error(read_txt_Witec_Graph("fileio/txt.Witec/Witec-timeseries (Header).txt", "fileio/txt.Witec/Witec-timeseries (Y-Axis).txt"))
+    expect_error(
+      read_txt_Witec_Graph(
+        paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"),
+        paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Y-Axis).txt")),
+      "length of wavelength axis .* differs from 'SizeGraph' in header")
   })
 }
