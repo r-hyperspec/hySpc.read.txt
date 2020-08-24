@@ -113,7 +113,7 @@ knitr::write_bib(
 **Consistent naming of file import functions in version >= 0.99**
 
 From now on, all import functions have names starting with `read.\*()`.
-All functions previously named `scan.\*()`. have been renamed accordingly.
+All functions previously named `scan.\*()`{.r} have been renamed accordingly.
 ```
 
 <!-- ======================================================================= -->
@@ -592,7 +592,8 @@ The file may be compressed via gzip, bzip2, xz or lzma.
 Zip compressed files are read via `read_zip_Renishaw()`{.r}.
 The ASCII files can easily become very large, particularly with linefocus or streamline imaging.
 Function `read_txt_Renishaw()`{.r} provides two mechanisms to avoid running out of memory during data import.
-The file may be imported in chunks of a given number of lines (see the last example). `read_txt_Renishaw()`{.r} can calculate the correct number of wavelengths (i.e., data points per spectrum) if the system command `wc` is available on your computer.
+The file may be imported in chunks of a given number of lines (see the last example).
+Function `read_txt_Renishaw()`{.r} can calculate the correct number of wavelengths (i.e., data points per spectrum) if the system command `wc` is available on your computer.
 
 Also, the processing of the long ASCII format into the spectra matrix is done by reshaping the vector of intensities into a matrix.
 This process does not allow any missing values in the data.
