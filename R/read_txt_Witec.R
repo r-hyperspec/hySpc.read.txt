@@ -69,7 +69,7 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
   .fileio.optional(spc, file)
 }
 
-test(read_txt_Witec) <- function() {
+hySpc.testthat::test(read_txt_Witec) <- function() {
   context("read_txt_Witec")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt")

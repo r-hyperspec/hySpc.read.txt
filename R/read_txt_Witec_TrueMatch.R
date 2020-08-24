@@ -112,7 +112,7 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   }
 }
 
-test(read_txt_Witec_TrueMatch) <- function() {
+hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   context("read_txt_Witec_TrueMatch")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt_TrueMatch")
