@@ -72,100 +72,129 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
 test(read_txt_Witec) <- function() {
   context("read_txt_Witec")
 
-  test_that("Map with neither header nor label lines", {
-    skip("TODO: adapt to new package")
-    expect_error(suppressWarnings(read_txt_Witec("fileio/txt.Witec/Witec-Map_no.txt",
-      type = "map", hdr.units = TRUE, hdr.label = TRUE
-    )))
-    expect_warning(read_txt_Witec("fileio/txt.Witec/Witec-Map_no.txt", type = "map"))
+  tmpdir <- paste0(tempdir(), "/txt_Witec")
+  untar("testfiles_Witec.tar.gz",
+        files = c ("image2x3_Table.Data 1_F.txt", "timeseries3x_Table.Data 1.txt",
+                   "Witec-Map_label.txt", "Witec-Map_unit.txt", "Witec-Map_full.txt",
+                   "Witec-timeseries_label.txt", "Witec-timeseries_unit.txt", "Witec-timeseries_full.txt"),
+        exdir = tmpdir)
+  on.exit(unlink(tmpdir))
 
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-Map_no.txt", type = "map", points.per.line = 5, lines.per.image = 5)
-    expect_known_hash(spc, hash = "6816a87cf3")
+  test_that("Map with neither header nor label lines", {
+    expect_error(
+      suppressWarnings(
+        read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+                       type = "map", hdr.units = TRUE, hdr.label = TRUE
+    )))
+    expect_warning(read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+                                  type = "map"),
+                   "no spatial information provided")
+
+    spc <- read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+                          type = "map", points.per.line = 3, lines.per.image = 2)
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_setequal(spc$x, 1 : 3)
+    expect_setequal(spc$y, -1 : -2)
+    expect_known_hash(spc, hash = "a74cdcd428")
   })
 
   test_that("Map: one of points.per.line and lines.per.image is sufficient", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-Map_no.txt", type = "map", lines.per.image = 5)
-    expect_known_hash(spc, hash = "6816a87cf3")
+    spc <- read_txt_Witec(
+      paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"), type = "map",
+      lines.per.image = 2)
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, hash = "a74cdcd428")
 
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-Map_no.txt", type = "map", points.per.line = 5)
-    expect_known_hash(spc, hash = "6816a87cf3")
+    spc <- read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+                          type = "map", points.per.line = 3)
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, hash = "a74cdcd428")
   })
 
   test_that("Map with label line but no units header", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-Map_label.txt", type = "map", hdr.units = FALSE, hdr.label = TRUE)
-    expect_known_hash(spc, "c4a384d6b2")
+
+    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-Map_label.txt"), type = "map",
+                          hdr.units = FALSE, hdr.label = TRUE)
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "5d1ed15baf")
   })
 
   test_that("Map with units header line but no labels", {
-    skip("TODO: adapt to new package")
-    expect_warning(spc <- read_txt_Witec("fileio/txt.Witec/Witec-Map_unit.txt", type = "map", hdr.units = TRUE, hdr.label = FALSE))
+    expect_warning(
+      spc <- read_txt_Witec(paste0(tmpdir, "/Witec-Map_unit.txt"),
+                            type = "map", hdr.units = TRUE, hdr.label = FALSE),
+      "no spatial information provided")
     expect_null(spc$x)
     expect_null(spc$y)
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "123fc77bdf")
 
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-Map_unit.txt",
+    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-Map_unit.txt"),
       type = "map", hdr.units = TRUE, hdr.label = FALSE,
       points.per.line = 5, lines.per.image = 5
     )
-    expect_known_hash(spc, "86ecc17360")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "f43487ae66")
   })
 
   test_that("Map with header and label lines", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-Map_full.txt", type = "map", hdr.units = TRUE, hdr.label = TRUE)
-    expect_known_hash(spc, "76db6397fc")
+    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-Map_full.txt"), type = "map",
+                          hdr.units = TRUE, hdr.label = TRUE)
+
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "60a1e20338")
   })
 
   test_that("Map can be read as time series", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-Map_no.txt")
-    expect_known_hash(spc, "6213aefc6b")
+    spc <- read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"))
     expect_null(spc$x)
     expect_null(spc$y)
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "40030b99dc")
   })
 
 
   test_that("parameter default type = 'single'", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-timeseries_no.txt")
-    expect_known_hash(spc, "1a8c3be079")
+    spc <- read_txt_Witec(paste0(tmpdir, "/timeseries3x_Table.Data 1.txt"))
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "37fc7cadcc")
   })
 
   test_that("Time series with neither header nor label lines", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-timeseries_no.txt")
-    expect_known_hash(spc, "1a8c3be079")
+    spc <- read_txt_Witec(paste0(tmpdir, "/timeseries3x_Table.Data 1.txt"))
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "37fc7cadcc")
   })
 
   test_that("Time series with label line but no units header", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-timeseries_label.txt", hdr.units = FALSE, hdr.label = TRUE)
-    expect_known_hash(spc, "4cb098a671")
+    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_label.txt"), hdr.units = FALSE, hdr.label = TRUE)
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "d102a0b244")
   })
 
   test_that("Time series with units header line but no labels", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-timeseries_unit.txt", hdr.units = TRUE, hdr.label = FALSE)
+    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_unit.txt"), hdr.units = TRUE, hdr.label = FALSE)
 
-    expect_known_hash(spc, "6b6abac4e8")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "375a63ae31")
   })
 
   test_that("Time series with header and label lines", {
-    skip("TODO: adapt to new package")
-    expect_error(spc <- read_txt_Witec("fileio/txt.Witec/Witec-timeseries_full.txt"))
+    expect_error(spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_full.txt")))
 
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-timeseries_full.txt", hdr.units = TRUE, hdr.label = TRUE)
-    expect_known_hash(spc, "db5b1a5db0")
+    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_full.txt"),
+                          hdr.units = TRUE, hdr.label = TRUE)
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "7fa6a0be645")
   })
 
   test_that("encoding", {
-    skip("TODO: adapt to new package")
-    spc <- read_txt_Witec("fileio/txt.Witec/Witec-timeseries_full.txt",
+    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_full.txt"),
       hdr.units = TRUE, hdr.label = TRUE,
       encoding = "ascii"
     )
-    expect_known_hash(spc, "db5b1a5db0")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+    expect_known_hash(spc, "7fa6a0be645")
   })
 }
 
