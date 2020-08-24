@@ -1,6 +1,7 @@
 #' @keywords internal
 #'
 #' @import hyperSpec
+#' @import hySpc.testthat
 #'
 #' @importFrom methods is
 #' @importFrom stats complete.cases

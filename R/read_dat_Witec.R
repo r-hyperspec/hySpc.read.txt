@@ -40,42 +40,69 @@ read_dat_Witec <- function(filex = stop("filename or connection needed"),
 hySpc.testthat::test(read_dat_Witec) <- function() {
   context("read_dat_Witec")
 
+  tmpdir <- paste0(tempdir(), "/test_Witec_dat")
+  untar("testfiles_Witec.tar.gz",
+        files = c("Witec-Map-x.dat", "Witec-Map-y.dat",
+                  "Witec-timeseries-x.dat", "Witec-timeseries-y.dat"),
+        exdir = tmpdir)
+
+  on.exit(unlink(tmpdir))
+
   test_that("-y file guessing", {
-    skip("TODO: adapt to new package")
-    spc <- read_dat_Witec("fileio/txt.Witec/Witec-timeseries-x.dat")
-    expect_known_hash(spc, "9562f59323")
+    spc <- read_dat_Witec(paste0(tmpdir, "/Witec-timeseries-x.dat"))
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "1977fe5997")
   })
 
   test_that("encoding", {
-    skip("TODO: adapt to new package")
-    spc <- read_dat_Witec("fileio/txt.Witec/Witec-timeseries-x.dat", encoding = "ascii")
-    expect_known_hash(spc, "9562f59323")
+    spc <- read_dat_Witec(paste0(tmpdir, "/Witec-timeseries-x.dat"),
+                          encoding = "ascii")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "1977fe5997")
   })
 
   test_that("Time series", {
-    skip("TODO: adapt to new package")
-    spc <- read_dat_Witec("fileio/txt.Witec/Witec-timeseries-x.dat", "fileio/txt.Witec/Witec-timeseries-y.dat")
-    expect_known_hash(spc, "9562f59323")
+    spc <- read_dat_Witec(paste0(tmpdir, "/Witec-timeseries-x.dat"),
+                          paste0(tmpdir, "/Witec-timeseries-y.dat"))
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "1977fe5997")
   })
 
   test_that("Map: .dat does not have spatial information", {
-    skip("TODO: adapt to new package")
-    spc <- read_dat_Witec("fileio/txt.Witec/Witec-Map-x.dat", "fileio/txt.Witec/Witec-Map-y.dat")
+    spc <- read_dat_Witec(paste0(tmpdir, "/Witec-Map-x.dat"),
+                          paste0(tmpdir, "/Witec-Map-y.dat"))
     expect_null(spc$x)
     expect_null(spc$y)
-    expect_known_hash(spc, "8a7ed06b0b")
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "b523735004")
   })
 
   test_that("Map", {
-    skip("TODO: adapt to new package")
-    expect_warning(read_dat_Witec("fileio/txt.Witec/Witec-Map-x.dat", "fileio/txt.Witec/Witec-Map-y.dat",
-      points.per.line = 5, lines.per.image = 5
-    ))
-
-    spc <- read_dat_Witec("fileio/txt.Witec/Witec-Map-x.dat", "fileio/txt.Witec/Witec-Map-y.dat",
-      type = "map", points.per.line = 5, lines.per.image = 5
+    expect_warning(
+      read_dat_Witec(paste0(tmpdir, "/Witec-Map-x.dat"),
+                     paste0(tmpdir, "/Witec-Map-y.dat"),
+                     points.per.line = 5, lines.per.image = 5
+      ),
+      "points.per.line != 1 given for single spectrum"
     )
-    expect_known_hash(spc, "3d6339675b")
+    expect_warning(
+      read_dat_Witec(paste0(tmpdir, "/Witec-Map-x.dat"),
+                     paste0(tmpdir, "/Witec-Map-y.dat"),
+                     points.per.line = 5, lines.per.image = 5
+      ),
+      "lines.per.image != 1 are defined for single spectrum"
+    )
+
+    spc <- read_dat_Witec(paste0(tmpdir, "/Witec-Map-x.dat"),
+                          paste0(tmpdir, "/Witec-Map-y.dat"),
+                          type = "map", points.per.line = 5, lines.per.image = 5
+    )
+    spc$filename <- gsub ("^.*/", "", spc$filename)
+
+    expect_known_hash(spc, "efc28c0d45")
   })
 }
-
