@@ -72,7 +72,7 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
 test(read_txt_Witec) <- function() {
   context("read_txt_Witec")
 
-  tmpdir <- paste0(tempdir(), "/txt_Witec")
+  tmpdir <- paste0(tempdir(), "/test_Witec_txt")
   untar("testfiles_Witec.tar.gz",
         files = c ("image2x3_Table.Data 1_F.txt", "timeseries3x_Table.Data 1.txt",
                    "Witec-Map_label.txt", "Witec-Map_unit.txt", "Witec-Map_full.txt",
