@@ -608,27 +608,24 @@ Supported types are:
 
 Instead of a file name, `read_txt_Renishaw()`{.r} accepts also a connection.
 
-```{r read_txt_Renishaw}
+```{block, r read_txt_Renishaw}
 paracetamol <- read_txt_Renishaw("fileio/txt.Renishaw/paracetamol.txt", "spc")
 paracetamol
 ```
 
 <!-- NOTE: the code to save this dataset as package data was removed from this file. -->
 <!-- save(paracetamol, file = "paracetamol.rda") -->
-
-```{r}
-read_txt_Renishaw("fileio/txt.Renishaw/laser.txt.gz", data = "ts")
-```
+<!-- read_txt_Renishaw("fileio/txt.Renishaw/laser.txt.gz", data = "ts") -->
 
 Very large files can be read in chunks to save memory:
 
-```{r read_txt_Renishaw-file}
+```{block, r read_txt_Renishaw-file}
 read_txt_Renishaw("fileio/txt.Renishaw/chondro.txt", nlines = 1e5, nspc = 875)
 ```
 
 R accepts a variety of compressed file formats for ASCII files:
 
-```{r read_txt_Renishaw-compressed, results='hide'}
+```{block, r read_txt_Renishaw-compressed, results='hide'}
 read_txt_Renishaw("fileio/txt.Renishaw/chondro.gz")
 read_txt_Renishaw("fileio/txt.Renishaw/chondro.xz")
 read_txt_Renishaw("fileio/txt.Renishaw/chondro.lzma")
@@ -652,7 +649,7 @@ read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")
 
 Horiba's Labspec software (e. g. LabRAM spectrometers) saves spectra in a wide ASCII format which is read by `read_txt_Horiba()`{.r}, e. g.:
 
-```{r Horiba}
+```{block, r Horiba}
 spc <- read_txt_Horiba("fileio/txt.HoribaJobinYvon/ts.txt",
   cols = list(
     t = "t / s", spc = "I / a.u.",
@@ -667,7 +664,7 @@ These spectra are by removed by default if option `file.remove.emptyspc`{.r} is 
 
 For convenience, functions to further wrappers to import maps (`read_txt_Horiba_xy()`{.r}) and time series (`read_txt_Horiba_t()`{.r}) are provided.
 
-```{r testHoriba-1}
+```{block, r testHoriba-1}
 spc <- read_txt_Horiba_xy("fileio/txt.HoribaJobinYvon/map.txt")
 if (any(dim(spc) != c(141, 4, 616)) ||
   any(abs(spc) < .Machine$double.eps^.5) ||
@@ -679,7 +676,7 @@ if (any(dim(spc) != c(141, 4, 616)) ||
 spc
 ```
 
-```{r testHoriba-2}
+```{block, r testHoriba-2}
 spc <- read_txt_Horiba_t("fileio/txt.HoribaJobinYvon/ts.txt")
 if (any(dim(spc) != c(100, 3, 1024)) ||
   is.null(spc$t) || any(is.na(spc$t)) ||
@@ -719,7 +716,7 @@ read.asc.Andor("fileio/asc.Andor/ASCII-Andor-Solis.asc")
 
 The Witec project software supports exporting spectra as Thermo Galactic `.spc` files.
 
-```{r witec-spc, results='hide'}
+```{block, r witec-spc, results='hide'}
 read.spc("fileio/spc.Witec/Witec-timeseries.spc")
 read.spc("fileio/spc.Witec/Witec-Map.spc")
 ```
@@ -730,7 +727,7 @@ For imaging data, no spatial information for the set of spectra is provided (in 
 Imaging data (but also single spectra and time series) can be exported as ASCII X and Y files (Save ASCII X and Save ASCII Y, not supported in version 4).
 These can be read by `read_dat_Witec()`{.r}:
 
-```{r witec-dat, results='hide'}
+```{block, r witec-dat, results='hide'}
 read_dat_Witec("fileio/txt.Witec/Witec-timeseries-x.dat")
 read_dat_Witec(
   filex = "fileio/txt.Witec/Witec-Map-x.dat",
@@ -744,7 +741,7 @@ Another option is Witec's txt table ASCII export (Export $\rightarrow$ Table), w
 The first column contains the wavelength axis; all further columns contain one spectrum each column.
 Such files can be read with `read_txt_Witec()`{.r}:
 
-```{r witec-txt, include=FALSE, eval=FALSE}
+```{block, r witec-txt, include=FALSE, eval=FALSE}
 read_txt_Witec("fileio/txt.Witec/Witec-timeseries_no.txt")
 ```
 `read_txt_Witec()`{.r} determines the number of wavelengths automatically.
@@ -755,7 +752,7 @@ It is also possible to export two additional header lines containing information
 Therefore parameters `hdr.label`{.r} and `hdr.units`{.r} have to be set properly.
 Otherwise, either an error will be displayed like
 
-```{r witec-txt-error, echo=FALSE}
+```{block, r witec-txt-error, echo=FALSE}
 cat("Error in scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  :
   scan() expected 'a real', got 'rel.'")
 ```
@@ -787,7 +784,7 @@ For imaging data set parameter `type`{.r} to "map".
 If the label header is exported, the spatial information can be extracted from this line.
 Otherwise, at least one, `points.per.line`{.r} or `lines.per.image`{.r}, has to be given manually, if not, a warning will be shown.
 
-```{r witec-txt-map, include=FALSE}
+```{block, r witec-txt-map, include=FALSE}
 read_txt_Witec("fileio/txt.Witec/Witec-Map_full.txt",  type = "map", hdr.label = TRUE, hdr.units = TRUE)
 
 read_txt_Witec("fileio/txt.Witec/Witec-Map_label.txt", type = "map", hdr.label = TRUE, hdr.units = FALSE)
