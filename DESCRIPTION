@@ -1,13 +1,16 @@
 Package: hySpc.read.txt
 Type: Package
 Title: File Import Functions for Spectra in Various ASCII or Text File Formats
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Maintainer: Erick Oduniyi <eeoduniyi@gmail.com>
 Authors@R: c(
-    person("Claudia",   "Beleites",  role = c("aut"), email = "Claudia.Beleites@chemometrix.gmbh"),
-    person("Erick",     "Oduniyi", role = c("aut","cre"), email = "eeoduniyi@gmail.com"),
+    person("Claudia", "Beleites", role = c("aut"), email = "Claudia.Beleites@chemometrix.gmbh"),
+    person("Erick", "Oduniyi", role = c("aut","cre"), email = "eeoduniyi@gmail.com"),
     person("Vilmantas", "Gegzna", role = c("aut")),
-    person("Bryan",     "Hanson", role = c("aut")))
+    person("Bryan", "Hanson", role = c("aut")),
+    person("Marcel", "Dahms", role = c("aut")),
+    person("Bjoern", "Egert", role = c("aut"))
+  )
 Description: File import filters for a number of file formats produced by Witec instruments.
     The imported data are returned as hyperSpec objects.
 License: MIT + file LICENSE
@@ -19,16 +22,37 @@ Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes
 Depends:
-    hyperSpec,
-    methods
+    hyperSpec
 Imports:
     hySpc.testthat,
+    methods,
+    stats,
     utils
 Suggests:
     R.matlab,
     testthat,
     knitr,
+    pkgdown,
     covr
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+Collate: 
+    'hySpc.read.txt-package.R'
+    '0temp_fileio_optional.R'
+    'count_lines.R'
+    'helpers.R'
+    'microbenchmark.R'
+    'read_txt_Witec.R'
+    'read_asc_Andor.R'
+    'read_asc_PerkinElmer.R'
+    'read_dat_Witec.R'
+    'read_ini.R'
+    'read_mat_Witec.R'
+    'read_txt_Graph_Witec.R'
+    'read_txt_Horiba.R'
+    'read_txt_Renishaw.R'
+    'read_txt_Shimadzu.R'
+    'read_txt_Witec_TrueMatch.R'
+    'read_txt_long.R'
+    'read_txt_wide.R'
