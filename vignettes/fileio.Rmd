@@ -1,8 +1,8 @@
 ---
 # For vignette ---------------------------------------------------------------
-title:       Import and Export Files with Spectra
-subtitle:    'Tutorial on Spectra File Import and Export for "hyperSpec"'
-description: 'fileio: Tutorial on spectra file import and export for "hyperSpec".'
+title:       Import from Text Files with Spectra
+subtitle:    'Tutorial on Spectra File Import from Text Files for "hyperSpec"'
+description: 'Tutorial on spectra file import from text files for "hyperSpec".'
 # Authors --------------------------------------------------------------------
 author:
   - name: Claudia Beleites^1,2,3,4,5^, Vilmantas Gegzna
@@ -17,21 +17,23 @@ author:
 # Document -------------------------------------------------------------------
 date:        "`r Sys.Date()`"
 output:
-    bookdown::html_vignette2:
+    bookdown::html_document2:
+      base_format: rmarkdown::html_vignette
       toc: yes
       fig_caption: yes
+      number_sections: true
       css:
         - vignette.css
         - style.css
 vignette: >
-    % \VignetteIndexEntry{Import and Export of Spectra Files}
+    % \VignetteIndexEntry{Import from Text Files with Spectra}
     % \VignetteKeyword{file}
+    % \VignetteKeyword{import}
     % \VignetteKeyword{spectra}
     % \VignetteKeyword{spectrum}
-    % \VignetteKeyword{import}
-    % \VignetteKeyword{export}
     % \VignetteKeyword{hyperSpec}
-    % \VignettePackage{hyperSpec}
+    % \VignetteKeyword{hySpc.read.txt}
+    % \VignettePackage{hySpc.read.txt}
     % \VignetteDepends{styler}
     % \VignetteEngine{knitr::rmarkdown}
     % \VignetteEncoding{UTF-8}
