@@ -29,14 +29,15 @@ Imports:
     stats,
     utils
 Suggests:
-    R.matlab,
-    testthat,
+    bookdown,
+    covr,
     kableExtra,
-    sessioninfo,
-    styler,
     knitr,
     pkgdown,
-    covr
+    R.matlab,
+    sessioninfo,
+    styler,
+    testthat
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
