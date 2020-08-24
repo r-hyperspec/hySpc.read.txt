@@ -37,10 +37,9 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
 }
 
 hySpc.testthat::test(read_asc_Andor) <- function() {
-  skip("Need to adapt to new package")
   context("read_asc_Andor")
   test_that("Andor Solis .asc text files", {
-    skip_if_not_fileio_available()
+    skip("Need to adapt to new package")
     expect_known_hash(read_asc_Andor("fileio/asc.Andor/ASCII-Andor-Solis.asc"), "9ead937f51")
   })
 }
