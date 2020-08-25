@@ -21,6 +21,8 @@ BugReports: https://github.com/r-hyperspec/hySpc.read.txt/issues
 Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes
+Additional_repositories: 
+    https://r-hyperspec.github.io/hySpc.pkgs/
 Depends:
     hyperSpec
 Imports:
