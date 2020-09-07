@@ -274,7 +274,8 @@ of <code><a href='https://rdrr.io/pkg/R.matlab/man/R.matlab-package.html'>R.matl
     wavelength = <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>wavelength</span>),
     label = <span class='kw'>data</span><span class='op'>$</span><span class='kw'>label</span>[, , <span class='fl'>1</span>]
   )
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: R.matlab</span></div><div class='output co'>#&gt; <span class='message'>R.matlab v3.6.2 (2018-09-26) successfully loaded. See ?R.matlab for help.</span></div><div class='output co'>#&gt; <span class='message'></span>
+}
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: R.matlab</span></div><div class='output co'>#&gt; <span class='message'>R.matlab v3.6.2 (2018-09-26) successfully loaded. See ?R.matlab for help.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘R.matlab’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    getOption, isOpen</span></div><div class='output co'>#&gt; $x
@@ -484,7 +485,7 @@ of <code><a href='https://rdrr.io/pkg/R.matlab/man/R.matlab-package.html'>R.matl
 #&gt; 
 #&gt; attr(,"header")
 #&gt; attr(,"header")$description
-#&gt; [1] "MATLAB 5.0 MAT-file, Platform: unix, Software: R v4.0.2, Created on: Tue Aug 25 10:06:51 2020                               "
+#&gt; [1] "MATLAB 5.0 MAT-file, Platform: unix, Software: R v4.0.2, Created on: Mon Sep  7 15:15:54 2020                               "
 #&gt; 
 #&gt; attr(,"header")$version
 #&gt; [1] "5"
@@ -508,7 +509,8 @@ of <code><a href='https://rdrr.io/pkg/R.matlab/man/R.matlab-package.html'>R.matl
     .wavelength = <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='kw'>lambda</span> <span class='op'>/</span> <span class='kw'>nm</span>),
     spc = <span class='st'>"I / a.u"</span>, c = <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='st'>"/"</span>(<span class='kw'>c</span>, (<span class='kw'>mg</span> <span class='op'>/</span> <span class='kw'>l</span>)))
   )
-)</div><div class='output co'>#&gt; hyperSpec object
+)
+</div><div class='output co'>#&gt; hyperSpec object
 #&gt;    6 spectra
 #&gt;    3 data columns
 #&gt;    181 data points / spectrum
@@ -516,7 +518,7 @@ of <code><a href='https://rdrr.io/pkg/R.matlab/man/R.matlab-package.html'>R.matl
 #&gt; data:  (6 rows x 3 columns)
 #&gt;    1. spc: I / a.u [matrix, array181] 27.15000 66.80133 ... 294.6495 
 #&gt;    2. c: c/(mg/l) [numeric] 0.05 0.10 ... 0.3 
-#&gt;    3. filename: filename [character] /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpxv0mle/flu.txt /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpxv0mle/flu.txt ... /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpxv0mle/flu.txt </div><div class='input'>
+#&gt;    3. filename: filename [character] /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpFNhy93/flu.txt /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpFNhy93/flu.txt ... /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpFNhy93/flu.txt </div><div class='input'>
 <span class='fu'>write.txt.wide</span>(<span class='kw'>flu</span>,
   file = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"/flu.txt"</span>),
   cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c"</span>, <span class='st'>"spc"</span>),
@@ -539,7 +541,8 @@ of <code><a href='https://rdrr.io/pkg/R.matlab/man/R.matlab-package.html'>R.matl
     .wavelength = <span class='st'>"lambda / nm"</span>
   ),
   header = <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: Function 'read.txt.wide' is deprecated. </span>
+)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Function 'read.txt.wide' is deprecated. </span>
 #&gt; <span class='warning'>Please, find alternatives in package 'hySpc.read.txt'</span>
 #&gt; <span class='warning'>https://r-hyperspec.github.io/hySpc.read.txt</span></div><div class='output co'>#&gt; <span class='warning'>Warning: $filename already exists. =&gt; Skipping file.keep.name</span></div><div class='output co'>#&gt; hyperSpec object
 #&gt;    6 spectra
