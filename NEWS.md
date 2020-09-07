@@ -9,4 +9,4 @@
 * New function `read_txt_Witec_TrueMatch()` to import text exports from Witec TrueMatch.
 
 ## New Features
-* When new versions of the data are pushed to this repo, the newly created `.tar.gz` is automatically deployed to `hySpc.pkgs`.
+* When new versions of the data are pushed to this repo, the newly created `.tar.gz` is automatically deployed to `pkg-repo`.

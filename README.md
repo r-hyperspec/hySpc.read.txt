@@ -107,4 +107,4 @@ Usually, "Windows" users need to download, install and properly configure **Rtoo
 
 ## For Developers
 
-Developers can find information about automatic deployment from this repo to `hySpc.pkgs` [here](https://github.com/r-hyperspec/hySpc.pkgs) in `CONTRIBUTING.md`.
+Developers can find information about automatic deployment from this repo to `pkg-repo` [here](https://github.com/r-hyperspec/pkg-repo) in `CONTRIBUTING.md`.
