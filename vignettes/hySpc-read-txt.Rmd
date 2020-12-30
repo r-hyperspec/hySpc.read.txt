@@ -15,7 +15,7 @@ author:
         4. Arbeitskreis Lebensmittelmikrobiologie und Biotechnologie, Hamburg University, Hamburg/Germany (2019 -- 2020)
         5. Chemometric Consulting and Chemometrix GmbH, Wölfersheim/Germany (since 2016)
 # Document -------------------------------------------------------------------
-date:        "`r Sys.Date()`"
+date:      "`r Sys.Date()`"
 output:
     bookdown::html_document2:
       base_format: rmarkdown::html_vignette
