@@ -1,6 +1,6 @@
 ---
 # For vignette ---------------------------------------------------------------
-title:       Import from Text Files with Spectra
+title:       'Import from Text Files with Spectra'
 subtitle:    'Tutorial on Spectra File Import from Text Files for "hyperSpec"'
 description: 'Tutorial on spectra file import from text files for "hyperSpec".'
 # Authors --------------------------------------------------------------------
