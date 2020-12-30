@@ -638,7 +638,7 @@ read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")
 ```
 
 
-## Horiba / Jobin Yvon (e.g. LabRAM) {#sec:read-txt-Horiba}
+## Horiba / Jobin Yvon (e.g., LabRAM) {#sec:read-txt-Horiba}
 
 \index{Horiba Jobin Yvon!ASCII!wide}
 \index{ASCII!wide!Horiba Jobin Yvon}
@@ -650,7 +650,7 @@ read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")
 \index{ASCII!wide!LabRAM|see{Horiba}}
 \index{Raman!LabRAM|see{Horiba}}
 
-Horiba's Labspec software (e. g. LabRAM spectrometers) saves spectra in a wide ASCII format which is read by `read_txt_Horiba()`{.r}, e. g.:
+Horiba's Labspec software (e.g., LabRAM spectrometers) saves spectra in a wide ASCII format which is read by `read_txt_Horiba()`{.r}, e.g.:
 
 ```{block, r Horiba}
 spc <- read_txt_Horiba("fileio/txt.HoribaJobinYvon/ts.txt",
