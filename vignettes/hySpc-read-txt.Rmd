@@ -5,7 +5,7 @@ subtitle:    'Tutorial on Spectra File Import from Text Files for "hyperSpec"'
 description: 'Tutorial on spectra file import from text files for "hyperSpec".'
 # Authors --------------------------------------------------------------------
 author:
-  - name: Claudia Beleites^1,2,3,4,5^, Vilmantas Gegzna
+  - name: Claudia Beleites^1,2,3,4,5^, Vilmantas Gegzna, Erick Oduniyi
     email: chemometrie@beleites.de
     corresponding : yes
     affiliation   : |
