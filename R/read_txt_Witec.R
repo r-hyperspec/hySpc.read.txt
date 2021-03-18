@@ -66,7 +66,7 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
   }
 
   ## consistent file import behavior across import functions
-  .fileio.optional(spc, file)
+  .spc_io_postprocess_optional(spc, file)
 }
 
 hySpc.testthat::test(read_txt_Witec) <- function() {

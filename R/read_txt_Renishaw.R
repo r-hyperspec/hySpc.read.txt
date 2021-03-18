@@ -37,7 +37,7 @@
 #' @return the `hyperSpec` object
 #' @export
 #' @author C. Beleites
-#' @seealso [read_txt_long()], [read_txt_wide()],
+#' @seealso [hyperSpec::read_txt_long()], [hyperSpec::read_txt_wide()],
 #'   [base::scan()]
 #'
 #' @keywords IO file
@@ -142,13 +142,13 @@ read_txt_Renishaw <- function(file = stop("file is required"),
 
   spc <- matrix(spc, ncol = length(wl), nrow = nspc, byrow = TRUE)
 
-  spc <- orderwl(new("hyperSpec",
+  spc <- wl_sort(new("hyperSpec",
     spc = spc, data = as.data.frame(data),
     wavelength = wl, label = cols
   ))
 
   ## consistent file import behaviour across import functions
-  .fileio.optional(spc, file)
+  .spc_io_postprocess_optional(spc, file)
 }
 
 hySpc.testthat::test(read_txt_Renishaw) <- function() {
