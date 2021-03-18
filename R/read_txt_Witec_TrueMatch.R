@@ -102,13 +102,13 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
   # Collect the keys_2header information
   if ("all" %in% keys_2header) {
-    .fileio.optional(spc, filename)
+    .spc_io_postprocess_optional(spc, filename)
   } else if ("none" %in% keys_2header) {
-    .fileio.optional(spc[, c("spc")], filename)
+    .spc_io_postprocess_optional(spc[, c("spc")], filename)
   } else if (!"all" %in% keys_2header && !"none" %in% keys_2header) {
-    .fileio.optional(spc[, c("spc", keys_2header)], filename)
+    .spc_io_postprocess_optional(spc[, c("spc", keys_2header)], filename)
   } else {
-      .fileio.optional(spc, filename)
+      .spc_io_postprocess_optional(spc, filename)
   }
 }
 

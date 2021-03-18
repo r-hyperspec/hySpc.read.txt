@@ -59,5 +59,3 @@ Collate:
     'read_txt_Renishaw.R'
     'read_txt_Shimadzu.R'
     'read_txt_Witec_TrueMatch.R'
-    'read_txt_long.R'
-    'read_txt_wide.R'

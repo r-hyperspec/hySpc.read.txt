@@ -33,7 +33,7 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
   spc <- new("hyperSpec", wavelength = txt [1, ], spc = txt [-1, ])
 
   ## consistent file import behaviour across import functions
-  .fileio.optional(spc, file)
+  .spc_io_postprocess_optional(spc, file)
 }
 
 hySpc.testthat::test(read_asc_Andor) <- function() {

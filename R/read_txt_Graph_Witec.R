@@ -45,7 +45,7 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
   }
 
   ## consistent file import behaviour across import functions
-  .fileio.optional(spc, filey)
+  .spc_io_postprocess_optional(spc, filey)
 }
 
 hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
