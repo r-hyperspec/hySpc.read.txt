@@ -3,7 +3,7 @@
 #' Imports a single spectrum in PerkinElmer's ASCII format. This function is experimental.
 #'
 #' @param file filename (or connection)
-#' @param ... further parameters are handed to [hySpc.read.txt::read_txt_long()]
+#' @param ... further parameters are handed to [hyperSpec::read_txt_long()]
 #'
 #' @return hyperSpec object
 #' @importFrom utils packageDescription
@@ -35,9 +35,9 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"), .
   ## Spectra values are stored
   content <- content[-seq_len(startDATA)]
 
-  spc <- read_txt_long(textConnection(content), header = FALSE, sep = "\t", ...)
+  spc <- hyperSpec::read_txt_long(textConnection(content), header = FALSE, sep = "\t", ...)
   spc$filename <- NULL # not meaningful due to textConnection use
 
   ## consistent file import behaviour across import functions
-  .fileio.optional(spc, file)
+  .spc_io_postprocess_optional(spc, file)
 }
