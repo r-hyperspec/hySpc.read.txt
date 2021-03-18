@@ -48,7 +48,6 @@ Collate:
     '0temp_fileio_optional.R'
     'count_lines.R'
     'helpers.R'
-    'microbenchmark.R'
     'read_txt_Witec.R'
     'read_asc_Andor.R'
     'read_asc_PerkinElmer.R'
