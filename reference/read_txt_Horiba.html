@@ -82,7 +82,7 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-book"></span>
+    <span class="fas fa-book"></span>
      
      
     <span class="caret"></span>
@@ -99,7 +99,7 @@
 </li>
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -116,7 +116,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-hyperspec/hySpc.read.txt/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,26 +142,26 @@
     <p>Read ASCII (<code>.txt</code>) files exported by Horiba's Labspec software (LabRAM spectrometers).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_txt_Horiba</span>(
-  <span class='kw'>file</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(spc = <span class='st'>"I / a.u."</span>, .wavelength = <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='kw'>Delta</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/tilde.html'>tilde</a></span>(<span class='kw'>nu</span>)<span class='op'>/</span><span class='kw'>cm</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>1</span>)),
-  header = <span class='fl'>TRUE</span>,
-  sep = <span class='st'>"\t"</span>,
-  row.names = <span class='kw'>NULL</span>,
-  check.names = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)
+    <pre class="usage"><span class='fu'>read_txt_Horiba</span><span class='op'>(</span>
+  <span class='va'>file</span>,
+  cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>spc <span class='op'>=</span> <span class='st'>"I / a.u."</span>, .wavelength <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span><span class='op'>(</span><span class='va'>Delta</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/tilde.html'>tilde</a></span><span class='op'>(</span><span class='va'>nu</span><span class='op'>)</span><span class='op'>/</span><span class='va'>cm</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,
+  header <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  sep <span class='op'>=</span> <span class='st'>"\t"</span>,
+  row.names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  check.names <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>read_txt_Horiba_xy</span>(<span class='kw'>file</span>, <span class='kw'>...</span>)
+<span class='fu'>read_txt_Horiba_xy</span><span class='op'>(</span><span class='va'>file</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>read_txt_Horiba_t</span>(
-  <span class='kw'>file</span>,
-  header = <span class='fl'>TRUE</span>,
-  sep = <span class='st'>"\t"</span>,
-  row.names = <span class='kw'>NULL</span>,
-  check.names = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)</pre>
+<span class='fu'>read_txt_Horiba_t</span><span class='op'>(</span>
+  <span class='va'>file</span>,
+  header <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  sep <span class='op'>=</span> <span class='st'>"\t"</span>,
+  row.names <span class='op'>=</span> <span class='cn'>NULL</span>,
+  check.names <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,7 +172,8 @@
     </tr>
     <tr>
       <th>cols, header, sep, row.names, check.names, ...</th>
-      <td><p>further parameters are handed over to <code>read_txt_wide()</code></p></td>
+      <td><p>further parameters are
+handed over to <code><a href='https://cbeleites.github.io/hyperSpec/reference/read_txt.html'>hyperSpec::read_txt_wide()</a></code></p></td>
     </tr>
     </table>
 
@@ -201,7 +202,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
