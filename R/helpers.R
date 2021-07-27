@@ -47,22 +47,22 @@ parse_hdr <- function(spc, hdr, hdr.label) {
 
     if (length(hdr) == 2) {
       spc@data$spcname <- hdr[[1]][-1]
-      labels(spc, ".wavelength") <- hdr[[2]] [1]
-      labels(spc, "spc") <- unique(hdr[[2]] [-1])
+      labels(spc, ".wavelength") <- hdr[[2]][1]
+      labels(spc, "spc") <- unique(hdr[[2]][-1])
     } else if (length(hdr) == 1 && hdr.label) {
       spc@data$spcname <- hdr[[1]][-1]
     } else {
-      labels(spc, ".wavelength") <- hdr[[1]] [1]
-      labels(spc, "spc") <- unique(hdr[[1]] [-1])
+      labels(spc, ".wavelength") <- hdr[[1]][1]
+      labels(spc, "spc") <- unique(hdr[[1]][-1])
     }
   }
 
   if (!missing(hdr) && missing(hdr.label)) {
-    spc@data$spcname <- hdr ["GraphName", ]
+    spc@data$spcname <- hdr["GraphName", ]
     if ("FileName" %in% rownames(hdr)) {
-      spc@data$WIPname <- hdr ["FileName", ]
+      spc@data$WIPname <- hdr["FileName", ]
     }
-    labels(spc, "spc") <- hdr ["DataUnit", ]
+    labels(spc, "spc") <- hdr["DataUnit", ]
   }
   return(spc)
 }
@@ -90,8 +90,8 @@ parse_xy <- function(spc, hdr, hdr.label, points.per.line, lines.per.image, ...)
     lines.per.image <- as.numeric(y) + 1
   } else if ((missing(points.per.line) || missing(lines.per.image)) &&
     !missing(hdr) && missing(hdr.label)) { # TODO: only read, if not yet calculated?
-    points.per.line <- as.numeric(hdr ["SizeX", ])
-    lines.per.image <- as.numeric(hdr ["SizeY", ])
+    points.per.line <- as.numeric(hdr["SizeX", ])
+    lines.per.image <- as.numeric(hdr["SizeY", ])
   } else if (is.null(points.per.line) && is.null(lines.per.image)) {
     warning("no spatial information provided")
     return(spc)

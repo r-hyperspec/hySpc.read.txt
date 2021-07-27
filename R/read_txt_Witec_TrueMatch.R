@@ -28,13 +28,15 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
   # Check if the number of wavelengths is the same for all the spectra
   if (!all(nwl == nwl[1])) {
-    stop("This file contains spectra with unequal length.\n",
-         "This is not yet supported by read_txt_Witec_ASCII, ",
-         "please report an issue at:\n",
-         packageDescription("hySpc.read.txt")$BugReport,
-         " including\n",
-         "- the output of `sessionInfo()` and\n",
-         "- an example file.")
+    stop(
+      "This file contains spectra with unequal length.\n",
+      "This is not yet supported by read_txt_Witec_ASCII, ",
+      "please report an issue at:\n",
+      packageDescription("hySpc.read.txt")$BugReport,
+      " including\n",
+      "- the output of `sessionInfo()` and\n",
+      "- an example file."
+    )
   }
   nwl <- nwl[1]
 
@@ -44,12 +46,14 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
   # Check if the SpectrumData is in the correct position (should appear 2 header positions after the SpectrumHeader)
   if (!all(names(file[spc_hdr + 2]) == "SpectrumData")) {
-    stop("This file does not contain the SpectrumData at the expected positions,\n",
-         "please report an issue at:\n",
-         packageDescription("hySpc.read.txt")$BugReport,
-         " including\n",
-         "- the output of `sessionInfo()` and\n",
-         "- an example file.")
+    stop(
+      "This file does not contain the SpectrumData at the expected positions,\n",
+      "please report an issue at:\n",
+      packageDescription("hySpc.read.txt")$BugReport,
+      " including\n",
+      "- the output of `sessionInfo()` and\n",
+      "- an example file."
+    )
   }
 
   # Parse SpectrumData
@@ -59,13 +63,14 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
     data <- matrix(data, nrow = nwl, ncol = 2L, byrow = TRUE)
 
     # Compare spectra
-    if (s == 1)
+    if (s == 1) {
       wl <- data[, 1]
-    else
-      if (!all(wl == data[,1]))
-        stop("Spectrum ", s, " has different wavelength axis.")
+    } else
+    if (!all(wl == data[, 1])) {
+      stop("Spectrum ", s, " has different wavelength axis.")
+    }
 
-    spc[s,] <- data[, 2]
+    spc[s, ] <- data[, 2]
   }
 
   # Create hyperSpec object
@@ -77,13 +82,13 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   if (file$SpectrumHeader$XDataKind == "nm") {
     labels(spc, ".wavelength") <- paste0("lambda/", file$SpectrumHeader$XDataKind)
   } else {
-    choice <- tolower(readline(prompt="Do you want to enter units for x-axis (wavelength)?: "))
-      if (choice == "yes" || choice == "y") {
-        label <- readline(prompt="Enter x-axis (wavelength) units: ")
-        labels(spc, ".wavelength") <- label
-      } else {
-        labels(spc, ".wavelength") <- file$SpectrumHeader$XDataKind
-      }
+    choice <- tolower(readline(prompt = "Do you want to enter units for x-axis (wavelength)?: "))
+    if (choice == "yes" || choice == "y") {
+      label <- readline(prompt = "Enter x-axis (wavelength) units: ")
+      labels(spc, ".wavelength") <- label
+    } else {
+      labels(spc, ".wavelength") <- file$SpectrumHeader$XDataKind
+    }
   }
 
   # Parse SpectrumHeader
@@ -108,7 +113,7 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   } else if (!"all" %in% keys_2header && !"none" %in% keys_2header) {
     .spc_io_postprocess_optional(spc[, c("spc", keys_2header)], filename)
   } else {
-      .spc_io_postprocess_optional(spc, filename)
+    .spc_io_postprocess_optional(spc, filename)
   }
 }
 
@@ -117,8 +122,9 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt_TrueMatch")
   untar("testfiles_Witec.tar.gz",
-        files = c("Witec_TrueMatch.txt"),
-        exdir = tmpdir)
+    files = c("Witec_TrueMatch.txt"),
+    exdir = tmpdir
+  )
 
   on.exit(unlink(tmpdir))
 
@@ -128,13 +134,13 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
     expect_equal(dim(spc), c(nrow = 2L, ncol = length(colnames(spc)), nwl = 1024L))
     expect_equal(spc$filename, rep(paste0(tmpdir, "/Witec_TrueMatch.txt"), 2))
 
-    expect_equivalent(spc [[,, 610]], c(902, 732))
+    expect_equivalent(spc[[, , 610]], c(902, 732))
   })
 
   test_that("multiple spectra with varying wavelengths return error", {
     spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
-    expect_equivalent(length(spc@data[1, c("spc")]),length(spc@data[2, c("spc")]))
+    expect_equivalent(length(spc@data[1, c("spc")]), length(spc@data[2, c("spc")]))
   })
 
   test_that("spectra are in correct positions", {
@@ -183,15 +189,15 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
 
     A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
     A <- A[A != ""]
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header="all")
+    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header = "all")
     expect_equal(sort(colnames(spc)), sort(c("filename", "spc", A)))
 
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header="none")
+    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header = "none")
     expect_equivalent(sort(colnames(spc)), c("filename", "spc"))
 
     A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
     A <- A[A != ""]
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header=c("Length"))
+    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header = c("Length"))
     expect_equivalent(sort(colnames(spc)), sort(c("filename", "spc", A[which(A == "Length")])))
   })
 

@@ -1,4 +1,4 @@
-#' Reads Shimadzu GCxGC-qMS - Spectra Files (`.txt`).
+#' Reads Shimadzu GCxGC-qMS - Spectra Files (`.txt`)
 #'
 #' Reads Shimadzu GCxGC-qMS - Spectra Files (`.txt`) as exported by Shimadzu Chrome Solution (v. 2.72).
 #' Mass Spectrometer: Shimadzu GCMS-QP 2010 Ultra (www.shimadzu.com)
@@ -182,7 +182,7 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
     if (tmpMat[i, 1] != "NULL") tmp <- c(tmp, rep(x = i, times = tmpMat[i, 1]))
   }
   m3 <- cbind(header = tmp, m3)
-  m3 <- m3 [, c(
+  m3 <- m3[, c(
     "header", "Spectrum.", "Hit..", "SI", "CAS..", "Name", "Mol.Weight", "Mol.Form",
     "Retention.Index"
   )] # select most important columns

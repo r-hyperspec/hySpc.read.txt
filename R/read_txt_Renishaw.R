@@ -1,4 +1,4 @@
-#' Import Raman measurements from Renishaw ASCII-files.
+#' Import Raman measurements from Renishaw ASCII-files
 #'
 #' Import Raman measurements from Renishaw (possibly compressed) `.txt` file.
 #'
@@ -87,7 +87,7 @@ read_txt_Renishaw <- function(file = stop("file is required"),
   ## wavelength axis
   wl <- rep(TRUE, nrow(fbuf))
   for (i in seq_len(ncol(fbuf) - 2)) {
-    wl [wl] <- fbuf [wl, i] == fbuf [1, i]
+    wl[wl] <- fbuf[wl, i] == fbuf[1, i]
   }
 
   wl <- fbuf[wl, ncol - 1]
@@ -117,12 +117,12 @@ read_txt_Renishaw <- function(file = stop("file is required"),
 
   while (length(fbuf > 0)) {
     if (nlines > 0) cat(".")
-    spc [pos.spc + seq_len(nrow(fbuf))] <- fbuf [, ncol]
+    spc[pos.spc + seq_len(nrow(fbuf))] <- fbuf[, ncol]
     pos.spc <- pos.spc + nrow(fbuf)
 
-    tmp <- fbuf [fbuf[, ncol - 1] == wl [1], seq_len(ncol - 2), drop = FALSE]
+    tmp <- fbuf[fbuf[, ncol - 1] == wl[1], seq_len(ncol - 2), drop = FALSE]
 
-    data [pos.data + seq_len(nrow(tmp)), ] <- tmp
+    data[pos.data + seq_len(nrow(tmp)), ] <- tmp
     pos.data <- pos.data + nrow(tmp)
 
     fbuf <- matrix(scan(file, quiet = TRUE, nlines = nlines),
@@ -222,6 +222,7 @@ hySpc.testthat::test(read_zip_Renishaw) <- function() {
 
     expect_equal(
       dim(read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")),
-      c(nrow = 875L, ncol = 4L, nwl = 1272L))
+      c(nrow = 875L, ncol = 4L, nwl = 1272L)
+    )
   })
 }
