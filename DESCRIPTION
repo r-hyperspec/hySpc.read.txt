@@ -54,7 +54,6 @@ Collate:
     'read_asc_PerkinElmer.R'
     'read_dat_Witec.R'
     'read_ini.R'
-    'read_mat_Witec.R'
     'read_txt_Graph_Witec.R'
     'read_txt_Horiba.R'
     'read_txt_Renishaw.R'
