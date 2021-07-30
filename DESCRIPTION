@@ -10,8 +10,7 @@ Authors@R: c(
     person("Marcel",    "Dahms",    role = c("aut")),
     person("Bjoern",    "Egert",    role = c("aut"))
   )
-Description: File import filters for a number of file formats produced by Witec instruments.
-    The imported data are returned as hyperSpec objects.
+Description: File import functions for spectra in various ASCII/text file formats.
 License: MIT + file LICENSE
 URL:
     https://r-hyperspec.github.io/hySpc.read.txt/,
