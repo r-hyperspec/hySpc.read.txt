@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Import Horiba Labspec exported ASCII files — read_txt_Horiba • hySpc.read.txt</title>
+<title>Read Horiba Labspec files (ASCII/txt) — read_txt_Horiba • hySpc.read.txt</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Import Horiba Labspec exported ASCII files — read_txt_Horiba" />
-<meta property="og:description" content="Read ASCII (.txt) files exported by Horiba's Labspec software (LabRAM spectrometers)" />
+<meta property="og:title" content="Read Horiba Labspec files (ASCII/txt) — read_txt_Horiba" />
+<meta property="og:description" content="Read ASCII (.txt) files exported by Horiba's Labspec software
+(LabRAM spectrometers)." />
 
 
 
@@ -133,13 +134,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Import Horiba Labspec exported ASCII files</h1>
+    <h1>Read Horiba Labspec files (ASCII/txt)</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_txt_Horiba.R'><code>R/read_txt_Horiba.R</code></a></small>
     <div class="hidden name"><code>read_txt_Horiba.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Read ASCII (<code>.txt</code>) files exported by Horiba's Labspec software (LabRAM spectrometers)</p>
+    <p>Read ASCII (<code>.txt</code>) files exported by Horiba's Labspec software
+(LabRAM spectrometers).</p>
     </div>
 
     <pre class="usage"><span class='fu'>read_txt_Horiba</span><span class='op'>(</span>
@@ -168,7 +170,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>connection (file name and path) to the <code>.txt</code> file</p></td>
+      <td><p>Path of connection to <code>.txt</code> file.</p></td>
     </tr>
     <tr>
       <th>cols, header, sep, row.names, check.names, ...</th>
@@ -179,10 +181,18 @@ handed over to <code><a href='https://r-hyperspec.github.io/hyperSpec/reference/
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>hyperSpec object</p>
+    <p><code>hyperSpec</code> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>read_txt_Horiba_xy</code> reads maps, i.e. <code>.txt</code> files where the first two columns give x and y coordinates.</p>
+    
+<ul>
+<li><p><code>read_txt_Horiba()</code></p></li>
+<li><p><code>read_txt_Horiba_xy()</code> reads maps, i.e. <code>.txt</code> files where the first two
+columns give x and y coordinates.</p></li>
+<li><p><code>read_txt_Horiba_t()</code> reads time series, i.e. <code>.txt</code> files with the time
+in the first column.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>C. Beleites</p>

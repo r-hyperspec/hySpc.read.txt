@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Import Raman measurements from Renishaw ASCII-files — read_txt_Renishaw • hySpc.read.txt</title>
+<title>Import Renishaw files (ASCII/txt) — read_txt_Renishaw • hySpc.read.txt</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Import Raman measurements from Renishaw ASCII-files — read_txt_Renishaw" />
+<meta property="og:title" content="Import Renishaw files (ASCII/txt) — read_txt_Renishaw" />
 <meta property="og:description" content="Import Raman measurements from Renishaw (possibly compressed) .txt file." />
 
 
@@ -133,7 +133,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Import Raman measurements from Renishaw ASCII-files</h1>
+    <h1>Import Renishaw files (ASCII/txt)</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_txt_Renishaw.R'><code>R/read_txt_Renishaw.R</code></a></small>
     <div class="hidden name"><code>read_txt_Renishaw.Rd</code></div>
     </div>
@@ -164,8 +164,8 @@
     </tr>
     <tr>
       <th>data</th>
-      <td><p>type of file, one of "spc", "xyspc", "zspc", "depth", "ts", see
-details.</p></td>
+      <td><p>type of file, one of "spc", "xyspc", "zspc", "depth", "ts",
+see  details.</p></td>
     </tr>
     <tr>
       <th>nlines</th>
@@ -182,7 +182,7 @@ values start at <code>1e6</code>.</p></td>
     <tr>
       <th>txt.file</th>
       <td><p>name of the .txt file in the .zip archive. Defaults to zip
-file's name with suffix .txt instead of .zip</p></td>
+file's name with extension .txt instead of .zip.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -192,12 +192,12 @@ file's name with suffix .txt instead of .zip</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the <code>hyperSpec</code> object</p>
+    <p><code>hyperSpec</code> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The file may be of any file type that can be read by
 <code><a href='https://rdrr.io/r/base/connections.html'>base::gzfile()</a></code> (i.e. text, or zipped by gzip, bzip2, xz or
-lzma). .zip zipped files need to be read using <code>read_zip_Renishaw</code>.</p>
+lzma). .zip zipped files need to be read using <code>read_zip_Renishaw()</code>.</p>
 <p>Renishaw .wxd files are converted to .txt ASCII files by their batch
 converter. They come in a "long" format with columns (y x | time | z)?
 wavelength intensity.  The first columns depend on the data type.</p>
@@ -212,7 +212,7 @@ wavelength intensity.  The first columns depend on the data type.</p>
 
 <p>This function allows reading very large ASCII files, but it does not work
 on files with missing values (<code>NA</code>s are allowed).</p>
-<p>If the file is so large that it sould be read in chunks and <code>nspc</code> is
+<p>If the file is so large that it should be read in chunks and <code>nspc</code> is
 not given, <code>read_txt_Renishaw</code> tries to guess it by using <code><a href='count_lines.html'>count_lines()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

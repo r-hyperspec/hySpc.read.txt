@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>File import filter PerkinElmer ASCII spectra. — read_asc_PerkinElmer • hySpc.read.txt</title>
+<title>Read single spectrum form PerkinElmer file (ASCII/txt) — read_asc_PerkinElmer • hySpc.read.txt</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,10 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="File import filter PerkinElmer ASCII spectra. — read_asc_PerkinElmer" />
-<meta property="og:description" content="Imports a single spectrum in PerkinElmer's ASCII format. This function is experimental." />
+<meta property="og:title" content="Read single spectrum form PerkinElmer file (ASCII/txt) — read_asc_PerkinElmer" />
+<meta property="og:description" content="EXPERIMENTAL FUNCTION.
+Import a single spectrum from a file in PerkinElmer's ASCII format.
+This function is experimental." />
 
 
 
@@ -133,13 +135,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>File import filter PerkinElmer ASCII spectra.</h1>
+    <h1>Read single spectrum form PerkinElmer file (ASCII/txt)</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_asc_PerkinElmer.R'><code>R/read_asc_PerkinElmer.R</code></a></small>
     <div class="hidden name"><code>read_asc_PerkinElmer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Imports a single spectrum in PerkinElmer's ASCII format. This function is experimental.</p>
+    <p><strong>EXPERIMENTAL FUNCTION.</strong><br />
+Import a single spectrum from a file in PerkinElmer's ASCII format.
+This function is experimental.</p>
     </div>
 
     <pre class="usage"><span class='fu'>read_asc_PerkinElmer</span><span class='op'>(</span>file <span class='op'>=</span> <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"filename or connection needed"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -149,17 +153,17 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>filename (or connection)</p></td>
+      <td><p>Path  or connection to file.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>further parameters are handed to <code><a href='https://r-hyperspec.github.io/hyperSpec/reference/read_txt.html'>hyperSpec::read_txt_long()</a></code></p></td>
+      <td><p>Further argument handed to <code><a href='https://r-hyperspec.github.io/hyperSpec/reference/read_txt.html'>hyperSpec::read_txt_long()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>hyperSpec object</p>
+    <p><code>hyperSpec</code> object.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -42,7 +42,7 @@
   
 
 <meta property="og:title" content="Read INI files — read_ini" />
-<meta property="og:description" content="read_ini reads ini files of the form
+<meta property="og:description" content="read_ini() reads ini files of the form
 
 [section]
 key = value
@@ -144,7 +144,7 @@ into a list." />
     </div>
 
     <div class="ref-description">
-    <p><code>read_ini</code> reads ini files of the form
+    <p><code>read_ini()</code> reads ini files of the form
 <br /><br />
 <code>[section]</code><br />
 <code>key = value</code>
@@ -163,26 +163,26 @@ into a list.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>con</th>
-      <td><p>connection or file name</p></td>
+      <td><p>connection or file name.</p></td>
     </tr>
     <tr>
       <th>skip</th>
-      <td><p>number of lines to skip before first <code>[section]</code> starts</p></td>
+      <td><p>number of lines to skip before first <code>[section]</code> starts.</p></td>
     </tr>
     <tr>
       <th>encoding</th>
-      <td><p>see <code><a href='https://rdrr.io/r/base/readLines.html'>base::readLines()</a></code></p></td>
+      <td><p>see <code><a href='https://rdrr.io/r/base/readLines.html'>base::readLines()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a list with one element per section in the .ini file, each containing a list with elements
-for the key-value-pairs.</p>
+    <p>A list with one element per section in the .ini file, each
+containing a list with elements for the key-value-pairs.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>read_ini</code> sanitizes the element names and tries to convert scalars and comma separated
-numeric vectors to numeric.</p>
+    <p><code>read_ini()</code> sanitizes the element names and tries to convert scalars and
+comma separated numeric vectors to numeric.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>C. Beleites</p>
