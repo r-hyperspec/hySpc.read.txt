@@ -1,7 +1,7 @@
 
 # Function -------------------------------------------------------------------
 
-#' Import spectra from WITec Raman ASCII files
+#' Read WITec files (ASCII/txt)
 #'
 #' Import Raman spectra/maps from WITec Instrument via ASCII files
 #'
