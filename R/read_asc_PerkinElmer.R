@@ -1,22 +1,30 @@
-#' File import filter PerkinElmer ASCII spectra.
+# Function -------------------------------------------------------------------
+
+#' Read single spectrum form PerkinElmer file (ASCII/txt)
 #'
-#' Imports a single spectrum in PerkinElmer's ASCII format. This function is experimental.
+#' **EXPERIMENTAL FUNCTION.**\cr
+#' Import a single spectrum from a file in PerkinElmer's ASCII format.
+#' This function is experimental.
 #'
-#' @param file filename (or connection)
-#' @param ... further parameters are handed to [hyperSpec::read_txt_long()]
+#' @param file Path  or connection to file.
+#' @param ... Further argument handed to [hyperSpec::read_txt_long()].
 #'
-#' @return hyperSpec object
-#' @importFrom utils packageDescription
-#' @export
+#' @return `hyperSpec` object.
 #'
 #' @concept io
 #'
-read_asc_PerkinElmer <- function(file = stop("filename or connection needed"), ...) {
+#' @importFrom utils packageDescription
+#' @export
+#'
+read_asc_PerkinElmer <- function(file = stop("filename or connection needed"),
+                                 ...) {
   content <- readLines(con = file)
 
   message(
-    "read_asc_PerkinElmer is experimental, hyperSpec so far has no test data for PE .asc files.",
-    " Please consider submitting your spectrum in an enhancement request to ", packageDescription("hyperSpec")$BugReports,
+    "read_asc_PerkinElmer() is experimental, ",
+    "'hyperSpec' so far has no test data for PE .asc files. ",
+    "Please consider submitting your spectrum in an enhancement request to ",
+    packageDescription("hyperSpec")$BugReports,
     " in order to help the development of hyperSpec."
   )
 
@@ -25,8 +33,9 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"), .
 
   if (length(startDATA) != 1L) {
     stop(
-      "read_asc_PerkinElmer so far can deal with single spectra files only.",
-      " Please file an enhancement request at", packageDescription("hyperSpec")$BugReports,
+      "read_asc_PerkinElmer() so far can deal with single spectra files only.",
+      " Please file an enhancement request at",
+      packageDescription("hyperSpec")$BugReports,
       " with your file as an example or contact the maintainer (",
       maintainer("hyperSpec"), ")."
     )
@@ -35,9 +44,19 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"), .
   ## Spectra values are stored
   content <- content[-seq_len(startDATA)]
 
-  spc <- hyperSpec::read_txt_long(textConnection(content), header = FALSE, sep = "\t", ...)
+  spc <- hyperSpec::read_txt_long(
+    textConnection(content),
+    header = FALSE,
+    sep = "\t",
+    ...
+  )
   spc$filename <- NULL # not meaningful due to textConnection use
 
   ## consistent file import behaviour across import functions
   .spc_io_postprocess_optional(spc, file)
 }
+
+
+# Unit tests -----------------------------------------------------------------
+
+# FIXME: add unit tests, if possible.
