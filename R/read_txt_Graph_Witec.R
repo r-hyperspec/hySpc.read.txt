@@ -1,5 +1,8 @@
 #' @rdname read_txt_Witec
-#' @param headerfile filename or connection to ASCII file with header information
+#'
+#' @param headerfile Path or connection to ASCII file with header information.
+#'
+#' @importFrom methods new
 #' @export
 read_txt_Witec_Graph <- function(headerfile = stop("filename or connection needed"),
                                  filex = gsub("Header", "X-Axis", headerfile),
