@@ -1,19 +1,30 @@
-#' Reads Shimadzu GCxGC-qMS - Spectra Files (`.txt`)
+
+# Function -------------------------------------------------------------------
+
+#' Read Shimadzu GCxGC-qMS spectra files (ASCII/txt)
 #'
-#' Reads Shimadzu GCxGC-qMS - Spectra Files (`.txt`) as exported by Shimadzu Chrome Solution (v. 2.72).
+#' **EXPERIMENTAL FUNCTION**\cr
+#' Read Shimadzu GCxGC-qMS spectra files (`.txt`) as exported by
+#' Shimadzu Chrome Solution (v. 2.72).
 #' Mass Spectrometer: Shimadzu GCMS-QP 2010 Ultra (www.shimadzu.com)
 #'
-#' @note This is a first rough import function and the functions may change without notice.
-#' @param filename file name and path of the `.txt` file
-#' @param encoding encoding of the txt file (used by [base::readLines()])
-#' @param quiet suppress printing of progress
+#' @note This is a first rough import function and the functions may change
+#'       without notice.
+#'
+#' @param filename file name and path of the `.txt` file.
+#' @param encoding encoding of the text file (used by [base::readLines()]).
+#' @param quiet suppress printing of progress.
+#'
 #' @return list of spectra tables
+#'
 #' @author Bjoern Egert
 #'
 #' @concept io
 #'
-#' @export
 #' @importFrom utils read.table
+#'
+#' @export
+#'
 read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
 
   # A file consists of several sections ([Headers])
@@ -208,3 +219,8 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
 
   return(list(peakInfo = m2, peakAnnotate = m3, peakMasses = m4))
 }
+
+
+# Unit tests -----------------------------------------------------------------
+
+# FIXME: add unit tests
