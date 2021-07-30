@@ -1,10 +1,13 @@
-#' Import Witec ASCII/txt files exported by Witec TrueMatch
+# Function -------------------------------------------------------------------
+
+#' Read WITec TrueMatch files (ASCII/txt)
 #'
-#' \code{read_txt_Witec_TrueMatch()} reads Witec ASCII files exported by Witec
+#' Import spectra from Witec ASCII/txt files exported by Witec TrueMatch
+#'
+#' [read_txt_Witec_TrueMatch()] reads Witec ASCII files exported by Witec
 #' TrueMatch. These files are ini-like: ASCII files with meta data sections and
 #' spectra data sections.
 #'
-#' @title File Import Witec TrueMatch
 #' @param file filename or connection to ASCII TrueMatch file
 #' @param keys_2header all meta data will be perserved if `key_2header="all"` (default); only `spc`
 #' filename will be perserved if `key_2header="none"`; only specified header information will be saved otherwise
@@ -12,7 +15,7 @@
 #' @return a hyperSpec object
 #' @author Claudia Beleites and Erick Oduniyi
 #' @importFrom hySpc.testthat test<-
-#' @seealso \code{vignette("fileio")} for more information on file import
+#' @seealso `vignette("fileio")` for more information on file import
 #' @export
 read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
@@ -117,6 +120,9 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   }
 }
 
+
+# Unit tests -----------------------------------------------------------------
+
 hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   context("read_txt_Witec_TrueMatch")
 
@@ -128,7 +134,7 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
 
   on.exit(unlink(tmpdir))
 
-  test_that("Witec TrueMatch example file", {
+  test_that("WITec TrueMatch example file", {
     spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
     expect_equal(dim(spc), c(nrow = 2L, ncol = length(colnames(spc)), nwl = 1024L))
