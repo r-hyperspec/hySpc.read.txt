@@ -1,17 +1,25 @@
-#' Import Raman spectra/maps from Andor Cameras/Solis ASCII files
+# Function -------------------------------------------------------------------
+
+#' Import Andor Cameras/Solis files (ASCII/txt)
+#'
+#' Import Raman spectra/maps from Andor Cameras/Solis ASCII files.
 #'
 #' `read_asc_Andor()` reads Andor Solis ASCII (`.asc`) files where the first
 #' column gives the wavelength  axes and the other columns the spectra.
 #'
-#' @param file filename or connection to ASCII file
-#' @param ...,quiet,dec,sep handed to [base::scan()]
-#' @return a hyperSpec object
+#' @param file filename or connection to ASCII file.
+#' @param ...,quiet,dec,sep handed to [base::scan()].
+#'
+#' @return `hyperSpec` object
+#'
 #' @author Claudia Beleites
+#'
 #' @seealso `vignette ("fileio")` for more information on file import and
 #'
 #' @concept io
 #'
 #' @export
+#'
 read_asc_Andor <- function(file = stop("filename or connection needed"),
                            ..., quiet = TRUE, dec = ".", sep = ",") {
 
@@ -36,10 +44,16 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
   .spc_io_postprocess_optional(spc, file)
 }
 
+
+# Unit tests -----------------------------------------------------------------
+
 hySpc.testthat::test(read_asc_Andor) <- function() {
   context("read_asc_Andor")
   test_that("Andor Solis .asc text files", {
     skip("Need to adapt to new package")
-    expect_known_hash(read_asc_Andor("fileio/asc.Andor/ASCII-Andor-Solis.asc"), "9ead937f51")
+    expect_known_hash(
+      read_asc_Andor("fileio/asc.Andor/ASCII-Andor-Solis.asc"),
+      "9ead937f51"
+    )
   })
 }
