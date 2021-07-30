@@ -46,7 +46,6 @@ RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate:
     'hySpc.read.txt-package.R'
-    '0temp_fileio_optional.R'
     'count_lines.R'
     'helpers.R'
     'read_txt_Witec.R'
