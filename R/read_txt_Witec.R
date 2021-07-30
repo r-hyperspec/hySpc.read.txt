@@ -1,25 +1,40 @@
-#' Import Raman Spectra/Maps from Witec Instrument via ASCII files
+
+# Function -------------------------------------------------------------------
+
+#' Import spectra from WITec Raman ASCII files
 #'
-#' \code{read_txt_Witec} reads Witec ASCII files where the first column gives the wavelength
-#' axes and the other columns the spectra. \code{read_dat_Witec} reads Witec's ASCII exported data
-#' which comes in separate files with x and y data.
+#' Import Raman spectra/maps from WITec Instrument via ASCII files
 #'
-#' @title File Import Witec Raman
-#' @param file filename or connection to ASCII file
-#' @param points.per.line number of spectra in x direction of the map
-#' @param lines.per.image number of spectra in y direction
-#' @param type type of spectra: \code{single} for single spectra (including time series), \code{map} for imaging data.
-#' @param hdr.label WITec Project exports the spectra names (contain information of map position or number of spectra) within the \code{file}.
-#' @param hdr.units WITec Project exports the spectra units within the \code{file}.
-#' @param encoding character encoding, see \code{\link[base]{readLines}}
-#' @param ...,quiet handed to \code{\link[base]{scan}}
-#' @return a hyperSpec object
+#' - [read_txt_Witec()] reads WITec ASCII files where the first column gives
+#'   the wavelength axes and the other columns the spectra.
+#'
+#' - [read_dat_Witec()] reads WITec's ASCII exported data which comes in
+#'   separate files with x and y data.
+#'
+#' @param file Path or connection to ASCII file.
+#' @param points.per.line Number of spectra in x direction of the map.
+#' @param lines.per.image Number of spectra in y direction.
+#' @param type Type of spectra:
+#' - `single` for single spectra (including time series);
+#' - `map` for imaging data.
+#' @param hdr.label WITec Project exports the spectra names (contain information
+#'        of map position or number of spectra) within the `file`.
+#' @param hdr.units WITec Project exports the spectra units within the `file`.
+#' @param encoding character encoding, see [base::readLines()].
+#' @param ...,quiet handed to [base::scan()].
+#'
+#' @return `hyperSpec` object.
+#'
 #' @author Claudia Beleites and Marcel Dahms
-#' @importFrom hySpc.testthat test<-
-#' @importFrom utils head
+#'
 #' @seealso \code{vignette ("fileio")} for more information on file import and
 #' \code{\link{options}} for details on options.
+#'
+#' @importFrom hySpc.testthat test<-
+#' @importFrom utils head
+#'
 #' @export
+#'
 read_txt_Witec <- function(file = stop("filename or connection needed"),
                            points.per.line = NULL,
                            lines.per.image = NULL,
@@ -36,7 +51,8 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
   ## check for valid input
   type <- check_valid(type, hdr = NULL, points.per.line, lines.per.image)
 
-  ## manage possible header lines by export function 'Table' in WITec Control/Project (version 4)
+  ## manage possible header lines by export function 'Table' in
+  ## WITec Control/Project (version 4)
   skip <- hdr.label + hdr.units
 
   ## read spectra
@@ -48,7 +64,7 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
 
   hdr <- head(tmp, skip)
 
-  ## fix: Witec/Andor may have final comma without values
+  ## fix: WITec/Andor may have final comma without values
   if (all(is.na(txt[nrow(txt), ]))) {
     txt <- txt[-nrow(txt), ]
   }
@@ -69,6 +85,9 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
   .spc_io_postprocess_optional(spc, file)
 }
 
+
+# Unit tests -----------------------------------------------------------------
+
 hySpc.testthat::test(read_txt_Witec) <- function() {
   context("read_txt_Witec")
 
@@ -77,7 +96,8 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
     files = c(
       "image2x3_Table.Data 1_F.txt", "timeseries3x_Table.Data 1.txt",
       "Witec-Map_label.txt", "Witec-Map_unit.txt", "Witec-Map_full.txt",
-      "Witec-timeseries_label.txt", "Witec-timeseries_unit.txt", "Witec-timeseries_full.txt"
+      "Witec-timeseries_label.txt", "Witec-timeseries_unit.txt",
+      "Witec-timeseries_full.txt"
     ),
     exdir = tmpdir
   )
@@ -183,13 +203,18 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("Time series with label line but no units header", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_label.txt"), hdr.units = FALSE, hdr.label = TRUE)
+    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_label.txt"),
+      hdr.units = FALSE, hdr.label = TRUE
+    )
     spc$filename <- gsub("^.*/", "", spc$filename)
     expect_known_hash(spc, "d102a0b244")
   })
 
   test_that("Time series with units header line but no labels", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_unit.txt"), hdr.units = TRUE, hdr.label = FALSE)
+    spc <- read_txt_Witec(
+      paste0(tmpdir, "/Witec-timeseries_unit.txt"),
+      hdr.units = TRUE, hdr.label = FALSE
+    )
 
     spc$filename <- gsub("^.*/", "", spc$filename)
     expect_known_hash(spc, "375a63ae31")
