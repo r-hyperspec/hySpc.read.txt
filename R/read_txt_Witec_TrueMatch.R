@@ -12,7 +12,7 @@
 #' @return a hyperSpec object
 #' @author Claudia Beleites and Erick Oduniyi
 #' @importFrom hySpc.testthat test<-
-#' @seealso \code{vignette ("fileio")} for more information on file import
+#' @seealso \code{vignette("fileio")} for more information on file import
 #' @export
 read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
