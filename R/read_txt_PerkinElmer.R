@@ -8,6 +8,7 @@
 #'
 #' @return `hyperSpec` object.
 #'
+#' @importFrom utils modifyList
 #' @export
 #'
 read_txt_PerkinElmer <- function(files = stop("filenames needed"),
