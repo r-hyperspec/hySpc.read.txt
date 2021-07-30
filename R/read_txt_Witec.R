@@ -27,8 +27,8 @@
 #'
 #' @author Claudia Beleites and Marcel Dahms
 #'
-#' @seealso \code{vignette ("fileio")} for more information on file import and
-#' \code{\link{options}} for details on options.
+#' @seealso `vignette("fileio")` for more information on file import and
+#' [options()] for details on options.
 #'
 #' @importFrom hySpc.testthat test<-
 #' @importFrom utils head
