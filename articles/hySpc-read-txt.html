@@ -953,9 +953,24 @@ wavelength axis as the others.</li>
 <li>Finally, package <strong>hyperSpec</strong> does some optional common post-processing for all imported files such as attaching the filename (or connection description) to the <code class="sourceCode r">hyperSpec</code> object (column <code class="sourceCode r">filename</code>) and deleting empty spectra.
 These options can be globally switched on or off by options.</li>
 </ul>
-<!-- \VerbatimInput[frame=single, label={read_txt_PerkinElmer.R}, formatcom=\footnotesize]{read_txt_PerkinElmer.R} --><pre><code># The contents of "read.txt.PerkinElmer.R"
+<!-- \VerbatimInput[frame=single, label={read_txt_PerkinElmer.R}, formatcom=\footnotesize]{read_txt_PerkinElmer.R} --><pre><code>@@ -0,0 +1,67 @@
+# Function -------------------------------------------------------------------
 
-read.txt.PerkinElmer &lt;- function(files = stop("filenames needed"), ..., label = list()) {
+#' Read PerkinElmer file (ASCII/txt)
+#'
+#' @param files Path to file.
+#' @param ... Passed to [base::scan()].
+#' @param label Labels.
+#'
+#' @return `hyperSpec` object.
+#'
+#' @export
+#'
+read_txt_PerkinElmer &lt;- function(files = stop("filenames needed"),
+                                 ...,
+                                 label = list()) {
+
+
   ##  set default labels
   label &lt;- modifyList(
     list(
@@ -998,9 +1013,14 @@ read.txt.PerkinElmer &lt;- function(files = stop("filenames needed"), ..., label
   ## make the hyperSpec object
   spc &lt;- new("hyperSpec", wavelength = wavelength, spc = spc, label = label)
 
-  ## consistent file import behaviour across import functions
-  hyperSpec::.spc_io_postprocess_optional(spc, files)
-}</code></pre>
+  ## consistent file import behavior across import functions
+  .spc_io_postprocess_optional(spc, files)
+}
+
+
+# Unit tests -----------------------------------------------------------------
+
+# FIXME: add unit tests</code></pre>
 <p>imports the spectra.
 Note how the labels are set.
 The label with the special name <code class="sourceCode r">.wavelength</code> corresponds to the wavelength axis, all data columns should have a label with the same name.
