@@ -1,10 +1,12 @@
-#' Import Raman measurements from Renishaw ASCII-files
+# Function -------------------------------------------------------------------
+
+#' Import Renishaw files (ASCII/txt)
 #'
 #' Import Raman measurements from Renishaw (possibly compressed) `.txt` file.
 #'
 #' The file may be of any file type that can be read by
 #' [base::gzfile()] (i.e. text, or zipped by gzip, bzip2, xz or
-#' lzma). .zip zipped files need to be read using `read_zip_Renishaw`.
+#' lzma). .zip zipped files need to be read using `read_zip_Renishaw()`.
 #'
 #' Renishaw .wxd files are converted to .txt ASCII files by their batch
 #' converter. They come in a "long" format with columns (y x | time | z)?
@@ -19,24 +21,28 @@
 #' This function allows reading very large ASCII files, but it does not work
 #' on files with missing values (`NA`s are allowed).
 #'
-#' If the file is so large that it sould be read in chunks and `nspc` is
+#' If the file is so large that it should be read in chunks and `nspc` is
 #' not given, `read_txt_Renishaw` tries to guess it by using [count_lines()].
 #'
 #' @aliases read_txt_Renishaw read_zip_Renishaw
+#'
 #' @param file file name or connection
-#' @param data type of file, one of "spc", "xyspc", "zspc", "depth", "ts", see
-#'   details.
+#' @param data type of file, one of "spc", "xyspc", "zspc", "depth", "ts",
+#'        see  details.
 #' @param nlines number of lines to read in each chunk, if 0 or less read
-#'   whole file at once.
+#'        whole file at once.
 #'
 #' `nlines` must cover at least one complete spectrum,i.e. `nlines`
 #'   must be at least the number of data points per spectrum. Reasonable
 #'   values start at `1e6`.
 #' @param nspc number of spectra in the file
 #' @param ... Arguments for `read_txt_Renishaw`
-#' @return the `hyperSpec` object
-#' @export
+#'
+#' @return  `hyperSpec` object.
+#'
+#'
 #' @author C. Beleites
+#'
 #' @seealso [hyperSpec::read_txt_long()], [hyperSpec::read_txt_wide()],
 #'   [base::scan()]
 #'
@@ -44,6 +50,8 @@
 #' @concept io
 #'
 #' @importFrom utils head
+#' @export
+
 read_txt_Renishaw <- function(file = stop("file is required"),
                               data = "xyspc", nlines = 0, nspc = NULL) {
   cols <- switch(data,
@@ -151,6 +159,9 @@ read_txt_Renishaw <- function(file = stop("file is required"),
   .spc_io_postprocess_optional(spc, file)
 }
 
+
+# Unit tests -----------------------------------------------------------------
+
 hySpc.testthat::test(read_txt_Renishaw) <- function() {
   context("read_txt_Renishaw")
 
@@ -202,17 +213,24 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   })
 }
 
-#' @export
-#' @param txt.file name of the .txt file in the .zip archive. Defaults to zip
-#'   file's name with suffix .txt instead of .zip
+
+# Function -------------------------------------------------------------------
+
 #' @rdname read_txt_Renishaw
+#'
+#' @param txt.file name of the .txt file in the .zip archive. Defaults to zip
+#'   file's name with extension .txt instead of .zip.
 #'
 #' @concept io
 #'
+#' @export
 read_zip_Renishaw <- function(file = stop("filename is required"),
                               txt.file = sub("[.]zip", ".txt", basename(file)), ...) {
   read_txt_Renishaw(file = unz(file, filename = txt.file, "r"), ...)
 }
+
+
+# Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_zip_Renishaw) <- function() {
   context("read_zip_Renishaw")
