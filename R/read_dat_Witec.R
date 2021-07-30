@@ -1,3 +1,4 @@
+# Function -------------------------------------------------------------------
 
 #' @rdname read_txt_Witec
 #' @param filex filename wavelength axis file
@@ -36,6 +37,9 @@ read_dat_Witec <- function(filex = stop("filename or connection needed"),
   ## consistent file import behaviour across import functions
   .spc_io_postprocess_optional(spc, filey)
 }
+
+
+# Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_dat_Witec) <- function() {
   context("read_dat_Witec")
