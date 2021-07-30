@@ -43,3 +43,4 @@ README.html
 # Other/Broad
 *.html
 _tmp/
+.Rproj.user
