@@ -50,17 +50,32 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
 hySpc.testthat::test(read_asc_Andor) <- function() {
   context("read_asc_Andor")
 
-  tmpdir <- paste0(tempdir(), "/test_Ancor")
-  untar("testfiles_Ancor.tar.gz",
-        files = c("ASCII-Andor-Solis.asc"),
-        exdir = tmpdir)
-  on.exit(unlink(tmpdir))
+  andor <- system.file("extdata/fileio/asc.Andor/", "ASCII-Andor-Solis.asc",package = "hySpc.read.txt")
+  spc <- read_asc_Andor(andor)
 
+  test_that("Andor Solis .asc filename",{
+    expect_equal(spc@label$.wavelength, NULL)
+    expect_equal(spc@label$spc, NULL)
+    expect_equal(spc@label$filename, "filename")
+  })
 
-  test_that("Andor Solis .asc text files", {
-    expect_known_hash(
-      read_asc_Andor(paste0(tmpdir, "/ASCII-Andor-Solis.asc")),
-      "9ead937f51"
-    )
+  test_that("Andor Solis .asc spectra", {
+    expect_equal(dim(spc@data$spc), c(5,63))
+
+    expect_equal(colnames(spc@data$spc),
+                 c("161.408","165.729","170.046","174.361","178.672","182.981","187.285","191.588","195.887",
+                   "200.184","204.477","208.767","213.054","217.339","221.62", "225.898","230.173","234.445",
+                   "238.714","242.981","247.244","251.505","255.762","260.016","264.268","268.516","272.762",
+                   "277.004","281.244","285.48", "289.714","293.945","298.172","302.397","306.619","310.838",
+                   "315.054","319.267","323.477","327.685","331.889","336.091","340.289","344.484","348.677",
+                   "352.867","357.054","361.238","365.419","369.596","373.772","377.945","382.114","386.281",
+                   "390.444","394.605","398.763","402.919","407.071","411.22", "415.366","419.51", "423.651"))
+  })
+
+  test_that("Andor Solis .asc wavelength", {
+    expect_equal(length(spc@wavelength), 63)
+
+    expect_equal(round(spc@wavelength[[47]], 3), 357.054)
+    expect_equal(round(spc@wavelength[[23]], 3), 255.762)
   })
 }
