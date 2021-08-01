@@ -233,12 +233,11 @@ read_zip_Renishaw <- function(file = stop("filename is required"),
 
 hySpc.testthat::test(read_zip_Renishaw) <- function() {
   context("read_zip_Renishaw")
-
+  path <- system.file("extdata/fileio/txt.Renishaw", package="hySpc.read.txt")
   test_that("compressed files", {
-    skip("TODO: adapt to new package")
 
     expect_equal(
-      dim(read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")),
+      dim(read_zip_Renishaw(paste0(path, "/chondro.zip"))),
       c(nrow = 875L, ncol = 4L, nwl = 1272L)
     )
   })
