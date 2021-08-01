@@ -53,13 +53,13 @@ hySpc.testthat::test(read_asc_Andor) <- function() {
   andor <- system.file("extdata/fileio/asc.Andor/", "ASCII-Andor-Solis.asc",package = "hySpc.read.txt")
   spc <- read_asc_Andor(andor)
 
-  test_that("Andor Solis .asc filename",{
+  test_that("Andor Solis .asc labels are correct",{
     expect_equal(spc@label$.wavelength, NULL)
     expect_equal(spc@label$spc, NULL)
     expect_equal(spc@label$filename, "filename")
   })
 
-  test_that("Andor Solis .asc labels are correct", {
+  test_that("Andor Solis .asc spectral data", {
     expect_equal(dim(spc@data$spc), c(5,63))
 
     expect_equal(colnames(spc@data$spc),
