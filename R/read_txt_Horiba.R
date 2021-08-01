@@ -87,3 +87,31 @@ read_txt_Horiba_t <- function(file, header = TRUE, sep = "\t", row.names = NULL,
 # Unit tests -----------------------------------------------------------------
 
 # FIXME: add unit tests
+
+hySpc.testthat::test(read_txt_Horiba_t) <- function() {
+  context("read_txt_Horiba_t")
+
+  ts <- system.file("extdata/fileio/txt.HoribaJobinYvon/", "ts.txt",package = "hySpc.read.txt")
+  spc <- read_txt_Horiba_t(ts)
+
+  test_that("Horiba time series .txt labels are correct",{
+    expect_true(is.expression(spc@label$.wavelength))
+    expect_true(is.expression(spc@label$spc))
+    expect_equal(spc@label$filename, "filename")
+  })
+
+  test_that("Horiba time series .txt spectral data", {
+    expect_equal(dim(spc@data$spc), c(100,1024))
+
+    expect_equal(colnames(spc@data$spc)[[974]], "5.9526")
+    expect_equal(colnames(spc@data$spc)[[657]], "772.27")
+  })
+
+  test_that("Horiba time series .txt wavelength", {
+    expect_equal(length(spc@wavelength), 1024)
+
+    expect_equal(round(spc@wavelength[[79]], 3), 1986.863)
+    expect_equal(round(spc@wavelength[[1011]], 3), -88.828)
+  })
+}
+
