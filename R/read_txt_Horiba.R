@@ -115,3 +115,31 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
   })
 }
 
+hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
+  context("read_txt_Horiba_t")
+
+  map <- system.file("extdata/fileio/txt.HoribaJobinYvon/", "map.txt",package = "hySpc.read.txt")
+  spc <- read_txt_Horiba_xy(map)
+
+  test_that("Horiba map .txt labels are correct",{
+    expect_true(is.expression(spc@label$.wavelength))
+    expect_true(is.expression(spc@label$spc))
+    expect_equal(spc@label$filename, "filename")
+  })
+
+  test_that("Horiba map .txt spectral data", {
+    expect_equal(dim(spc@data$spc), c(141,616))
+
+    expect_equal(colnames(spc@data$spc)[[231]], "1340.24")
+    expect_equal(colnames(spc@data$spc)[[123]], "734.39")
+  })
+
+  test_that("Horiba map .txt wavelength", {
+    expect_equal(length(spc@wavelength), 616)
+
+    expect_equal(round(spc@wavelength[[85]], 3), 521.219)
+    expect_equal(round(spc@wavelength[[431]], 3), 2462.195)
+  })
+}
+
+
