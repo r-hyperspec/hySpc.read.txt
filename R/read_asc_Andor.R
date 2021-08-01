@@ -47,20 +47,20 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
 
 # Unit tests -----------------------------------------------------------------
 
-hySpc.testthat::test(read_asc_Andor) <- function() {
-  context("read_asc_Andor")
-
-  tmpdir <- paste0(tempdir(), "/test_Ancor")
-  untar("testfiles_Ancor.tar.gz",
-        files = c("ASCII-Andor-Solis.asc"),
-        exdir = tmpdir)
-  on.exit(unlink(tmpdir))
-
-
-  test_that("Andor Solis .asc text files", {
-    expect_known_hash(
-      read_asc_Andor(paste0(tmpdir, "/ASCII-Andor-Solis.asc")),
-      "9ead937f51"
-    )
-  })
-}
+# hySpc.testthat::test(read_asc_Andor) <- function() {
+#   context("read_asc_Andor")
+#
+#   tmpdir <- paste0(tempdir(), "/test_Ancor")
+#   untar("testfiles_Ancor.tar.gz",
+#         files = c("ASCII-Andor-Solis.asc"),
+#         exdir = tmpdir)
+#   on.exit(unlink(tmpdir))
+#
+#
+#   test_that("Andor Solis .asc text files", {
+#     expect_known_hash(
+#       read_asc_Andor(paste0(tmpdir, "/ASCII-Andor-Solis.asc")),
+#       "9ead937f51"
+#     )
+#   })
+# }
