@@ -57,7 +57,7 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
 #   on.exit(unlink(tmpdir))
 #
 #
-#   test_that("Andor Solis .asc text files", {
+#   test_that("Andor Solis .asc files are read correctly", {
 #     expect_known_hash(
 #       read_asc_Andor(paste0(tmpdir, "/ASCII-Andor-Solis.asc")),
 #       "9ead937f51"
