@@ -50,7 +50,21 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
 hySpc.testthat::test(read_asc_Andor) <- function() {
   context("read_asc_Andor")
 
-  andor <- system.file("extdata/fileio/asc.Andor/", "ASCII-Andor-Solis.asc",package = "hySpc.read.txt")
+#   tmpdir <- paste0(tempdir(), "/test_Ancor")
+#   untar("testfiles_Ancor.tar.gz",
+#         files = c("ASCII-Andor-Solis.asc"),
+#         exdir = tmpdir)
+#   on.exit(unlink(tmpdir))
+#
+#
+#   test_that("Andor Solis .asc files are read correctly", {
+#     expect_known_hash(
+#       read_asc_Andor(paste0(tmpdir, "/ASCII-Andor-Solis.asc")),
+#       "9ead937f51"
+#     )
+#   })
+
+  andor <- system.file("extdata/asc.Andor/", "ASCII-Andor-Solis.asc",package = "hySpc.read.txt")
   spc <- read_asc_Andor(andor)
 
   test_that("Andor Solis .asc labels are correct",{
