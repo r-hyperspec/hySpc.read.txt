@@ -106,7 +106,7 @@
 <br><a class="author_email" href="mailto:#"></a><a href="mailto:chemometrie@beleites.de" class="email">chemometrie@beleites.de</a>
       </address>
                   
-            <h4 class="date">2021-07-30</h4>
+            <h4 class="date">2021-08-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-hyperspec/hySpc.read.txt/blob/master/vignettes/hySpc-read-txt.Rmd"><code>vignettes/hySpc-read-txt.Rmd</code></a></small>
       <div class="hidden name"><code>hySpc-read-txt.Rmd</code></div>
@@ -115,6 +115,7 @@
 
     
     
+<pre><code>#&gt; Warning: Code evaluation in fileio.Rmd DISABLED!</code></pre>
 <hr>
 <div class="redbox">
 <p>
@@ -174,7 +175,7 @@ To run the code examples, create a folder named “fileio” in your working dir
 </p>
 </div>
 <hr>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-hyperspec.github.io/hyperSpec">hyperSpec</a></span><span class="op">)</span></code></pre></div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
@@ -203,7 +204,7 @@ In general, the naming convention is the data format followed by the manufacture
 
 </p>
 <p>To create a <code class="sourceCode r">hyperSpec</code> object from data in R’s workspace, use:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/initialize.html">new</a></span><span class="op">(</span><span class="st">"hyperSpec"</span>, <span class="va">spc</span>, <span class="va">wavelength</span>, <span class="va">data</span>, <span class="va">labels</span><span class="op">)</span></code></pre></div>
 <p>With the arguments:</p>
 <table class="table">
@@ -242,7 +243,7 @@ Secion <a href="#sec:writing-Import">8</a><!--, (p. \pageref{sec:writing-Import}
 <h2 class="hasAnchor">
 <a href="#import-spectra-matrix" class="anchor"></a><span class="header-section-number">2.1</span> Creating a <code class="sourceCode r">hyperSpec</code> Object from a Data Matrix (Spectra Matrix)</h2>
 <p>As spectra matrices are the internal format of <code class="sourceCode r">hyperSpec</code>, the constructor can directly be used:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/initialize.html">new</a></span><span class="op">(</span><span class="st">"hyperSpec"</span>, <span class="va">spc</span>, <span class="va">wavelength</span>, <span class="va">data</span>, <span class="va">labels</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="import-spectra-array" class="section level2">
@@ -260,29 +261,14 @@ wavelengths = 256</p>
 They have three directions, usually <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and the spectral dimension.</p>
 <p>The solution is to convert the array into a spectra matrix and have separate <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates.</p>
 <p>Assume <code class="sourceCode r">data</code> is the data cube, and <code class="sourceCode r">x</code>, <code class="sourceCode r">y</code> and <code class="sourceCode r">wl</code> hold vectors with the proper <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates and the wavelengths:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">24</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
 <span class="va">wl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">550</span>, <span class="fl">630</span><span class="op">)</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1200</span>, <span class="fl">1400</span><span class="op">)</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">1600</span>, <span class="fl">1400</span>, <span class="fl">1200</span><span class="op">)</span>
-<span class="va">data</span>
-<span class="co">#&gt; , , 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;      [,1] [,2] [,3]</span>
-<span class="co">#&gt; [1,]    1    5    9</span>
-<span class="co">#&gt; [2,]    2    6   10</span>
-<span class="co">#&gt; [3,]    3    7   11</span>
-<span class="co">#&gt; [4,]    4    8   12</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; , , 2</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;      [,1] [,2] [,3]</span>
-<span class="co">#&gt; [1,]   13   17   21</span>
-<span class="co">#&gt; [2,]   14   18   22</span>
-<span class="co">#&gt; [3,]   15   19   23</span>
-<span class="co">#&gt; [4,]   16   20   24</span></code></pre></div>
+<span class="va">data</span></code></pre></div>
 <p>Such data can be converted into a <code class="sourceCode r">hyperSpec</code> object by:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">d</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
@@ -296,7 +282,7 @@ They have three directions, usually <span class="math inline">\(x\)</span>, <spa
 <p>If no proper coordinates (vectors <code class="sourceCode r">x</code>, <code class="sourceCode r">y</code> and <code class="sourceCode r">wl</code>) are available, they can be left out.
 In the case of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, map plotting will then be impossible, missing <code class="sourceCode r">wavelength</code>s will be replaced by column indices counting from <code class="sourceCode r"><span class="dv">1</span></code> to <code class="sourceCode r">d[<span class="dv">3</span>]</code> automatically.
 Of course, such sequences (the row/column/pixel numbers) can be used instead of the original <code class="sourceCode r">x</code> and <code class="sourceCode r">y</code> as well:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <p>Data cubes often come from spectral imaging systems that use an “image” coordinate system counting <span class="math inline">\(y\)</span> from top to bottom.
@@ -315,238 +301,14 @@ Note that this should be accounted for in the decreasing order of the original <
 <a href="#sec:read-mult-files" class="anchor"></a><span class="header-section-number">4</span> Reading Multiple files into one <code class="sourceCode r">hyperSpec</code> object</h1>
 <p>Many of the function described below will work on one file, even though derived functions such as <code class="sourceCode r"><span class="kw">read.spc.KaiserMap</span>()</code> (see section <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a><!--, p. \pageref{sec:read-spc-KaiserMap}-->) may take care of measurements consisting of multiple files.</p>
 <p>Usually, the most convenient way to import multiple files into one <code class="sourceCode r">hyperSpec</code> object is reading all files into a list of <code class="sourceCode r">hyperSpec</code> objects, and then <code class="sourceCode r"><span class="kw">collapse</span>()</code>ing this list into a single <code class="sourceCode r">hyperSpec</code> object:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.glob.html">Sys.glob</a></span><span class="op">(</span><span class="st">"fileio/spc.Kaisermap/*.spc"</span><span class="op">)</span>
 <span class="va">files</span> <span class="op">&lt;-</span> <span class="va">files</span><span class="op">[</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">files</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="co"># import low wavenumber region only</span>
 <span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">read.spc</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
-
-<span class="co">#&gt; Warning: Function 'FUN' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.spc'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.spc</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>
-<span class="co">#&gt; [1] 54</span>
 <span class="va">spc</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; hyperSpec object</span>
-<span class="co">#&gt;    1 spectra</span>
-<span class="co">#&gt;    4 data columns</span>
-<span class="co">#&gt;    1340 data points / spectrum</span>
 <span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/collapse.html">collapse</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>
-<span class="va">spc</span>
-<span class="co">#&gt; hyperSpec object</span>
-<span class="co">#&gt;    54 spectra</span>
-<span class="co">#&gt;    4 data columns</span>
-<span class="co">#&gt;    1340 data points / spectrum</span></code></pre></div>
+<span class="va">spc</span></code></pre></div>
 <p>Note that in this particular case, the spectra are more efficiently read by <code class="sourceCode r"><span class="kw">read.spc.KaiserMap</span>()</code> (see section <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a><!--, p. \pageref{sec:read-spc-KaiserMap}-->).</p>
 <p>If one regularly imports huge maps or images, writing a customized import function is highly encouraged.
 Users may gain speed and memory by using the internal workhorse functions for the file import.
@@ -594,7 +356,7 @@ samples respectively.</p>
 <p>Thus, this file differs from the ASCII formats discussed above in that the samples are actually in columns whereas <code class="sourceCode r">hyperSpec</code> expects them to be in rows.
 The header line gives the name of the sample.
 Import is straightforward, and just the spectra matrix needs to be transposed to make a <code class="sourceCode r">hyperSpec</code> object:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"fileio/txt.t/Triazine_5_31.txt"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, dec <span class="op">=</span> <span class="st">","</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span>
 
 <span class="va">triazine</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/initialize.html">new</a></span><span class="op">(</span><span class="st">"hyperSpec"</span>,
@@ -605,19 +367,9 @@ Import is straightforward, and just the spectra matrix needs to be transposed to
     spc <span class="op">=</span> <span class="st">"I / a.u."</span>
   <span class="op">)</span>
 <span class="op">)</span>
-<span class="va">triazine</span>
-<span class="co">#&gt; hyperSpec object</span>
-<span class="co">#&gt;    25 spectra</span>
-<span class="co">#&gt;    2 data columns</span>
-<span class="co">#&gt;    1759 data points / spectrum</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<span class="va">triazine</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">triazine</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span id="fig:plot-triazine"></span>
-<img src="hySpc-read-txt_files/figure-html/plot-triazine-1.png" alt="Spectra of triazine. "><p class="caption">
-Figure 5.1: Spectra of triazine.
-</p>
-</div>
 <p>Witec also saves ASCII data with spectra in columns (Export <span class="math inline">\(\rightarrow\)</span> Table), see <a href="#sec:read-txt-Witec">7.5</a>.</p>
 </div>
 <div id="sec:aes-nist" class="section level2">
@@ -630,7 +382,7 @@ Figure 5.1: Spectra of triazine.
 <p>The NIST (National Institute of Standards and Technology) has published a data base of basic atomic
 emission spectra see <a href="http://physics.nist.gov/PhysRefData/Handbook/periodictable.htm" class="uri">http://physics.nist.gov/PhysRefData/Handbook/periodictable.htm</a> with emission lines tabulated in ASCII (HTML) files.</p>
 <p>Here’s an example how to extract the data of the Hg strong lines file:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"fileio/NIST/mercurytable2.htm"</span><span class="op">)</span>
 <span class="co"># file &lt;- readLines("http://physics.nist.gov/PhysRefData/Handbook/Tables/mercurytable2.htm")</span>
 
@@ -670,14 +422,8 @@ emission spectra see <a href="http://physics.nist.gov/PhysRefData/Handbook/perio
     <span class="op">)</span>
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/collapse.html">collapse</a></span><span class="op">(</span><span class="va">Hg.AES</span><span class="op">)</span>, lines.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"h"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span id="fig:plot-hg-aes"></span>
-<img src="hySpc-read-txt_files/figure-html/plot-hg-aes-1.png" alt="Extracted spectra from of the Hg strong lines file."><p class="caption">
-Figure 5.2: Extracted spectra from of the Hg strong lines file.
-</p>
-</div>
 </div>
 <div id="further-ascii-formats" class="section level2">
 <h2 class="hasAnchor">
@@ -699,17 +445,17 @@ If you need a specific header or footer, use R’s functions for writing files: 
 <a href="#sec:readMat" class="anchor"></a><span class="header-section-number">6.1</span> Matlab Files</h2>
 <p></p>
 <p>Matlab files can be read and written using the package <strong>R.matlab</strong>, which is available at CRAN and can be installed by <code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"R.matlab"</span>)</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/R.matlab">R.matlab</a></span><span class="op">)</span></code></pre></div>
 <!-- ======================================================================= -->
 <!-- ======================================================================= -->
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">spc.mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/R.matlab/man/readMat.html">readMat</a></span><span class="op">(</span><span class="st">"fileio/spectra.mat"</span><span class="op">)</span></code></pre></div>
 <p>If the <code>.mat</code> file was saved with compression, the additional package <strong>Rcompression</strong> is needed.
 It can be installed from omegahat:</p>
 <!-- ======================================================================= -->
 <!-- ======================================================================= -->
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"Rcompression"</span>, repos <span class="op">=</span> <span class="st">"http://www.omegahat.org/R"</span><span class="op">)</span></code></pre></div>
 <p>See the documentation of package <strong>R.matlab</strong> for more details and possibly needed further packages.</p>
 <p>Function <code class="sourceCode r"><span class="kw">readMat</span>()</code> imports the <code>.mat</code> file’s contents as a list.
@@ -855,15 +601,8 @@ rm(spc)</p>
 
 </p>
 <p>Andor Solis exports ASCII files that can be read with <code class="sourceCode r"><span class="kw">read.asc.Andor</span>()</code>:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/DEPRECATED-read.asc.Andor.html">read.asc.Andor</a></span><span class="op">(</span><span class="st">"fileio/asc.Andor/ASCII-Andor-Solis.asc"</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Function 'read.asc.Andor' is deprecated. </span>
-<span class="co">#&gt; Please, find alternatives in package 'hySpc.read.txt'</span>
-<span class="co">#&gt; https://r-hyperspec.github.io/hySpc.read.txt</span>
-<span class="co">#&gt; hyperSpec object</span>
-<span class="co">#&gt;    5 spectra</span>
-<span class="co">#&gt;    2 data columns</span>
-<span class="co">#&gt;    63 data points / spectrum</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/DEPRECATED-read.asc.Andor.html">read.asc.Andor</a></span><span class="op">(</span><span class="st">"fileio/asc.Andor/ASCII-Andor-Solis.asc"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="sec:read-txt-Witec" class="section level2">
 <h2 class="hasAnchor">
@@ -3746,7 +3485,7 @@ matrix
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session Info</h1>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; ─ Session info ───────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt;  setting  value                       </span>
@@ -3758,7 +3497,7 @@ matrix
 <span class="co">#&gt;  collate  en_US.UTF-8                 </span>
 <span class="co">#&gt;  ctype    en_US.UTF-8                 </span>
 <span class="co">#&gt;  tz       UTC                         </span>
-<span class="co">#&gt;  date     2021-07-30                  </span>
+<span class="co">#&gt;  date     2021-08-02                  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ─ Packages ───────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt;  package        * version      date       lib source        </span>
