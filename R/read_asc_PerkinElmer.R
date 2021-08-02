@@ -63,7 +63,7 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"),
 hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
   context("read_asc_PerkinElmer")
 
-  path <- system.file("extdata/fileio/txt.PerkinElmer",package = "hySpc.read.txt")
+  path <- system.file("extdata/txt.PerkinElmer",package = "hySpc.read.txt")
   flu_file <- paste0(path, c("/flu1.txt", "/flu2.txt",
                              "/flu3.txt", "/flu4.txt", "/flu5.txt", "/flu6.txt"))
 
