@@ -91,7 +91,7 @@ read_txt_Horiba_t <- function(file, header = TRUE, sep = "\t", row.names = NULL,
 hySpc.testthat::test(read_txt_Horiba_t) <- function() {
   context("read_txt_Horiba_t")
 
-  ts <- system.file("extdata/fileio/txt.HoribaJobinYvon/", "ts.txt",package = "hySpc.read.txt")
+  ts <- system.file("extdata/txt.HoribaJobinYvon/", "ts.txt",package = "hySpc.read.txt")
   spc <- read_txt_Horiba_t(ts)
 
   test_that("Horiba time series .txt labels are correct",{
@@ -118,7 +118,7 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
 hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
   context("read_txt_Horiba_t")
 
-  map <- system.file("extdata/fileio/txt.HoribaJobinYvon/", "map.txt",package = "hySpc.read.txt")
+  map <- system.file("extdata/txt.HoribaJobinYvon/", "map.txt",package = "hySpc.read.txt")
   spc <- read_txt_Horiba_xy(map)
 
   test_that("Horiba map .txt labels are correct",{
