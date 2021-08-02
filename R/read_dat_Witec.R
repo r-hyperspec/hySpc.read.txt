@@ -58,7 +58,6 @@ hySpc.testthat::test(read_dat_Witec) <- function() {
   test_that("-y file guessing", {
     spc <- read_dat_Witec(paste0(tmpdir, "/Witec-timeseries-x.dat"))
     spc$filename <- gsub("^.*/", "", spc$filename)
-
     expect_known_hash(spc, "1977fe5997")
   })
 
