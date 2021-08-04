@@ -58,7 +58,7 @@ hySpc.testthat::test(read_asc_Andor) <- function() {
     expect_equal(spc@label$filename, "filename")
   })
 
-  test_that("Andor Solis .asc spectral data", {
+  test_that("Andor Solis .asc: spectra are correct", {
     expect_equal(dim(spc@data$spc), c(5,63))
 
     expect_equal(colnames(spc@data$spc),
