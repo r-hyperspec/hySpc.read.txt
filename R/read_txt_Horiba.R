@@ -101,8 +101,8 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
   test_that("Horiba time series .txt spectral data", {
     expect_equal(dim(spc@data$spc), c(100,1024))
 
-    expect_equal(colnames(spc@data$spc)[[974]], "5.9526")
-    expect_equal(colnames(spc@data$spc)[[657]], "772.27")
+    expect_equal(colnames(spc@data$spc)[974], "5.9526")
+    expect_equal(colnames(spc@data$spc)[657], "772.27")
   })
 
   test_that("Horiba time series .txt wavelength", {
