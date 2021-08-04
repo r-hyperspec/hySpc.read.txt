@@ -86,8 +86,6 @@ read_txt_Horiba_t <- function(file, header = TRUE, sep = "\t", row.names = NULL,
 
 # Unit tests -----------------------------------------------------------------
 
-# FIXME: add unit tests
-
 hySpc.testthat::test(read_txt_Horiba_t) <- function() {
   context("read_txt_Horiba_t")
 
