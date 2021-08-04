@@ -66,7 +66,7 @@ hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
   flu_file <- paste0(path, c("/flu1.txt", "/flu2.txt",
                              "/flu3.txt", "/flu4.txt", "/flu5.txt", "/flu6.txt"))
 
-  test_that("PerkinElmer .txt labels are correct", {
+  test_that("PerkinElmer .txt: labels are correct", {
     for(flu in flu_file){
       expect_message(spc <- read_asc_PerkinElmer(flu))
 
