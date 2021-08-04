@@ -59,7 +59,6 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"),
 
 # Unit tests -----------------------------------------------------------------
 
-# FIXME: add unit tests, if possible.
 hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
   context("read_asc_PerkinElmer")
 
