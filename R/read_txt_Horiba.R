@@ -108,8 +108,8 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
   test_that("Horiba time series .txt wavelength", {
     expect_equal(length(spc@wavelength), 1024)
 
-    expect_equal(round(spc@wavelength[[79]], 3), 1986.863)
-    expect_equal(round(spc@wavelength[[1011]], 3), -88.828)
+    expect_equal(round(spc@wavelength[79], 3), 1986.863)
+    expect_equal(round(spc@wavelength[1011], 3), -88.828)
   })
 }
 
