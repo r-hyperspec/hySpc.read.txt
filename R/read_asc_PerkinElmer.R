@@ -76,7 +76,7 @@ hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
     }
   })
 
-  test_that("PerkinElmer .txt spectra data", {
+  test_that("PerkinElmer .txt: spectra are correct", {
     for(flu in flu_file){
       expect_message(spc <- read_asc_PerkinElmer(flu))
 
