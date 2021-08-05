@@ -14,7 +14,6 @@
 #'
 #' @author Claudia Beleites
 #'
-#' @seealso `vignette ("fileio")` for more information on file import and
 #'
 #' @concept io
 #'
