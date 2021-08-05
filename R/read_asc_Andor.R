@@ -70,9 +70,6 @@ hySpc.testthat::test(read_asc_Andor) <- function() {
   test_that("Andor Solis .asc: extra data are correct", {
     # @data colnames
     expect_equal(colnames(spc), c("spc", "filename"))
-
-    # @data values
-    # (Add tests, if relevant or remove this row)
   })
 
   test_that("Andor Solis .asc: labels are correct", {
