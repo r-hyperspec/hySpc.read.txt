@@ -10,7 +10,7 @@
 #' @param file filename or connection to ASCII file.
 #' @param ...,quiet,dec,sep handed to [base::scan()].
 #'
-#' @return `hyperSpec` object
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
 #'
 #' @author Claudia Beleites
 #'
