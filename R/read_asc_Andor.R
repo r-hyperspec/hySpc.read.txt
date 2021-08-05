@@ -54,6 +54,14 @@ hySpc.testthat::test(read_asc_Andor) <- function() {
   )
   spc <- read_asc_Andor(andor)
 
+  test_that("Andor Solis .asc hyperSpec obj. dimensions are correct", {
+    expect_equal(nwl(spc), 63)
+    expect_equal(nrow(spc), 5)
+    expect_equal(ncol(spc), 2)
+    expect_equal(colnames(spc), c("spc", "filename"))
+  })
+
+
   test_that("Andor Solis .asc labels are correct", {
     expect_equal(spc@label$.wavelength, NULL)
     expect_equal(spc@label$spc, NULL)
@@ -63,6 +71,7 @@ hySpc.testthat::test(read_asc_Andor) <- function() {
   test_that("Andor Solis .asc spectra are correct", {
     expect_equal(dim(spc@data$spc), c(5, 63))
 
+    # Test column names of spectra matrix
     expect_equal(
       colnames(spc@data$spc),
       c(
@@ -82,6 +91,11 @@ hySpc.testthat::test(read_asc_Andor) <- function() {
         "411.22", "415.366", "419.51", "423.651"
       )
     )
+
+    # Test values of spectra matrix
+
+    # TODO: Check a few values of spectra matrix
+
   })
 
   test_that("Andor Solis .asc wavelengths are correct", {
