@@ -11,7 +11,7 @@ read_dat_Witec <- function(filex = stop("filename or connection needed"),
                            type = c("single", "map"),
                            encoding = "unknown",
                            ...,
-                           quiet = hy.getOption("debuglevel") < 1L) {
+                           quiet = hy_get_option("debuglevel") < 1L) {
   ## check valid data connection
   check_con(filex = filex, filey = filey)
 
