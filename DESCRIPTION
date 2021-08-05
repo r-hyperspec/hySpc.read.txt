@@ -22,7 +22,7 @@ LazyData: yes
 Additional_repositories:
     https://r-hyperspec.github.io/pkg-repo/
 Depends:
-    hyperSpec
+    hyperSpec (>= 0.100.0.9001)
 Imports:
     hySpc.testthat,
     methods,
