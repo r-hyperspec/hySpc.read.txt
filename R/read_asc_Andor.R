@@ -62,6 +62,7 @@ hySpc.testthat::test(read_asc_Andor) <- function() {
 
   test_that("Andor Solis .asc spectra are correct", {
     expect_equal(dim(spc@data$spc), c(5, 63))
+
     expect_equal(
       colnames(spc@data$spc),
       c(
@@ -84,9 +85,12 @@ hySpc.testthat::test(read_asc_Andor) <- function() {
   })
 
   test_that("Andor Solis .asc wavelengths are correct", {
-    expect_equal(length(spc@wavelength), 63)
+    n_wl <- length(spc@wavelength)
+    expect_equal(n_wl, 63)
 
-    expect_equal(round(spc@wavelength[47], 3), 357.054)
-    expect_equal(round(spc@wavelength[23], 3), 255.762)
+    expect_equal(spc@wavelength[1], 161.40845)
+    expect_equal(spc@wavelength[23], 255.76215)
+    expect_equal(spc@wavelength[47], 357.05362)
+    expect_equal(spc@wavelength[n_wl], 423.65106)
   })
 }
