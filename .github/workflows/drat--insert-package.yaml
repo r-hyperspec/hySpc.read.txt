@@ -68,8 +68,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -84,6 +84,8 @@ jobs:
         run: |
           remotes::install_cran(c("roxygen2", "devtools", "drat"))
           remotes::install_deps(dependencies = TRUE)
+          # Force to install hyperSpec:
+          remotes::install_cran("hyperSpec")
 
       - name: Roxygenize
         shell: Rscript {0}

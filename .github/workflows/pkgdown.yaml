@@ -42,8 +42,9 @@ jobs:
         run: |
           install.packages(c("remotes", "devtools"))
           remotes::install_deps(dependencies = TRUE)
-          # remotes::install_dev("pkgdown")
-          remotes::install_github("forked-packages/pkgdown")
+          remotes::install_cran("pkgdown")
+          # Force to install hyperSpec:
+          remotes::install_cran("hyperSpec")
         shell: Rscript {0}
 
       - name: Roxygenize
