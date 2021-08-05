@@ -73,7 +73,8 @@ jobs:
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("devtools")
           # Force to install hyperSpec:
-          remotes::install_cran("hyperSpec")
+          repos <- c("https://r-hyperspec.github.io/pkg-repo/", getOption("repos"))
+          install.packages("hyperSpec", repos = repos, type = "source")
         shell: Rscript {0}
 
       - name: Session info
