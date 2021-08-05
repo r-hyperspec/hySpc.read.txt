@@ -40,14 +40,17 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-
 
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "devtools"))
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
+          # Force to install hyperSpec:
+          repos <- c("https://r-hyperspec.github.io/pkg-repo/", getOption("repos"))
+          install.packages("hyperSpec", repos = repos, type = "source")
         shell: Rscript {0}
 
       - name: Roxygenize
