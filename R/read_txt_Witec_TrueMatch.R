@@ -40,7 +40,7 @@ read_txt_WITec_TrueMatch <- function(file, keys_2header = "all") {
   if (!all(nwl == nwl[1])) {
     stop(
       "This file contains spectra with unequal length. \n",
-      "This is not yet supported by 'read_txt_WITec_ASCII()'. \n ",
+      "This is not yet supported by 'read_txt_WITec()'. \n ",
       msg_open_issue_and_add_file()
     )
   }
@@ -55,7 +55,7 @@ read_txt_WITec_TrueMatch <- function(file, keys_2header = "all") {
   if (!all(names(file[spc_hdr + 2]) == "SpectrumData")) {
     stop(
       "This file does not contain the SpectrumData at the expected positions.\n",
-      "This is not yet supported by 'read_txt_WITec_ASCII()'. \n ",
+      "This is not yet supported by 'read_txt_WITec()'. \n ",
       msg_open_issue_and_add_file()
     )
   }
