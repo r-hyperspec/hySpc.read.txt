@@ -242,34 +242,3 @@ read_txt_Shimadzu <- function(file, encoding = "", quiet = TRUE) {
   return(list(peakInfo = m2, peakAnnotate = m3, peakMasses = m4))
 }
 
-
-# Unit tests -----------------------------------------------------------------
-
-hySpc.testthat::test(read_txt_Shimadzu) <- function() {
-  context("read_txt_Shimadzu")
-
-  filename <- system.file(
-    "extdata",
-    "txt.Shimadzu/GCxGC-qMS.txt",
-    package = "hySpc.read.txt"
-  )
-
-  spc <- read_txt_Shimadzu(filename)
-
-  test_that("Shimadzu .txt", {
-    expect_equal(length(spc), 3)
-
-    expect_equal(dim(spc[[1]]), c(2191, 13))
-    expect_equal(dim(spc[[2]]), c(509, 9))
-    expect_equal(dim(spc[[3]]), c(516939, 5))
-
-    expect_equal(spc[[1]][[107, 6]], "TIC")
-    expect_equal(spc[[1]][[259, 8]], 381874)
-
-    expect_equal(spc[[2]][[21, 1]], 1)
-    expect_equal(spc[[2]][[397, 8]], "C22_H55_N_O6_Si5")
-
-    expect_equal(spc[[3]][[38796, 4]], 280)
-    expect_equal(spc[[3]][[56789, 2]], 72)
-  })
-}
