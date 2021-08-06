@@ -167,7 +167,7 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
   paracetamol <- paste0(path, "/paracetamol.txt")
   laser <- paste0(path, "/laser.txt.gz")
-  faux_cell <- paste0(path, "/chondro.txt")
+  chondro_file <- paste0(path, "/chondro.txt")
 
   test_that("single spectrum", {
     tmp <- read_txt_Renishaw(paracetamol, "spc")
@@ -181,11 +181,11 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   })
 
   test_that("map (= default)", {
-    tmp <- read_txt_Renishaw(faux_cell, "xyspc")
+    tmp <- read_txt_Renishaw(chondro_file, "xyspc")
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
 
-    tmp <- read_txt_Renishaw(faux_cell)
+    tmp <- read_txt_Renishaw(chondro_file)
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
   })
@@ -194,11 +194,11 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
 
     ## error on too small chunk size
     expect_error(
-      read_txt_Renishaw(faux_cell, nlines = 10),
+      read_txt_Renishaw(chondro_file, nlines = 10),
       "Wavelengths do not correspond"
     )
 
-    tmp <- read_txt_Renishaw(faux_cell, nlines = 1e5)
+    tmp <- read_txt_Renishaw(chondro_file, nlines = 1e5)
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
   })
 
