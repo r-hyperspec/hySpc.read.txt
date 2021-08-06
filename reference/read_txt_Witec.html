@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read WITec files (ASCII/txt) — read_dat_Witec • hySpc.read.txt</title>
+<title>Read WITec files (ASCII/txt) — read_dat_WITec • hySpc.read.txt</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,7 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Read WITec files (ASCII/txt) — read_dat_Witec" />
+<meta property="og:title" content="Read WITec files (ASCII/txt) — read_dat_WITec" />
 <meta property="og:description" content="Import Raman spectra/maps from WITec Instrument via ASCII files" />
 
 
@@ -135,14 +135,14 @@
     <div class="page-header">
     <h1>Read WITec files (ASCII/txt)</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_dat_Witec.R'><code>R/read_dat_Witec.R</code></a>, <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_txt_Graph_Witec.R'><code>R/read_txt_Graph_Witec.R</code></a>, <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_txt_Witec.R'><code>R/read_txt_Witec.R</code></a></small>
-    <div class="hidden name"><code>read_txt_Witec.Rd</code></div>
+    <div class="hidden name"><code>read_txt_WITec.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Import Raman spectra/maps from WITec Instrument via ASCII files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_dat_Witec</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>read_dat_WITec</span><span class='op'>(</span>
   filex <span class='op'>=</span> <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"filename or connection needed"</span><span class='op'>)</span>,
   filey <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span><span class='op'>(</span><span class='st'>"-x"</span>, <span class='st'>"-y"</span>, <span class='va'>filex</span><span class='op'>)</span>,
   points.per.line <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -153,7 +153,7 @@
   quiet <span class='op'>=</span> <span class='fu'>hy_get_option</span><span class='op'>(</span><span class='st'>"debuglevel"</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>1L</span>
 <span class='op'>)</span>
 
-<span class='fu'>read_txt_Witec_Graph</span><span class='op'>(</span>
+<span class='fu'>read_txt_WITec_Graph</span><span class='op'>(</span>
   headerfile <span class='op'>=</span> <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"filename or connection needed"</span><span class='op'>)</span>,
   filex <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span><span class='op'>(</span><span class='st'>"Header"</span>, <span class='st'>"X-Axis"</span>, <span class='va'>headerfile</span><span class='op'>)</span>,
   filey <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span><span class='op'>(</span><span class='st'>"Header"</span>, <span class='st'>"Y-Axis"</span>, <span class='va'>headerfile</span><span class='op'>)</span>,
@@ -163,7 +163,7 @@
   quiet <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 
-<span class='fu'>read_txt_Witec</span><span class='op'>(</span>
+<span class='fu'>read_txt_WITec</span><span class='op'>(</span>
   file <span class='op'>=</span> <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"filename or connection needed"</span><span class='op'>)</span>,
   points.per.line <span class='op'>=</span> <span class='cn'>NULL</span>,
   lines.per.image <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -235,9 +235,9 @@ of map position or number of spectra) within the <code>file</code>.</p></td>
 
     
 <ul>
-<li><p><code>read_txt_Witec()</code> reads WITec ASCII files where the first column gives
+<li><p><code>read_txt_WITec()</code> reads WITec ASCII files where the first column gives
 the wavelength axes and the other columns the spectra.</p></li>
-<li><p><code>read_dat_Witec()</code> reads WITec's ASCII exported data which comes in
+<li><p><code>read_dat_WITec()</code> reads WITec's ASCII exported data which comes in
 separate files with x and y data.</p></li>
 </ul>
 

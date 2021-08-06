@@ -370,7 +370,7 @@ Import is straightforward, and just the spectra matrix needs to be transposed to
 <span class="va">triazine</span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">triazine</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
-<p>Witec also saves ASCII data with spectra in columns (Export <span class="math inline">\(\rightarrow\)</span> Table), see <a href="#sec:read-txt-Witec">7.5</a>.</p>
+<p>WITec also saves ASCII data with spectra in columns (Export <span class="math inline">\(\rightarrow\)</span> Table), see <a href="#sec:read-txt-witec">7.5</a>.</p>
 </div>
 <div id="sec:aes-nist" class="section level2">
 <h2 class="hasAnchor">
@@ -604,9 +604,9 @@ rm(spc)</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/DEPRECATED-read.asc.Andor.html">read.asc.Andor</a></span><span class="op">(</span><span class="st">"fileio/asc.Andor/ASCII-Andor-Solis.asc"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="sec:read-txt-Witec" class="section level2">
+<div id="sec:read-txt-witec" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sec:read-txt-Witec" class="anchor"></a><span class="header-section-number">7.5</span> Witec</h2>
+<a href="#sec:read-txt-witec" class="anchor"></a><span class="header-section-number">7.5</span> WITec</h2>
 <p>
 
 
@@ -617,23 +617,23 @@ rm(spc)</p>
 
 
 </p>
-<p>The Witec project software supports exporting spectra as Thermo Galactic <code>.spc</code> files.</p>
+<p>The WITec project software supports exporting spectra as Thermo Galactic <code>.spc</code> files.</p>
 <p>read.spc(“fileio/spc.Witec/Witec-timeseries.spc”)
 read.spc(“fileio/spc.Witec/Witec-Map.spc”)</p>
 <p><code>.spc</code> is in general the recommended format for package <strong>hyperSpec</strong> import.
 For imaging data, no spatial information for the set of spectra is provided (in version 2.10, this export option is not supported).</p>
 <p>Imaging data (but also single spectra and time series) can be exported as ASCII X and Y files (Save ASCII X and Save ASCII Y, not supported in version 4).
-These can be read by <code class="sourceCode r"><span class="kw">read_dat_Witec</span>()</code>:</p>
-<p>read_dat_Witec(“fileio/txt.Witec/Witec-timeseries-x.dat”)
-read_dat_Witec(
+These can be read by <code class="sourceCode r"><span class="kw">read_dat_WITec</span>()</code>:</p>
+<p>read_dat_WITec(“fileio/txt.Witec/Witec-timeseries-x.dat”)
+read_dat_WITec(
 filex = “fileio/txt.Witec/Witec-Map-x.dat”,
 points.per.line = 5, lines.per.image = 5, type = “map”
 )</p>
-<p>Note that the Y data files also contain wavelength information, but (at least Witec Project 2.10) this information is always wavelength in nm, not Raman shift in wavenumbers: this is provided by the X data file only.</p>
-<p>Another option is Witec’s txt table ASCII export (Export <span class="math inline">\(\rightarrow\)</span> Table), which produces ASCII files with each row corresponding to one wavelength.
+<p>Note that the Y data files also contain wavelength information, but (at least WITec Project 2.10) this information is always wavelength in nm, not Raman shift in wavenumbers: this is provided by the X data file only.</p>
+<p>Another option is WITec’s txt table ASCII export (Export <span class="math inline">\(\rightarrow\)</span> Table), which produces ASCII files with each row corresponding to one wavelength.
 The first column contains the wavelength axis; all further columns contain one spectrum each column.
-Such files can be read with <code class="sourceCode r"><span class="kw">read_txt_Witec</span>()</code>:</p>
-<p><code class="sourceCode r"><span class="kw">read_txt_Witec</span>()</code> determines the number of wavelengths automatically.</p>
+Such files can be read with <code class="sourceCode r"><span class="kw">read_txt_WITec</span>()</code>:</p>
+<p><code class="sourceCode r"><span class="kw">read_txt_WITec</span>()</code> determines the number of wavelengths automatically.</p>
 <p>Note that there are several Export Filter Options.
 It is possible to determine which units should be used for the export (see XUnits tab).
 It is also possible to export two additional header lines containing information about spectra labels and units.
@@ -1092,7 +1092,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.txt.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Export Table
@@ -1663,7 +1663,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.dat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Save ASCII X, Save ASCII Y
@@ -1691,7 +1691,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.txt.Witec.Graph</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Export Table in 3 separate files (Header, X-Axis, Y-Axis)
@@ -2371,7 +2371,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.dat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Save ASCII X, Save ASCII Y
@@ -2394,7 +2394,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.txt.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Export Table
@@ -2417,7 +2417,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.txt.Witec.Graph</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Export Table in 3 separate files (Header, X-Axis, Y-Axis)
@@ -2996,7 +2996,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.dat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Save ASCII X, Save ASCII Y
@@ -3019,7 +3019,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.txt.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Export Table
@@ -3042,7 +3042,7 @@ Raman
 <code class="sourceCode r"><span class="kw">read.txt.Witec.Graph</span>()</code>
 </td>
 <td style="text-align:left;">
-<a href="#sec:read-txt-Witec">7.5</a>
+<a href="#sec:read-txt-Witec"><strong>??</strong></a>
 </td>
 <td style="text-align:left;">
 Export Table in 3 separate files (Header, X-Axis, Y-Axis)
