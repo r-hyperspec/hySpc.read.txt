@@ -165,27 +165,27 @@ read_txt_Renishaw <- function(file = stop("file is required"),
 hySpc.testthat::test(read_txt_Renishaw) <- function() {
   context("read_txt_Renishaw")
   path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
-  paracetamol <- paste0(path, "/paracetamol.txt")
-  laser <- paste0(path, "/laser.txt.gz")
-  chondro_file <- paste0(path, "/chondro.txt")
+  f_paracetamol <- paste0(path, "/paracetamol.txt")
+  f_laser <- paste0(path, "/laser.txt.gz")
+  f_chondro <- paste0(path, "/chondro.txt")
 
   test_that("single spectrum", {
-    tmp <- read_txt_Renishaw(paracetamol, "spc")
+    tmp <- read_txt_Renishaw(f_paracetamol, "spc")
     expect_equal(dim(tmp), c(nrow = 1L, ncol = 2L, nwl = 4064L))
   })
 
   test_that("time series spectrum, gzipped", {
-    tmp <- read_txt_Renishaw(laser, "ts")
+    tmp <- read_txt_Renishaw(f_laser, "ts")
     expect_equal(dim(tmp), c(nrow = 84L, ncol = 3L, nwl = 140L))
     expect_equal(colnames(tmp), c("t", "spc", "filename"))
   })
 
   test_that("map (= default)", {
-    tmp <- read_txt_Renishaw(chondro_file, "xyspc")
+    tmp <- read_txt_Renishaw(f_chondro, "xyspc")
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
 
-    tmp <- read_txt_Renishaw(chondro_file)
+    tmp <- read_txt_Renishaw(f_chondro)
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
   })
@@ -194,11 +194,11 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
 
     ## error on too small chunk size
     expect_error(
-      read_txt_Renishaw(chondro_file, nlines = 10),
+      read_txt_Renishaw(f_chondro, nlines = 10),
       "Wavelengths do not correspond"
     )
 
-    tmp <- read_txt_Renishaw(chondro_file, nlines = 1e5)
+    tmp <- read_txt_Renishaw(f_chondro, nlines = 1e5)
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
   })
 
