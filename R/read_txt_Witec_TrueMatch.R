@@ -2,19 +2,27 @@
 
 #' Read WITec TrueMatch files (ASCII/txt)
 #'
-#' Import spectra from Witec ASCII/txt files exported by Witec TrueMatch
+#' Import spectra from Witec ASCII/txt files exported by Witec TrueMatch.
 #'
-#' [read_txt_Witec_TrueMatch()] reads Witec ASCII files exported by Witec
-#' TrueMatch. These files are ini-like: ASCII files with meta data sections and
-#' spectra data sections.
+#' Function [read_txt_Witec_TrueMatch()] reads Witec ASCII files exported by
+#' WITec TrueMatch. These files are ini-like: ASCII files with meta data
+#' sections and spectra data sections.
 #'
-#' @param file filename or connection to ASCII TrueMatch file
-#' @param keys_2header all meta data will be perserved if `key_2header="all"` (default); only `spc`
-#' filename will be perserved if `key_2header="none"`; only specified header information will be saved otherwise
-#' e.g., `key_2header=c("key1", "key2", ...)`
-#' @return a hyperSpec object
+#' @param file Path or connection to ASCII TrueMatch file.
+#' @param keys_2header
+#'        All meta data will be preserved if `key_2header = "all"` (default);
+#'        only `spc`  file name will be preserved if `key_2header = "none"`;
+#'        only specified header information will be saved otherwise
+#'        e.g., `key_2header=c("key1", "key2", ...)`.
+#'
+#'
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
+#'
+#'
 #' @author Claudia Beleites and Erick Oduniyi
+#'
 #' @importFrom hySpc.testthat test<-
+#'
 #' @export
 read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
