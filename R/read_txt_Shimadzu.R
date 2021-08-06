@@ -136,7 +136,7 @@ read_txt_Shimadzu <- function(file, encoding = "", quiet = TRUE) {
       if (!quiet) cat("header:", header, "spec:", i, "start:", start, "stop:", stop, "\n")
 
       # -------------------
-      # Catch expeption, when peak is reported in peakMat, but [MS Spectrum] is not available: like example: (keyrow: # of Peaks; 0)
+      # Catch exception, when peak is reported in peakMat, but [MS Spectrum] is not available: like example: (keyrow: # of Peaks; 0)
       # [MS Spectrum]
       # # of Peaks;0
       # Raw Spectrum;38.343 (scan : 68686);Base Peak;m/z 0.00 (Inten : 0)
