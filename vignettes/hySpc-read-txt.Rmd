@@ -421,7 +421,7 @@ CAPTION <- "Spectra of triazine. "
 plot(triazine[1])
 ```
 
-Witec also saves ASCII data with spectra in columns (Export $\rightarrow$ Table), see \@ref(sec:read-txt-Witec).
+WITec also saves ASCII data with spectra in columns (Export $\rightarrow$ Table), see \@ref(sec:read-txt-witec).
 
 
 ## Basic Atomic Spectra from NIST Tables {#sec:aes-nist}
@@ -705,20 +705,20 @@ Andor Solis exports ASCII files that can be read with `read.asc.Andor()`{.r}:
 read.asc.Andor("fileio/asc.Andor/ASCII-Andor-Solis.asc")
 ```
 
-## Witec {#sec:read-txt-Witec}
+## WITec {#sec:read-txt-witec}
 
-\index{Witec!ASCII}
-\index{ASCII!Witec}
-\index{Graph ASCII!Witec}
-\index{Witec!Graph ASCII}
-\index{Raman!Witec!ASCII}
-\index{Raman!Witec!Save ASCII X, Save ASCII Y}
-\index{Raman!Witec!Export Table}
-\index{Raman!Witec!spc}
-\index{Raman!Witec!Graph ASCII}
-\index{spc!Witec}
+\index{WITec!ASCII}
+\index{ASCII!WITec}
+\index{Graph ASCII!WITec}
+\index{WITec!Graph ASCII}
+\index{Raman!WITec!ASCII}
+\index{Raman!WITec!Save ASCII X, Save ASCII Y}
+\index{Raman!WITec!Export Table}
+\index{Raman!WITec!spc}
+\index{Raman!WITec!Graph ASCII}
+\index{spc!WITec}
 
-The Witec project software supports exporting spectra as Thermo Galactic `.spc` files.
+The WITec project software supports exporting spectra as Thermo Galactic `.spc` files.
 
 ```{block, r witec-spc, results='hide'}
 read.spc("fileio/spc.Witec/Witec-timeseries.spc")
@@ -739,9 +739,9 @@ read_dat_WITec(
 )
 ```
 
-Note that the Y data files also contain wavelength information, but (at least Witec Project 2.10) this information is always wavelength in nm, not Raman shift in wavenumbers: this is provided by the X data file only.
+Note that the Y data files also contain wavelength information, but (at least WITec Project 2.10) this information is always wavelength in nm, not Raman shift in wavenumbers: this is provided by the X data file only.
 
-Another option is Witec's txt table ASCII export (Export $\rightarrow$ Table), which produces ASCII files with each row corresponding to one wavelength.
+Another option is WITec's txt table ASCII export (Export $\rightarrow$ Table), which produces ASCII files with each row corresponding to one wavelength.
 The first column contains the wavelength axis; all further columns contain one spectrum each column.
 Such files can be read with `read_txt_WITec()`{.r}:
 
