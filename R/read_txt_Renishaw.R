@@ -181,11 +181,11 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   })
 
   test_that("map (= default)", {
-    tmp <- read_txt_Renishaw(chondro, "xyspc")
+    tmp <- read_txt_Renishaw(faux_cell, "xyspc")
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
 
-    tmp <- read_txt_Renishaw(chondro)
+    tmp <- read_txt_Renishaw(faux_cell)
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
   })
@@ -194,17 +194,17 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
 
     ## error on too small chunk size
     expect_error(
-      read_txt_Renishaw(chondro, nlines = 10),
+      read_txt_Renishaw(faux_cell, nlines = 10),
       "Wavelengths do not correspond"
     )
 
-    tmp <- read_txt_Renishaw(chondro, nlines = 1e5)
+    tmp <- read_txt_Renishaw(faux_cell, nlines = 1e5)
     expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
   })
 
   test_that("compressed files", {
 
-    files <- Sys.glob(paste0(path, "/chondro.*"))
+    files <- Sys.glob(paste0(path, "/faux_cell.*"))
     files <- grep("[.]zip", files, invert = TRUE, value = TRUE) # .zip is tested with read_zip_Renishaw
     for (f in files) {
       expect_equal(dim(read_txt_Renishaw(!!f)), c(nrow = 875L, ncol = 4L, nwl = 1272L))
@@ -238,7 +238,7 @@ hySpc.testthat::test(read_zip_Renishaw) <- function() {
     skip("TODO: adapt to new package")
 
     expect_equal(
-      dim(read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")),
+      dim(read_zip_Renishaw("fileio/txt.Renishaw/faux_cell.zip")),
       c(nrow = 875L, ncol = 4L, nwl = 1272L)
     )
   })
