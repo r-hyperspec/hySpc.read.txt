@@ -31,13 +31,9 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   # Check if the number of wavelengths is the same for all the spectra
   if (!all(nwl == nwl[1])) {
     stop(
-      "This file contains spectra with unequal length.\n",
-      "This is not yet supported by read_txt_Witec_ASCII, ",
-      "please report an issue at:\n",
-      packageDescription("hySpc.read.txt")$BugReport,
-      " including\n",
-      "- the output of `sessionInfo()` and\n",
-      "- an example file."
+      "This file contains spectra with unequal length. \n",
+      "This is not yet supported by 'read_txt_Witec_ASCII()'. \n ",
+       msg_open_issue_and_add_file()
     )
   }
   nwl <- nwl[1]
@@ -46,15 +42,13 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   spc <- matrix(NA_real_, nrow = length(spc_hdr), ncol = nwl)
   wl <- NA
 
-  # Check if the SpectrumData is in the correct position (should appear 2 header positions after the SpectrumHeader)
+  # Check if the SpectrumData is in the correct position
+  # (should appear 2 header positions after the SpectrumHeader)
   if (!all(names(file[spc_hdr + 2]) == "SpectrumData")) {
     stop(
-      "This file does not contain the SpectrumData at the expected positions,\n",
-      "please report an issue at:\n",
-      packageDescription("hySpc.read.txt")$BugReport,
-      " including\n",
-      "- the output of `sessionInfo()` and\n",
-      "- an example file."
+      "This file does not contain the SpectrumData at the expected positions.\n",
+      "This is not yet supported by 'read_txt_Witec_ASCII()'. \n ",
+       msg_open_issue_and_add_file()
     )
   }
 
