@@ -1,10 +1,10 @@
-#' @rdname read_txt_Witec
+#' @rdname read_txt_WITec
 #'
 #' @param headerfile Path or connection to ASCII file with header information.
 #'
 #' @importFrom methods new
 #' @export
-read_txt_Witec_Graph <- function(headerfile = stop("filename or connection needed"),
+read_txt_WITec_Graph <- function(headerfile = stop("filename or connection needed"),
                                  filex = gsub("Header", "X-Axis", headerfile),
                                  filey = gsub("Header", "Y-Axis", headerfile),
                                  type = c("single", "map"), encoding = "unknown",
@@ -14,7 +14,8 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
 
   ## processing headerfile
   hdr <- read_ini(headerfile, skip = 1, encoding = encoding)
-  hdr <- sapply(hdr, function(x) unlist(x, recursive = FALSE)) # returns a matrix with colnames and rownames for better adressing
+  # returns a matrix with colnames and rownames for better addressing
+  hdr <- sapply(hdr, function(x) unlist(x, recursive = FALSE))
 
   ## check valid input
   type <- check_valid(
@@ -51,8 +52,8 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
   .spc_io_postprocess_optional(spc, filey)
 }
 
-hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
-  context("read_txt_Witec_Graph")
+hySpc.testthat::test(read_txt_WITec_Graph) <- function() {
+  context("read_txt_WITec_Graph")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt_Graph")
   untar("testfiles_Witec.tar.gz",
@@ -73,7 +74,9 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
   on.exit(unlink(tmpdir))
 
   test_that("defaults and (X-Axis)/(Y-Axis) file guessing", {
-    spc <- read_txt_Witec_Graph(paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"))
+    spc <- read_txt_WITec_Graph(
+      paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt")
+    )
 
     expect_equal(dim(spc), c(nrow = 3L, ncol = 4L, nwl = 1024L))
 
@@ -96,7 +99,7 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
   })
 
   test_that("encoding", {
-    spc <- read_txt_Witec_Graph(
+    spc <- read_txt_WITec_Graph(
       paste0(tmpdir, "/nofilename (Header).txt"),
       encoding = "latin1"
     )
@@ -106,7 +109,7 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
   })
 
   test_that("Time Series", {
-    spc <- read_txt_Witec_Graph(
+    spc <- read_txt_WITec_Graph(
       paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"),
       type = "single"
     )
@@ -117,7 +120,7 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
 
   test_that("Map", {
     expect_warning(
-      read_txt_Witec_Graph(
+      read_txt_WITec_Graph(
         paste0(tmpdir, "/image2x3_GraphASCII.Data 1_F (Header).txt"),
         encoding = "latin1"
       ),
@@ -125,14 +128,14 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
     )
 
     expect_warning(
-      read_txt_Witec_Graph(
+      read_txt_WITec_Graph(
         paste0(tmpdir, "/image2x3_GraphASCII.Data 1_F (Header).txt"),
         encoding = "latin1", type = "single"
       ),
       "header provides spatial information in y direction for single spectra"
     )
 
-    spc <- read_txt_Witec_Graph(
+    spc <- read_txt_WITec_Graph(
       paste0(tmpdir, "/image2x3_GraphASCII.Data 1_F (Header).txt"),
       type = "map", encoding = "latin1"
     )
@@ -142,7 +145,7 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
   })
 
   test_that("missing filename", {
-    spc <- read_txt_Witec_Graph(paste0(tmpdir, "/nofilename (Header).txt"),
+    spc <- read_txt_WITec_Graph(paste0(tmpdir, "/nofilename (Header).txt"),
       encoding = "latin1"
     )
     spc$filename <- gsub("^.*/", "", spc$filename)
@@ -152,7 +155,7 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
 
   test_that("wrong combination of file names", {
     expect_error(
-      read_txt_Witec_Graph(
+      read_txt_WITec_Graph(
         paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"),
         paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Y-Axis).txt")
       ),

@@ -11,11 +11,12 @@
 #' @note This is a first rough import function and the functions may change
 #'       without notice.
 #'
-#' @param filename file name and path of the `.txt` file.
-#' @param encoding encoding of the text file (used by [base::readLines()]).
-#' @param quiet suppress printing of progress.
+#' @param file (character): Path to file of Shimadzu `.txt` file.
+#' @param encoding (character): Encoding of the text file (used by
+#'        [base::readLines()]).
+#' @param quiet (logical):  Suppress printing of progress.
 #'
-#' @return list of spectra tables
+#' @return List of spectra tables
 #'
 #' @author Bjoern Egert
 #'
@@ -25,7 +26,7 @@
 #'
 #' @export
 #'
-read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
+read_txt_Shimadzu <- function(file, encoding = "", quiet = TRUE) {
 
   # A file consists of several sections ([Headers])
   # Each Section consists of:
@@ -34,13 +35,19 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
   #   [MC Peak Table]
   #   [MS Similarity Search Results for Spectrum Process Table]
 
-  impLines <- readLines(con = filename, n = -1L, ok = TRUE, warn = TRUE, encoding = encoding)
-  length(impLines)
+  impLines <- readLines(
+    con = file, n = -1L, ok = TRUE, warn = TRUE, encoding = encoding
+  )
+  # length(impLines)
 
   # total numbers of pos1 and pos2 and pos3 are equal
   pos1 <- which(impLines == "[Header]") # row positions of Headers
-  pos2 <- which(impLines == "[MC Peak Table]") # row positions of peak info tables
-  pos3 <- which(impLines == "[MS Similarity Search Results for Spectrum Process Table]") # row positions of peak annotations
+  # row positions of peak info tables
+  pos2 <- which(impLines == "[MC Peak Table]")
+  # row positions of peak annotations:
+  pos3 <- which(
+    impLines == "[MS Similarity Search Results for Spectrum Process Table]"
+  )
   pos4 <- which(impLines == "[MS Spectrum]") # row positions of peak spectra
 
   headers <- length(pos1) # number of header sections
@@ -87,33 +94,40 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
   {
     if (!quiet) cat("header:", header, "\n")
 
-    # ----------------- 1a. Import: "[MC Peak Table]"
+    # 1a. Import: "[MC Peak Table]" ----
 
     start <- pos2[header] + 3
     stop <- pos3[header] - 2
 
     peakMat <- read.table(
-      file = filename, skip = start - 1, nrows = stop - start,
+      file = file, skip = start - 1, nrows = stop - start,
       header = TRUE, sep = ";", dec = ".", comment.char = "",
       stringsAsFactors = FALSE, quote = "\"'"
     )
+
+
+    # FIXME: commented code should not be present:
 
     # maybe faster than above ...
     # Peak#;Ret.Time;Proc.From;Proc.To;Mass;Area;Height;A/H;Conc.;Mark;Name;Ret. Index"
     # colnames <- strsplit(impLines[start], split = ";")[[1]]
     # strsplit(impLines[(start+1):stop], split = ";")[[1]]
-    # peakMat <- matrix(impLines[(start+1):stop], ncol = length(colnames), byrow = TRUE)
+    # peakMat <- matrix(
+    #   impLines[(start+1):stop],
+    #   ncol = length(colnames),
+    #   byrow = TRUE
+    # )
 
     res2Li[[header]] <- peakMat
 
-    # ----------------- 1b. Import: "[MS Similarity Search Results for Spectrum Process Table]"
+    # 1b. Import: "[MS Similarity Search Results for Spectrum Process Table]" ----
 
     start <- pos3[header] + 2
     stop <- pos4Li[[header]][1] - 1
     if (stop - start != 0) # no annotation hits
       {
         simMat <- read.table(
-          file = filename, skip = start - 1, , nrows = stop - start,
+          file = file, skip = start - 1, , nrows = stop - start,
           header = TRUE, sep = ";", dec = ".", comment.char = "",
           stringsAsFactors = FALSE, quote = ""
         ) # quote = "\"'"
@@ -122,7 +136,7 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
     }
     res3Li[[header]] <- simMat
 
-    # ----------------- 1c. Import: "[MS Spectrum]"
+    # 1c. Import: "[MS Spectrum]" ----
 
     specLi <- list() # list of all spectra in current header section
     for (i in 1:(length(pos4Li[[header]]) - 1))
@@ -133,10 +147,13 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
       stop <- pos4Li[[header]][i + 1] - 1 # last data row before new Spectrum
 
       # debug purposes
-      if (!quiet) cat("header:", header, "spec:", i, "start:", start, "stop:", stop, "\n")
+      if (!quiet) {
+        cat("header:", header, "spec:", i, "start:", start, "stop:", stop, "\n")
+      }
 
-      # -------------------
-      # Catch expeption, when peak is reported in peakMat, but [MS Spectrum] is not available: like example: (keyrow: # of Peaks; 0)
+      # -------------------~
+      # Catch exception, when peak is reported in peakMat, but [MS Spectrum]
+      # is not available: like example: (keyrow: # of Peaks; 0)
       # [MS Spectrum]
       # # of Peaks;0
       # Raw Spectrum;38.343 (scan : 68686);Base Peak;m/z 0.00 (Inten : 0)
@@ -148,13 +165,17 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
       isEmptySpec <- impLines[checkRow] == "# of Peaks;0"
       if (isEmptySpec) {
         # special case: create dummy spectrum with zero intensities
-        spec <- cbind("m/z" = 1:100, "Absolute Intensity" = 0, "Relative Intensity" = 0)
+        spec <- cbind(
+          "m/z" = 1:100,
+          "Absolute Intensity" = 0,
+          "Relative Intensity" = 0
+        )
       }
-      # -------------------
+      # -------------------~
 
       if (!isEmptySpec) {
         spec <- scan(
-          file = filename, sep = ";", skip = start - 1, nlines = (stop - start) + 1,
+          file = file, sep = ";", skip = start - 1, nlines = (stop - start) + 1,
           dec = ".", quiet = TRUE
         )
         spec <- matrix(spec, ncol = 3, byrow = T)
@@ -194,8 +215,8 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
   }
   m3 <- cbind(header = tmp, m3)
   m3 <- m3[, c(
-    "header", "Spectrum.", "Hit..", "SI", "CAS..", "Name", "Mol.Weight", "Mol.Form",
-    "Retention.Index"
+    "header", "Spectrum.", "Hit..", "SI", "CAS..", "Name",
+    "Mol.Weight", "Mol.Form", "Retention.Index"
   )] # select most important columns
   tmp <- complete.cases(m3)
   m3 <- m3[tmp, ]
@@ -204,7 +225,8 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
   tmp <- colnames(res4Li[[1]][[1]])
   m4 <- matrix(NA, nrow = 1, ncol = length(tmp))
   colnames(m4) <- tmp
-  m4 <- cbind(header = NA, spectra = NA, m4) # header number and spectra number as first columns
+  # header number and spectra number as first columns:
+  m4 <- cbind(header = NA, spectra = NA, m4)
   for (header in 1:headers)
   {
     for (spectra in 1:length(res4Li[[header]]))
@@ -212,7 +234,7 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
       tmp <- as.matrix(res4Li[[header]][[spectra]])
       tmp <- cbind(header, spectra, tmp)
       m4 <- rbind(m4, tmp)
-    } # spectras
+    } # spectra
   } # header
   mode(m4) <- "numeric"
   m4 <- m4[-1, ]
@@ -220,7 +242,3 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
   return(list(peakInfo = m2, peakAnnotate = m3, peakMasses = m4))
 }
 
-
-# Unit tests -----------------------------------------------------------------
-
-# FIXME: add unit tests
