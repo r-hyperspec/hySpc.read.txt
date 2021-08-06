@@ -743,12 +743,12 @@ Note that the Y data files also contain wavelength information, but (at least Wi
 
 Another option is Witec's txt table ASCII export (Export $\rightarrow$ Table), which produces ASCII files with each row corresponding to one wavelength.
 The first column contains the wavelength axis; all further columns contain one spectrum each column.
-Such files can be read with `read_txt_Witec()`{.r}:
+Such files can be read with `read_txt_WITec()`{.r}:
 
 ```{block, r witec-txt, include=FALSE, eval=FALSE}
-read_txt_Witec("fileio/txt.Witec/Witec-timeseries_no.txt")
+read_txt_WITec("fileio/txt.Witec/Witec-timeseries_no.txt")
 ```
-`read_txt_Witec()`{.r} determines the number of wavelengths automatically.
+`read_txt_WITec()`{.r} determines the number of wavelengths automatically.
 
 Note that there are several Export Filter Options.
 It is possible to determine which units should be used for the export (see XUnits tab).
@@ -789,9 +789,9 @@ If the label header is exported, the spatial information can be extracted from t
 Otherwise, at least one, `points.per.line`{.r} or `lines.per.image`{.r}, has to be given manually, if not, a warning will be shown.
 
 ```{block, r witec-txt-map, include=FALSE}
-read_txt_Witec("fileio/txt.Witec/Witec-Map_full.txt",  type = "map", hdr.label = TRUE, hdr.units = TRUE)
+read_txt_WITec("fileio/txt.Witec/Witec-Map_full.txt",  type = "map", hdr.label = TRUE, hdr.units = TRUE)
 
-read_txt_Witec("fileio/txt.Witec/Witec-Map_label.txt", type = "map", hdr.label = TRUE, hdr.units = FALSE)
+read_txt_WITec("fileio/txt.Witec/Witec-Map_label.txt", type = "map", hdr.label = TRUE, hdr.units = FALSE)
 
 read_txt_Witec("fileio/txt.Witec/Witec-Map_unit.txt",  type = "map", hdr.label = FALSE, hdr.units = TRUE)
 

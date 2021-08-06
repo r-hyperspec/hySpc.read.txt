@@ -1,6 +1,6 @@
 # Function -------------------------------------------------------------------
 
-#' @rdname read_txt_Witec
+#' @rdname read_txt_WITec
 #' @param filex filename wavelength axis file
 #' @param filey filename intensity file
 #' @export
