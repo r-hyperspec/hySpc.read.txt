@@ -164,10 +164,10 @@ read_txt_Renishaw <- function(file = stop("file is required"),
 
 hySpc.testthat::test(read_txt_Renishaw) <- function() {
   context("read_txt_Renishaw")
-  path <- system.file("extdata/fileio/txt.Renishaw", package="hySpc.read.txt")
+  path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
   paracetamol <- paste0(path, "/paracetamol.txt")
   laser <- paste0(path, "/laser.txt.gz")
-  chondro <- paste0(path, "/chondro.txt")
+  faux_cell <- paste0(path, "/chondro.txt")
 
   test_that("single spectrum", {
     tmp <- read_txt_Renishaw(paracetamol, "spc")
@@ -204,7 +204,7 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
 
   test_that("compressed files", {
 
-    files <- Sys.glob(paste0(path, "/faux_cell.*"))
+    files <- Sys.glob(paste0(path, "/chondro.*"))
     files <- grep("[.]zip", files, invert = TRUE, value = TRUE) # .zip is tested with read_zip_Renishaw
     for (f in files) {
       expect_equal(dim(read_txt_Renishaw(!!f)), c(nrow = 875L, ncol = 4L, nwl = 1272L))
@@ -238,7 +238,7 @@ hySpc.testthat::test(read_zip_Renishaw) <- function() {
     skip("TODO: adapt to new package")
 
     expect_equal(
-      dim(read_zip_Renishaw("fileio/txt.Renishaw/faux_cell.zip")),
+      dim(read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")),
       c(nrow = 875L, ncol = 4L, nwl = 1272L)
     )
   })
