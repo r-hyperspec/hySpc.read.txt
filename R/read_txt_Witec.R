@@ -8,7 +8,7 @@
 #' - [read_txt_Witec()] reads WITec ASCII files where the first column gives
 #'   the wavelength axes and the other columns the spectra.
 #'
-#' - [read_dat_Witec()] reads WITec's ASCII exported data which comes in
+#' - [read_dat_WITec()] reads WITec's ASCII exported data which comes in
 #'   separate files with x and y data.
 #'
 #' @param file Path or connection to ASCII file.
