@@ -62,9 +62,10 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"),
 hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
   context("read_asc_PerkinElmer")
 
-  path <- system.file("extdata/txt.PerkinElmer",package = "hySpc.read.txt")
+  path <- system.file("extdata/txt.PerkinElmer", package = "hySpc.read.txt")
   flu_file <- paste0(path, c("/flu1.txt", "/flu2.txt",
-                             "/flu3.txt", "/flu4.txt", "/flu5.txt", "/flu6.txt"))
+                             "/flu3.txt", "/flu4.txt",
+                             "/flu5.txt", "/flu6.txt"))
 
   test_that("PerkinElmer .txt: labels are correct", {
     for (flu in flu_file) {
@@ -76,16 +77,16 @@ hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
     }
   })
 
-  test_that("PerkinElmer .txt: spectra are correct", {
-    for(flu in flu_file){
+  test_that ("PerkinElmer .txt: spectra are correct", {
+    for (flu in flu_file) {
       expect_message(spc <- read_asc_PerkinElmer(flu))
 
       expect_equal(colnames(spc@data$spc), as.character(seq(from = 405, to = 495, by = .5)))
     }
   })
 
-  test_that("PerkinElmer .txt wavelength",{
-    for(flu in flu_file){
+  test_that("PerkinElmer .txt wavelength", {
+    for (flu in flu_file) {
       expect_message(spc <- read_asc_PerkinElmer(flu))
 
       expect_equal(length(spc@wavelength), 181)
