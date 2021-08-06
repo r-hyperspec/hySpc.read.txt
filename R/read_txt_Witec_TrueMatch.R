@@ -4,7 +4,7 @@
 #'
 #' Import spectra from WITec ASCII/txt files exported by WITec TrueMatch.
 #'
-#' Function [read_txt_Witec_TrueMatch()] reads WITec ASCII files exported by
+#' Function [read_txt_WITec_TrueMatch()] reads WITec ASCII files exported by
 #' WITec TrueMatch. These files are ini-like: ASCII files with meta data
 #' sections and spectra data sections.
 #'
@@ -25,7 +25,7 @@
 #' @importFrom hySpc.testthat test<-
 #'
 #' @export
-read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
+read_txt_WITec_TrueMatch <- function(file, keys_2header = "all") {
 
   # Get file
   filename <- file
@@ -41,7 +41,7 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   if (!all(nwl == nwl[1])) {
     stop(
       "This file contains spectra with unequal length. \n",
-      "This is not yet supported by 'read_txt_Witec_ASCII()'. \n ",
+      "This is not yet supported by 'read_txt_WITec()'. \n ",
       msg_open_issue_and_add_file()
     )
   }
@@ -56,7 +56,7 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
   if (!all(names(file[spc_hdr + 2]) == "SpectrumData")) {
     stop(
       "This file does not contain the SpectrumData at the expected positions.\n",
-      "This is not yet supported by 'read_txt_Witec_ASCII()'. \n ",
+      "This is not yet supported by 'read_txt_WITec()'. \n ",
       msg_open_issue_and_add_file()
     )
   }
@@ -129,8 +129,8 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
 # Unit tests -----------------------------------------------------------------
 
-hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
-  context("read_txt_Witec_TrueMatch")
+hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
+  context("read_txt_WITec_TrueMatch")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt_TrueMatch")
   untar("testfiles_Witec.tar.gz",
@@ -141,7 +141,7 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   on.exit(unlink(tmpdir))
 
   test_that("WITec TrueMatch example file", {
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
     expect_equal(
       dim(spc),
@@ -153,7 +153,7 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   })
 
   test_that("multiple spectra with varying wavelengths return error", {
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
     expect_equivalent(
       length(spc@data[1, c("spc")]),
@@ -162,7 +162,7 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   })
 
   test_that("spectra are in correct positions", {
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
     expect_equivalent(
       is.matrix(spc@data[1, c("spc")]),
@@ -173,7 +173,7 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   test_that("spectra data is correctly parsed", {
     file <- hyperSpec::read.ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     ini_spc <- file[which(names(file) == "SpectrumData")]
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
     for (s in seq_along(ini_spc)) {
       data <- unlist(ini_spc[s])
@@ -186,7 +186,7 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   test_that("spectra meta data is correctly parsed", {
     file <- read.ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     ini_meta <- file[which(names(file) == "SampleMetaData")]
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     A <- names(file$SampleMetaData)
     A <- A[A != ""]
     A <- intersect(names(spc@data), A)
@@ -197,7 +197,7 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   test_that("spectra header is correctly parsed", {
     file <- read.ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     ini_meta <- file[which(names(file) == "SpectrumHeader")]
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     A <- names(file$SpectrumHeader)
     A <- A[A != ""]
     A <- intersect(names(spc@data), A)
@@ -210,13 +210,13 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
 
     A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
     A <- A[A != ""]
-    spc <- read_txt_Witec_TrueMatch(
+    spc <- read_txt_WITec_TrueMatch(
       paste0(tmpdir, "/Witec_TrueMatch.txt"),
       keys_2header = "all"
     )
     expect_equal(sort(colnames(spc)), sort(c("filename", "spc", A)))
 
-    spc <- read_txt_Witec_TrueMatch(
+    spc <- read_txt_WITec_TrueMatch(
       paste0(tmpdir, "/Witec_TrueMatch.txt"),
       keys_2header = "none"
     )
@@ -224,7 +224,7 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
 
     A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
     A <- A[A != ""]
-    spc <- read_txt_Witec_TrueMatch(
+    spc <- read_txt_WITec_TrueMatch(
       paste0(tmpdir, "/Witec_TrueMatch.txt"),
       keys_2header = c("Length")
     )
@@ -235,12 +235,12 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   })
 
   test_that("labels are correctly assigned to wavelength", {
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     expect_equivalent(labels(spc, ".wavelength"), "lambda/nm")
   })
 
   test_that("a valid hyperSpec object is returned", {
-    spc_test <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    spc_test <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     expect(
       assert_hyperSpec(spc_test),
       failure_message = "hyperSpec object was not returned"

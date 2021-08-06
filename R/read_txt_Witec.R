@@ -5,10 +5,10 @@
 #'
 #' Import Raman spectra/maps from WITec Instrument via ASCII files
 #'
-#' - [read_txt_Witec()] reads WITec ASCII files where the first column gives
+#' - [read_txt_WITec()] reads WITec ASCII files where the first column gives
 #'   the wavelength axes and the other columns the spectra.
 #'
-#' - [read_dat_Witec()] reads WITec's ASCII exported data which comes in
+#' - [read_dat_WITec()] reads WITec's ASCII exported data which comes in
 #'   separate files with x and y data.
 #'
 #' @param file Path or connection to ASCII file.
@@ -33,7 +33,7 @@
 #'
 #' @export
 #'
-read_txt_Witec <- function(file = stop("filename or connection needed"),
+read_txt_WITec <- function(file = stop("filename or connection needed"),
                            points.per.line = NULL,
                            lines.per.image = NULL,
                            type = c("single", "map"),
@@ -86,8 +86,8 @@ read_txt_Witec <- function(file = stop("filename or connection needed"),
 
 # Unit tests -----------------------------------------------------------------
 
-hySpc.testthat::test(read_txt_Witec) <- function() {
-  context("read_txt_Witec")
+hySpc.testthat::test(read_txt_WITec) <- function() {
+  context("read_txt_WITec")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt")
   untar("testfiles_Witec.tar.gz",
@@ -104,19 +104,19 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   test_that("Map with neither header nor label lines", {
     expect_error(
       suppressWarnings(
-        read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+        read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
           type = "map", hdr.units = TRUE, hdr.label = TRUE
         )
       )
     )
     expect_warning(
-      read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+      read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
         type = "map"
       ),
       "no spatial information provided"
     )
 
-    spc <- read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+    spc <- read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
       type = "map", points.per.line = 3, lines.per.image = 2
     )
     spc$filename <- gsub("^.*/", "", spc$filename)
@@ -126,7 +126,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("Map: one of points.per.line and lines.per.image is sufficient", {
-    spc <- read_txt_Witec(
+    spc <- read_txt_WITec(
       paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
       type = "map",
       lines.per.image = 2
@@ -134,7 +134,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
     spc$filename <- gsub("^.*/", "", spc$filename)
     expect_known_hash(spc, hash = "a74cdcd428")
 
-    spc <- read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+    spc <- read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
       type = "map", points.per.line = 3
     )
     spc$filename <- gsub("^.*/", "", spc$filename)
@@ -142,7 +142,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("Map with label line but no units header", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-Map_label.txt"),
+    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-Map_label.txt"),
       type = "map",
       hdr.units = FALSE, hdr.label = TRUE
     )
@@ -152,7 +152,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
 
   test_that("Map with units header line but no labels", {
     expect_warning(
-      spc <- read_txt_Witec(paste0(tmpdir, "/Witec-Map_unit.txt"),
+      spc <- read_txt_WITec(paste0(tmpdir, "/Witec-Map_unit.txt"),
         type = "map", hdr.units = TRUE, hdr.label = FALSE
       ),
       "no spatial information provided"
@@ -162,7 +162,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
     spc$filename <- gsub("^.*/", "", spc$filename)
     expect_known_hash(spc, "123fc77bdf")
 
-    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-Map_unit.txt"),
+    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-Map_unit.txt"),
       type = "map", hdr.units = TRUE, hdr.label = FALSE,
       points.per.line = 5, lines.per.image = 5
     )
@@ -171,7 +171,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("Map with header and label lines", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-Map_full.txt"),
+    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-Map_full.txt"),
       type = "map",
       hdr.units = TRUE, hdr.label = TRUE
     )
@@ -181,7 +181,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("Map can be read as time series", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"))
+    spc <- read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"))
     expect_null(spc$x)
     expect_null(spc$y)
     spc$filename <- gsub("^.*/", "", spc$filename)
@@ -189,19 +189,19 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("parameter default type = 'single'", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/timeseries3x_Table.Data 1.txt"))
+    spc <- read_txt_WITec(paste0(tmpdir, "/timeseries3x_Table.Data 1.txt"))
     spc$filename <- gsub("^.*/", "", spc$filename)
     expect_known_hash(spc, "37fc7cadcc")
   })
 
   test_that("Time series with neither header nor label lines", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/timeseries3x_Table.Data 1.txt"))
+    spc <- read_txt_WITec(paste0(tmpdir, "/timeseries3x_Table.Data 1.txt"))
     spc$filename <- gsub("^.*/", "", spc$filename)
     expect_known_hash(spc, "37fc7cadcc")
   })
 
   test_that("Time series with label line but no units header", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_label.txt"),
+    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-timeseries_label.txt"),
       hdr.units = FALSE, hdr.label = TRUE
     )
     spc$filename <- gsub("^.*/", "", spc$filename)
@@ -209,7 +209,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("Time series with units header line but no labels", {
-    spc <- read_txt_Witec(
+    spc <- read_txt_WITec(
       paste0(tmpdir, "/Witec-timeseries_unit.txt"),
       hdr.units = TRUE, hdr.label = FALSE
     )
@@ -219,9 +219,9 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("Time series with header and label lines", {
-    expect_error(spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_full.txt")))
+    expect_error(spc <- read_txt_WITec(paste0(tmpdir, "/Witec-timeseries_full.txt")))
 
-    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_full.txt"),
+    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-timeseries_full.txt"),
       hdr.units = TRUE, hdr.label = TRUE
     )
     spc$filename <- gsub("^.*/", "", spc$filename)
@@ -229,7 +229,7 @@ hySpc.testthat::test(read_txt_Witec) <- function() {
   })
 
   test_that("encoding", {
-    spc <- read_txt_Witec(paste0(tmpdir, "/Witec-timeseries_full.txt"),
+    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-timeseries_full.txt"),
       hdr.units = TRUE, hdr.label = TRUE,
       encoding = "ascii"
     )
