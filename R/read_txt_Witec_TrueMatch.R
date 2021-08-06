@@ -21,6 +21,7 @@
 #'
 #' @author Claudia Beleites and Erick Oduniyi
 #'
+#' @include messages.R
 #' @importFrom hySpc.testthat test<-
 #'
 #' @export
