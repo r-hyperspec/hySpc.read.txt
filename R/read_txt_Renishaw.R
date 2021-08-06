@@ -233,7 +233,7 @@ read_zip_Renishaw <- function(file = stop("filename is required"),
 
 hySpc.testthat::test(read_zip_Renishaw) <- function() {
   context("read_zip_Renishaw")
-  path <- system.file("extdata/fileio/txt.Renishaw", package="hySpc.read.txt")
+  path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
   test_that("compressed files", {
 
     expect_equal(
