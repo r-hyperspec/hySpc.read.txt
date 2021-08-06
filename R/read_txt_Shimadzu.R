@@ -11,11 +11,12 @@
 #' @note This is a first rough import function and the functions may change
 #'       without notice.
 #'
-#' @param file file name and path of the `.txt` file.
-#' @param encoding encoding of the text file (used by [base::readLines()]).
-#' @param quiet suppress printing of progress.
+#' @param file (character): Path to file of Shimadzu `.txt` file.
+#' @param encoding (character): Encoding of the text file (used by
+#'        [base::readLines()]).
+#' @param quiet (logical):  Suppress printing of progress.
 #'
-#' @return list of spectra tables
+#' @return List of spectra tables
 #'
 #' @author Bjoern Egert
 #'
