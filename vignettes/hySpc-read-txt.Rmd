@@ -421,7 +421,7 @@ CAPTION <- "Spectra of triazine. "
 plot(triazine[1])
 ```
 
-Witec also saves ASCII data with spectra in columns (Export $\rightarrow$ Table), see \@ref(sec:read-txt-Witec).
+WITec also saves ASCII data with spectra in columns (Export $\rightarrow$ Table), see \@ref(sec:read-txt-witec).
 
 
 ## Basic Atomic Spectra from NIST Tables {#sec:aes-nist}
@@ -705,20 +705,20 @@ Andor Solis exports ASCII files that can be read with `read.asc.Andor()`{.r}:
 read.asc.Andor("fileio/asc.Andor/ASCII-Andor-Solis.asc")
 ```
 
-## Witec {#sec:read-txt-Witec}
+## WITec {#sec:read-txt-witec}
 
-\index{Witec!ASCII}
-\index{ASCII!Witec}
-\index{Graph ASCII!Witec}
-\index{Witec!Graph ASCII}
-\index{Raman!Witec!ASCII}
-\index{Raman!Witec!Save ASCII X, Save ASCII Y}
-\index{Raman!Witec!Export Table}
-\index{Raman!Witec!spc}
-\index{Raman!Witec!Graph ASCII}
-\index{spc!Witec}
+\index{WITec!ASCII}
+\index{ASCII!WITec}
+\index{Graph ASCII!WITec}
+\index{WITec!Graph ASCII}
+\index{Raman!WITec!ASCII}
+\index{Raman!WITec!Save ASCII X, Save ASCII Y}
+\index{Raman!WITec!Export Table}
+\index{Raman!WITec!spc}
+\index{Raman!WITec!Graph ASCII}
+\index{spc!WITec}
 
-The Witec project software supports exporting spectra as Thermo Galactic `.spc` files.
+The WITec project software supports exporting spectra as Thermo Galactic `.spc` files.
 
 ```{block, r witec-spc, results='hide'}
 read.spc("fileio/spc.Witec/Witec-timeseries.spc")
@@ -729,26 +729,26 @@ read.spc("fileio/spc.Witec/Witec-Map.spc")
 For imaging data, no spatial information for the set of spectra is provided (in version 2.10, this export option is not supported).
 
 Imaging data (but also single spectra and time series) can be exported as ASCII X and Y files (Save ASCII X and Save ASCII Y, not supported in version 4).
-These can be read by `read_dat_Witec()`{.r}:
+These can be read by `read_dat_WITec()`{.r}:
 
 ```{block, r witec-dat, results='hide'}
-read_dat_Witec("fileio/txt.Witec/Witec-timeseries-x.dat")
-read_dat_Witec(
+read_dat_WITec("fileio/txt.Witec/Witec-timeseries-x.dat")
+read_dat_WITec(
   filex = "fileio/txt.Witec/Witec-Map-x.dat",
   points.per.line = 5, lines.per.image = 5, type = "map"
 )
 ```
 
-Note that the Y data files also contain wavelength information, but (at least Witec Project 2.10) this information is always wavelength in nm, not Raman shift in wavenumbers: this is provided by the X data file only.
+Note that the Y data files also contain wavelength information, but (at least WITec Project 2.10) this information is always wavelength in nm, not Raman shift in wavenumbers: this is provided by the X data file only.
 
-Another option is Witec's txt table ASCII export (Export $\rightarrow$ Table), which produces ASCII files with each row corresponding to one wavelength.
+Another option is WITec's txt table ASCII export (Export $\rightarrow$ Table), which produces ASCII files with each row corresponding to one wavelength.
 The first column contains the wavelength axis; all further columns contain one spectrum each column.
-Such files can be read with `read_txt_Witec()`{.r}:
+Such files can be read with `read_txt_WITec()`{.r}:
 
 ```{block, r witec-txt, include=FALSE, eval=FALSE}
-read_txt_Witec("fileio/txt.Witec/Witec-timeseries_no.txt")
+read_txt_WITec("fileio/txt.Witec/Witec-timeseries_no.txt")
 ```
-`read_txt_Witec()`{.r} determines the number of wavelengths automatically.
+`read_txt_WITec()`{.r} determines the number of wavelengths automatically.
 
 Note that there are several Export Filter Options.
 It is possible to determine which units should be used for the export (see XUnits tab).
@@ -789,9 +789,9 @@ If the label header is exported, the spatial information can be extracted from t
 Otherwise, at least one, `points.per.line`{.r} or `lines.per.image`{.r}, has to be given manually, if not, a warning will be shown.
 
 ```{block, r witec-txt-map, include=FALSE}
-read_txt_Witec("fileio/txt.Witec/Witec-Map_full.txt",  type = "map", hdr.label = TRUE, hdr.units = TRUE)
+read_txt_WITec("fileio/txt.Witec/Witec-Map_full.txt",  type = "map", hdr.label = TRUE, hdr.units = TRUE)
 
-read_txt_Witec("fileio/txt.Witec/Witec-Map_label.txt", type = "map", hdr.label = TRUE, hdr.units = FALSE)
+read_txt_WITec("fileio/txt.Witec/Witec-Map_label.txt", type = "map", hdr.label = TRUE, hdr.units = FALSE)
 
 read_txt_Witec("fileio/txt.Witec/Witec-Map_unit.txt",  type = "map", hdr.label = FALSE, hdr.units = TRUE)
 
