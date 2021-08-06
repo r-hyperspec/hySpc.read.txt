@@ -1,10 +1,10 @@
 # Function -------------------------------------------------------------------
 
-#' @rdname read_txt_Witec
+#' @rdname read_txt_WITec
 #' @param filex filename wavelength axis file
 #' @param filey filename intensity file
 #' @export
-read_dat_Witec <- function(filex = stop("filename or connection needed"),
+read_dat_WITec <- function(filex = stop("filename or connection needed"),
                            filey = sub("-x", "-y", filex),
                            points.per.line = NULL,
                            lines.per.image = NULL,
@@ -41,8 +41,8 @@ read_dat_Witec <- function(filex = stop("filename or connection needed"),
 
 # Unit tests -----------------------------------------------------------------
 
-hySpc.testthat::test(read_dat_Witec) <- function() {
-  context("read_dat_Witec")
+hySpc.testthat::test(read_dat_WITec) <- function() {
+  context("read_dat_WITec")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_dat")
   untar("testfiles_Witec.tar.gz",
@@ -56,13 +56,13 @@ hySpc.testthat::test(read_dat_Witec) <- function() {
   on.exit(unlink(tmpdir))
 
   test_that("-y file guessing", {
-    spc <- read_dat_Witec(paste0(tmpdir, "/Witec-timeseries-x.dat"))
+    spc <- read_dat_WITec(paste0(tmpdir, "/Witec-timeseries-x.dat"))
     spc$filename <- gsub("^.*/", "", spc$filename)
     expect_known_hash(spc, "1977fe5997")
   })
 
   test_that("encoding", {
-    spc <- read_dat_Witec(paste0(tmpdir, "/Witec-timeseries-x.dat"),
+    spc <- read_dat_WITec(paste0(tmpdir, "/Witec-timeseries-x.dat"),
       encoding = "ascii"
     )
     spc$filename <- gsub("^.*/", "", spc$filename)
@@ -71,7 +71,7 @@ hySpc.testthat::test(read_dat_Witec) <- function() {
   })
 
   test_that("Time series", {
-    spc <- read_dat_Witec(
+    spc <- read_dat_WITec(
       paste0(tmpdir, "/Witec-timeseries-x.dat"),
       paste0(tmpdir, "/Witec-timeseries-y.dat")
     )
@@ -81,7 +81,7 @@ hySpc.testthat::test(read_dat_Witec) <- function() {
   })
 
   test_that("Map: .dat does not have spatial information", {
-    spc <- read_dat_Witec(
+    spc <- read_dat_WITec(
       paste0(tmpdir, "/Witec-Map-x.dat"),
       paste0(tmpdir, "/Witec-Map-y.dat")
     )
@@ -94,21 +94,21 @@ hySpc.testthat::test(read_dat_Witec) <- function() {
 
   test_that("Map", {
     expect_warning(
-      read_dat_Witec(paste0(tmpdir, "/Witec-Map-x.dat"),
+      read_dat_WITec(paste0(tmpdir, "/Witec-Map-x.dat"),
         paste0(tmpdir, "/Witec-Map-y.dat"),
         points.per.line = 5, lines.per.image = 5
       ),
       "points.per.line != 1 given for single spectrum"
     )
     expect_warning(
-      read_dat_Witec(paste0(tmpdir, "/Witec-Map-x.dat"),
+      read_dat_WITec(paste0(tmpdir, "/Witec-Map-x.dat"),
         paste0(tmpdir, "/Witec-Map-y.dat"),
         points.per.line = 5, lines.per.image = 5
       ),
       "lines.per.image != 1 are defined for single spectrum"
     )
 
-    spc <- read_dat_Witec(paste0(tmpdir, "/Witec-Map-x.dat"),
+    spc <- read_dat_WITec(paste0(tmpdir, "/Witec-Map-x.dat"),
       paste0(tmpdir, "/Witec-Map-y.dat"),
       type = "map", points.per.line = 5, lines.per.image = 5
     )
