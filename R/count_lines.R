@@ -1,3 +1,6 @@
+
+# Function -------------------------------------------------------------------
+
 #' Count Lines (of an ASCII File)
 #'
 #' @param file the file name or connection
@@ -20,6 +23,9 @@ count_lines <- function(file, chunksize = 1e4) {
 
   nlines
 }
+
+
+# Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(count_lines) <- function() {
   context("count_lines")
