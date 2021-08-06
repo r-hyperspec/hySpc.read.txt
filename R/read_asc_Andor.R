@@ -10,11 +10,10 @@
 #' @param file filename or connection to ASCII file.
 #' @param ...,quiet,dec,sep handed to [base::scan()].
 #'
-#' @return `hyperSpec` object
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
 #'
 #' @author Claudia Beleites
 #'
-#' @seealso `vignette ("fileio")` for more information on file import and
 #'
 #' @concept io
 #'
@@ -47,20 +46,56 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
 
 # Unit tests -----------------------------------------------------------------
 
-# hySpc.testthat::test(read_asc_Andor) <- function() {
-#   context("read_asc_Andor")
-#
-#   tmpdir <- paste0(tempdir(), "/test_Ancor")
-#   untar("testfiles_Ancor.tar.gz",
-#         files = c("ASCII-Andor-Solis.asc"),
-#         exdir = tmpdir)
-#   on.exit(unlink(tmpdir))
-#
-#
-#   test_that("Andor Solis .asc files are read correctly", {
-#     expect_known_hash(
-#       read_asc_Andor(paste0(tmpdir, "/ASCII-Andor-Solis.asc")),
-#       "9ead937f51"
-#     )
-#   })
-# }
+hySpc.testthat::test(read_asc_Andor) <- function() {
+  local_edition(3)
+
+  filename <- system.file(
+    "extdata",
+    "asc.Andor/ASCII-Andor-Solis.asc",
+    package = "hySpc.read.txt"
+  )
+
+  expect_silent(spc <- read_asc_Andor(filename))
+
+  n_wl <- nwl(spc)
+  n_rows <- nrow(spc)
+  n_clos <- ncol(spc)
+
+  test_that("Andor Solis .asc: hyperSpec obj. dimensions are correct", {
+    expect_equal(n_wl, 63)
+    expect_equal(n_rows, 5)
+    expect_equal(n_clos, 2)
+  })
+
+  test_that("Andor Solis .asc: extra data are correct", {
+    # @data colnames
+    expect_equal(colnames(spc), c("spc", "filename"))
+  })
+
+  test_that("Andor Solis .asc: labels are correct", {
+    expect_equal(spc@label$.wavelength, NULL)
+    expect_equal(spc@label$spc, NULL)
+    expect_equal(spc@label$filename, "filename")
+  })
+
+  test_that("Andor Solis .asc: spectra are correct", {
+    # Dimensions of spectra matrix (@data$spc)
+    expect_equal(dim(spc@data$spc), c(5, 63))
+
+    # Column names of spectra matrix
+    expect_equal(colnames(spc@data$spc)[1], "161.408")
+    expect_equal(colnames(spc@data$spc)[10], "200.184")
+    expect_equal(colnames(spc@data$spc)[n_wl], "423.651") # last name
+
+    # Values of spectra matrix
+    expect_equal(unname(spc@data$spc[1, 1]), 3404)
+    expect_equal(unname(spc@data$spc[2, 10]), 3405)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 3415) # last spc value
+  })
+
+  test_that("Andor Solis .asc: wavelengths are correct", {
+    expect_equal(spc@wavelength[1], 161.40845)
+    expect_equal(spc@wavelength[10], 200.18387)
+    expect_equal(spc@wavelength[n_wl], 423.65106)
+  })
+}
