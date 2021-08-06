@@ -2,9 +2,9 @@
 
 #' Read WITec TrueMatch files (ASCII/txt)
 #'
-#' Import spectra from Witec ASCII/txt files exported by Witec TrueMatch.
+#' Import spectra from WITec ASCII/txt files exported by WITec TrueMatch.
 #'
-#' Function [read_txt_Witec_TrueMatch()] reads Witec ASCII files exported by
+#' Function [read_txt_Witec_TrueMatch()] reads WITec ASCII files exported by
 #' WITec TrueMatch. These files are ini-like: ASCII files with meta data
 #' sections and spectra data sections.
 #'
@@ -41,7 +41,7 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
     stop(
       "This file contains spectra with unequal length. \n",
       "This is not yet supported by 'read_txt_Witec_ASCII()'. \n ",
-       msg_open_issue_and_add_file()
+      msg_open_issue_and_add_file()
     )
   }
   nwl <- nwl[1]
@@ -56,7 +56,7 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
     stop(
       "This file does not contain the SpectrumData at the expected positions.\n",
       "This is not yet supported by 'read_txt_Witec_ASCII()'. \n ",
-       msg_open_issue_and_add_file()
+      msg_open_issue_and_add_file()
     )
   }
 
@@ -82,11 +82,15 @@ read_txt_Witec_TrueMatch <- function(file, keys_2header = "all") {
 
   # Update labels
   # By default, the wavelength is assumed to be measured in lambda/nm
-  # However, the user has the options to specify different units at object creation
+  # However, the user has the options to specify different units
+  # at object creation
   if (file$SpectrumHeader$XDataKind == "nm") {
-    labels(spc, ".wavelength") <- paste0("lambda/", file$SpectrumHeader$XDataKind)
+    labels(spc, ".wavelength") <-
+      paste0("lambda/", file$SpectrumHeader$XDataKind)
   } else {
-    choice <- tolower(readline(prompt = "Do you want to enter units for x-axis (wavelength)?: "))
+    choice <- tolower(
+      readline(prompt = "Do you want to enter units for x-axis (wavelength)?: ")
+    )
     if (choice == "yes" || choice == "y") {
       label <- readline(prompt = "Enter x-axis (wavelength) units: ")
       labels(spc, ".wavelength") <- label
@@ -138,7 +142,10 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   test_that("WITec TrueMatch example file", {
     spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
-    expect_equal(dim(spc), c(nrow = 2L, ncol = length(colnames(spc)), nwl = 1024L))
+    expect_equal(
+      dim(spc),
+      c(nrow = 2L, ncol = length(colnames(spc)), nwl = 1024L)
+    )
     expect_equal(spc$filename, rep(paste0(tmpdir, "/Witec_TrueMatch.txt"), 2))
 
     expect_equivalent(spc[[, , 610]], c(902, 732))
@@ -147,13 +154,19 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
   test_that("multiple spectra with varying wavelengths return error", {
     spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
-    expect_equivalent(length(spc@data[1, c("spc")]), length(spc@data[2, c("spc")]))
+    expect_equivalent(
+      length(spc@data[1, c("spc")]),
+      length(spc@data[2, c("spc")])
+    )
   })
 
   test_that("spectra are in correct positions", {
     spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
-    expect_equivalent(is.matrix(spc@data[1, c("spc")]), is.matrix(spc@data[2, c("spc")]))
+    expect_equivalent(
+      is.matrix(spc@data[1, c("spc")]),
+      is.matrix(spc@data[2, c("spc")])
+    )
   })
 
   test_that("spectra data is correctly parsed", {
@@ -196,16 +209,28 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
 
     A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
     A <- A[A != ""]
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header = "all")
+    spc <- read_txt_Witec_TrueMatch(
+      paste0(tmpdir, "/Witec_TrueMatch.txt"),
+      keys_2header = "all"
+    )
     expect_equal(sort(colnames(spc)), sort(c("filename", "spc", A)))
 
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header = "none")
+    spc <- read_txt_Witec_TrueMatch(
+      paste0(tmpdir, "/Witec_TrueMatch.txt"),
+      keys_2header = "none"
+    )
     expect_equivalent(sort(colnames(spc)), c("filename", "spc"))
 
     A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
     A <- A[A != ""]
-    spc <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"), keys_2header = c("Length"))
-    expect_equivalent(sort(colnames(spc)), sort(c("filename", "spc", A[which(A == "Length")])))
+    spc <- read_txt_Witec_TrueMatch(
+      paste0(tmpdir, "/Witec_TrueMatch.txt"),
+      keys_2header = c("Length")
+    )
+    expect_equivalent(
+      sort(colnames(spc)),
+      sort(c("filename", "spc", A[which(A == "Length")]))
+    )
   })
 
   test_that("labels are correctly assigned to wavelength", {
@@ -215,6 +240,9 @@ hySpc.testthat::test(read_txt_Witec_TrueMatch) <- function() {
 
   test_that("a valid hyperSpec object is returned", {
     spc_test <- read_txt_Witec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-    expect(assert_hyperSpec(spc_test), failure_message = "hyperSpec object was not returned")
+    expect(
+      assert_hyperSpec(spc_test),
+      failure_message = "hyperSpec object was not returned"
+    )
   })
 }
