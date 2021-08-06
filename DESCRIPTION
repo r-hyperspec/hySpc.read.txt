@@ -43,17 +43,18 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate:
-    'hySpc.read.txt-package.R'
     'count_lines.R'
     'helpers.R'
-    'read_txt_Witec.R'
+    'hySpc.read.txt-package.R'
+    'messages.R'
     'read_asc_Andor.R'
     'read_asc_PerkinElmer.R'
-    'read_txt_PerkinElmer.R'
     'read_dat_Witec.R'
     'read_ini.R'
     'read_txt_Graph_Witec.R'
     'read_txt_Horiba.R'
+    'read_txt_PerkinElmer.R'
     'read_txt_Renishaw.R'
     'read_txt_Shimadzu.R'
+    'read_txt_Witec.R'
     'read_txt_Witec_TrueMatch.R'
