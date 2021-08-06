@@ -212,7 +212,7 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
       tmp <- as.matrix(res4Li[[header]][[spectra]])
       tmp <- cbind(header, spectra, tmp)
       m4 <- rbind(m4, tmp)
-    } # spectras
+    } # spectra
   } # header
   mode(m4) <- "numeric"
   m4 <- m4[-1, ]
