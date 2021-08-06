@@ -225,8 +225,15 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
 
 hySpc.testthat::test(read_txt_Shimadzu) <- function() {
   context("read_txt_Shimadzu")
-  gc <- system.file("extdata/txt.Shimadzu/", "GCxGC-qMS.txt", package = "hySpc.read.txt")
-  spc <- read_txt_Shimadzu(gc)
+
+  filename <- system.file(
+    "extdata",
+    "txt.Shimadzu/GCxGC-qMS.txt",
+    package = "hySpc.read.txt"
+  )
+
+  spc <- read_txt_Shimadzu(filename)
+
   test_that("Shimadzu .txt",{
     expect_equal(length(spc), 3)
 
