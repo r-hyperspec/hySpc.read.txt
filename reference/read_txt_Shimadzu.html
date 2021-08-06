@@ -148,28 +148,29 @@ Shimadzu Chrome Solution (v. 2.72).
 Mass Spectrometer: Shimadzu GCMS-QP 2010 Ultra (www.shimadzu.com)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_txt_Shimadzu</span><span class='op'>(</span><span class='va'>filename</span>, encoding <span class='op'>=</span> <span class='st'>""</span>, quiet <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>read_txt_Shimadzu</span><span class='op'>(</span><span class='va'>file</span>, encoding <span class='op'>=</span> <span class='st'>""</span>, quiet <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>filename</th>
-      <td><p>file name and path of the <code>.txt</code> file.</p></td>
+      <th>file</th>
+      <td><p>(character): Path to file of Shimadzu <code>.txt</code> file.</p></td>
     </tr>
     <tr>
       <th>encoding</th>
-      <td><p>encoding of the text file (used by <code><a href='https://rdrr.io/r/base/readLines.html'>base::readLines()</a></code>).</p></td>
+      <td><p>(character): Encoding of the text file (used by
+<code><a href='https://rdrr.io/r/base/readLines.html'>base::readLines()</a></code>).</p></td>
     </tr>
     <tr>
       <th>quiet</th>
-      <td><p>suppress printing of progress.</p></td>
+      <td><p>(logical):  Suppress printing of progress.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list of spectra tables</p>
+    <p>List of spectra tables</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>This is a first rough import function and the functions may change
