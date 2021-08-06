@@ -27,8 +27,6 @@
 #'
 #' @author Claudia Beleites and Marcel Dahms
 #'
-#' @seealso `vignette("fileio")` for more information on file import and
-#' [options()] for details on options.
 #'
 #' @importFrom hySpc.testthat test<-
 #' @importFrom utils head
