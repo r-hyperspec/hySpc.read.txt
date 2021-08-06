@@ -14,7 +14,8 @@ read_txt_Witec_Graph <- function(headerfile = stop("filename or connection neede
 
   ## processing headerfile
   hdr <- read_ini(headerfile, skip = 1, encoding = encoding)
-  hdr <- sapply(hdr, function(x) unlist(x, recursive = FALSE)) # returns a matrix with colnames and rownames for better adressing
+  # returns a matrix with colnames and rownames for better addressing
+  hdr <- sapply(hdr, function(x) unlist(x, recursive = FALSE))
 
   ## check valid input
   type <- check_valid(
@@ -73,7 +74,9 @@ hySpc.testthat::test(read_txt_Witec_Graph) <- function() {
   on.exit(unlink(tmpdir))
 
   test_that("defaults and (X-Axis)/(Y-Axis) file guessing", {
-    spc <- read_txt_Witec_Graph(paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt"))
+    spc <- read_txt_Witec_Graph(
+      paste0(tmpdir, "/timeseries3x_GraphASCII.Data 1 (Header).txt")
+    )
 
     expect_equal(dim(spc), c(nrow = 3L, ncol = 4L, nwl = 1024L))
 
