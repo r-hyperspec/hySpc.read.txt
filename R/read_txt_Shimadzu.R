@@ -11,7 +11,7 @@
 #' @note This is a first rough import function and the functions may change
 #'       without notice.
 #'
-#' @param filename file name and path of the `.txt` file.
+#' @param file file name and path of the `.txt` file.
 #' @param encoding encoding of the text file (used by [base::readLines()]).
 #' @param quiet suppress printing of progress.
 #'
@@ -25,7 +25,7 @@
 #'
 #' @export
 #'
-read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
+read_txt_Shimadzu <- function(file, encoding = "", quiet = TRUE) {
 
   # A file consists of several sections ([Headers])
   # Each Section consists of:
@@ -34,7 +34,7 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
   #   [MC Peak Table]
   #   [MS Similarity Search Results for Spectrum Process Table]
 
-  impLines <- readLines(con = filename, n = -1L, ok = TRUE, warn = TRUE, encoding = encoding)
+  impLines <- readLines(con = file, n = -1L, ok = TRUE, warn = TRUE, encoding = encoding)
   length(impLines)
 
   # total numbers of pos1 and pos2 and pos3 are equal
@@ -93,7 +93,7 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
     stop <- pos3[header] - 2
 
     peakMat <- read.table(
-      file = filename, skip = start - 1, nrows = stop - start,
+      file = file, skip = start - 1, nrows = stop - start,
       header = TRUE, sep = ";", dec = ".", comment.char = "",
       stringsAsFactors = FALSE, quote = "\"'"
     )
@@ -113,7 +113,7 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
     if (stop - start != 0) # no annotation hits
       {
         simMat <- read.table(
-          file = filename, skip = start - 1, , nrows = stop - start,
+          file = file, skip = start - 1, , nrows = stop - start,
           header = TRUE, sep = ";", dec = ".", comment.char = "",
           stringsAsFactors = FALSE, quote = ""
         ) # quote = "\"'"
@@ -154,7 +154,7 @@ read_txt_Shimadzu <- function(filename, encoding = "", quiet = TRUE) {
 
       if (!isEmptySpec) {
         spec <- scan(
-          file = filename, sep = ";", skip = start - 1, nlines = (stop - start) + 1,
+          file = file, sep = ";", skip = start - 1, nlines = (stop - start) + 1,
           dec = ".", quiet = TRUE
         )
         spec <- matrix(spec, ncol = 3, byrow = T)
