@@ -234,7 +234,7 @@ hySpc.testthat::test(read_txt_Shimadzu) <- function() {
 
   spc <- read_txt_Shimadzu(filename)
 
-  test_that("Shimadzu .txt",{
+  test_that("Shimadzu .txt", {
     expect_equal(length(spc), 3)
 
     expect_equal(dim(spc[[1]]), c(2191, 13))
@@ -250,6 +250,4 @@ hySpc.testthat::test(read_txt_Shimadzu) <- function() {
     expect_equal(spc[[3]][[38796, 4]], 280)
     expect_equal(spc[[3]][[56789, 2]], 72)
   })
-
 }
-
