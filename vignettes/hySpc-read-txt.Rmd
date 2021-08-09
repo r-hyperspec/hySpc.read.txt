@@ -67,7 +67,7 @@ source("vignette-functions.R", encoding = "UTF-8")
 # Settings -------------------------------------------------------------------
 source("vignette-default-settings.R", encoding = "UTF-8")
 
-# Temporaty options ----------------------------------------------------------
+# Temporary options ----------------------------------------------------------
 # Change the value of this option in "vignette-default-settings.R"
 show_reviewers_notes = getOption("show_reviewers_notes", TRUE)
 ```
@@ -344,7 +344,7 @@ Note that in this particular case, the spectra are more efficiently read by `rea
 
 If one regularly imports huge maps or images, writing a customized import function is highly encouraged.
 Users may gain speed and memory by using the internal workhorse functions for the file import.
-In that case, please contact the package maintainer ([**hyperSpec**'s GitHub repository](https://github.com/cbeleites/hyperSpec/issues){target="_blank"}) for advise (contributions to package **hyperSpec** are welcome and all authors are listed appropriately in the function help page's author section).
+In that case, please open an issue at ([**hySpc.read.txt**'s GitHub repository](https://github.com/r-hyperspec/hySpc.read.txt/issues){target="_blank"}) for advise (contributions to package **hySpc.read.txt** are welcome and all authors are listed appropriately in the function help page's author section).
 
 
 # ASCII files {#sec:ascii}
@@ -668,24 +668,34 @@ These spectra are by removed by default if option `file.remove.emptyspc`{.r} is 
 
 For convenience, functions to further wrappers to import maps (`read_txt_Horiba_xy()`{.r}) and time series (`read_txt_Horiba_t()`{.r}) are provided.
 
-```{block, r testHoriba-1}
+```{r, r testHoriba-1, eval=FALSE}
 spc <- read_txt_Horiba_xy("fileio/txt.HoribaJobinYvon/map.txt")
 if (any(dim(spc) != c(141, 4, 616)) ||
   any(abs(spc) < .Machine$double.eps^.5) ||
   is.null(spc$x) || any(is.na(spc$x)) ||
   is.null(spc$y) || any(is.na(spc$y)) ||
   length(setdiff(wl(spc), 1:616)) == 0L) {
-  stop("error in testing read_txt_Horiba_xy. Please contact ", maintainer("hyperSpec"))
+  pkg <- "hySpc.read.txt"
+  stop(
+    "error in testing read_txt_Horiba_xy(). ",
+    "opening an issue at \n",
+    packageDescription(pkg)$BugReports
+  )
 }
 spc
 ```
 
-```{block, r testHoriba-2}
+```{r, r testHoriba-2, eval=FALSE}
 spc <- read_txt_Horiba_t("fileio/txt.HoribaJobinYvon/ts.txt")
 if (any(dim(spc) != c(100, 3, 1024)) ||
   is.null(spc$t) || any(is.na(spc$t)) ||
   length(setdiff(wl(spc), 1:1024)) == 0L) {
-  stop("error in testing read_txt_Horiba_xy. Please contact ", maintainer("hyperSpec"))
+  pkg <- "hySpc.read.txt"
+  stop(
+    "error in testing read_txt_Horiba_xy(). ",
+    "opening an issue at \n",
+    packageDescription(pkg)$BugReports
+  )
 }
 
 spc
