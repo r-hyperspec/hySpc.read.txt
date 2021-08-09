@@ -312,7 +312,7 @@ Note that this should be accounted for in the decreasing order of the original <
 <p>Note that in this particular case, the spectra are more efficiently read by <code class="sourceCode r"><span class="kw">read.spc.KaiserMap</span>()</code> (see section <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a><!--, p. \pageref{sec:read-spc-KaiserMap}-->).</p>
 <p>If one regularly imports huge maps or images, writing a customized import function is highly encouraged.
 Users may gain speed and memory by using the internal workhorse functions for the file import.
-In that case, please contact the package maintainer (<a href="https://github.com/cbeleites/hyperSpec/issues" target="_blank"><strong>hyperSpec</strong>’s GitHub repository</a>) for advise (contributions to package <strong>hyperSpec</strong> are welcome and all authors are listed appropriately in the function help page’s author section).</p>
+In that case, please open an issue at (<a href="https://github.com/r-hyperspec/hySpc.read.txt/issues" target="_blank"><strong>hySpc.read.txt</strong>’s GitHub repository</a>) for advise (contributions to package <strong>hySpc.read.txt</strong> are welcome and all authors are listed appropriately in the function help page’s author section).</p>
 </div>
 <div id="sec:ascii" class="section level1">
 <h1 class="hasAnchor">
@@ -578,21 +578,36 @@ spc</p>
 <p>Note that Labspec <code>.txt</code> files can contain lots of spectra with zero intensity: Labspec saves a complete rectangular grid even if only part of a map was measured.
 These spectra are by removed by default if option <code class="sourceCode r">file.remove.emptyspc</code> is <code class="sourceCode r"><span class="ot">TRUE</span></code> (the default).</p>
 <p>For convenience, functions to further wrappers to import maps (<code class="sourceCode r"><span class="kw">read_txt_Horiba_xy</span>()</code>) and time series (<code class="sourceCode r"><span class="kw">read_txt_Horiba_t</span>()</code>) are provided.</p>
-<p>spc &lt;- read_txt_Horiba_xy(“fileio/txt.HoribaJobinYvon/map.txt”)
-if (any(dim(spc) != c(141, 4, 616)) ||
-any(abs(spc) &lt; .Machine<span class="math inline">\(double.eps^.5) ||  is.null(spc\)</span>x) || any(is.na(spc<span class="math inline">\(x)) ||  is.null(spc\)</span>y) || any(is.na(spc$y)) ||
-length(setdiff(wl(spc), 1:616)) == 0L) {
-stop(“error in testing read_txt_Horiba_xy. Please contact”, maintainer(“hyperSpec”))
-}
-spc</p>
-<p>spc &lt;- read_txt_Horiba_t(“fileio/txt.HoribaJobinYvon/ts.txt”)
-if (any(dim(spc) != c(100, 3, 1024)) ||
-is.null(spc<span class="math inline">\(t) || any(is.na(spc\)</span>t)) ||
-length(setdiff(wl(spc), 1:1024)) == 0L) {
-stop(“error in testing read_txt_Horiba_xy. Please contact”, maintainer(“hyperSpec”))
-}</p>
-<p>spc
-rm(spc)</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_txt_Horiba.html">read_txt_Horiba_xy</a></span><span class="op">(</span><span class="st">"fileio/txt.HoribaJobinYvon/map.txt"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">141</span>, <span class="fl">4</span>, <span class="fl">616</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">^</span><span class="fl">.5</span><span class="op">)</span> <span class="op">||</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">x</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/wl.html">wl</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">616</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0L</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">pkg</span> <span class="op">&lt;-</span> <span class="st">"hySpc.read.txt"</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span>
+    <span class="st">"error in testing read_txt_Horiba_xy(). "</span>,
+    <span class="st">"opening an issue at \n"</span>,
+    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageDescription</a></span><span class="op">(</span><span class="va">pkg</span><span class="op">)</span><span class="op">$</span><span class="va">BugReports</span>
+  <span class="op">)</span>
+<span class="op">}</span>
+<span class="va">spc</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_txt_Horiba.html">read_txt_Horiba_t</a></span><span class="op">(</span><span class="st">"fileio/txt.HoribaJobinYvon/ts.txt"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">3</span>, <span class="fl">1024</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">t</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">t</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/wl.html">wl</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1024</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0L</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">pkg</span> <span class="op">&lt;-</span> <span class="st">"hySpc.read.txt"</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span>
+    <span class="st">"error in testing read_txt_Horiba_xy(). "</span>,
+    <span class="st">"opening an issue at \n"</span>,
+    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageDescription</a></span><span class="op">(</span><span class="va">pkg</span><span class="op">)</span><span class="op">$</span><span class="va">BugReports</span>
+  <span class="op">)</span>
+<span class="op">}</span>
+
+<span class="va">spc</span>
+<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="sec:read-asc-Andor" class="section level2">
 <h2 class="hasAnchor">
@@ -601,7 +616,7 @@ rm(spc)</p>
 
 </p>
 <p>Andor Solis exports ASCII files that can be read with <code class="sourceCode r"><span class="kw">read.asc.Andor</span>()</code>:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/DEPRECATED-read.asc.Andor.html">read.asc.Andor</a></span><span class="op">(</span><span class="st">"fileio/asc.Andor/ASCII-Andor-Solis.asc"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="sec:read-txt-witec" class="section level2">
@@ -3485,7 +3500,7 @@ matrix
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session Info</h1>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; ─ Session info ───────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt;  setting  value                       </span>
