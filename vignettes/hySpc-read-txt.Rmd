@@ -67,7 +67,7 @@ source("vignette-functions.R", encoding = "UTF-8")
 # Settings -------------------------------------------------------------------
 source("vignette-default-settings.R", encoding = "UTF-8")
 
-# Temporaty options ----------------------------------------------------------
+# Temporary options ----------------------------------------------------------
 # Change the value of this option in "vignette-default-settings.R"
 show_reviewers_notes = getOption("show_reviewers_notes", TRUE)
 ```
@@ -668,24 +668,34 @@ These spectra are by removed by default if option `file.remove.emptyspc`{.r} is 
 
 For convenience, functions to further wrappers to import maps (`read_txt_Horiba_xy()`{.r}) and time series (`read_txt_Horiba_t()`{.r}) are provided.
 
-```{block, r testHoriba-1}
+```{r, r testHoriba-1, eval=FALSE}
 spc <- read_txt_Horiba_xy("fileio/txt.HoribaJobinYvon/map.txt")
 if (any(dim(spc) != c(141, 4, 616)) ||
   any(abs(spc) < .Machine$double.eps^.5) ||
   is.null(spc$x) || any(is.na(spc$x)) ||
   is.null(spc$y) || any(is.na(spc$y)) ||
   length(setdiff(wl(spc), 1:616)) == 0L) {
-  stop("error in testing read_txt_Horiba_xy. Please contact ", maintainer("hyperSpec"))
+  pkg <- "hySpc.read.txt"
+  stop(
+    "error in testing read_txt_Horiba_xy(). ",
+    "opening an issue at \n",
+    packageDescription(pkg)$BugReports
+  )
 }
 spc
 ```
 
-```{block, r testHoriba-2}
+```{r, r testHoriba-2, eval=FALSE}
 spc <- read_txt_Horiba_t("fileio/txt.HoribaJobinYvon/ts.txt")
 if (any(dim(spc) != c(100, 3, 1024)) ||
   is.null(spc$t) || any(is.na(spc$t)) ||
   length(setdiff(wl(spc), 1:1024)) == 0L) {
-  stop("error in testing read_txt_Horiba_xy. Please contact ", maintainer("hyperSpec"))
+  pkg <- "hySpc.read.txt"
+  stop(
+    "error in testing read_txt_Horiba_xy(). ",
+    "opening an issue at \n",
+    packageDescription(pkg)$BugReports
+  )
 }
 
 spc
