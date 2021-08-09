@@ -5,7 +5,6 @@
 #'
 #' @importFrom methods is
 #' @importFrom stats complete.cases
-#' @importFrom utils maintainer
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage
