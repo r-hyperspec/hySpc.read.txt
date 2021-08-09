@@ -344,7 +344,7 @@ Note that in this particular case, the spectra are more efficiently read by `rea
 
 If one regularly imports huge maps or images, writing a customized import function is highly encouraged.
 Users may gain speed and memory by using the internal workhorse functions for the file import.
-In that case, please contact the package maintainer ([**hyperSpec**'s GitHub repository](https://github.com/cbeleites/hyperSpec/issues){target="_blank"}) for advise (contributions to package **hyperSpec** are welcome and all authors are listed appropriately in the function help page's author section).
+In that case, please open an issue at ([**hySpc.read.txt**'s GitHub repository](https://github.com/r-hyperspec/hySpc.read.txt/issues){target="_blank"}) for advise (contributions to package **hySpc.read.txt** are welcome and all authors are listed appropriately in the function help page's author section).
 
 
 # ASCII files {#sec:ascii}
