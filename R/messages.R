@@ -5,7 +5,7 @@ msg_open_issue_and_add_file <- function(pkg = "hySpc.read.txt") {
     packageDescription(pkg)$BugReport,
     " and include including \n",
     "- the output of `sessionInfo()` and \n",
-    "- an example data file."
+    "- an example data file (possibly included in a ZIP archive)."
   )
 }
 
