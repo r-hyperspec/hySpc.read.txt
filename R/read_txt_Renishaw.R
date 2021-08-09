@@ -159,56 +159,61 @@ read_txt_Renishaw <- function(file = stop("file is required"),
   .spc_io_postprocess_optional(spc, file)
 }
 
-
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_txt_Renishaw) <- function() {
-  context("read_txt_Renishaw")
-  path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
-  f_paracetamol <- paste0(path, "/paracetamol.txt")
-  f_laser <- paste0(path, "/laser.txt.gz")
-  f_chondro <- paste0(path, "/chondro.txt")
+  local_edition(3)
 
-  test_that("single spectrum", {
-    tmp <- read_txt_Renishaw(f_paracetamol, "spc")
-    expect_equal(dim(tmp), c(nrow = 1L, ncol = 2L, nwl = 4064L))
+  filename <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
+  f_paracetamol <- paste0(filename, "/paracetamol.txt")
+  expect_silent(spc <- read_txt_Renishaw(f_paracetamol, "spc"))
+
+  n_wl <- nwl(spc)
+  n_rows <- nrow(spc)
+  n_clos <- ncol(spc)
+
+  test_that("Renishaw .txt: hyperSpec obj. dimensions are correct", {
+    expect_equal(n_wl, 4064)
+    expect_equal(n_rows, 1)
+    expect_equal(n_clos, 2)
+
   })
 
-  test_that("time series spectrum, gzipped", {
-    tmp <- read_txt_Renishaw(f_laser, "ts")
-    expect_equal(dim(tmp), c(nrow = 84L, ncol = 3L, nwl = 140L))
-    expect_equal(colnames(tmp), c("t", "spc", "filename"))
+  test_that("Renishaw .txt: extra data are correct", {
+    # @data colnames
+    expect_equal(colnames(spc), c("spc", "filename"))
+
+    # @data values
+    # (Add tests, if relevant or remove this row)
+
   })
 
-  test_that("map (= default)", {
-    tmp <- read_txt_Renishaw(f_chondro, "xyspc")
-    expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
-    expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
-
-    tmp <- read_txt_Renishaw(f_chondro)
-    expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
-    expect_equal(colnames(tmp), c("y", "x", "spc", "filename"))
+  test_that("Renishaw .txt: labels are correct", {
+    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu)/cm^-1))
+    expect_equal(spc@label$spc, expression("I / a.u."))
+    expect_equal(spc@label$filename, "filename")
   })
 
-  test_that("chunked reading", {
+  test_that("Renishaw .txt: spectra are correct", {
+    # Dimensions of spectra matrix (@data$spc)
+    expect_equal(dim(spc@data$spc), c(1, 4064))
 
-    ## error on too small chunk size
-    expect_error(
-      read_txt_Renishaw(f_chondro, nlines = 10),
-      "Wavelengths do not correspond"
-    )
+    # Column names of spectra matrix
+    expect_equal(colnames(spc@data$spc)[1], "96.7865")
+    expect_equal(colnames(spc@data$spc)[10], "108.982")
+    expect_equal(colnames(spc@data$spc)[n_wl], "3200.07") # last name
 
-    tmp <- read_txt_Renishaw(f_chondro, nlines = 1e5)
-    expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
+    # Values of spectra matrix
+    expect_equal(unname(spc@data$spc[1, 1]), 2056.5)
+    expect_equal(unname(spc@data$spc[1, 10]), 7248.13)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 299.229) # last spc value
+
   })
 
-  test_that("compressed files", {
-
-    files <- Sys.glob(paste0(path, "/chondro.*"))
-    files <- grep("[.]zip", files, invert = TRUE, value = TRUE) # .zip is tested with read_zip_Renishaw
-    for (f in files) {
-      expect_equal(dim(read_txt_Renishaw(!!f)), c(nrow = 875L, ncol = 4L, nwl = 1272L))
-    }
+  test_that("Renishaw .txt: wavelengths are correct", {
+    expect_equal(spc@wavelength[1], 96.7865)
+    expect_equal(spc@wavelength[10], 108.982)
+    expect_equal(spc@wavelength[n_wl], 3200.07)
   })
 }
 
@@ -233,12 +238,12 @@ read_zip_Renishaw <- function(file = stop("filename is required"),
 
 hySpc.testthat::test(read_zip_Renishaw) <- function() {
   context("read_zip_Renishaw")
-
+  filename <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
   test_that("compressed files", {
     skip("TODO: adapt to new package")
 
     expect_equal(
-      dim(read_zip_Renishaw("fileio/txt.Renishaw/chondro.zip")),
+      dim(read_zip_Renishaw(paste0(filename, "/chondro.zip"))),
       c(nrow = 875L, ncol = 4L, nwl = 1272L)
     )
   })
