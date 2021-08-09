@@ -21,11 +21,9 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"),
   content <- readLines(con = file)
 
   message(
-    "read_asc_PerkinElmer() is experimental, ",
-    "'hyperSpec' so far has no test data for PE .asc files. ",
-    "Please consider submitting your spectrum in an enhancement request to ",
-    packageDescription("hyperSpec")$BugReports,
-    " in order to help the development of hyperSpec."
+    "\nread_asc_PerkinElmer() is experimental. Package 'hySpc.read.txt' so far ",
+    "has no test data for PerkinElmer .asc files. ",
+    msg_open_issue_to_contribute_file()
   )
 
   ## find beginning of DATA section
@@ -33,11 +31,9 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"),
 
   if (length(startDATA) != 1L) {
     stop(
-      "read_asc_PerkinElmer() so far can deal with single spectra files only.",
-      " Please file an enhancement request at",
-      packageDescription("hyperSpec")$BugReports,
-      " with your file as an example or contact the maintainer (",
-      maintainer("hyperSpec"), ")."
+      "read_asc_PerkinElmer() so far can deal with single spectra files only. ",
+      "It seems that your file contains more than one spectrum. ",
+      msg_open_issue_to_contribute_file()
     )
   }
 
