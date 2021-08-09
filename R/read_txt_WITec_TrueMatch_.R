@@ -29,7 +29,7 @@ read_txt_WITec_TrueMatch <- function(file, keys_2header = "all") {
 
   # Get file
   filename <- file
-  file <- read.ini(filename)
+  file <- read_ini(filename)
 
   # Get header information
   spc_hdr <- which(names(file) == "SpectrumHeader")
@@ -171,7 +171,7 @@ hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
   })
 
   test_that("spectra data is correctly parsed", {
-    file <- hyperSpec::read.ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    file <- read_ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     ini_spc <- file[which(names(file) == "SpectrumData")]
     spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
@@ -184,7 +184,7 @@ hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
   })
 
   test_that("spectra meta data is correctly parsed", {
-    file <- read.ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    file <- read_ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     ini_meta <- file[which(names(file) == "SampleMetaData")]
     spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     A <- names(file$SampleMetaData)
@@ -195,7 +195,7 @@ hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
   })
 
   test_that("spectra header is correctly parsed", {
-    file <- read.ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    file <- read_ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     ini_meta <- file[which(names(file) == "SpectrumHeader")]
     spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
     A <- names(file$SpectrumHeader)
@@ -206,7 +206,7 @@ hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
   })
 
   test_that("users can specify extra data to keep", {
-    file <- read.ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+    file <- read_ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
 
     A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
     A <- A[A != ""]
