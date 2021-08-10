@@ -87,36 +87,47 @@ read_txt_WITec <- function(file = stop("filename or connection needed"),
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_txt_WITec) <- function() {
+  local_edition(2)
+
   context("read_txt_WITec")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt")
+  on.exit(unlink(tmpdir))
+
   untar("testfiles_Witec.tar.gz",
     files = c(
-      "image2x3_Table.Data 1_F.txt", "timeseries3x_Table.Data 1.txt",
-      "Witec-Map_label.txt", "Witec-Map_unit.txt", "Witec-Map_full.txt",
-      "Witec-timeseries_label.txt", "Witec-timeseries_unit.txt",
+      "image2x3_Table.Data 1_F.txt",
+      "timeseries3x_Table.Data 1.txt",
+      "Witec-Map_label.txt",
+      "Witec-Map_unit.txt",
+      "Witec-Map_full.txt",
+      "Witec-timeseries_label.txt",
+      "Witec-timeseries_unit.txt",
       "Witec-timeseries_full.txt"
     ),
     exdir = tmpdir
   )
-  on.exit(unlink(tmpdir))
 
   test_that("Map with neither header nor label lines", {
     expect_error(
       suppressWarnings(
-        read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+        read_txt_WITec(
+          paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
           type = "map", hdr.units = TRUE, hdr.label = TRUE
         )
       )
     )
     expect_warning(
-      read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+      read_txt_WITec(
+        paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
         type = "map"
       ),
       "no spatial information provided"
     )
 
-    spc <- read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
+    spc <- read_txt_WITec(
+
+      paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
       type = "map", points.per.line = 3, lines.per.image = 2
     )
     spc$filename <- gsub("^.*/", "", spc$filename)
