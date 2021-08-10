@@ -54,5 +54,58 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"),
 
 
 # Unit tests -----------------------------------------------------------------
+hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
+  local_edition(3)
 
-# FIXME: add unit tests, if possible.
+  path <- system.file("extdata", "txt.PerkinElmer", package = "hySpc.read.txt")
+  spc <- paste0(path, "/flu1.txt")
+  expect_message(spc <- read_asc_PerkinElmer(spc))
+
+  n_wl <- nwl(spc)
+  n_rows <- nrow(spc)
+  n_clos <- ncol(spc)
+
+  test_that("PerkinElmer .asc: hyperSpec obj. dimensions are correct", {
+    expect_equal(n_wl, 181)
+    expect_equal(n_rows, 1)
+    expect_equal(n_clos, 2)
+
+  })
+
+  test_that("PerkinElmer .asc: extra data are correct", {
+    # @data colnames
+    expect_equal(colnames(spc), c("spc", "filename"))
+
+    # @data values
+    # (Add tests, if relevant or remove this row)
+
+  })
+
+  test_that("PerkinElmer .asc: labels are correct", {
+    expect_equal(spc@label$.wavelength, expression(lambda/nm))
+    expect_equal(spc@label$spc, expression("I / a.u."))
+    expect_equal(spc@label$filename, "filename")
+  })
+
+  test_that("PerkinElmer .asc: spectra are correct", {
+    # Dimensions of spectra matrix (@data$spc)
+    expect_equal(dim(spc@data$spc), c(1, 181))
+
+    # Column names of spectra matrix
+    expect_equal(colnames(spc@data$spc)[1], "405")
+    expect_equal(colnames(spc@data$spc)[10], "409.5")
+    expect_equal(colnames(spc@data$spc)[n_wl], "495") # last name
+
+    # Values of spectra matrix
+    expect_equal(unname(spc@data$spc[1, 1]), 27.15)
+    expect_equal(unname(spc@data$spc[1, 10]), 41.381333)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 45.256333) # last spc value
+
+  })
+
+  test_that("PerkinElmer .asc: wavelengths are correct", {
+    expect_equal(spc@wavelength[1], 405)
+    expect_equal(spc@wavelength[10], 409.5)
+    expect_equal(spc@wavelength[n_wl], 495)
+  })
+}
