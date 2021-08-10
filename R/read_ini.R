@@ -21,7 +21,7 @@
 #' @author C. Beleites
 #'
 #' @return A list with one element per section in the .ini file, each
-#'         containing a list with elements for the key-value-pairs.
+#'         containing a list with elements for the key-value pairs.
 #'
 #' @keywords IO file
 #'
