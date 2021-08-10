@@ -86,39 +86,46 @@ read_txt_Horiba_t <- function(file, header = TRUE, sep = "\t", row.names = NULL,
 
 # Unit tests -----------------------------------------------------------------
 
-hySpc.testthat::test(read_txt_Horiba_t) <- function() {
+hySpc.testthat::test(read_txt_Horiba) <- function() {
+  context("read_txt_Horiba")
+
   local_edition(3)
 
-  ts <- system.file("extdata/txt.HoribaJobinYvon/", "ts.txt",package = "hySpc.read.txt")
-  expect_silent(spc <- read_txt_Horiba_t(ts))
+  # read_txt_Horiba_t()  -----------------------------------------------------
+
+  f_ts <- system.file(
+    "extdata",
+    "txt.HoribaJobinYvon/ts.txt",
+    package = "hySpc.read.txt"
+  )
+
+  expect_silent(spc <- read_txt_Horiba_t(f_ts))
 
   n_wl <- nwl(spc)
   n_rows <- nrow(spc)
   n_clos <- ncol(spc)
 
-  test_that("Horiba .txt: hyperSpec obj. dimensions are correct", {
+  test_that("Horiba t .txt: hyperSpec obj. dimensions are correct", {
     expect_equal(n_wl, 1024)
     expect_equal(n_rows, 100)
     expect_equal(n_clos, 3)
-
   })
 
-  test_that("Horiba .txt: extra data are correct", {
+  test_that("Horiba t .txt: extra data are correct", {
     # @data colnames
     expect_equal(colnames(spc), c("t", "spc", "filename"))
 
     # @data values
     # (Add tests, if relevant or remove this row)
-
   })
 
-  test_that("Horiba .txt: labels are correct", {
-    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu)/cm^-1))
+  test_that("Horiba t .txt: labels are correct", {
+    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu) / cm^-1))
     expect_equal(spc@label$spc, expression("I / a.u."))
     expect_equal(spc@label$filename, "filename")
   })
 
-  test_that("Horiba .txt: spectra are correct", {
+  test_that("Horiba t .txt: spectra are correct", {
     # Dimensions of spectra matrix (@data$spc)
     expect_equal(dim(spc@data$spc), c(100, 1024))
 
@@ -131,49 +138,52 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
     expect_equal(unname(spc@data$spc[1, 1]), 6244)
     expect_equal(unname(spc@data$spc[1, 10]), 5961)
     expect_equal(unname(spc@data$spc[n_rows, n_wl]), 117) # last spc value
-
   })
 
-  test_that("Horiba .txt: wavelengths are correct", {
+  test_that("Horiba t .txt: wavelengths are correct", {
     expect_equal(spc@wavelength[1], 2135.1912)
     expect_equal(spc@wavelength[10], 2118.2483)
     expect_equal(spc@wavelength[n_wl], -122.41003)
   })
-}
 
-hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
-  local_edition(3)
+  # Cleanup
+  rm(f_ts, spc, n_wl, n_rows, n_clos)
 
-  map <- system.file("extdata/txt.HoribaJobinYvon/", "map.txt",package = "hySpc.read.txt")
-  expect_silent(spc <- read_txt_Horiba_xy(map))
+
+  # read_txt_Horiba_xy() -----------------------------------------------------
+
+  f_map <- system.file(
+    "extdata",
+    "txt.HoribaJobinYvon/map.txt",
+    package = "hySpc.read.txt"
+  )
+  expect_silent(spc <- read_txt_Horiba_xy(f_map))
 
   n_wl <- nwl(spc)
   n_rows <- nrow(spc)
   n_clos <- ncol(spc)
 
-  test_that("Horiba .txt: hyperSpec obj. dimensions are correct", {
+  test_that("Horiba xy .txt: hyperSpec obj. dimensions are correct", {
     expect_equal(n_wl, 616)
     expect_equal(n_rows, 141)
     expect_equal(n_clos, 4)
-
   })
 
-  test_that("Horiba .txt: extra data are correct", {
+  test_that("Horiba xy .txt: extra data are correct", {
     # @data colnames
     expect_equal(colnames(spc), c("x", "y", "spc", "filename"))
 
     # @data values
     # (Add tests, if relevant or remove this row)
-
   })
 
-  test_that("Horiba .txt: labels are correct", {
-    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu)/cm^-1))
+  test_that("Horiba xy .txt: labels are correct", {
+    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu) / cm^-1))
     expect_equal(spc@label$spc, expression("I / a.u."))
     expect_equal(spc@label$filename, "filename")
   })
 
-  test_that("Horiba .txt: spectra are correct", {
+  test_that("Horiba xy .txt: spectra are correct", {
     # Dimensions of spectra matrix (@data$spc)
     expect_equal(dim(spc@data$spc), c(141, 616))
 
@@ -186,10 +196,9 @@ hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
     expect_equal(unname(spc@data$spc[1, 1]), 3126.31)
     expect_equal(unname(spc@data$spc[1, 10]), 1958.41)
     expect_equal(unname(spc@data$spc[n_rows, n_wl]), 898.605) # last spc value
-
   })
 
-  test_that("Horiba .txt: wavelengths are correct", {
+  test_that("Horiba xy .txt: wavelengths are correct", {
     expect_equal(spc@wavelength[1], 50)
     expect_equal(spc@wavelength[10], 100.48781)
     expect_equal(spc@wavelength[n_wl], 3500)

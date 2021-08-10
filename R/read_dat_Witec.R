@@ -42,18 +42,22 @@ read_dat_WITec <- function(filex = stop("filename or connection needed"),
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_dat_WITec) <- function() {
+  local_edition(2)
+
   context("read_dat_WITec")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_dat")
+  on.exit(unlink(tmpdir, force = TRUE))
+
   untar("testfiles_Witec.tar.gz",
     files = c(
-      "Witec-Map-x.dat", "Witec-Map-y.dat",
-      "Witec-timeseries-x.dat", "Witec-timeseries-y.dat"
+      "Witec-Map-x.dat",
+      "Witec-Map-y.dat",
+      "Witec-timeseries-x.dat",
+      "Witec-timeseries-y.dat"
     ),
     exdir = tmpdir
   )
-
-  on.exit(unlink(tmpdir))
 
   test_that("-y file guessing", {
     spc <- read_dat_WITec(paste0(tmpdir, "/Witec-timeseries-x.dat"))
@@ -62,7 +66,8 @@ hySpc.testthat::test(read_dat_WITec) <- function() {
   })
 
   test_that("encoding", {
-    spc <- read_dat_WITec(paste0(tmpdir, "/Witec-timeseries-x.dat"),
+    spc <- read_dat_WITec(
+      paste0(tmpdir, "/Witec-timeseries-x.dat"),
       encoding = "ascii"
     )
     spc$filename <- gsub("^.*/", "", spc$filename)
@@ -94,21 +99,24 @@ hySpc.testthat::test(read_dat_WITec) <- function() {
 
   test_that("Map", {
     expect_warning(
-      read_dat_WITec(paste0(tmpdir, "/Witec-Map-x.dat"),
+      read_dat_WITec(
+        paste0(tmpdir, "/Witec-Map-x.dat"),
         paste0(tmpdir, "/Witec-Map-y.dat"),
         points.per.line = 5, lines.per.image = 5
       ),
       "points.per.line != 1 given for single spectrum"
     )
     expect_warning(
-      read_dat_WITec(paste0(tmpdir, "/Witec-Map-x.dat"),
+      read_dat_WITec(
+        paste0(tmpdir, "/Witec-Map-x.dat"),
         paste0(tmpdir, "/Witec-Map-y.dat"),
         points.per.line = 5, lines.per.image = 5
       ),
       "lines.per.image != 1 are defined for single spectrum"
     )
 
-    spc <- read_dat_WITec(paste0(tmpdir, "/Witec-Map-x.dat"),
+    spc <- read_dat_WITec(
+      paste0(tmpdir, "/Witec-Map-x.dat"),
       paste0(tmpdir, "/Witec-Map-y.dat"),
       type = "map", points.per.line = 5, lines.per.image = 5
     )
