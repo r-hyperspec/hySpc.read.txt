@@ -1,3 +1,5 @@
+# Function -------------------------------------------------------------------
+
 #' @rdname read_txt_WITec
 #'
 #' @param headerfile Path or connection to ASCII file with header information.
@@ -52,7 +54,12 @@ read_txt_WITec_Graph <- function(headerfile = stop("filename or connection neede
   .spc_io_postprocess_optional(spc, filey)
 }
 
+
+# Unit tests -----------------------------------------------------------------
+
 hySpc.testthat::test(read_txt_WITec_Graph) <- function() {
+  local_edition(2)
+
   context("read_txt_WITec_Graph")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt_Graph")
