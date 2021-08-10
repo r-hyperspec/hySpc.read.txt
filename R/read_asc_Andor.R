@@ -47,6 +47,8 @@ read_asc_Andor <- function(file = stop("filename or connection needed"),
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_asc_Andor) <- function() {
+  context("read_asc_Andor")
+
   local_edition(3)
 
   filename <- system.file(
