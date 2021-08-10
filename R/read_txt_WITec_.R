@@ -23,7 +23,9 @@
 #' @param encoding character encoding, see [base::readLines()].
 #' @param ...,quiet handed to [base::scan()].
 #'
-#' @return `hyperSpec` object.
+#'
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
+#'
 #'
 #' @author Claudia Beleites and Marcel Dahms
 #'

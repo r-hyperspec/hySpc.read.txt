@@ -38,7 +38,7 @@
 #' @param nspc number of spectra in the file
 #' @param ... Arguments for `read_txt_Renishaw`
 #'
-#' @return  `hyperSpec` object.
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
 #'
 #'
 #' @author C. Beleites

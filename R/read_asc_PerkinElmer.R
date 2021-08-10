@@ -9,7 +9,9 @@
 #' @param file Path  or connection to file.
 #' @param ... Further argument handed to [hyperSpec::read_txt_long()].
 #'
-#' @return `hyperSpec` object.
+#'
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
+#'
 #'
 #' @concept io
 #'

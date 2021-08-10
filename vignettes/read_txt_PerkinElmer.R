@@ -1,4 +1,4 @@
-@@ -0,0 +1,67 @@
+
 # Function -------------------------------------------------------------------
 
 #' Read PerkinElmer file (ASCII/txt)
@@ -7,7 +7,9 @@
 #' @param ... Passed to [base::scan()].
 #' @param label Labels.
 #'
-#' @return `hyperSpec` object.
+#'
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
+#'
 #'
 #' @export
 #'

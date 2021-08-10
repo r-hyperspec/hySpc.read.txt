@@ -6,7 +6,9 @@
 #' @param ... Passed to [base::scan()].
 #' @param label Labels.
 #'
-#' @return `hyperSpec` object.
+#'
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
+#'
 #'
 #' @importFrom utils modifyList
 #' @export

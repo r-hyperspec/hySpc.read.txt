@@ -17,7 +17,9 @@
 #' @param cols,header,sep,row.names,check.names,... further parameters are
 #'        handed over to [hyperSpec::read_txt_wide()]
 #'
-#' @return `hyperSpec` object.
+#'
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
+#'
 #'
 #' @author C. Beleites
 #'
