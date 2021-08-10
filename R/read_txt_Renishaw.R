@@ -159,13 +159,66 @@ read_txt_Renishaw <- function(file = stop("file is required"),
   .spc_io_postprocess_optional(spc, file)
 }
 
-
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_txt_Renishaw) <- function() {
   context("read_txt_Renishaw")
+
+  local_edition(3)
+
   path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
+
+
+  # Test with "paracetamol.txt" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   f_paracetamol <- paste0(path, "/paracetamol.txt")
+  expect_silent(spc <- read_txt_Renishaw(f_paracetamol, "spc"))
+
+  n_wl <- nwl(spc)
+  n_rows <- nrow(spc)
+  n_clos <- ncol(spc)
+
+  test_that("Renishaw .txt: hyperSpec obj. dimensions are correct", {
+    expect_equal(n_wl, 4064)
+    expect_equal(n_rows, 1)
+    expect_equal(n_clos, 2)
+  })
+
+  test_that("Renishaw .txt: extra data are correct", {
+    # @data colnames
+    expect_equal(colnames(spc), c("spc", "filename"))
+  })
+
+  test_that("Renishaw .txt: labels are correct", {
+    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu) / cm^-1))
+    expect_equal(spc@label$spc, expression("I / a.u."))
+    expect_equal(spc@label$filename, "filename")
+  })
+
+  test_that("Renishaw .txt: spectra are correct", {
+    # Dimensions of spectra matrix (@data$spc)
+    expect_equal(dim(spc@data$spc), c(1, 4064))
+
+    # Column names of spectra matrix
+    expect_equal(colnames(spc@data$spc)[1], "96.7865")
+    expect_equal(colnames(spc@data$spc)[10], "108.982")
+    expect_equal(colnames(spc@data$spc)[n_wl], "3200.07") # last name
+
+    # Values of spectra matrix
+    expect_equal(unname(spc@data$spc[1, 1]), 2056.5)
+    expect_equal(unname(spc@data$spc[1, 10]), 7248.13)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 299.229) # last spc value
+  })
+
+  test_that("Renishaw .txt: wavelengths are correct", {
+    expect_equal(spc@wavelength[1], 96.7865)
+    expect_equal(spc@wavelength[10], 108.982)
+    expect_equal(spc@wavelength[n_wl], 3200.07)
+  })
+
+
+  # Test with "laser.txt.gz" and "chondro.txt"
+
   f_laser <- paste0(path, "/laser.txt.gz")
   f_chondro <- paste0(path, "/chondro.txt")
 
@@ -191,23 +244,40 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   })
 
   test_that("chunked reading", {
-
-    ## error on too small chunk size
+    ## Test 1: error on too small chunk size
     expect_error(
-      read_txt_Renishaw(f_chondro, nlines = 10),
+      expect_message(
+        expect_output(
+          read_txt_Renishaw(f_chondro, nlines = 10),
+          "."),
+        "Counted 1113000 lines"
+      ),
       "Wavelengths do not correspond"
     )
 
-    tmp <- read_txt_Renishaw(f_chondro, nlines = 1e5)
-    expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
+    # Test 2
+    expect_output(
+      expect_message(
+        tmp <- read_txt_Renishaw(f_chondro, nlines = 1e5),
+        "Counted 1113000 lines"
+      ),
+      "............"
+    )
+
+    expect_equal(
+      dim(tmp),
+      c(nrow = 875L, ncol = 4L, nwl = 1272L)
+    )
   })
 
-  test_that("compressed files", {
 
+  test_that("compressed files", {
     files <- Sys.glob(paste0(path, "/chondro.*"))
-    files <- grep("[.]zip", files, invert = TRUE, value = TRUE) # .zip is tested with read_zip_Renishaw
+    # .zip is tested with read_zip_Renishaw
+    files <- grep("[.]zip", files, invert = TRUE, value = TRUE)
     for (f in files) {
-      expect_equal(dim(read_txt_Renishaw(!!f)), c(nrow = 875L, ncol = 4L, nwl = 1272L))
+      expect_silent(spc_chondro_i <- read_txt_Renishaw(f))
+      expect_equal(dim(spc_chondro_i), c(nrow = 875L, ncol = 4L, nwl = 1272L))
     }
   })
 }
@@ -224,7 +294,8 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
 #'
 #' @export
 read_zip_Renishaw <- function(file = stop("filename is required"),
-                              txt.file = sub("[.]zip", ".txt", basename(file)), ...) {
+                              txt.file = sub("[.]zip", ".txt", basename(file)),
+                              ...) {
   read_txt_Renishaw(file = unz(file, filename = txt.file, "r"), ...)
 }
 
@@ -244,7 +315,6 @@ hySpc.testthat::test(read_zip_Renishaw) <- function() {
     expect_equal(n_wl, 1272)
     expect_equal(n_rows, 875)
     expect_equal(n_clos, 4)
-
   })
 
   test_that("Renishaw .zip: extra data are correct", {
@@ -253,11 +323,10 @@ hySpc.testthat::test(read_zip_Renishaw) <- function() {
 
     # @data values
     # (Add tests, if relevant or remove this row)
-
   })
 
   test_that("Renishaw .zip: labels are correct", {
-    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu)/cm^-1))
+    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu) / cm^-1))
     expect_equal(spc@label$spc, expression("I / a.u."))
     expect_equal(spc@label$filename, "filename")
   })
@@ -275,7 +344,6 @@ hySpc.testthat::test(read_zip_Renishaw) <- function() {
     expect_equal(unname(spc@data$spc[1, 1]), 501.723)
     expect_equal(unname(spc@data$spc[1, 10]), 444.748)
     expect_equal(unname(spc@data$spc[n_rows, n_wl]), 151.921) # last spc value
-
   })
 
   test_that("Renishaw .txt: wavelengths are correct", {
