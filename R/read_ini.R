@@ -12,25 +12,25 @@
 #' `read_ini()` sanitizes the element names and tries to convert scalars and
 #'  comma separated numeric vectors to numeric.
 #'
-#' @rdname read-ini
+#' @rdname read_ini
 #'
-#' @param con connection or file name.
-#' @param skip number of lines to skip before first `[section]` starts.
-#' @param encoding see [base::readLines()].
+#' @param file Connection or path to file.
+#' @param skip Number of lines to skip before first `[section]` starts.
+#' @param encoding See [base::readLines()].
 #'
 #' @author C. Beleites
 #'
-#' @return A list with one element per section in the .ini file, each
+#' @return A list with one element per section in the `.ini` file, each
 #'         containing a list with elements for the key-value pairs.
 #'
 #' @keywords IO file
 #'
 #' @export
 
-read_ini <- function(con = stop("Connection con needed."),
+read_ini <- function(file = stop("Argument 'file' is needed."),
                      skip = NULL,
                      encoding = "unknown") {
-  Lines <- readLines(con, encoding = encoding)
+  Lines <- readLines(file, encoding = encoding)
   ## remove leading lines, if they are not a section
   if (!is.null(skip)) {
     Lines <- Lines[-seq_len(skip)]
