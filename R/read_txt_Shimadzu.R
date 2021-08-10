@@ -14,9 +14,11 @@
 #' @param file (character): Path to file of Shimadzu `.txt` file.
 #' @param encoding (character): Encoding of the text file (used by
 #'        [base::readLines()]).
-#' @param quiet (logical):  Suppress printing of progress.
+#' @param quiet (logical): Suppress printing of progress.
 #'
-#' @return List of spectra tables
+#'
+#' @return List of spectra tables.
+#'
 #'
 #' @author Bjoern Egert
 #'
