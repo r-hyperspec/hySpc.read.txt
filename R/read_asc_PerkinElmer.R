@@ -102,8 +102,8 @@ hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
 
     # Values of spectra matrix
     expect_equal(unname(spc@data$spc[1, 1]), 27.15)
-    expect_equal(unname(spc@data$spc[1, 10]), 41.38133)
-    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 45.25633) # last spc value
+    expect_equal(unname(spc@data$spc[1, 10]), 41.381333)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 45.256333) # last spc value
 
   })
 
