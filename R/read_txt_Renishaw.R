@@ -250,8 +250,7 @@ hySpc.testthat::test(read_zip_Renishaw) <- function() {
   local_edition(3)
 
   path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
-  f_chondro <- paste0(path, "/chondro.zip")
-  expect_silent(spc <- read_zip_Renishaw(f_paracetamol))
+  expect_silent(spc <- read_zip_Renishaw(paste0(path, "/chondro.zip")))
 
   n_wl <- nwl(spc)
   n_rows <- nrow(spc)
