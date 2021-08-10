@@ -50,7 +50,7 @@ Collate:
     'messages.R'
     'read_asc_Andor.R'
     'read_asc_PerkinElmer.R'
-    'read_dat_Witec.R'
+    'read_dat_WITec_.R'
     'read_ini.R'
     'read_txt_Graph_WITec_.R'
     'read_txt_Horiba.R'
