@@ -228,22 +228,6 @@ read_zip_Renishaw <- function(file = stop("filename is required"),
   read_txt_Renishaw(file = unz(file, filename = txt.file, "r"), ...)
 }
 
-
-# Unit tests -----------------------------------------------------------------
-
-# hySpc.testthat::test(read_zip_Renishaw) <- function() {
-#   context("read_zip_Renishaw")
-#   path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
-#   test_that("compressed files", {
-#
-#     expect_equal(
-#       dim(read_zip_Renishaw(paste0(path, "/chondro.zip"))),
-#       c(nrow = 875L, ncol = 4L, nwl = 1272L)
-#     )
-#   })
-# }
-
-
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_zip_Renishaw) <- function() {
