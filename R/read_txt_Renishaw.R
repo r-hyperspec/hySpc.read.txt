@@ -162,6 +162,8 @@ read_txt_Renishaw <- function(file = stop("file is required"),
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_txt_Renishaw) <- function() {
+  context("read_txt_Renishaw")
+
   local_edition(3)
 
   path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
@@ -242,15 +244,32 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   })
 
   test_that("chunked reading", {
-    ## error on too small chunk size
+    ## Test 1: error on too small chunk size
     expect_error(
-      read_txt_Renishaw(f_chondro, nlines = 10),
+      expect_message(
+        expect_output(
+          read_txt_Renishaw(f_chondro, nlines = 10),
+          "."),
+        "Counted 1113000 lines"
+      ),
       "Wavelengths do not correspond"
     )
 
-    tmp <- read_txt_Renishaw(f_chondro, nlines = 1e5)
-    expect_equal(dim(tmp), c(nrow = 875L, ncol = 4L, nwl = 1272L))
+    # Test 2
+    expect_output(
+      expect_message(
+        tmp <- read_txt_Renishaw(f_chondro, nlines = 1e5),
+        "Counted 1113000 lines"
+      ),
+      "............"
+    )
+
+    expect_equal(
+      dim(tmp),
+      c(nrow = 875L, ncol = 4L, nwl = 1272L)
+    )
   })
+
 
   test_that("compressed files", {
     files <- Sys.glob(paste0(path, "/chondro.*"))
