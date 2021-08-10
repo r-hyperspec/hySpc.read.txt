@@ -135,9 +135,9 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
   })
 
   test_that("Horiba .txt: wavelengths are correct", {
-    expect_equal(spc@wavelength[1], 2135.191)
-    expect_equal(spc@wavelength[10], 2118.248)
-    expect_equal(spc@wavelength[n_wl], -122.41)
+    expect_equal(spc@wavelength[1], 2135.1912)
+    expect_equal(spc@wavelength[10], 2118.2483)
+    expect_equal(spc@wavelength[n_wl], -122.41003)
   })
 }
 
@@ -175,7 +175,7 @@ hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
 
   test_that("Horiba .txt: spectra are correct", {
     # Dimensions of spectra matrix (@data$spc)
-    expect_equal(dim(spc@data$spc), c(1, 4064))
+    expect_equal(dim(spc@data$spc), c(141, 616))
 
     # Column names of spectra matrix
     expect_equal(colnames(spc@data$spc)[1], "50")
@@ -191,7 +191,7 @@ hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
 
   test_that("Horiba .txt: wavelengths are correct", {
     expect_equal(spc@wavelength[1], 50)
-    expect_equal(spc@wavelength[10], 100.4878)
+    expect_equal(spc@wavelength[10], 100.48781)
     expect_equal(spc@wavelength[n_wl], 3500)
   })
 }
