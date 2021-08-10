@@ -30,18 +30,18 @@ count_lines <- function(file, chunksize = 1e4) {
 hySpc.testthat::test(count_lines) <- function() {
   context("count_lines")
 
+  local_edition(3)
+
   tmpfile <- tempfile()
   on.exit(unlink(tmpfile))
 
   writeLines("blabla\nblubb", con = tmpfile)
 
-  test_that(
-    "file read in one chunk",
+  test_that("file read in one chunk", {
     expect_equal(count_lines(tmpfile), 2)
-  )
+  })
 
-  test_that(
-    "file read in more chunks",
+  test_that("file read in more chunks", {
     expect_equal(count_lines(tmpfile, chunksize = 1L), 2)
-  )
+  })
 }

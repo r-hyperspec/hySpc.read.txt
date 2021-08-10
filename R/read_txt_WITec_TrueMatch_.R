@@ -130,6 +130,9 @@ read_txt_WITec_TrueMatch <- function(file, keys_2header = "all") {
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
+
+  local_edition(2)
+
   context("read_txt_WITec_TrueMatch")
 
   tmpdir <- paste0(tempdir(), "/test_Witec_txt_TrueMatch")
