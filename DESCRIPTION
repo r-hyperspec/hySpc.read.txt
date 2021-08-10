@@ -42,6 +42,7 @@ Suggests:
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
 Collate:
     'count_lines.R'
     'helpers.R'
