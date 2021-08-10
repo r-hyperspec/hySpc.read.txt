@@ -37,7 +37,7 @@ Suggests:
     R.matlab,
     sessioninfo,
     styler,
-    testthat,
+    testthat (>= 3.0.0),
     rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
