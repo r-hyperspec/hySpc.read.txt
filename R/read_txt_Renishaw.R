@@ -231,14 +231,73 @@ read_zip_Renishaw <- function(file = stop("filename is required"),
 
 # Unit tests -----------------------------------------------------------------
 
-hySpc.testthat::test(read_zip_Renishaw) <- function() {
-  context("read_zip_Renishaw")
-  path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
-  test_that("compressed files", {
+# hySpc.testthat::test(read_zip_Renishaw) <- function() {
+#   context("read_zip_Renishaw")
+#   path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
+#   test_that("compressed files", {
+#
+#     expect_equal(
+#       dim(read_zip_Renishaw(paste0(path, "/chondro.zip"))),
+#       c(nrow = 875L, ncol = 4L, nwl = 1272L)
+#     )
+#   })
+# }
 
-    expect_equal(
-      dim(read_zip_Renishaw(paste0(path, "/chondro.zip"))),
-      c(nrow = 875L, ncol = 4L, nwl = 1272L)
-    )
+
+# Unit tests -----------------------------------------------------------------
+
+hySpc.testthat::test(read_zip_Renishaw) <- function() {
+  local_edition(3)
+
+  path <- system.file("extdata", "txt.Renishaw", package = "hySpc.read.txt")
+  f_chondro <- paste0(path, "/chondro.zip")
+  expect_silent(spc <- read_zip_Renishaw(f_paracetamol))
+
+  n_wl <- nwl(spc)
+  n_rows <- nrow(spc)
+  n_clos <- ncol(spc)
+
+  test_that("Renishaw .zip: hyperSpec obj. dimensions are correct", {
+    expect_equal(n_wl, 1272)
+    expect_equal(n_rows, 875)
+    expect_equal(n_clos, 4)
+
+  })
+
+  test_that("Renishaw .zip: extra data are correct", {
+    # @data colnames
+    expect_equal(colnames(spc), c("y", "x", "spc", "filename"))
+
+    # @data values
+    # (Add tests, if relevant or remove this row)
+
+  })
+
+  test_that("Renishaw .zip: labels are correct", {
+    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu)/cm^-1))
+    expect_equal(spc@label$spc, expression("I / a.u."))
+    expect_equal(spc@label$filename, "filename")
+  })
+
+  test_that("Renishaw .txt: spectra are correct", {
+    # Dimensions of spectra matrix (@data$spc)
+    expect_equal(dim(spc@data$spc), c(875, 1272))
+
+    # Column names of spectra matrix
+    expect_equal(colnames(spc@data$spc)[1], "601.622")
+    expect_equal(colnames(spc@data$spc)[10], "610.989")
+    expect_equal(colnames(spc@data$spc)[n_wl], "1802.15") # last name
+
+    # Values of spectra matrix
+    expect_equal(unname(spc@data$spc[1, 1]), 501.723)
+    expect_equal(unname(spc@data$spc[1, 10]), 444.748)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 151.921) # last spc value
+
+  })
+
+  test_that("Renishaw .txt: wavelengths are correct", {
+    expect_equal(spc@wavelength[1], 601.622)
+    expect_equal(spc@wavelength[10], 610.989)
+    expect_equal(spc@wavelength[n_wl], 1802.15)
   })
 }
