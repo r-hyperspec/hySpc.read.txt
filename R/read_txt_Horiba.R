@@ -87,9 +87,16 @@ read_txt_Horiba_t <- function(file, header = TRUE, sep = "\t", row.names = NULL,
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_txt_Horiba_t) <- function() {
+  context("read_txt_Horiba_t")
+
   local_edition(3)
 
-  ts <- system.file("extdata/txt.HoribaJobinYvon/", "ts.txt",package = "hySpc.read.txt")
+  ts <- system.file(
+    "extdata",
+    "txt.HoribaJobinYvon/ts.txt",
+    package = "hySpc.read.txt"
+  )
+
   expect_silent(spc <- read_txt_Horiba_t(ts))
 
   n_wl <- nwl(spc)
@@ -100,7 +107,6 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
     expect_equal(n_wl, 1024)
     expect_equal(n_rows, 100)
     expect_equal(n_clos, 3)
-
   })
 
   test_that("Horiba .txt: extra data are correct", {
@@ -109,11 +115,10 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
 
     # @data values
     # (Add tests, if relevant or remove this row)
-
   })
 
   test_that("Horiba .txt: labels are correct", {
-    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu)/cm^-1))
+    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu) / cm^-1))
     expect_equal(spc@label$spc, expression("I / a.u."))
     expect_equal(spc@label$filename, "filename")
   })
@@ -131,7 +136,6 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
     expect_equal(unname(spc@data$spc[1, 1]), 6244)
     expect_equal(unname(spc@data$spc[1, 10]), 5961)
     expect_equal(unname(spc@data$spc[n_rows, n_wl]), 117) # last spc value
-
   })
 
   test_that("Horiba .txt: wavelengths are correct", {
@@ -142,9 +146,15 @@ hySpc.testthat::test(read_txt_Horiba_t) <- function() {
 }
 
 hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
+  context("read_txt_Horiba_xy")
+
   local_edition(3)
 
-  map <- system.file("extdata/txt.HoribaJobinYvon/", "map.txt",package = "hySpc.read.txt")
+  map <- system.file(
+    "extdata",
+    "txt.HoribaJobinYvon/map.txt",
+    package = "hySpc.read.txt"
+  )
   expect_silent(spc <- read_txt_Horiba_xy(map))
 
   n_wl <- nwl(spc)
@@ -155,7 +165,6 @@ hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
     expect_equal(n_wl, 616)
     expect_equal(n_rows, 141)
     expect_equal(n_clos, 4)
-
   })
 
   test_that("Horiba .txt: extra data are correct", {
@@ -164,11 +173,10 @@ hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
 
     # @data values
     # (Add tests, if relevant or remove this row)
-
   })
 
   test_that("Horiba .txt: labels are correct", {
-    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu)/cm^-1))
+    expect_equal(spc@label$.wavelength, expression(Delta * tilde(nu) / cm^-1))
     expect_equal(spc@label$spc, expression("I / a.u."))
     expect_equal(spc@label$filename, "filename")
   })
@@ -186,7 +194,6 @@ hySpc.testthat::test(read_txt_Horiba_xy) <- function() {
     expect_equal(unname(spc@data$spc[1, 1]), 3126.31)
     expect_equal(unname(spc@data$spc[1, 10]), 1958.41)
     expect_equal(unname(spc@data$spc[n_rows, n_wl]), 898.605) # last spc value
-
   })
 
   test_that("Horiba .txt: wavelengths are correct", {
