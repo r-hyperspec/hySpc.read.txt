@@ -11,7 +11,7 @@
 #' @note This is a first rough import function and the functions may change
 #'       without notice.
 #'
-#' @param file (character): Path to file of Shimadzu `.txt` file.
+#' @param file (character): Path to Shimadzu `.txt` file.
 #' @param encoding (character): Encoding of the text file (used by
 #'        [base::readLines()]).
 #' @param quiet (logical): Suppress printing of progress.
