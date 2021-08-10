@@ -9,8 +9,10 @@
 read_txt_WITec_Graph <- function(headerfile = stop("filename or connection needed"),
                                  filex = gsub("Header", "X-Axis", headerfile),
                                  filey = gsub("Header", "Y-Axis", headerfile),
-                                 type = c("single", "map"), encoding = "unknown",
-                                 ..., quiet = TRUE) {
+                                 type = c("single", "map"),
+                                 encoding = "unknown",
+                                 ...,
+                                 quiet = TRUE) {
   ## check for valid data connection
   check_con(headerfile, filex, filey)
 
