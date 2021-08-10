@@ -294,7 +294,8 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
 #'
 #' @export
 read_zip_Renishaw <- function(file = stop("filename is required"),
-                              txt.file = sub("[.]zip", ".txt", basename(file)), ...) {
+                              txt.file = sub("[.]zip", ".txt", basename(file)),
+                              ...) {
   read_txt_Renishaw(file = unz(file, filename = txt.file, "r"), ...)
 }
 
