@@ -22,6 +22,8 @@ msg_open_issue_to_contribute_file <- function(pkg = "hySpc.read.txt") {
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(msg_open_issue_and_add_file) <- function() {
+  context("messages")
+
   local_edition(3)
 
   test_that("msg_open_issue_and_add_file() works", {
