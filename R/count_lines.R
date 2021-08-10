@@ -28,6 +28,9 @@ count_lines <- function(file, chunksize = 1e4) {
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(count_lines) <- function() {
+  context("count_lines")
+
+  local_edition(3)
 
   tmpfile <- tempfile()
   on.exit(unlink(tmpfile))
