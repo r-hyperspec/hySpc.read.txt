@@ -5,7 +5,11 @@
 #'
 #' @param file the file name or connection
 #' @param chunksize `file` is read in chunks of `chunksize` lines.
-#' @return number of lines in file
+#'
+#'
+#' @return Number of lines in file.
+#'
+#'
 #' @export
 #'
 #' @concept io
