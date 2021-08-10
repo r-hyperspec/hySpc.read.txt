@@ -55,6 +55,8 @@ read_asc_PerkinElmer <- function(file = stop("filename or connection needed"),
 
 # Unit tests -----------------------------------------------------------------
 hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
+  context("read_asc_PerkinElmer")
+
   local_edition(3)
 
   path <- system.file("extdata", "txt.PerkinElmer", package = "hySpc.read.txt")
@@ -75,10 +77,6 @@ hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
   test_that("PerkinElmer .asc: extra data are correct", {
     # @data colnames
     expect_equal(colnames(spc), c("spc", "filename"))
-
-    # @data values
-    # (Add tests, if relevant or remove this row)
-
   })
 
   test_that("PerkinElmer .asc: labels are correct", {
