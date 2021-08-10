@@ -185,9 +185,6 @@ hySpc.testthat::test(read_txt_Renishaw) <- function() {
   test_that("Renishaw .txt: extra data are correct", {
     # @data colnames
     expect_equal(colnames(spc), c("spc", "filename"))
-
-    # @data values
-    # (Add tests, if relevant or remove this row)
   })
 
   test_that("Renishaw .txt: labels are correct", {
