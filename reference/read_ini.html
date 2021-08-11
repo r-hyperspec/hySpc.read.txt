@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hySpc.read.txt</title>
+<title>Read INI files — read_ini • hySpc.read.txt</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,13 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Read INI files — read_ini" />
+<meta property="og:description" content="read_ini() reads ini files of the form
+
+[section]
+key = value
+
+into a list." />
 
 
 
@@ -60,7 +66,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -130,96 +136,58 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Read INI files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-hyperspec/hySpc.read.txt/blob/master/R/read_ini.R'><code>R/read_ini.R</code></a></small>
+    <div class="hidden name"><code>read_ini.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><code>read_ini()</code> reads ini files of the form
+<br /><br />
+<code>[section]</code><br />
+<code>key = value</code>
+<br /><br />
+into a list.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>read_ini</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"Argument 'file' is needed."</span><span class='op'>)</span>,
+  skip <span class='op'>=</span> <span class='cn'>NULL</span>,
+  encoding <span class='op'>=</span> <span class='st'>"unknown"</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="count_lines.html">count_lines()</a></code> </p>
-        </td>
-        <td><p>Count Lines (of an ASCII File)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_asc_Andor.html">read_asc_Andor()</a></code> </p>
-        </td>
-        <td><p>Import Andor Cameras/Solis files (ASCII/txt)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_asc_PerkinElmer.html">read_asc_PerkinElmer()</a></code> </p>
-        </td>
-        <td><p>Read single spectrum form PerkinElmer file (ASCII/txt)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_ini.html">read_ini()</a></code> </p>
-        </td>
-        <td><p>Read INI files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_Horiba.html">read_txt_Horiba()</a></code> <code><a href="read_txt_Horiba.html">read_txt_Horiba_xy()</a></code> <code><a href="read_txt_Horiba.html">read_txt_Horiba_t()</a></code> </p>
-        </td>
-        <td><p>Read Horiba Labspec files (ASCII/txt)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_PerkinElmer.html">read_txt_PerkinElmer()</a></code> </p>
-        </td>
-        <td><p>Read PerkinElmer file (ASCII/txt)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_Renishaw.html">read_txt_Renishaw()</a></code> <code><a href="read_txt_Renishaw.html">read_zip_Renishaw()</a></code> </p>
-        </td>
-        <td><p>Import Renishaw files (ASCII/txt)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_Shimadzu.html">read_txt_Shimadzu()</a></code> </p>
-        </td>
-        <td><p>Read Shimadzu GCxGC-qMS spectra files (ASCII/txt)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_WITec.html">read_dat_WITec()</a></code> <code><a href="read_txt_WITec.html">read_txt_WITec_Graph()</a></code> <code><a href="read_txt_WITec.html">read_txt_WITec()</a></code> </p>
-        </td>
-        <td><p>Read WITec files (ASCII/txt)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_txt_WITec_TrueMatch.html">read_txt_WITec_TrueMatch()</a></code> </p>
-        </td>
-        <td><p>Read WITec TrueMatch files (ASCII/txt)</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>file</th>
+      <td><p>Connection or path to file.</p></td>
+    </tr>
+    <tr>
+      <th>skip</th>
+      <td><p>Number of lines to skip before first <code>[section]</code> starts.</p></td>
+    </tr>
+    <tr>
+      <th>encoding</th>
+      <td><p>See <code><a href='https://rdrr.io/r/base/readLines.html'>base::readLines()</a></code>.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list with one element per section in the <code>.ini</code> file, each
+containing a list with elements for the key-value pairs.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>read_ini()</code> sanitizes the element names and tries to convert scalars and
+comma separated numeric vectors to numeric.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>C. Beleites</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

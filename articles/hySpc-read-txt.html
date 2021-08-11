@@ -106,7 +106,7 @@
 <br><a class="author_email" href="mailto:#"></a><a href="mailto:chemometrie@beleites.de" class="email">chemometrie@beleites.de</a>
       </address>
                   
-            <h4 class="date">2021-08-10</h4>
+            <h4 class="date">2021-08-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-hyperspec/hySpc.read.txt/blob/master/vignettes/hySpc-read-txt.Rmd"><code>vignettes/hySpc-read-txt.Rmd</code></a></small>
       <div class="hidden name"><code>hySpc-read-txt.Rmd</code></div>
@@ -707,20 +707,22 @@ wavelength axis as the others.</li>
 <li>Finally, package <strong>hyperSpec</strong> does some optional common post-processing for all imported files such as attaching the filename (or connection description) to the <code class="sourceCode r">hyperSpec</code> object (column <code class="sourceCode r">filename</code>) and deleting empty spectra.
 These options can be globally switched on or off by options.</li>
 </ul>
-<!-- \VerbatimInput[frame=single, label={read_txt_PerkinElmer.R}, formatcom=\footnotesize]{read_txt_PerkinElmer.R} --><pre><code>@@ -0,0 +1,67 @@
+<!-- \VerbatimInput[frame=single, label={read_txt_PerkinElmer.R}, formatcom=\footnotesize]{read_txt_PerkinElmer.R} --><pre><code>
 # Function -------------------------------------------------------------------
 
 #' Read PerkinElmer file (ASCII/txt)
 #'
-#' @param files Path to file.
+#' @param file Path to file or several files
 #' @param ... Passed to [base::scan()].
 #' @param label Labels.
 #'
-#' @return `hyperSpec` object.
+#'
+#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
+#'
 #'
 #' @export
 #'
-read_txt_PerkinElmer &lt;- function(files = stop("filenames needed"),
+read_txt_PerkinElmer &lt;- function(file = stop("filenames needed"),
                                  ...,
                                  label = list()) {
 
@@ -734,31 +736,31 @@ read_txt_PerkinElmer &lt;- function(files = stop("filenames needed"),
     label
   )
 
-  if (length(files) == 0) {
+  if (length(file) == 0) {
     warning("No files found.")
     return(new("hyperSpec"))
   }
 
   ## read the first file
-  buffer &lt;- matrix(scan(files[1], ...), ncol = 2, byrow = TRUE)
+  buffer &lt;- matrix(scan(file[1], ...), ncol = 2, byrow = TRUE)
 
   ## first column gives the wavelength vector
   wavelength &lt;- buffer[, 1]
 
   ## preallocate the spectra matrix:
   ##  one row per file x as many columns as the first file has
-  spc &lt;- matrix(ncol = nrow(buffer), nrow = length(files))
+  spc &lt;- matrix(ncol = nrow(buffer), nrow = length(file))
 
   ## the first file's data goes into the first row
   spc[1, ] &lt;- buffer[, 2]
 
   ## now read the remaining files
-  for (f in seq(along = files)[-1]) {
-    buffer &lt;- matrix(scan(files[f], ...), ncol = 2, byrow = TRUE)
+  for (f in seq(along = file)[-1]) {
+    buffer &lt;- matrix(scan(file[f], ...), ncol = 2, byrow = TRUE)
 
     ## check whether they have the same wavelength axis
     if (!all.equal(buffer[, 1], wavelength)) {
-      stop(paste(files[f], "has different wavelength axis."))
+      stop(paste(file[f], "has different wavelength axis."))
     }
 
     spc[f, ] &lt;- buffer[, 2]
@@ -768,7 +770,7 @@ read_txt_PerkinElmer &lt;- function(files = stop("filenames needed"),
   spc &lt;- new("hyperSpec", wavelength = wavelength, spc = spc, label = label)
 
   ## consistent file import behavior across import functions
-  .spc_io_postprocess_optional(spc, files)
+  .spc_io_postprocess_optional(spc, file)
 }
 
 
@@ -3512,7 +3514,7 @@ matrix
 <span class="co">#&gt;  collate  en_US.UTF-8                 </span>
 <span class="co">#&gt;  ctype    en_US.UTF-8                 </span>
 <span class="co">#&gt;  tz       UTC                         </span>
-<span class="co">#&gt;  date     2021-08-10                  </span>
+<span class="co">#&gt;  date     2021-08-11                  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ─ Packages ───────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt;  package        * version      date       lib source        </span>
@@ -3533,7 +3535,7 @@ matrix
 <span class="co">#&gt;  highr            0.9          2021-04-16 [1] CRAN (R 4.1.0)</span>
 <span class="co">#&gt;  htmltools        0.5.1.1      2021-01-22 [1] CRAN (R 4.1.0)</span>
 <span class="co">#&gt;  httr             1.4.2        2020-07-20 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  hyperSpec      * 0.100.0.9001 2021-08-10 [1] local         </span>
+<span class="co">#&gt;  hyperSpec      * 0.100.0.9001 2021-08-11 [1] local         </span>
 <span class="co">#&gt;  hySpc.testthat   0.2.1.9000   2021-07-27 [1] local         </span>
 <span class="co">#&gt;  jpeg             0.1-9        2021-07-24 [1] CRAN (R 4.1.0)</span>
 <span class="co">#&gt;  kableExtra       1.3.4        2021-02-20 [1] CRAN (R 4.1.0)</span>
