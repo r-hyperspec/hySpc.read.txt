@@ -36,6 +36,7 @@ The documentation of the other **`r-hyperspec`** family packages can be found at
 
 <!-- ---------------------------------------------------------------------- -->
 
+<!--
 ## Installation of Released Version
 
 ### Install from CRAN
@@ -46,6 +47,7 @@ You can install a released version of **hySpc.read.txt** from [CRAN](https://cra
 install.packages("hySpc.read.txt")
 ```
 
+-->
 
 
 ## Installation of In-Development Version
