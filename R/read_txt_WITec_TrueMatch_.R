@@ -146,40 +146,48 @@ hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
   n_clos <- ncol(spc)
 
   test_that("WITec TrueMatch .txt: hyperSpec obj. dimensions are correct", {
-    expect_equal(n_wl, 63)
-    expect_equal(n_rows, 5)
-    expect_equal(n_clos, 2)
+    expect_equal(n_wl, 1024)
+    expect_equal(n_rows, 2)
+    expect_equal(n_clos, 24)
   })
 
   test_that("WITec TrueMatch .txt: extra data are correct", {
     # @data colnames
-    expect_equal(colnames(spc), c("spc", "filename"))
+    expect_equal(colnames(spc), c("spc",
+                                  "Title", "ExcitationWavelength",
+                                  "SpectrumSize", "XDataKind", "Length",
+                                  "Width", "Aspect.Ratio", "Num.Pixels",
+                                  "Area", "Convex.Area", "Perimeter", "Convex.Perimeter",
+                                  "Feret.Max", "Feret.Min", "CE.Diameter", "Circularity",
+                                  "Convexity", "Solidity", "SE.Volume", "IsOversaturated",
+                                  "RamanSignal", "FluorescenceSignal",
+                                  "filename"))
   })
 
   test_that("WITec TrueMatch .txt: labels are correct", {
-    expect_equal(spc@label$.wavelength, NULL)
+    expect_equal(spc@label$.wavelength, 'lambda/nm')
     expect_equal(spc@label$spc, NULL)
     expect_equal(spc@label$filename, "filename")
   })
 
   test_that("WITec TrueMatch .txt: spectra are correct", {
     # Dimensions of spectra matrix (@data$spc)
-    expect_equal(dim(spc@data$spc), c(5, 63))
+    expect_equal(dim(spc@data$spc), c(2, 1024))
 
     # Column names of spectra matrix
-    expect_equal(colnames(spc@data$spc)[1], "161.408")
-    expect_equal(colnames(spc@data$spc)[10], "200.184")
-    expect_equal(colnames(spc@data$spc)[n_wl], "423.651") # last name
+    expect_equal(colnames(spc@data$spc)[1], "528.208")
+    expect_equal(colnames(spc@data$spc)[10], "529.431")
+    expect_equal(colnames(spc@data$spc)[n_wl], "664.327") # last name
 
     # Values of spectra matrix
-    expect_equal(unname(spc@data$spc[1, 1]), 3404)
-    expect_equal(unname(spc@data$spc[2, 10]), 3405)
-    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 3415) # last spc value
+    expect_equal(unname(spc@data$spc[1, 1]), 683)
+    expect_equal(unname(spc@data$spc[2, 10]), 679)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 726) # last spc value
   })
 
   test_that("WITec TrueMatch .txt: wavelengths are correct", {
-    expect_equal(spc@wavelength[1], 161.40845)
-    expect_equal(spc@wavelength[10], 200.18387)
-    expect_equal(spc@wavelength[n_wl], 423.65106)
+    expect_equal(spc@wavelength[1], 528.208474329979)
+    expect_equal(spc@wavelength[10], 529.431371013975)
+    expect_equal(spc@wavelength[n_wl], 664.326506070232)
   })
 }
