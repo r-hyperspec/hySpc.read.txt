@@ -89,164 +89,57 @@ read_txt_WITec <- function(file = stop("filename or connection needed"),
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_txt_WITec) <- function() {
-  local_edition(2)
-
   context("read_txt_WITec")
 
-  tmpdir <- paste0(tempdir(), "/test_Witec_txt")
-  on.exit(unlink(tmpdir))
+  local_edition(3)
 
-  untar("testfiles_Witec.tar.gz",
-    files = c(
-      "image2x3_Table.Data 1_F.txt",
-      "timeseries3x_Table.Data 1.txt",
-      "Witec-Map_label.txt",
-      "Witec-Map_unit.txt",
-      "Witec-Map_full.txt",
-      "Witec-timeseries_label.txt",
-      "Witec-timeseries_unit.txt",
-      "Witec-timeseries_full.txt"
-    ),
-    exdir = tmpdir
+  filename <- system.file(
+    "extdata",
+    "txt.Witec/Witec-timeseries_full.txt",
+    package = "hySpc.read.txt"
   )
 
-  test_that("Map with neither header nor label lines", {
-    expect_error(
-      suppressWarnings(
-        read_txt_WITec(
-          paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
-          type = "map", hdr.units = TRUE, hdr.label = TRUE
-        )
-      )
-    )
-    expect_warning(
-      read_txt_WITec(
-        paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
-        type = "map"
-      ),
-      "no spatial information provided"
-    )
+  expect_silent(spc <- read_txt_WITec(filename, hdr.units = TRUE, hdr.label = TRUE))
 
-    spc <- read_txt_WITec(
+  n_wl <- nwl(spc)
+  n_rows <- nrow(spc)
+  n_clos <- ncol(spc)
 
-      paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
-      type = "map", points.per.line = 3, lines.per.image = 2
-    )
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_setequal(spc$x, 1:3)
-    expect_setequal(spc$y, -1:-2)
-    expect_known_hash(spc, hash = "a74cdcd428")
+  test_that("WITec .txt: hyperSpec obj. dimensions are correct", {
+    expect_equal(n_wl, 1024)
+    expect_equal(n_rows, 100)
+    expect_equal(n_clos, 3)
   })
 
-  test_that("Map: one of points.per.line and lines.per.image is sufficient", {
-    spc <- read_txt_WITec(
-      paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
-      type = "map",
-      lines.per.image = 2
-    )
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, hash = "a74cdcd428")
-
-    spc <- read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"),
-      type = "map", points.per.line = 3
-    )
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, hash = "a74cdcd428")
+  test_that("WITec .txt: extra data are correct", {
+    # @data colnames
+    expect_equal(colnames(spc), c("spc", "spcname", "filename"))
   })
 
-  test_that("Map with label line but no units header", {
-    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-Map_label.txt"),
-      type = "map",
-      hdr.units = FALSE, hdr.label = TRUE
-    )
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "5d1ed15baf")
+  test_that("WITec .txt: labels are correct", {
+    expect_equal(spc@label$.wavelength, "rel. 1/cm")
+    expect_equal(spc@label$spc, "CCD cts")
+    expect_equal(spc@label$filename, "filename")
   })
 
-  test_that("Map with units header line but no labels", {
-    expect_warning(
-      spc <- read_txt_WITec(paste0(tmpdir, "/Witec-Map_unit.txt"),
-        type = "map", hdr.units = TRUE, hdr.label = FALSE
-      ),
-      "no spatial information provided"
-    )
-    expect_null(spc$x)
-    expect_null(spc$y)
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "123fc77bdf")
+  test_that("Andor Solis .asc: spectra are correct", {
+    # Dimensions of spectra matrix (@data$spc)
+    expect_equal(dim(spc@data$spc), c(100, 1024))
 
-    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-Map_unit.txt"),
-      type = "map", hdr.units = TRUE, hdr.label = FALSE,
-      points.per.line = 5, lines.per.image = 5
-    )
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "f43487ae66")
+    # Column names of spectra matrix
+    expect_equal(colnames(spc@data$spc)[1], "87.7367")
+    expect_equal(colnames(spc@data$spc)[10], "117.333")
+    expect_equal(colnames(spc@data$spc)[n_wl], "2821.31") # last name
+
+    # Values of spectra matrix
+    expect_equal(unname(spc@data$spc[1, 1]), 995)
+    expect_equal(unname(spc@data$spc[2, 10]), 1002)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 985) # last spc value
   })
 
-  test_that("Map with header and label lines", {
-    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-Map_full.txt"),
-      type = "map",
-      hdr.units = TRUE, hdr.label = TRUE
-    )
-
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "60a1e20338")
-  })
-
-  test_that("Map can be read as time series", {
-    spc <- read_txt_WITec(paste0(tmpdir, "/image2x3_Table.Data 1_F.txt"))
-    expect_null(spc$x)
-    expect_null(spc$y)
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "40030b99dc")
-  })
-
-  test_that("parameter default type = 'single'", {
-    spc <- read_txt_WITec(paste0(tmpdir, "/timeseries3x_Table.Data 1.txt"))
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "37fc7cadcc")
-  })
-
-  test_that("Time series with neither header nor label lines", {
-    spc <- read_txt_WITec(paste0(tmpdir, "/timeseries3x_Table.Data 1.txt"))
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "37fc7cadcc")
-  })
-
-  test_that("Time series with label line but no units header", {
-    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-timeseries_label.txt"),
-      hdr.units = FALSE, hdr.label = TRUE
-    )
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "d102a0b244")
-  })
-
-  test_that("Time series with units header line but no labels", {
-    spc <- read_txt_WITec(
-      paste0(tmpdir, "/Witec-timeseries_unit.txt"),
-      hdr.units = TRUE, hdr.label = FALSE
-    )
-
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "375a63ae31")
-  })
-
-  test_that("Time series with header and label lines", {
-    expect_error(spc <- read_txt_WITec(paste0(tmpdir, "/Witec-timeseries_full.txt")))
-
-    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-timeseries_full.txt"),
-      hdr.units = TRUE, hdr.label = TRUE
-    )
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "7fa6a0be645")
-  })
-
-  test_that("encoding", {
-    spc <- read_txt_WITec(paste0(tmpdir, "/Witec-timeseries_full.txt"),
-      hdr.units = TRUE, hdr.label = TRUE,
-      encoding = "ascii"
-    )
-    spc$filename <- gsub("^.*/", "", spc$filename)
-    expect_known_hash(spc, "7fa6a0be645")
+  test_that("Andor Solis .asc: wavelengths are correct", {
+    expect_equal(spc@wavelength[1], 87.7367)
+    expect_equal(spc@wavelength[10], 117.333)
+    expect_equal(spc@wavelength[n_wl], 2821.31)
   })
 }
