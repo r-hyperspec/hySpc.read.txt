@@ -139,9 +139,9 @@ hySpc.testthat::test(read_txt_Horiba) <- function() {
     expect_equal(unname(spc@data$spc[n_rows, n_wl]), 117) # last spc value
 
     # Time series read correctly
-    expect_equal(unname(spc@data$t)[1], "0")
-    expect_equal(unname(spc@data$t)[10], "51.46")
-    expect_equal(unname(spc@data$t)[n_rows], "566.766") # last time value
+    expect_equal(unname(spc@data$t)[1], 0)
+    expect_equal(unname(spc@data$t)[10], 51.46)
+    expect_equal(unname(spc@data$t)[n_rows], 566.766) # last time value
 
   })
 
@@ -200,14 +200,14 @@ hySpc.testthat::test(read_txt_Horiba) <- function() {
     expect_equal(unname(spc@data$spc[n_rows, n_wl]), 898.605) # last spc value
 
     # Test x dimension read correctly
-    expect_equal(unname(spc@data$x)[1], "-55.5402")
-    expect_equal(unname(spc@data$x)[10], "-50.4685")
-    expect_equal(unname(spc@data$x)[n_rows], "43.2338") # last x value
+    expect_equal(unname(spc@data$x)[1], -55.5402)
+    expect_equal(unname(spc@data$x)[10], -50.4685)
+    expect_equal(unname(spc@data$x)[n_rows], 43.2338) # last x value
 
     # Test y dimension read correctly
-    expect_equal(unname(spc@data$y)[1], "-35.5996")
-    expect_equal(unname(spc@data$y)[10], "-19.8329")
-    expect_equal(unname(spc@data$y)[n_rows], "48.4894") # last y value
+    expect_equal(unname(spc@data$y)[1], -35.5996)
+    expect_equal(unname(spc@data$y)[10], -19.8329)
+    expect_equal(unname(spc@data$y)[n_rows], 48.4894) # last y value
   })
 
   test_that("Horiba xy .txt: wavelengths are correct", {
