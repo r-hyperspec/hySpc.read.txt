@@ -116,9 +116,6 @@ hySpc.testthat::test(read_txt_Horiba) <- function() {
   test_that("Horiba t .txt: extra data are correct", {
     # @data colnames
     expect_equal(colnames(spc), c("t", "spc", "filename"))
-
-    # @data values
-    # (Add tests, if relevant or remove this row)
   })
 
   test_that("Horiba t .txt: labels are correct", {
@@ -140,6 +137,12 @@ hySpc.testthat::test(read_txt_Horiba) <- function() {
     expect_equal(unname(spc@data$spc[1, 1]), 6244)
     expect_equal(unname(spc@data$spc[1, 10]), 5961)
     expect_equal(unname(spc@data$spc[n_rows, n_wl]), 117) # last spc value
+
+    # Time series read correctly
+    expect_equal(unname(spc@data$t)[1], "0")
+    expect_equal(unname(spc@data$t)[10], "51.46")
+    expect_equal(unname(spc@data$t)[n_rows], "566.766") # last time value
+
   })
 
   test_that("Horiba t .txt: wavelengths are correct", {
