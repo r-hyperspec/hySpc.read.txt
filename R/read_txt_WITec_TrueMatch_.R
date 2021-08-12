@@ -126,127 +126,60 @@ read_txt_WITec_TrueMatch <- function(file, keys_2header = "all") {
   }
 }
 
-
 # Unit tests -----------------------------------------------------------------
 
 hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
-
-  local_edition(2)
-
   context("read_txt_WITec_TrueMatch")
 
-  tmpdir <- paste0(tempdir(), "/test_Witec_txt_TrueMatch")
-  untar("testfiles_Witec.tar.gz",
-    files = c("Witec_TrueMatch.txt"),
-    exdir = tmpdir
+  local_edition(3)
+
+  filename <- system.file(
+    "extdata",
+    "txt.Witec/Witec_TrueMatch.txt",
+    package = "hySpc.read.txt"
   )
 
-  on.exit(unlink(tmpdir))
+  expect_silent(spc <- read_txt_WITec_TrueMatch(filename))
 
-  test_that("WITec TrueMatch example file", {
-    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+  n_wl <- nwl(spc)
+  n_rows <- nrow(spc)
+  n_clos <- ncol(spc)
 
-    expect_equal(
-      dim(spc),
-      c(nrow = 2L, ncol = length(colnames(spc)), nwl = 1024L)
-    )
-    expect_equal(spc$filename, rep(paste0(tmpdir, "/Witec_TrueMatch.txt"), 2))
-
-    expect_equivalent(spc[[, , 610]], c(902, 732))
+  test_that("WITec TrueMatch .txt: hyperSpec obj. dimensions are correct", {
+    expect_equal(n_wl, 63)
+    expect_equal(n_rows, 5)
+    expect_equal(n_clos, 2)
   })
 
-  test_that("multiple spectra with varying wavelengths return error", {
-    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-
-    expect_equivalent(
-      length(spc@data[1, c("spc")]),
-      length(spc@data[2, c("spc")])
-    )
+  test_that("WITec TrueMatch .txt: extra data are correct", {
+    # @data colnames
+    expect_equal(colnames(spc), c("spc", "filename"))
   })
 
-  test_that("spectra are in correct positions", {
-    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-
-    expect_equivalent(
-      is.matrix(spc@data[1, c("spc")]),
-      is.matrix(spc@data[2, c("spc")])
-    )
+  test_that("WITec TrueMatch .txt: labels are correct", {
+    expect_equal(spc@label$.wavelength, NULL)
+    expect_equal(spc@label$spc, NULL)
+    expect_equal(spc@label$filename, "filename")
   })
 
-  test_that("spectra data is correctly parsed", {
-    file <- read_ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-    ini_spc <- file[which(names(file) == "SpectrumData")]
-    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
+  test_that("WITec TrueMatch .txt: spectra are correct", {
+    # Dimensions of spectra matrix (@data$spc)
+    expect_equal(dim(spc@data$spc), c(5, 63))
 
-    for (s in seq_along(ini_spc)) {
-      data <- unlist(ini_spc[s])
-      data <- scan(text = data, quiet = TRUE)
-      expect_equivalent(data[c(TRUE, FALSE)], spc@wavelength) # wavelength
-      expect_equivalent(data[c(FALSE, TRUE)], spc@data[s, c("spc")]) # intensity
-    }
+    # Column names of spectra matrix
+    expect_equal(colnames(spc@data$spc)[1], "161.408")
+    expect_equal(colnames(spc@data$spc)[10], "200.184")
+    expect_equal(colnames(spc@data$spc)[n_wl], "423.651") # last name
+
+    # Values of spectra matrix
+    expect_equal(unname(spc@data$spc[1, 1]), 3404)
+    expect_equal(unname(spc@data$spc[2, 10]), 3405)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 3415) # last spc value
   })
 
-  test_that("spectra meta data is correctly parsed", {
-    file <- read_ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-    ini_meta <- file[which(names(file) == "SampleMetaData")]
-    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-    A <- names(file$SampleMetaData)
-    A <- A[A != ""]
-    A <- intersect(names(spc@data), A)
-    expect_equivalent(A, gsub("SampleMetaData.", "", names(unlist(ini_meta[1]))))
-    expect_equivalent(A, gsub("SampleMetaData.", "", names(unlist(ini_meta[2]))))
-  })
-
-  test_that("spectra header is correctly parsed", {
-    file <- read_ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-    ini_meta <- file[which(names(file) == "SpectrumHeader")]
-    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-    A <- names(file$SpectrumHeader)
-    A <- A[A != ""]
-    A <- intersect(names(spc@data), A)
-    expect_equivalent(A, gsub("SpectrumHeader.", "", names(unlist(ini_meta[1]))))
-    expect_equivalent(A, gsub("SpectrumHeader.", "", names(unlist(ini_meta[2]))))
-  })
-
-  test_that("users can specify extra data to keep", {
-    file <- read_ini(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-
-    A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
-    A <- A[A != ""]
-    spc <- read_txt_WITec_TrueMatch(
-      paste0(tmpdir, "/Witec_TrueMatch.txt"),
-      keys_2header = "all"
-    )
-    expect_equal(sort(colnames(spc)), sort(c("filename", "spc", A)))
-
-    spc <- read_txt_WITec_TrueMatch(
-      paste0(tmpdir, "/Witec_TrueMatch.txt"),
-      keys_2header = "none"
-    )
-    expect_equivalent(sort(colnames(spc)), c("filename", "spc"))
-
-    A <- c(names(file$SpectrumHeader), names(file$SampleMetaData))
-    A <- A[A != ""]
-    spc <- read_txt_WITec_TrueMatch(
-      paste0(tmpdir, "/Witec_TrueMatch.txt"),
-      keys_2header = c("Length")
-    )
-    expect_equivalent(
-      sort(colnames(spc)),
-      sort(c("filename", "spc", A[which(A == "Length")]))
-    )
-  })
-
-  test_that("labels are correctly assigned to wavelength", {
-    spc <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-    expect_equivalent(labels(spc, ".wavelength"), "lambda/nm")
-  })
-
-  test_that("a valid hyperSpec object is returned", {
-    spc_test <- read_txt_WITec_TrueMatch(paste0(tmpdir, "/Witec_TrueMatch.txt"))
-    expect(
-      assert_hyperSpec(spc_test),
-      failure_message = "hyperSpec object was not returned"
-    )
+  test_that("WITec TrueMatch .txt: wavelengths are correct", {
+    expect_equal(spc@wavelength[1], 161.40845)
+    expect_equal(spc@wavelength[10], 200.18387)
+    expect_equal(spc@wavelength[n_wl], 423.65106)
   })
 }
