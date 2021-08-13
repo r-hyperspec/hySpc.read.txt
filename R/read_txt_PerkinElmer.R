@@ -2,6 +2,10 @@
 
 #' Read PerkinElmer file (ASCII/txt)
 #'
+#' **EXPERIMENTAL FUNCTION**.
+#' To read example files correctly, pay attention to `skip = 54` in the
+#' examples.
+#'
 #' @param file Path to file (or several files).
 #' @param ... Passed to [base::scan()].
 #' @param label Labels.
@@ -11,8 +15,16 @@
 #'
 #'
 #' @importFrom utils modifyList
-#' @export
 #'
+#' @noRd
+#'
+#' @examples
+#' path <- system.file("extdata", "txt.PerkinElmer", package = "hySpc.read.txt")
+#' f_flu <- Sys.glob(paste0(path, "/flu?.txt"))
+#'
+#' spc_flu <- read_txt_PerkinElmer(f_flu, skip = 54)
+#' plot(spc_flu)
+
 read_txt_PerkinElmer <- function(file = stop("filenames needed"),
                                  ...,
                                  label = list()) {
@@ -22,7 +34,7 @@ read_txt_PerkinElmer <- function(file = stop("filenames needed"),
   label <- modifyList(
     list(
       .wavelength = expression(lambda / nm),
-      spc = expression(I[fl] / "a.u.")
+      spc = expression(I / a.u.)
     ),
     label
   )
@@ -33,7 +45,7 @@ read_txt_PerkinElmer <- function(file = stop("filenames needed"),
   }
 
   ## read the first file
-  buffer <- matrix(scan(file[1], ...), ncol = 2, byrow = TRUE)
+  buffer <- matrix(scan(file[1], ..., quiet = TRUE), ncol = 2, byrow = TRUE)
 
   ## first column gives the wavelength vector
   wavelength <- buffer[, 1]
@@ -66,5 +78,56 @@ read_txt_PerkinElmer <- function(file = stop("filenames needed"),
 
 
 # Unit tests -----------------------------------------------------------------
+hySpc.testthat::test(read_txt_PerkinElmer) <- function() {
+  context("read_txt_PerkinElmer")
 
-# FIXME: add unit tests
+  local_edition(3)
+
+  path <- system.file("extdata", "txt.PerkinElmer", package = "hySpc.read.txt")
+  f_spc <- paste0(path, "/flu1.txt")
+  expect_silent(spc <- read_txt_PerkinElmer(f_spc, skip = 54))
+
+  n_wl <- nwl(spc)
+  n_rows <- nrow(spc)
+  n_clos <- ncol(spc)
+
+  test_that("PerkinElmer .txt: hyperSpec obj. dimensions are correct", {
+    expect_equal(n_wl, 181)
+    expect_equal(n_rows, 1)
+    expect_equal(n_clos, 2)
+
+  })
+
+  test_that("PerkinElmer .txt: extra data are correct", {
+    # @data colnames
+    expect_equal(colnames(spc), c("spc", "filename"))
+  })
+
+  test_that("PerkinElmer .txt: labels are correct", {
+    expect_equal(spc@label$.wavelength, expression(lambda/nm))
+    expect_equal(spc@label$spc, expression(I / a.u.))
+    expect_equal(spc@label$filename, "filename")
+  })
+
+  test_that("PerkinElmer .txt: spectra are correct", {
+    # Dimensions of spectra matrix (@data$spc)
+    expect_equal(dim(spc@data$spc), c(1, 181))
+
+    # Column names of spectra matrix
+    expect_equal(colnames(spc@data$spc)[1], "405")
+    expect_equal(colnames(spc@data$spc)[10], "409.5")
+    expect_equal(colnames(spc@data$spc)[n_wl], "495") # last name
+
+    # Values of spectra matrix
+    expect_equal(unname(spc@data$spc[1, 1]), 27.15)
+    expect_equal(unname(spc@data$spc[1, 10]), 41.381333)
+    expect_equal(unname(spc@data$spc[n_rows, n_wl]), 45.256333) # last spc value
+
+  })
+
+  test_that("PerkinElmer .txt: wavelengths are correct", {
+    expect_equal(spc@wavelength[1], 405)
+    expect_equal(spc@wavelength[10], 409.5)
+    expect_equal(spc@wavelength[n_wl], 495)
+  })
+}
