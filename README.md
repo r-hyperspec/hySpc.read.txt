@@ -1,18 +1,28 @@
-
+<!-- ---------------------------------------------------------------------- -->
 
 <!-- badges: start -->
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![CRAN status](https://www.r-pkg.org/badges/version-last-release/hySpc.read.txt)](https://cran.r-project.org/package=hySpc.read.txt)
 [![R-CMD-check](https://github.com/r-hyperspec/hySpc.read.txt/workflows/R-CMD-check/badge.svg)](https://github.com/r-hyperspec/hySpc.read.txt/actions)
 ![Website (pkgdown)](https://github.com/r-hyperspec/hySpc.read.txt/workflows/Website%20(pkgdown)/badge.svg)
 [![Codecov](https://codecov.io/gh/r-hyperspec/hySpc.read.txt/branch/develop/graph/badge.svg)](https://codecov.io/gh/r-hyperspec/hySpc.read.txt?branch=develop)
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!--[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/hySpc.read.txt)](https://cran.r-project.org/package=hySpc.read.txt)-->
 <!--[![metacran downloads](https://cranlogs.r-pkg.org/badges/hySpc.read.txt)](https://cran.r-project.org/package=hySpc.read.txt)-->
 <!-- badges: end -->
 
 
-
+<!-- ---------------------------------------------------------------------- -->
 # R Package **hySpc.read.txt**
+<!-- ---------------------------------------------------------------------- -->
+<br>
+<center>
+<font color="red" size=4>
+<b>This package is still under construction.</b>  
+So this website is not fully updated yet.  
+</font>
+</center>
+<br>
+<!-- ---------------------------------------------------------------------- -->
 
 [**R**](https://www.r-project.org/) package **hySpc.read.txt** is a member of the [**`r-hyperspec`**](https://r-hyperspec.github.io/) packages family, which contains functions to import data from ASCII/text files saved by various instruments/software into **hyperSpec**.
 
@@ -21,7 +31,6 @@
 
 The **hyperSpec** team gratefully acknowledges support from the Google Summer of Code program, which sponsored student Erick Oduniyi during summer 2020.
 Erick and the team carried out a significant overhaul of **hyperSpec**, which led to this release.
-
 
 <!-- ---------------------------------------------------------------------- -->
 
@@ -36,34 +45,44 @@ The documentation of the other **`r-hyperspec`** family packages can be found at
 
 <!-- ---------------------------------------------------------------------- -->
 
-<!--
-## Installation of Released Version
+## Issues, Bug Reports and Feature Requests
 
+Issues, bug reports and feature requests should go to an appopriate package's repository:
+
+- if related to this package, use [this link](https://github.com/r-hyperspec/hySpc.read.txt/issues);
+- if related to `hyperSpec` package, use [this link](https://github.com/r-hyperspec/hyperSpec/issues).
+<!-- ---------------------------------------------------------------------- -->
+
+
+## Installation
+
+<!--
 ### Install from CRAN
 
-You can install a released version of **hySpc.read.txt** from [CRAN](https://cran.r-project.org/package=hySpc.read.txt) with:
+You can install the released version of **hySpc.read.txt** from [CRAN](https://cran.r-project.org/package=hySpc.read.txt) with:
 
 ```r
 install.packages("hySpc.read.txt")
 ```
-
 -->
 
 
-## Installation of In-Development Version
-
 ### Install from CRAN-like Repository
 
-The recommended way to install the in-development version:
+The **recommended** way to install the in-development version:
 
 ```r
 repos <- c("https://r-hyperspec.github.io/pkg-repo/", getOption("repos"))
 install.packages("hySpc.read.txt", repos = repos)
 ```
 
+
 ### Install from GitHub
 
-You can install the development version of the package from [GitHub](https://github.com/r-hyperspec/hySpc.read.txt):
+<details>
+<summary>Install from GitHub (details)</summary>
+
+You can install the in-development version of the package from [GitHub](https://github.com/r-hyperspec/hySpc.read.txt) too:
 
 ```r
 if (!require(remotes)) {install.packages("remotes")}
@@ -77,8 +96,14 @@ Usually, "Windows" users need to download, install and properly configure **Rtoo
 This method will **not** install package's documentation (help pages and vignettes) into your computer.
 So you can either use the [online documentation](https://r-hyperspec.github.io/) or build the package from source (see the next section).
 
+</details>
+
+
 
 ### Install from Source
+
+<details>
+<summary>Install from Source (details)</summary>
 
 1. From the **hySpc.read.txt**'s GitHub [repository](https://github.com/r-hyperspec/hySpc.read.txt):
     - If you use Git, `git clone` the branch of interest.
@@ -115,6 +140,8 @@ devtools::install(build_vignettes = TRUE)
 
 **NOTE 1:**
 Usually, "Windows" users need to download, install and properly configure **Rtools** (see [these instructions](https://cran.r-project.org/bin/windows/Rtools/)) to make the code above work.
+
+</details>
 
 
 ## For Developers
