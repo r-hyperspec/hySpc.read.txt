@@ -1,13 +1,25 @@
+# READ-ONLY FILE
+#
+# Original file resides in r-hyperspec/pkg-skelton.
+# DO NOT EDIT in any other repo as these changes will be overwritten.
+# Edit at r-hyperspec/pkg-skelton, then push there and
+# this file will be deployed to the other repos.
+#
 on:
   push:
     branches:
       - release
+      - main
       - master
       - develop
+
+      # - auto-update
+      - auto-update-test
 
   pull_request:
     branches:
       - release
+      - main
       - master
       - develop
 
@@ -40,23 +52,22 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "devtools"))
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
-          # Force to install hyperSpec:
-          repos <- c("https://r-hyperspec.github.io/pkg-repo/", getOption("repos"))
-          install.packages("hyperSpec", repos = repos, type = "source")
         shell: Rscript {0}
 
       - name: Roxygenize
         run: |
           # Vignettes are not needed for coverage tests
-          devtools::document(roclets = c('rd', 'collate', 'namespace'))
+          roclets <- roxygen2::load_options()$roclets
+          roclets <- roclets[!roclets %in% "vignette"]
+          devtools::document(roclets = roclets)
         shell: Rscript {0}
 
       - name: Test coverage
