@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-book"></span>
      
      
@@ -48,18 +50,12 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Documentation for version of package:</li>
     <li>
-      <a href="https://r-hyperspec.github.io/hySpc.read.txt/">Released</a>
+      <a href="https://r-hyperspec.github.io/hySpc.read.txt/" class="external-link">Released</a>
     </li>
     <li>
-      <a href="https://r-hyperspec.github.io/hySpc.read.txt/dev/">In-development</a>
+      <a href="https://r-hyperspec.github.io/hySpc.read.txt/dev/" class="external-link">In-development</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
 </li>
 <li>
   <a href="../articles/hySpc-read-txt.html">Get started</a>
@@ -73,7 +69,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-hyperspec/hySpc.read.txt/">
+  <a href="https://github.com/r-hyperspec/hySpc.read.txt/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -88,41 +84,40 @@
 
       
 
-      </header><script src="hySpc-read-txt_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="hySpc-read-txt_files/kePrint-0.0.1/kePrint.js"></script><link href="hySpc-read-txt_files/lightable-0.0.1/lightable.css" rel="stylesheet">
-<div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Import from Text Files with Spectra</h1>
-            <h3 class="subtitle">Tutorial on Spectra File Import from Text Files for “hyperSpec”</h3>
-                        <h4 class="author">Claudia Beleites<sup>1,2,3,4,5</sup>, Vilmantas Gegzna, Erick Oduniyi</h4>
+            <h3 data-toc-skip class="subtitle">Tutorial on Spectra File Import from Text Files for “hyperSpec”</h3>
+                        <h4 data-toc-skip class="author">Claudia Beleites<sup>1,2,3,4,5</sup>, Vilmantas Gegzna, Erick Oduniyi</h4>
             <address class="author_afil">
       <ol style="list-style-type: decimal">
 <li>DIA Raman Spectroscopy Group, University of Trieste/Italy (2005–2008)</li>
-      <li>Spectroscopy <span class="math inline">\(\cdot\)</span> Imaging, IPHT, Jena/Germany (2008–2017)</li>
-      <li>ÖPV, JKI, Berlin/Germany (2017–2019)</li>
-      <li>Arbeitskreis Lebensmittelmikrobiologie und Biotechnologie, Hamburg University, Hamburg/Germany (2019 – 2020)</li>
-      <li>Chemometric Consulting and Chemometrix GmbH, Wölfersheim/Germany (since 2016)</li>
-      </ol>
+<li>Spectroscopy <span class="math inline">\(\cdot\)</span> Imaging, IPHT, Jena/Germany (2008–2017)</li>
+<li>ÖPV, JKI, Berlin/Germany (2017–2019)</li>
+<li>Arbeitskreis Lebensmittelmikrobiologie und Biotechnologie, Hamburg University, Hamburg/Germany (2019 – 2020)</li>
+<li>Chemometric Consulting and Chemometrix GmbH, Wölfersheim/Germany (since 2016)</li>
+</ol>
 <br><a class="author_email" href="mailto:#"></a><a href="mailto:chemometrie@beleites.de" class="email">chemometrie@beleites.de</a>
       </address>
                   
-            <h4 class="date">2021-12-01</h4>
+            <h4 data-toc-skip class="date">2022-08-06</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/r-hyperspec/hySpc.read.txt/blob/master/vignettes/hySpc-read-txt.Rmd"><code>vignettes/hySpc-read-txt.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-hyperspec/hySpc.read.txt/blob/HEAD/vignettes/hySpc-read-txt.Rmd" class="external-link"><code>vignettes/hySpc-read-txt.Rmd</code></a></small>
       <div class="hidden name"><code>hySpc-read-txt.Rmd</code></div>
 
     </div>
 
     
     
-<pre><code>#&gt; Warning: Code evaluation in fileio.Rmd DISABLED!</code></pre>
+<pre><code><span><span class="co">#&gt; Warning: Code evaluation in fileio.Rmd DISABLED!</span></span></code></pre>
 <hr>
 <div class="redbox">
 <p>
 <strong>Consistent naming of file import functions in version &gt;= 0.99</strong>
 </p>
 <p>
-From now on, all import functions have names starting with <code>read.*()</code>. All functions previously named <code class="sourceCode r">scan.&lt;span class=“op”&gt;*()</code> have been renamed accordingly.
+From now on, all import functions have names starting with <code>read.*()</code>. All functions previously named <code class="sourceCode r">scan.&lt;span class=“sc”&gt;*()</code> have been renamed accordingly.
 </p>
 </div>
 <!-- ======================================================================= -->
@@ -138,7 +133,7 @@ From now on, all import functions have names starting with <code>read.*()</code>
 Package <strong>hyperSpec</strong> supports several file formats relevant for different types of spectroscopy. This file format is naturally only a subset of the file formats produced by different spectroscopic equipment.
 </p>
 <p>
-If you use package <strong>hyperSpec</strong> with data formats not mentioned in this document, please open a <a href="https://github.com/cbeleites/hyperSpec/issues" target="_blank">new issue</a> in <strong>hyperSpec</strong>’s GitHub repository so that this document can be updated. The information should include:
+If you use package <strong>hyperSpec</strong> with data formats not mentioned in this document, please open a <a href="https://github.com/cbeleites/hyperSpec/issues" target="_blank" class="external-link">new issue</a> in <strong>hyperSpec</strong>’s GitHub repository so that this document can be updated. The information should include:
 </p>
 <ul>
 <li>
@@ -161,7 +156,7 @@ Documentation, particularly the description of the data format.
 </li>
 </ul>
 <p>
-If you need help finding out how to import your data, please search and eventually ask on <a href="http://stackoverflow.com/questions/tagged/r+spectroscopy" target="_blank">Stackexchange</a> with tags <code>[r]</code> and <code>[spectroscopy]</code>.
+If you need help finding out how to import your data, please search and eventually ask on <a href="http://stackoverflow.com/questions/tagged/r+spectroscopy" target="_blank" class="external-link">Stackexchange</a> with tags <code>[r]</code> and <code>[spectroscopy]</code>.
 </p>
 </div>
 <!-- ======================================================================= -->
@@ -171,17 +166,18 @@ If you need help finding out how to import your data, please search and eventual
 <strong>Reproducing the Examples in this Manual</strong>
 </p>
 <p>
-To run the code examples, create a folder named “fileio” in your working directory and copy the contents of the directory <a href="https://github.com/cbeleites/hyperSpec/tree/develop/Vignettes/fileio" class="uri">https://github.com/cbeleites/hyperSpec/tree/develop/Vignettes/fileio</a>. This online directory contains the required datasets (via <code>git-lfs</code>).
+To run the code examples, create a folder named “fileio” in your working directory and copy the contents of the directory <a href="https://github.com/cbeleites/hyperSpec/tree/develop/Vignettes/fileio" class="external-link uri">https://github.com/cbeleites/hyperSpec/tree/develop/Vignettes/fileio</a>. This online directory contains the required datasets (via <code>git-lfs</code>).
 </p>
 </div>
 <hr>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-hyperspec.github.io/hyperSpec">hyperSpec</a></span><span class="op">)</span></code></pre></div>
-<div id="introduction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a><span class="header-section-number">1</span> Introduction</h1>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-hyperspec.github.io/hyperSpec" class="external-link">hyperSpec</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2" number="1">
+<h2 id="introduction">
+<span class="header-section-number">1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>This document describes how to import files containing spectra into <code class="sourceCode r">hyperSpec</code> objects, as well as exporting<code>hyperSpec</code> objects as files.</p>
-<p>The most basic funtion to create <code class="sourceCode r">hyperSpec</code> objects is <code class="sourceCode r"><span class="kw">new</span>(<span class="st">"hyperSpec"</span>)</code> (section <a href="#sec:new">2</a>).
+<p>The most basic funtion to create <code class="sourceCode r">hyperSpec</code> objects is <code class="sourceCode r"><span class="fu">new</span>(<span class="st">"hyperSpec"</span>)</code> (section <a href="#sec:new">2</a>).
 It makes a <code class="sourceCode r">hyperSpec</code> object from data already in R’s workspace.
 Thus, after spectra importation into R, conversion to <code class="sourceCode r">hyperSpec</code> objects is straightforward.</p>
 <p>Additionally, the <strong>hyperSpec</strong> package comes with predefined import functions for different data formats.
@@ -193,10 +189,10 @@ In general, the naming convention is the data format followed by the manufacture
 <!-- ======================================================================= -->
 <p>Overview lists of the directly supported file formats are in the appendix: sorted by file format (<!--appendix --><a href="#sec:format">9.1</a><!--, p. \pageref{sec:format}-->), manufacturer (<!--appendix --><a href="#sec:manufacturer">9.2</a><!--, p. \pageref{sec:manufacturer}-->), and by spectroscopy (<!--appendix --><a href="#sec:spectroscopy">9.3</a><!--, p. \pageref{sec:spectroscopy}-->).</p>
 </div>
-<div id="sec:new" class="section level1">
-<h1 class="hasAnchor">
-<a href="#sec:new" class="anchor"></a><span class="header-section-number">2</span> Creating a <code class="sourceCode r">hyperSpec</code> object with <code class="sourceCode r"><span class="kw">new</span>()</code>
-</h1>
+<div class="section level2" number="2">
+<h2 id="sec:new">
+<span class="header-section-number">2</span> Creating a <code class="sourceCode r">hyperSpec</code> object with <code class="sourceCode r"><span class="fu">new</span>()</code><a class="anchor" aria-label="anchor" href="#sec:new"></a>
+</h2>
 <!-- ======================================================================= -->
 <!-- ======================================================================= -->
 <p>
@@ -205,7 +201,7 @@ In general, the naming convention is the data format followed by the manufacture
 </p>
 <p>To create a <code class="sourceCode r">hyperSpec</code> object from data in R’s workspace, use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/initialize.html">new</a></span><span class="op">(</span><span class="st">"hyperSpec"</span>, <span class="va">spc</span>, <span class="va">wavelength</span>, <span class="va">data</span>, <span class="va">labels</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"hyperSpec"</span>, <span class="va">spc</span>, <span class="va">wavelength</span>, <span class="va">data</span>, <span class="va">labels</span><span class="op">)</span></span></code></pre></div>
 <p>With the arguments:</p>
 <table class="table">
 <colgroup>
@@ -216,7 +212,7 @@ In general, the naming convention is the data format followed by the manufacture
 <tr class="odd">
 <td align="left"><strong><code>spc</code></strong></td>
 <td align="left">the spectra matrix (may also be given as matrix inside
-column <code class="sourceCode r"><span class="op">$</span>spc</code> of <code class="sourceCode r">data</code>)</td>
+column <code class="sourceCode r"><span class="sc">$</span>spc</code> of <code class="sourceCode r">data</code>)</td>
 </tr>
 <tr class="even">
 <td align="left"><strong><code>wavelength</code></strong></td>
@@ -230,8 +226,8 @@ matrix in column <code>spc</code>)</td>
 <tr class="even">
 <td align="left"><strong><code>labels</code></strong></td>
 <td align="left">a list with the proper labels.
-Do not forget the wavelength axis label in <code class="sourceCode r"><span class="op">$</span>.wavelength</code>
-and the spectral intensity axis label in <code class="sourceCode r"><span class="op">$</span>spc</code>.</td>
+Do not forget the wavelength axis label in <code class="sourceCode r"><span class="sc">$</span>.wavelength</code>
+and the spectral intensity axis label in <code class="sourceCode r"><span class="sc">$</span>spc</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -239,16 +235,18 @@ and the spectral intensity axis label in <code class="sourceCode r"><span class=
 We suggest wrapping the code to import the data and the line joining it into a <code class="sourceCode r">hyperSpec</code> object by a user-created import function.
 Users are more than welcome to contribute such import code to package <strong>hyperSpec</strong>.
 Secion <a href="#sec:writing-Import">8</a><!--, (p. \pageref{sec:writing-Import})--> discusses examples of custom import functions.</p>
-<div id="import-spectra-matrix" class="section level2">
-<h2 class="hasAnchor">
-<a href="#import-spectra-matrix" class="anchor"></a><span class="header-section-number">2.1</span> Creating a <code class="sourceCode r">hyperSpec</code> Object from a Data Matrix (Spectra Matrix)</h2>
+<div class="section level3" number="2.1">
+<h3 id="import-spectra-matrix">
+<span class="header-section-number">2.1</span> Creating a <code class="sourceCode r">hyperSpec</code> Object from a Data Matrix (Spectra Matrix)<a class="anchor" aria-label="anchor" href="#import-spectra-matrix"></a>
+</h3>
 <p>As spectra matrices are the internal format of <code class="sourceCode r">hyperSpec</code>, the constructor can directly be used:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/initialize.html">new</a></span><span class="op">(</span><span class="st">"hyperSpec"</span>, <span class="va">spc</span>, <span class="va">wavelength</span>, <span class="va">data</span>, <span class="va">labels</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"hyperSpec"</span>, <span class="va">spc</span>, <span class="va">wavelength</span>, <span class="va">data</span>, <span class="va">labels</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="import-spectra-array" class="section level2">
-<h2 class="hasAnchor">
-<a href="#import-spectra-array" class="anchor"></a><span class="header-section-number">2.2</span> Creating a <code class="sourceCode r">hyperSpec</code> Object from a Data Cube (Spectra Array)</h2>
+<div class="section level3" number="2.2">
+<h3 id="import-spectra-array">
+<span class="header-section-number">2.2</span> Creating a <code class="sourceCode r">hyperSpec</code> Object from a Data Cube (Spectra Array)<a class="anchor" aria-label="anchor" href="#import-spectra-array"></a>
+</h3>
 <p>Roberto Moscetti asked how to convert a hyperspectral data cube into a <code class="sourceCode r">hyperSpec</code> object:</p>
 <blockquote>
 <p>The problem is that I have a hypercube with the following dimensions: 67 × 41 × 256
@@ -262,81 +260,84 @@ They have three directions, usually <span class="math inline">\(x\)</span>, <spa
 <p>The solution is to convert the array into a spectra matrix and have separate <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates.</p>
 <p>Assume <code class="sourceCode r">data</code> is the data cube, and <code class="sourceCode r">x</code>, <code class="sourceCode r">y</code> and <code class="sourceCode r">wl</code> hold vectors with the proper <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates and the wavelengths:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">24</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">wl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">550</span>, <span class="fl">630</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1200</span>, <span class="fl">1400</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">1600</span>, <span class="fl">1400</span>, <span class="fl">1200</span><span class="op">)</span>
-<span class="va">data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">24</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">wl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">550</span>, <span class="fl">630</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1200</span>, <span class="fl">1400</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">1600</span>, <span class="fl">1400</span>, <span class="fl">1200</span><span class="op">)</span></span>
+<span><span class="va">data</span></span></code></pre></div>
 <p>Such data can be converted into a <code class="sourceCode r">hyperSpec</code> object by:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">d</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
-
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">x</span>, each <span class="op">=</span> <span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
-
-<span class="va">spectra</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/initialize.html">new</a></span><span class="op">(</span><span class="st">"hyperSpec"</span>,
-  spc <span class="op">=</span> <span class="va">data</span>,
-  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, wavelength <span class="op">=</span> <span class="va">wl</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">d</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">x</span>, each <span class="op">=</span> <span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">spectra</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"hyperSpec"</span>,</span>
+<span>  spc <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, wavelength <span class="op">=</span> <span class="va">wl</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>If no proper coordinates (vectors <code class="sourceCode r">x</code>, <code class="sourceCode r">y</code> and <code class="sourceCode r">wl</code>) are available, they can be left out.
 In the case of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, map plotting will then be impossible, missing <code class="sourceCode r">wavelength</code>s will be replaced by column indices counting from <code class="sourceCode r"><span class="dv">1</span></code> to <code class="sourceCode r">d[<span class="dv">3</span>]</code> automatically.
 Of course, such sequences (the row/column/pixel numbers) can be used instead of the original <code class="sourceCode r">x</code> and <code class="sourceCode r">y</code> as well:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p>Data cubes often come from spectral imaging systems that use an “image” coordinate system counting <span class="math inline">\(y\)</span> from top to bottom.
 Note that this should be accounted for in the decreasing order of the original <code class="sourceCode r">y</code> vector.</p>
 <!-- ======================================================================= -->
 <!-- ======================================================================= -->
 </div>
 </div>
-<div id="io-options" class="section level1">
-<h1 class="hasAnchor">
-<a href="#io-options" class="anchor"></a><span class="header-section-number">3</span> General behaviour of file import functions: Options <code>file.keep.name</code> and <code>file.remove.emptyspc</code>
-</h1>
+<div class="section level2" number="3">
+<h2 id="io-options">
+<span class="header-section-number">3</span> General behaviour of file import functions: Options <code>file.keep.name</code> and <code>file.remove.emptyspc</code><a class="anchor" aria-label="anchor" href="#io-options"></a>
+</h2>
 </div>
-<div id="sec:read-mult-files" class="section level1">
-<h1 class="hasAnchor">
-<a href="#sec:read-mult-files" class="anchor"></a><span class="header-section-number">4</span> Reading Multiple files into one <code class="sourceCode r">hyperSpec</code> object</h1>
-<p>Many of the function described below will work on one file, even though derived functions such as <code class="sourceCode r"><span class="kw">read.spc.KaiserMap</span>()</code> (see section <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a><!--, p. \pageref{sec:read-spc-KaiserMap}-->) may take care of measurements consisting of multiple files.</p>
-<p>Usually, the most convenient way to import multiple files into one <code class="sourceCode r">hyperSpec</code> object is reading all files into a list of <code class="sourceCode r">hyperSpec</code> objects, and then <code class="sourceCode r"><span class="kw">collapse</span>()</code>ing this list into a single <code class="sourceCode r">hyperSpec</code> object:</p>
+<div class="section level2" number="4">
+<h2 id="sec:read-mult-files">
+<span class="header-section-number">4</span> Reading Multiple files into one <code class="sourceCode r">hyperSpec</code> object<a class="anchor" aria-label="anchor" href="#sec:read-mult-files"></a>
+</h2>
+<p>Many of the function described below will work on one file, even though derived functions such as <code class="sourceCode r"><span class="fu">read.spc.KaiserMap</span>()</code> (see section <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a><!--, p. \pageref{sec:read-spc-KaiserMap}-->) may take care of measurements consisting of multiple files.</p>
+<p>Usually, the most convenient way to import multiple files into one <code class="sourceCode r">hyperSpec</code> object is reading all files into a list of <code class="sourceCode r">hyperSpec</code> objects, and then <code class="sourceCode r"><span class="fu">collapse</span>()</code>ing this list into a single <code class="sourceCode r">hyperSpec</code> object:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.glob.html">Sys.glob</a></span><span class="op">(</span><span class="st">"fileio/spc.Kaisermap/*.spc"</span><span class="op">)</span>
-<span class="va">files</span> <span class="op">&lt;-</span> <span class="va">files</span><span class="op">[</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">files</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="co"># import low wavenumber region only</span>
-<span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">read.spc</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>
-<span class="va">spc</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/collapse.html">collapse</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>
-<span class="va">spc</span></code></pre></div>
-<p>Note that in this particular case, the spectra are more efficiently read by <code class="sourceCode r"><span class="kw">read.spc.KaiserMap</span>()</code> (see section <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a><!--, p. \pageref{sec:read-spc-KaiserMap}-->).</p>
+<code class="sourceCode R"><span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.glob.html" class="external-link">Sys.glob</a></span><span class="op">(</span><span class="st">"fileio/spc.Kaisermap/*.spc"</span><span class="op">)</span></span>
+<span><span class="va">files</span> <span class="op">&lt;-</span> <span class="va">files</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">files</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="co"># import low wavenumber region only</span></span>
+<span><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">read.spc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span></span>
+<span><span class="va">spc</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/collapse.html" class="external-link">collapse</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span></span>
+<span><span class="va">spc</span></span></code></pre></div>
+<p>Note that in this particular case, the spectra are more efficiently read by <code class="sourceCode r"><span class="fu">read.spc.KaiserMap</span>()</code> (see section <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a><!--, p. \pageref{sec:read-spc-KaiserMap}-->).</p>
 <p>If one regularly imports huge maps or images, writing a customized import function is highly encouraged.
 Users may gain speed and memory by using the internal workhorse functions for the file import.
-In that case, please open an issue at (<a href="https://github.com/r-hyperspec/hySpc.read.txt/issues" target="_blank"><strong>hySpc.read.txt</strong>’s GitHub repository</a>) for advise (contributions to package <strong>hySpc.read.txt</strong> are welcome and all authors are listed appropriately in the function help page’s author section).</p>
+In that case, please open an issue at (<a href="https://github.com/r-hyperspec/hySpc.read.txt/issues" target="_blank" class="external-link"><strong>hySpc.read.txt</strong>’s GitHub repository</a>) for advise (contributions to package <strong>hySpc.read.txt</strong> are welcome and all authors are listed appropriately in the function help page’s author section).</p>
 </div>
-<div id="sec:ascii" class="section level1">
-<h1 class="hasAnchor">
-<a href="#sec:ascii" class="anchor"></a><span class="header-section-number">5</span> ASCII files</h1>
+<div class="section level2" number="5">
+<h2 id="sec:ascii">
+<span class="header-section-number">5</span> ASCII files<a class="anchor" aria-label="anchor" href="#sec:ascii"></a>
+</h2>
 <!-- {#sec:ascii} {#sec:read-txt-long} {#sec:read-txt-wide} -->
 <p>
 </p>
 <p>Currently, <code class="sourceCode r">hyperSpec</code> provides two functions for general ASCII data import:</p>
 <ul>
 <li>
-<code class="sourceCode r"><span class="kw">read_txt_long</span>()</code> imports long format ASCII files, i.e., one intensity value per row.</li>
+<code class="sourceCode r"><span class="fu">read_txt_long</span>()</code> imports long format ASCII files, i.e., one intensity value per row.</li>
 <li>
-<code class="sourceCode r"><span class="kw">read_txt_wide</span>()</code> imports wide format ASCII files, i.e., one spectrum per row.</li>
+<code class="sourceCode r"><span class="fu">read_txt_wide</span>()</code> imports wide format ASCII files, i.e., one spectrum per row.</li>
 </ul>
 <p>The import functions immediately return a <code class="sourceCode r">hyperSpec</code> object.</p>
-<p>Internally, they use <code class="sourceCode r"><span class="kw">read.table</span>()</code>, a very powerful ASCII import function.
-R supplies another ASCII import function, <code class="sourceCode r"><span class="kw">scan</span>()</code>.
-Function <code class="sourceCode r"><span class="kw">scan</span>()</code> imports numeric data matrices and is faster than <code class="sourceCode r"><span class="kw">read.table</span>()</code>, but cannot import column names.
-If the data does not contain a header or is not important and can safely be skipped, it may want to import the data using <code class="sourceCode r"><span class="kw">scan</span>()</code>.</p>
+<p>Internally, they use <code class="sourceCode r"><span class="fu">read.table</span>()</code>, a very powerful ASCII import function.
+R supplies another ASCII import function, <code class="sourceCode r"><span class="fu">scan</span>()</code>.
+Function <code class="sourceCode r"><span class="fu">scan</span>()</code> imports numeric data matrices and is faster than <code class="sourceCode r"><span class="fu">read.table</span>()</code>, but cannot import column names.
+If the data does not contain a header or is not important and can safely be skipped, it may want to import the data using <code class="sourceCode r"><span class="fu">scan</span>()</code>.</p>
 <p>Note that R allows the use a variety of compressed file formats directly as ASCII files (for example, see section <a href="#sec:read-txt-Renishaw"><strong>??</strong></a><!-- on p. \pageref{sec:read-txt-Renishaw}-->).
-Also, both <code class="sourceCode r"><span class="kw">read_txt_long</span>()</code> and <code class="sourceCode r"><span class="kw">read_txt_wide</span>()</code> accept connections instead of file names.</p>
-<div id="sec:ascii-files-cols" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:ascii-files-cols" class="anchor"></a><span class="header-section-number">5.1</span> ASCII files with samples in columns</h2>
+Also, both <code class="sourceCode r"><span class="fu">read_txt_long</span>()</code> and <code class="sourceCode r"><span class="fu">read_txt_wide</span>()</code> accept connections instead of file names.</p>
+<div class="section level3" number="5.1">
+<h3 id="sec:ascii-files-cols">
+<span class="header-section-number">5.1</span> ASCII files with samples in columns<a class="anchor" aria-label="anchor" href="#sec:ascii-files-cols"></a>
+</h3>
 <p>
 
 
@@ -347,7 +348,7 @@ Also, both <code class="sourceCode r"><span class="kw">read_txt_long</span>()</c
 <p>Richard Pena asked about importing another ASCII file type:</p>
 <blockquote>
 <p>File <code>Triazine5_31.txt</code> corresponds to X ray powder diffraction data (Bruker AXS).
-The native files data“ra”are read with EVA software then they are converted into <code>.uxd</code> file with the
+The native files data”ra”are read with EVA software then they are converted into <code>.uxd</code> file with the
 File Exchange software (Bruker AXS).
 The <code>.uxd</code> file are opened with Excel software and saved as <code>.txt</code> file, <code>.csv</code> file (ChemoSpec) or <code>.xls</code>.</p>
 <p>The first and following columns corresponds to the angle diffraction and the intensity values of
@@ -357,150 +358,160 @@ samples respectively.</p>
 The header line gives the name of the sample.
 Import is straightforward, and just the spectra matrix needs to be transposed to make a <code class="sourceCode r">hyperSpec</code> object:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"fileio/txt.t/Triazine_5_31.txt"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, dec <span class="op">=</span> <span class="st">","</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span>
-
-<span class="va">triazine</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/initialize.html">new</a></span><span class="op">(</span><span class="st">"hyperSpec"</span>,
-  wavelength <span class="op">=</span> <span class="va">file</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, spc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">file</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,
-  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/dimnames.html">colnames</a></span><span class="op">(</span><span class="va">file</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,
-  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    .wavelength <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">theta</span> <span class="op">/</span> <span class="va">degree</span><span class="op">)</span>,
-    spc <span class="op">=</span> <span class="st">"I / a.u."</span>
-  <span class="op">)</span>
-<span class="op">)</span>
-<span class="va">triazine</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="st">"fileio/txt.t/Triazine_5_31.txt"</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, dec <span class="op">=</span> <span class="st">","</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">triazine</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"hyperSpec"</span>,</span>
+<span>  wavelength <span class="op">=</span> <span class="va">file</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, spc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">file</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/dimnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">file</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    .wavelength <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">theta</span> <span class="op">/</span> <span class="va">degree</span><span class="op">)</span>,</span>
+<span>    spc <span class="op">=</span> <span class="st">"I / a.u."</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">triazine</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">triazine</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">triazine</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p>WITec also saves ASCII data with spectra in columns (Export <span class="math inline">\(\rightarrow\)</span> Table), see <a href="#sec:read-txt-witec">7.5</a>.</p>
 </div>
-<div id="sec:aes-nist" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:aes-nist" class="anchor"></a><span class="header-section-number">5.2</span> Basic Atomic Spectra from NIST Tables</h2>
+<div class="section level3" number="5.2">
+<h3 id="sec:aes-nist">
+<span class="header-section-number">5.2</span> Basic Atomic Spectra from NIST Tables<a class="anchor" aria-label="anchor" href="#sec:aes-nist"></a>
+</h3>
 <p>
 
 
 </p>
 <p>The NIST (National Institute of Standards and Technology) has published a data base of basic atomic
-emission spectra see <a href="http://physics.nist.gov/PhysRefData/Handbook/periodictable.htm" class="uri">http://physics.nist.gov/PhysRefData/Handbook/periodictable.htm</a> with emission lines tabulated in ASCII (HTML) files.</p>
+emission spectra see <a href="http://physics.nist.gov/PhysRefData/Handbook/periodictable.htm" class="external-link uri">http://physics.nist.gov/PhysRefData/Handbook/periodictable.htm</a> with emission lines tabulated in ASCII (HTML) files.</p>
 <p>Here’s an example how to extract the data of the Hg strong lines file:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"fileio/NIST/mercurytable2.htm"</span><span class="op">)</span>
-<span class="co"># file &lt;- readLines("http://physics.nist.gov/PhysRefData/Handbook/Tables/mercurytable2.htm")</span>
-
-<span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"Intensity.*Wavelength"</span>, <span class="va">file</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span>
-<span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"&lt;/pre&gt;"</span>, <span class="va">file</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span>
-<span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"&lt;[^&gt;]*&gt;"</span>, <span class="st">""</span>, <span class="va">file</span><span class="op">)</span>
-<span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"^[[:space:]]+$"</span>, <span class="va">file</span><span class="op">)</span><span class="op">]</span>
-
-<span class="va">colnames</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-<span class="va">colnames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"[[:space:]][[:space:]]+"</span>, <span class="st">"\t"</span>, <span class="va">file</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="va">colnames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">colnames</span>, <span class="st">"\t"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">colnames</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Intensity"</span>, <span class="st">"Wavelength (&amp;Aring;)"</span>, <span class="st">"Spectrum"</span>, <span class="st">"Ref. "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"file format changed!"</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">tablestart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^[[:blank:]]*[[:alpha:]]+$"</span>, <span class="va">file</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span>
-<span class="va">tableend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">tablestart</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span><span class="op">)</span>
-<span class="va">tables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">tablestart</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="va">tablestart</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">:</span><span class="va">tableend</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">]</span>
-  <span class="va">tables</span><span class="op">[[</span><span class="va">t</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.fwf.html">read.fwf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/textconnections.html">textConnection</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">12</span>, <span class="fl">15</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span>
-  <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/dimnames.html">colnames</a></span><span class="op">(</span><span class="va">tables</span><span class="op">[[</span><span class="va">t</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Intensity"</span>, <span class="st">"persistent"</span>, <span class="st">"Wavelength"</span>, <span class="st">"Spectrum"</span>, <span class="st">"Ref. "</span><span class="op">)</span>
-  <span class="va">tables</span><span class="op">[[</span><span class="va">t</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"[[:space:]]"</span>, <span class="st">""</span>, <span class="va">file</span><span class="op">[</span><span class="va">tablestart</span><span class="op">[</span><span class="va">t</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="va">tables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">tables</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">" "</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">Hg.AES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">s</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">Hg.AES</span><span class="op">[[</span><span class="va">s</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/initialize.html">new</a></span><span class="op">(</span><span class="st">"hyperSpec"</span>,
-    wavelength <span class="op">=</span> <span class="va">tables</span><span class="op">$</span><span class="va">Wavelength</span><span class="op">[</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span> <span class="op">==</span> <span class="va">s</span><span class="op">]</span>,
-    spc <span class="op">=</span> <span class="va">tables</span><span class="op">$</span><span class="va">Intensity</span><span class="op">[</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span> <span class="op">==</span> <span class="va">s</span><span class="op">]</span>,
-    data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Spectrum <span class="op">=</span> <span class="va">s</span><span class="op">)</span>,
-    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      .wavelength <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">ring</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span>,
-      spc <span class="op">=</span> <span class="st">"I"</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"fileio/NIST/mercurytable2.htm"</span><span class="op">)</span></span>
+<span><span class="co"># file &lt;- readLines("http://physics.nist.gov/PhysRefData/Handbook/Tables/mercurytable2.htm")</span></span>
+<span></span>
+<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"Intensity.*Wavelength"</span>, <span class="va">file</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"&lt;/pre&gt;"</span>, <span class="va">file</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"&lt;[^&gt;]*&gt;"</span>, <span class="st">""</span>, <span class="va">file</span><span class="op">)</span></span>
+<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^[[:space:]]+$"</span>, <span class="va">file</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">colnames</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">colnames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"[[:space:]][[:space:]]+"</span>, <span class="st">"\t"</span>, <span class="va">file</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">colnames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">colnames</span>, <span class="st">"\t"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">colnames</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intensity"</span>, <span class="st">"Wavelength (&amp;Aring;)"</span>, <span class="st">"Spectrum"</span>, <span class="st">"Ref. "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"file format changed!"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">tablestart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"^[[:blank:]]*[[:alpha:]]+$"</span>, <span class="va">file</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span><span class="va">tableend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tablestart</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">tables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">tablestart</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="va">file</span><span class="op">[</span><span class="va">tablestart</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">:</span><span class="va">tableend</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">]</span></span>
+<span>  <span class="va">tables</span><span class="op">[[</span><span class="va">t</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.fwf.html" class="external-link">read.fwf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/textconnections.html" class="external-link">textConnection</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">12</span>, <span class="fl">15</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/dimnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">tables</span><span class="op">[[</span><span class="va">t</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intensity"</span>, <span class="st">"persistent"</span>, <span class="st">"Wavelength"</span>, <span class="st">"Spectrum"</span>, <span class="st">"Ref. "</span><span class="op">)</span></span>
+<span>  <span class="va">tables</span><span class="op">[[</span><span class="va">t</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"[[:space:]]"</span>, <span class="st">""</span>, <span class="va">file</span><span class="op">[</span><span class="va">tablestart</span><span class="op">[</span><span class="va">t</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">tables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">tables</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">" "</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Hg.AES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">s</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">Hg.AES</span><span class="op">[[</span><span class="va">s</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"hyperSpec"</span>,</span>
+<span>    wavelength <span class="op">=</span> <span class="va">tables</span><span class="op">$</span><span class="va">Wavelength</span><span class="op">[</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span> <span class="op">==</span> <span class="va">s</span><span class="op">]</span>,</span>
+<span>    spc <span class="op">=</span> <span class="va">tables</span><span class="op">$</span><span class="va">Intensity</span><span class="op">[</span><span class="va">tables</span><span class="op">$</span><span class="va">Spectrum</span> <span class="op">==</span> <span class="va">s</span><span class="op">]</span>,</span>
+<span>    data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Spectrum <span class="op">=</span> <span class="va">s</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      .wavelength <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">/</span> <span class="fu">ring</span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      spc <span class="op">=</span> <span class="st">"I"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/collapse.html">collapse</a></span><span class="op">(</span><span class="va">Hg.AES</span><span class="op">)</span>, lines.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"h"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/collapse.html" class="external-link">collapse</a></span><span class="op">(</span><span class="va">Hg.AES</span><span class="op">)</span>, lines.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"h"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="further-ascii-formats" class="section level2">
-<h2 class="hasAnchor">
-<a href="#further-ascii-formats" class="anchor"></a><span class="header-section-number">5.3</span> Further ASCII Formats</h2>
+<div class="section level3" number="5.3">
+<h3 id="further-ascii-formats">
+<span class="header-section-number">5.3</span> Further ASCII Formats<a class="anchor" aria-label="anchor" href="#further-ascii-formats"></a>
+</h3>
 <p>Further import filters are provided for manufacturer/software specific ASCII formats, see table <a href="#sec:format">9.1</a><!-- (p. \pageref{sec:format})--> and section <a href="#sec:manuf-spec-import">7.1</a><!--(p. \pageref{sec:manuf-spec-import})-->.</p>
 </div>
-<div id="ascii-export" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ascii-export" class="anchor"></a><span class="header-section-number">5.4</span> ASCII Export</h2>
-<p>ASCII export can be done in wide and long format using <code class="sourceCode r"><span class="kw">write_txt_long</span>()</code> and <code class="sourceCode r"><span class="kw">write_txt_wide</span>()</code>.
-If you need a specific header or footer, use R’s functions for writing files: <code class="sourceCode r"><span class="kw">write.table</span>()</code>, <code class="sourceCode r"><span class="kw">write</span>()</code>, <code class="sourceCode r"><span class="kw">cat</span>()</code> and so on offer fine-grained control of writing ASCII files.</p>
+<div class="section level3" number="5.4">
+<h3 id="ascii-export">
+<span class="header-section-number">5.4</span> ASCII Export<a class="anchor" aria-label="anchor" href="#ascii-export"></a>
+</h3>
+<p>ASCII export can be done in wide and long format using <code class="sourceCode r"><span class="fu">write_txt_long</span>()</code> and <code class="sourceCode r"><span class="fu">write_txt_wide</span>()</code>.
+If you need a specific header or footer, use R’s functions for writing files: <code class="sourceCode r"><span class="fu">write.table</span>()</code>, <code class="sourceCode r"><span class="fu">write</span>()</code>, <code class="sourceCode r"><span class="fu">cat</span>()</code> and so on offer fine-grained control of writing ASCII files.</p>
 </div>
 </div>
-<div id="sec:binary-file-formats" class="section level1">
-<h1 class="hasAnchor">
-<a href="#sec:binary-file-formats" class="anchor"></a><span class="header-section-number">6</span> Binary file formats</h1>
-<div id="sec:readMat" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:readMat" class="anchor"></a><span class="header-section-number">6.1</span> Matlab Files</h2>
+<div class="section level2" number="6">
+<h2 id="sec:binary-file-formats">
+<span class="header-section-number">6</span> Binary file formats<a class="anchor" aria-label="anchor" href="#sec:binary-file-formats"></a>
+</h2>
+<div class="section level3" number="6.1">
+<h3 id="sec:readMat">
+<span class="header-section-number">6.1</span> Matlab Files<a class="anchor" aria-label="anchor" href="#sec:readMat"></a>
+</h3>
 <p></p>
-<p>Matlab files can be read and written using the package <strong>R.matlab</strong>, which is available at CRAN and can be installed by <code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"R.matlab"</span>)</code>.</p>
+<p>Matlab files can be read and written using the package <strong>R.matlab</strong>, which is available at CRAN and can be installed by <code class="sourceCode r"><span class="fu">install.packages</span>(<span class="st">"R.matlab"</span>)</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/R.matlab">R.matlab</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/R.matlab" class="external-link">R.matlab</a></span><span class="op">)</span></span></code></pre></div>
 <!-- ======================================================================= -->
 <!-- ======================================================================= -->
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spc.mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/R.matlab/man/readMat.html">readMat</a></span><span class="op">(</span><span class="st">"fileio/spectra.mat"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">spc.mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/R.matlab/man/readMat.html" class="external-link">readMat</a></span><span class="op">(</span><span class="st">"fileio/spectra.mat"</span><span class="op">)</span></span></code></pre></div>
 <p>If the <code>.mat</code> file was saved with compression, the additional package <strong>Rcompression</strong> is needed.
 It can be installed from omegahat:</p>
 <!-- ======================================================================= -->
 <!-- ======================================================================= -->
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"Rcompression"</span>, repos <span class="op">=</span> <span class="st">"http://www.omegahat.org/R"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rcompression"</span>, repos <span class="op">=</span> <span class="st">"http://www.omegahat.org/R"</span><span class="op">)</span></span></code></pre></div>
 <p>See the documentation of package <strong>R.matlab</strong> for more details and possibly needed further packages.</p>
-<p>Function <code class="sourceCode r"><span class="kw">readMat</span>()</code> imports the <code>.mat</code> file’s contents as a list.
+<p>Function <code class="sourceCode r"><span class="fu">readMat</span>()</code> imports the <code>.mat</code> file’s contents as a list.
 The variables in the <code>.mat</code> file are appropriately named elements of the list.
-The <code class="sourceCode r">hyperSpec</code> object can be created using <code class="sourceCode r"><span class="kw">new</span>()</code>, see section <a href="#sec:new">2</a><!-- (p. \pageref{sec:new})-->.</p>
+The <code class="sourceCode r">hyperSpec</code> object can be created using <code class="sourceCode r"><span class="fu">new</span>()</code>, see section <a href="#sec:new">2</a><!-- (p. \pageref{sec:new})-->.</p>
 <p>Again, users probably want to wrap the import of their Matlab files into a function.</p>
-<div id="sec:writing-matlab-files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#sec:writing-matlab-files" class="anchor"></a><span class="header-section-number">6.1.1</span> Matlab Export</h3>
-<p>package <strong>R.matlab</strong>’s function <code class="sourceCode r"><span class="kw">writeMat</span>()</code> can be used to write R objects into <code>.mat</code> files.
+<div class="section level4" number="6.1.1">
+<h4 id="sec:writing-matlab-files">
+<span class="header-section-number">6.1.1</span> Matlab Export<a class="anchor" aria-label="anchor" href="#sec:writing-matlab-files"></a>
+</h4>
+<p>package <strong>R.matlab</strong>’s function <code class="sourceCode r"><span class="fu">writeMat</span>()</code> can be used to write R objects into <code>.mat</code> files.
 To save an <code class="sourceCode r">hyperSpec</code> object <code class="sourceCode r">x</code> for use in Matlab, you most likely want to save:</p>
 <ul>
-<li>the wavelength axis as obtained by <code class="sourceCode r"><span class="kw">wl</span>(x)</code>,</li>
+<li>the wavelength axis as obtained by <code class="sourceCode r"><span class="fu">wl</span>(x)</code>,</li>
 <li>the spectra matrix as obtained by <code class="sourceCode r">x[[]]</code>, and</li>
-<li>possibly also the extra data as obtained by <code class="sourceCode r">x<span class="op">$</span>..</code>
+<li>possibly also the extra data as obtained by <code class="sourceCode r">x<span class="sc">$</span>..</code>
 </li>
-<li>as well as the axis labels <code class="sourceCode r"><span class="kw">labels</span>(x)</code>.</li>
-<li>Alternatively, <code class="sourceCode r">x<span class="op">$</span>.</code> yields the extra data together with the spectra matrix.</li>
+<li>as well as the axis labels <code class="sourceCode r"><span class="fu">labels</span>(x)</code>.</li>
+<li>Alternatively, <code class="sourceCode r">x<span class="sc">$</span>.</code> yields the extra data together with the spectra matrix.</li>
 </ul>
 <p>However, it may be convenient to transform the saved data according to how it is needed in Matlab.
-The functions <code class="sourceCode r"><span class="kw">as.long.df</span>()</code> and <code class="sourceCode r"><span class="kw">as.wide.df</span>()</code> may prove useful for reshaping the data.</p>
+The functions <code class="sourceCode r"><span class="fu">as.long.df</span>()</code> and <code class="sourceCode r"><span class="fu">as.wide.df</span>()</code> may prove useful for reshaping the data.</p>
 </div>
-<div id="deriving-manufacturer-specific-import-filters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#deriving-manufacturer-specific-import-filters" class="anchor"></a><span class="header-section-number">6.1.2</span> Deriving manufacturer specific import filters</h3>
+<div class="section level4" number="6.1.2">
+<h4 id="deriving-manufacturer-specific-import-filters">
+<span class="header-section-number">6.1.2</span> Deriving manufacturer specific import filters<a class="anchor" aria-label="anchor" href="#deriving-manufacturer-specific-import-filters"></a>
+</h4>
 <p>Please note that future changes inside the read.spc function is likely to occur.
-However, if you just post-process the <code class="sourceCode r">hyperSpec</code> object returned by <code class="sourceCode r"><span class="kw">read.spc</span>()</code>, you should be fine.</p>
+However, if you just post-process the <code class="sourceCode r">hyperSpec</code> object returned by <code class="sourceCode r"><span class="fu">read.spc</span>()</code>, you should be fine.</p>
 </div>
 </div>
 </div>
-<div id="manufacturer-specific-discussion-of-file-import" class="section level1">
-<h1 class="hasAnchor">
-<a href="#manufacturer-specific-discussion-of-file-import" class="anchor"></a><span class="header-section-number">7</span> Manufacturer-Specific Discussion of File Import</h1>
-<div id="sec:manuf-spec-import" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:manuf-spec-import" class="anchor"></a><span class="header-section-number">7.1</span> Manufacturer Specific Import Functions</h2>
+<div class="section level2" number="7">
+<h2 id="manufacturer-specific-discussion-of-file-import">
+<span class="header-section-number">7</span> Manufacturer-Specific Discussion of File Import<a class="anchor" aria-label="anchor" href="#manufacturer-specific-discussion-of-file-import"></a>
+</h2>
+<div class="section level3" number="7.1">
+<h3 id="sec:manuf-spec-import">
+<span class="header-section-number">7.1</span> Manufacturer Specific Import Functions<a class="anchor" aria-label="anchor" href="#sec:manuf-spec-import"></a>
+</h3>
 <p>Many spectrometer manufacturers provide a function to export their spectra into ASCII files.
 The functions discussed above are written in a very general way and are highly customizable.
 We recommend wrapping these calls with the appropriate settings for the spectra format in an import function.
 Please consider contributing such import filters to package <strong>hyperSpec</strong>: send us the documented code (for details, see the box at the beginning of this document).
 If there is any format not mentioned in this document (even without the need of new converters), please let me know (details again in the box at the beginning of this document).</p>
 </div>
-<div id="sec:read-txt-Renishaw-ASCII" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:read-txt-Renishaw-ASCII" class="anchor"></a><span class="header-section-number">7.2</span> Renishaw ASCII data</h2>
+<div class="section level3" number="7.2">
+<h3 id="sec:read-txt-Renishaw-ASCII">
+<span class="header-section-number">7.2</span> Renishaw ASCII data<a class="anchor" aria-label="anchor" href="#sec:read-txt-Renishaw-ASCII"></a>
+</h3>
 <p>
 
 
@@ -509,17 +520,17 @@ If there is any format not mentioned in this document (even without the need of 
 
 
 </p>
-<p>An optimized import function for the ASCII files is available: <code class="sourceCode r"><span class="kw">read_txt_Renishaw</span>()</code>.
+<p>An optimized import function for the ASCII files is available: <code class="sourceCode r"><span class="fu">read_txt_Renishaw</span>()</code>.
 The file may be compressed via gzip, bzip2, xz or lzma.
-Zip compressed files are read via <code class="sourceCode r"><span class="kw">read_zip_Renishaw</span>()</code>.
+Zip compressed files are read via <code class="sourceCode r"><span class="fu">read_zip_Renishaw</span>()</code>.
 The ASCII files can easily become very large, particularly with linefocus or streamline imaging.
-Function <code class="sourceCode r"><span class="kw">read_txt_Renishaw</span>()</code> provides two mechanisms to avoid running out of memory during data import.
+Function <code class="sourceCode r"><span class="fu">read_txt_Renishaw</span>()</code> provides two mechanisms to avoid running out of memory during data import.
 The file may be imported in chunks of a given number of lines (see the last example).
-Function <code class="sourceCode r"><span class="kw">read_txt_Renishaw</span>()</code> can calculate the correct number of wavelengths (i.e., data points per spectrum) if the system command <code>wc</code> is available on your computer.</p>
+Function <code class="sourceCode r"><span class="fu">read_txt_Renishaw</span>()</code> can calculate the correct number of wavelengths (i.e., data points per spectrum) if the system command <code>wc</code> is available on your computer.</p>
 <p>Also, the processing of the long ASCII format into the spectra matrix is done by reshaping the vector of intensities into a matrix.
 This process does not allow any missing values in the data.
-<em>Therefore it is not possible to import multi-spectra files with individually “zapped” spectra using <code class="sourceCode r"><span class="kw">read_txt_Renishaw</span>()</code>.</em></p>
-<p>The second argument to <code class="sourceCode r"><span class="kw">read_txt_Renishaw</span>()</code> decides what type of experiment is imported.
+<em>Therefore it is not possible to import multi-spectra files with individually “zapped” spectra using <code class="sourceCode r"><span class="fu">read_txt_Renishaw</span>()</code>.</em></p>
+<p>The second argument to <code class="sourceCode r"><span class="fu">read_txt_Renishaw</span>()</code> decides what type of experiment is imported.
 Supported types are:</p>
 <table class="table"><tbody>
 <tr class="odd">
@@ -539,7 +550,7 @@ Supported types are:</p>
 <td align="left">time series</td>
 </tr>
 </tbody></table>
-<p>Instead of a file name, <code class="sourceCode r"><span class="kw">read_txt_Renishaw</span>()</code> accepts also a connection.</p>
+<p>Instead of a file name, <code class="sourceCode r"><span class="fu">read_txt_Renishaw</span>()</code> accepts also a connection.</p>
 <p>paracetamol &lt;- read_txt_Renishaw(“fileio/txt.Renishaw/paracetamol.txt”, “spc”)
 paracetamol</p>
 <!-- NOTE: the code to save this dataset as package data was removed from this file. -->
@@ -555,9 +566,10 @@ read_txt_Renishaw(“fileio/txt.Renishaw/chondro.gz”)
 read_txt_Renishaw(“fileio/txt.Renishaw/chondro.bz2”)
 read_zip_Renishaw(“fileio/txt.Renishaw/chondro.zip”)</p>
 </div>
-<div id="sec:read-txt-Horiba" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:read-txt-Horiba" class="anchor"></a><span class="header-section-number">7.3</span> Horiba / Jobin Yvon (e.g., LabRAM)</h2>
+<div class="section level3" number="7.3">
+<h3 id="sec:read-txt-Horiba">
+<span class="header-section-number">7.3</span> Horiba / Jobin Yvon (e.g., LabRAM)<a class="anchor" aria-label="anchor" href="#sec:read-txt-Horiba"></a>
+</h3>
 <p>
 
 
@@ -567,7 +579,7 @@ read_zip_Renishaw(“fileio/txt.Renishaw/chondro.zip”)</p>
 
 
 </p>
-<p>Horiba’s Labspec software (e.g., LabRAM spectrometers) saves spectra in a wide ASCII format which is read by <code class="sourceCode r"><span class="kw">read_txt_Horiba</span>()</code>, e.g.:</p>
+<p>Horiba’s Labspec software (e.g., LabRAM spectrometers) saves spectra in a wide ASCII format which is read by <code class="sourceCode r"><span class="fu">read_txt_Horiba</span>()</code>, e.g.:</p>
 <p>spc &lt;- read_txt_Horiba(“fileio/txt.HoribaJobinYvon/ts.txt”,
 cols = list(
 t = “t / s”, spc = “I / a.u.”,
@@ -576,52 +588,54 @@ t = “t / s”, spc = “I / a.u.”,
 )
 spc</p>
 <p>Note that Labspec <code>.txt</code> files can contain lots of spectra with zero intensity: Labspec saves a complete rectangular grid even if only part of a map was measured.
-These spectra are by removed by default if option <code class="sourceCode r">file.remove.emptyspc</code> is <code class="sourceCode r"><span class="ot">TRUE</span></code> (the default).</p>
-<p>For convenience, functions to further wrappers to import maps (<code class="sourceCode r"><span class="kw">read_txt_Horiba_xy</span>()</code>) and time series (<code class="sourceCode r"><span class="kw">read_txt_Horiba_t</span>()</code>) are provided.</p>
+These spectra are by removed by default if option <code class="sourceCode r">file.remove.emptyspc</code> is <code class="sourceCode r"><span class="cn">TRUE</span></code> (the default).</p>
+<p>For convenience, functions to further wrappers to import maps (<code class="sourceCode r"><span class="fu">read_txt_Horiba_xy</span>()</code>) and time series (<code class="sourceCode r"><span class="fu">read_txt_Horiba_t</span>()</code>) are provided.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_txt_Horiba.html">read_txt_Horiba_xy</a></span><span class="op">(</span><span class="st">"fileio/txt.HoribaJobinYvon/map.txt"</span><span class="op">)</span>
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">141</span>, <span class="fl">4</span>, <span class="fl">616</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">^</span><span class="fl">.5</span><span class="op">)</span> <span class="op">||</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">x</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/wl.html">wl</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">616</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0L</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">pkg</span> <span class="op">&lt;-</span> <span class="st">"hySpc.read.txt"</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span>
-    <span class="st">"error in testing read_txt_Horiba_xy(). "</span>,
-    <span class="st">"opening an issue at \n"</span>,
-    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageDescription</a></span><span class="op">(</span><span class="va">pkg</span><span class="op">)</span><span class="op">$</span><span class="va">BugReports</span>
-  <span class="op">)</span>
-<span class="op">}</span>
-<span class="va">spc</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_txt_Horiba.html">read_txt_Horiba_xy</a></span><span class="op">(</span><span class="st">"fileio/txt.HoribaJobinYvon/map.txt"</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">141</span>, <span class="fl">4</span>, <span class="fl">616</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">^</span><span class="fl">.5</span><span class="op">)</span> <span class="op">||</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">x</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/wl.html" class="external-link">wl</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">616</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0L</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">pkg</span> <span class="op">&lt;-</span> <span class="st">"hySpc.read.txt"</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span></span>
+<span>    <span class="st">"error in testing read_txt_Horiba_xy(). "</span>,</span>
+<span>    <span class="st">"opening an issue at \n"</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageDescription</a></span><span class="op">(</span><span class="va">pkg</span><span class="op">)</span><span class="op">$</span><span class="va">BugReports</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">spc</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_txt_Horiba.html">read_txt_Horiba_t</a></span><span class="op">(</span><span class="st">"fileio/txt.HoribaJobinYvon/ts.txt"</span><span class="op">)</span>
-<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">3</span>, <span class="fl">1024</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">t</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">t</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/wl.html">wl</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1024</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0L</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">pkg</span> <span class="op">&lt;-</span> <span class="st">"hySpc.read.txt"</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span>
-    <span class="st">"error in testing read_txt_Horiba_xy(). "</span>,
-    <span class="st">"opening an issue at \n"</span>,
-    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageDescription</a></span><span class="op">(</span><span class="va">pkg</span><span class="op">)</span><span class="op">$</span><span class="va">BugReports</span>
-  <span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">spc</span>
-<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_txt_Horiba.html">read_txt_Horiba_t</a></span><span class="op">(</span><span class="st">"fileio/txt.HoribaJobinYvon/ts.txt"</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">3</span>, <span class="fl">1024</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">t</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">t</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/wl.html" class="external-link">wl</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1024</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0L</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">pkg</span> <span class="op">&lt;-</span> <span class="st">"hySpc.read.txt"</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span></span>
+<span>    <span class="st">"error in testing read_txt_Horiba_xy(). "</span>,</span>
+<span>    <span class="st">"opening an issue at \n"</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageDescription</a></span><span class="op">(</span><span class="va">pkg</span><span class="op">)</span><span class="op">$</span><span class="va">BugReports</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">spc</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">spc</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="sec:read-asc-Andor" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:read-asc-Andor" class="anchor"></a><span class="header-section-number">7.4</span> Andor Solis</h2>
+<div class="section level3" number="7.4">
+<h3 id="sec:read-asc-Andor">
+<span class="header-section-number">7.4</span> Andor Solis<a class="anchor" aria-label="anchor" href="#sec:read-asc-Andor"></a>
+</h3>
 <p>
 
 </p>
-<p>Andor Solis exports ASCII files that can be read with <code class="sourceCode r"><span class="kw">read.asc.Andor</span>()</code>:</p>
+<p>Andor Solis exports ASCII files that can be read with <code class="sourceCode r"><span class="fu">read.asc.Andor</span>()</code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/DEPRECATED-read.asc.Andor.html">read.asc.Andor</a></span><span class="op">(</span><span class="st">"fileio/asc.Andor/ASCII-Andor-Solis.asc"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/DEPRECATED-read.asc.Andor.html" class="external-link">read.asc.Andor</a></span><span class="op">(</span><span class="st">"fileio/asc.Andor/ASCII-Andor-Solis.asc"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="sec:read-txt-witec" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:read-txt-witec" class="anchor"></a><span class="header-section-number">7.5</span> WITec</h2>
+<div class="section level3" number="7.5">
+<h3 id="sec:read-txt-witec">
+<span class="header-section-number">7.5</span> WITec<a class="anchor" aria-label="anchor" href="#sec:read-txt-witec"></a>
+</h3>
 <p>
 
 
@@ -638,7 +652,7 @@ read.spc(“fileio/spc.Witec/Witec-Map.spc”)</p>
 <p><code>.spc</code> is in general the recommended format for package <strong>hyperSpec</strong> import.
 For imaging data, no spatial information for the set of spectra is provided (in version 2.10, this export option is not supported).</p>
 <p>Imaging data (but also single spectra and time series) can be exported as ASCII X and Y files (Save ASCII X and Save ASCII Y, not supported in version 4).
-These can be read by <code class="sourceCode r"><span class="kw">read_dat_WITec</span>()</code>:</p>
+These can be read by <code class="sourceCode r"><span class="fu">read_dat_WITec</span>()</code>:</p>
 <p>read_dat_WITec(“fileio/txt.Witec/Witec-timeseries-x.dat”)
 read_dat_WITec(
 filex = “fileio/txt.Witec/Witec-Map-x.dat”,
@@ -647,8 +661,8 @@ points.per.line = 5, lines.per.image = 5, type = “map”
 <p>Note that the Y data files also contain wavelength information, but (at least WITec Project 2.10) this information is always wavelength in nm, not Raman shift in wavenumbers: this is provided by the X data file only.</p>
 <p>Another option is WITec’s txt table ASCII export (Export <span class="math inline">\(\rightarrow\)</span> Table), which produces ASCII files with each row corresponding to one wavelength.
 The first column contains the wavelength axis; all further columns contain one spectrum each column.
-Such files can be read with <code class="sourceCode r"><span class="kw">read_txt_WITec</span>()</code>:</p>
-<p><code class="sourceCode r"><span class="kw">read_txt_WITec</span>()</code> determines the number of wavelengths automatically.</p>
+Such files can be read with <code class="sourceCode r"><span class="fu">read_txt_WITec</span>()</code>:</p>
+<p><code class="sourceCode r"><span class="fu">read_txt_WITec</span>()</code> determines the number of wavelengths automatically.</p>
 <p>Note that there are several Export Filter Options.
 It is possible to determine which units should be used for the export (see XUnits tab).
 It is also possible to export two additional header lines containing information about spectra labels and units.
@@ -659,24 +673,25 @@ Otherwise, either an error will be displayed like</p>
 <p>For imaging data set parameter <code class="sourceCode r">type</code> to “map”.
 If the label header is exported, the spatial information can be extracted from this line.
 Otherwise, at least one, <code class="sourceCode r">points.per.line</code> or <code class="sourceCode r">lines.per.image</code>, has to be given manually, if not, a warning will be shown.</p>
-<p>For line scans and z-stacks use <code class="sourceCode r">type =<span class="st"> "single"</span></code> because the provided information is looking the same as for time series, so no further information can be extracted from the header files.</p>
-<p>Since version 4 WITec Project offers the Graph ASCII export (Export <span class="math inline">\(\rightarrow\)</span> Graph ASCII), which produces three ASCII files, named Header containing additional information, X-Axis containing the wavelength values and Y-Axis containing the spectra one spectrum in each column. Data exported in this way can be read with <code class="sourceCode r"><span class="kw">read_txt_Witec_Graph</span>()</code>:</p>
+<p>For line scans and z-stacks use <code class="sourceCode r">type <span class="ot">=</span> <span class="st">"single"</span></code> because the provided information is looking the same as for time series, so no further information can be extracted from the header files.</p>
+<p>Since version 4 WITec Project offers the Graph ASCII export (Export <span class="math inline">\(\rightarrow\)</span> Graph ASCII), which produces three ASCII files, named Header containing additional information, X-Axis containing the wavelength values and Y-Axis containing the spectra one spectrum in each column. Data exported in this way can be read with <code class="sourceCode r"><span class="fu">read_txt_Witec_Graph</span>()</code>:</p>
 <p>read_txt_Witec_Graph(“fileio/txt.Witec/Witec-timeseries (Header).txt”)
 read_txt_Witec_Graph(“fileio/txt.Witec/Witec-Map (Header).txt”, type = “map”)
 read_txt_Witec_Graph(“fileio/txt.Witec/nofilename (Header).txt”, encoding = “latin1”)</p>
-<p>This function reads the spectra files automatically, if they are appropriately named and extracts additional information of the header file. As for the other Witec functions, it is possible to read image data by selecting <code class="sourceCode r">type =<span class="st"> "map"</span></code>. Line scans and z-stacks should be read as single spectra.</p>
+<p>This function reads the spectra files automatically, if they are appropriately named and extracts additional information of the header file. As for the other Witec functions, it is possible to read image data by selecting <code class="sourceCode r">type <span class="ot">=</span> <span class="st">"map"</span></code>. Line scans and z-stacks should be read as single spectra.</p>
 </div>
 </div>
-<div id="sec:writing-Import" class="section level1">
-<h1 class="hasAnchor">
-<a href="#sec:writing-Import" class="anchor"></a><span class="header-section-number">8</span> Writing your own Import Function</h1>
+<div class="section level2" number="8">
+<h2 id="sec:writing-Import">
+<span class="header-section-number">8</span> Writing your own Import Function<a class="anchor" aria-label="anchor" href="#sec:writing-Import"></a>
+</h2>
 <p>This section gives examples of how to write import functions. The first example implements an import
 filter for an ASCII file format, basically from scratch. The second example shows how to implement
 more details for an already existing import filter.</p>
-<div id="sec:read-txt-PerkinElmer" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:read-txt-PerkinElmer" class="anchor"></a><span class="header-section-number">8.1</span> A new ASCII Import Function: <code>read_txt_PerkinElmer</code>
-</h2>
+<div class="section level3" number="8.1">
+<h3 id="sec:read-txt-PerkinElmer">
+<span class="header-section-number">8.1</span> A new ASCII Import Function: <code>read_txt_PerkinElmer</code><a class="anchor" aria-label="anchor" href="#sec:read-txt-PerkinElmer"></a>
+</h3>
 <p>
 
 
@@ -684,17 +699,17 @@ more details for an already existing import filter.</p>
 
 </p>
 <p>The raw spectra of the <code class="sourceCode r">flu</code> data set (see also the separate vignette) are in PerkinElmer’s ASCII file format, one spectrum per file.</p>
-<p>We need a function that automatically reads all files specified by a pattern, such as <code class="sourceCode r"><span class="op">*</span>.txt</code>.
+<p>We need a function that automatically reads all files specified by a pattern, such as <code class="sourceCode r"><span class="sc">*</span>.txt</code>.
 To gain speed, users should preallocate the spectra matrix after the first reading of the file.</p>
 <!-- ======================================================================= -->
 <!-- ======================================================================= -->
-<p>A short examination of the files (<code class="sourceCode r">flu<span class="op">*</span>.txt</code> in directory <code>txt.PerkinElmer</code>) reveals that the actual spectrum starts at line 55, after a line containing <code>\#DATA</code>.
+<p>A short examination of the files (<code class="sourceCode r">flu<span class="sc">*</span>.txt</code> in directory <code>txt.PerkinElmer</code>) reveals that the actual spectrum starts at line 55, after a line containing <code>\#DATA</code>.
 For now, no other information about the files is to be extracted.
 It is thus easier to skip the first 54 lines than searching for the line after <code>\#DATA</code>.</p>
 <p>A fully-featured import function should support:</p>
 <ul>
 <li>Reading multiple files by giving a pattern</li>
-<li>hand further arguments to <code class="sourceCode r"><span class="kw">scan</span>()</code>.
+<li>hand further arguments to <code class="sourceCode r"><span class="fu">scan</span>()</code>.
 This comes handy in case the function is used later to import other data types.</li>
 <li>Also, skipping 54 lines would be a weird default, so we instead require it to be given
 explicitly.</li>
@@ -707,76 +722,76 @@ wavelength axis as the others.</li>
 <li>Finally, package <strong>hyperSpec</strong> does some optional common post-processing for all imported files such as attaching the filename (or connection description) to the <code class="sourceCode r">hyperSpec</code> object (column <code class="sourceCode r">filename</code>) and deleting empty spectra.
 These options can be globally switched on or off by options.</li>
 </ul>
-<!-- \VerbatimInput[frame=single, label={read_txt_PerkinElmer.R}, formatcom=\footnotesize]{read_txt_PerkinElmer.R} --><pre><code>
-# Function -------------------------------------------------------------------
-
-#' Read PerkinElmer file (ASCII/txt)
-#'
-#' @param file Path to file or several files
-#' @param ... Passed to [base::scan()].
-#' @param label Labels.
-#'
-#'
-#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.
-#'
-#'
-#' @export
-#'
-read_txt_PerkinElmer &lt;- function(file = stop("filenames needed"),
-                                 ...,
-                                 label = list()) {
-
-
-  ##  set default labels
-  label &lt;- modifyList(
-    list(
-      .wavelength = expression(lambda / nm),
-      spc = expression(I[fl] / "a.u.")
-    ),
-    label
-  )
-
-  if (length(file) == 0) {
-    warning("No files found.")
-    return(new("hyperSpec"))
-  }
-
-  ## read the first file
-  buffer &lt;- matrix(scan(file[1], ...), ncol = 2, byrow = TRUE)
-
-  ## first column gives the wavelength vector
-  wavelength &lt;- buffer[, 1]
-
-  ## preallocate the spectra matrix:
-  ##  one row per file x as many columns as the first file has
-  spc &lt;- matrix(ncol = nrow(buffer), nrow = length(file))
-
-  ## the first file's data goes into the first row
-  spc[1, ] &lt;- buffer[, 2]
-
-  ## now read the remaining files
-  for (f in seq(along = file)[-1]) {
-    buffer &lt;- matrix(scan(file[f], ...), ncol = 2, byrow = TRUE)
-
-    ## check whether they have the same wavelength axis
-    if (!all.equal(buffer[, 1], wavelength)) {
-      stop(paste(file[f], "has different wavelength axis."))
-    }
-
-    spc[f, ] &lt;- buffer[, 2]
-  }
-
-  ## make the hyperSpec object
-  spc &lt;- new("hyperSpec", wavelength = wavelength, spc = spc, label = label)
-
-  ## consistent file import behavior across import functions
-  .spc_io_postprocess_optional(spc, file)
-}
-
-
-# Unit tests -----------------------------------------------------------------
-
-# FIXME: add unit tests</code></pre>
+<!-- \VerbatimInput[frame=single, label={read_txt_PerkinElmer.R}, formatcom=\footnotesize]{read_txt_PerkinElmer.R} --><pre><code><span></span>
+<span><span class="co"># Function -------------------------------------------------------------------</span></span>
+<span></span>
+<span><span class="co">#' Read PerkinElmer file (ASCII/txt)</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @param file Path to file or several files</span></span>
+<span><span class="co">#' @param ... Passed to [base::scan()].</span></span>
+<span><span class="co">#' @param label Labels.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @return [hyperSpec][hyperSpec::hyperSpec-class()] object.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @export</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="va">read_txt_PerkinElmer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span> <span class="op">=</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"filenames needed"</span><span class="op">)</span>,</span>
+<span>                                 <span class="va">...</span>,</span>
+<span>                                 <span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span></span>
+<span>  <span class="co">##  set default labels</span></span>
+<span>  <span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/modifyList.html" class="external-link">modifyList</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      .wavelength <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">/</span> <span class="va">nm</span><span class="op">)</span>,</span>
+<span>      spc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="va">fl</span><span class="op">]</span> <span class="op">/</span> <span class="st">"a.u."</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    <span class="va">label</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"No files found."</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu">new</span><span class="op">(</span><span class="st">"hyperSpec"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co">## read the first file</span></span>
+<span>  <span class="va">buffer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scan.html" class="external-link">scan</a></span><span class="op">(</span><span class="va">file</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">...</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co">## first column gives the wavelength vector</span></span>
+<span>  <span class="va">wavelength</span> <span class="op">&lt;-</span> <span class="va">buffer</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="co">## preallocate the spectra matrix:</span></span>
+<span>  <span class="co">##  one row per file x as many columns as the first file has</span></span>
+<span>  <span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">buffer</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co">## the first file's data goes into the first row</span></span>
+<span>  <span class="va">spc</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">buffer</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="co">## now read the remaining files</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">f</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>along <span class="op">=</span> <span class="va">file</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">buffer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scan.html" class="external-link">scan</a></span><span class="op">(</span><span class="va">file</span><span class="op">[</span><span class="va">f</span><span class="op">]</span>, <span class="va">...</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co">## check whether they have the same wavelength axis</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/Comparison.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">buffer</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="va">wavelength</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">file</span><span class="op">[</span><span class="va">f</span><span class="op">]</span>, <span class="st">"has different wavelength axis."</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span></span>
+<span>    <span class="va">spc</span><span class="op">[</span><span class="va">f</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">buffer</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co">## make the hyperSpec object</span></span>
+<span>  <span class="va">spc</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"hyperSpec"</span>, wavelength <span class="op">=</span> <span class="va">wavelength</span>, spc <span class="op">=</span> <span class="va">spc</span>, label <span class="op">=</span> <span class="va">label</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co">## consistent file import behavior across import functions</span></span>
+<span>  <span class="fu"><a href="https://r-hyperspec.github.io/hyperSpec/reference/dot-spc_io_postprocess_optional.html" class="external-link">.spc_io_postprocess_optional</a></span><span class="op">(</span><span class="va">spc</span>, <span class="va">file</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Unit tests -----------------------------------------------------------------</span></span>
+<span></span>
+<span><span class="co"># FIXME: add unit tests</span></span></code></pre>
 <p>imports the spectra.
 Note how the labels are set.
 The label with the special name <code class="sourceCode r">.wavelength</code> corresponds to the wavelength axis, all data columns should have a label with the same name.
@@ -789,14 +804,16 @@ read_txt_PerkinElmer(Sys.glob(“fileio/txt.PerkinElmer/flu?.txt”), skip = 54)
 Thus information like the excitation wavelength is lost.</p>
 </div>
 </div>
-<div id="appendix-a" class="section level1">
-<h1 class="hasAnchor">
-<a href="#appendix-a" class="anchor"></a><span class="header-section-number">9</span> <strong>Appendix A:</strong> File Import Functions</h1>
+<div class="section level2" number="9">
+<h2 id="appendix-a">
+<span class="header-section-number">9</span> <strong>Appendix A:</strong> File Import Functions<a class="anchor" aria-label="anchor" href="#appendix-a"></a>
+</h2>
 <!-- ======================================================================= -->
 <!-- ======================================================================= -->
-<div id="sec:format" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:format" class="anchor"></a><span class="header-section-number">9.1</span> File Import Functions by Format</h2>
+<div class="section level3" number="9.1">
+<h3 id="sec:format">
+<span class="header-section-number">9.1</span> File Import Functions by Format<a class="anchor" aria-label="anchor" href="#sec:format"></a>
+</h3>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -841,7 +858,7 @@ Andor
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.asc.Andor</span>()</code>
+<code class="sourceCode r"><span class="fu">read.asc.Andor</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-asc-Andor">7.4</a>
@@ -890,7 +907,7 @@ ASCII long
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.long</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.long</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:ascii">5</a>
@@ -912,7 +929,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Renishaw</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Renishaw</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -934,7 +951,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.long</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.long</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:KaiserASCII"><strong>??</strong></a>
@@ -957,7 +974,7 @@ Perkin Elmer
 Fluorescence
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.PerkinElmer</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.PerkinElmer</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-PerkinElmer">8.1</a>
@@ -985,7 +1002,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.zip.Renishaw</span>()</code>
+<code class="sourceCode r"><span class="fu">read.zip.Renishaw</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -1010,7 +1027,7 @@ ASCII wide
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.wide</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.wide</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:ascii">5</a>
@@ -1032,7 +1049,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -1055,7 +1072,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba.xy</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba.xy</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -1078,7 +1095,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba.t</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba.t</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -1106,7 +1123,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -1132,7 +1149,7 @@ ENVI
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI"><strong>??</strong></a>
@@ -1154,7 +1171,7 @@ Bruker
 Infrared Imaging
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI-Bruker"><strong>??</strong></a>
@@ -1176,7 +1193,7 @@ Nicolet
 Infrared Imaging
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI.Nicolet</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI.Nicolet</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI-Nicolet"><strong>??</strong></a>
@@ -1228,7 +1245,7 @@ JCAMP-DX
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -1250,7 +1267,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -1272,7 +1289,7 @@ Shimadzu
 GCxGC-MS
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Shimadzu</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Shimadzu</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -1293,7 +1310,7 @@ PerkinElmer
 Infrared
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -1320,7 +1337,7 @@ Matlab
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r">R.matlab<span class="op">::</span><span class="kw">readMat</span>()</code>
+<code class="sourceCode r">R.matlab<span class="sc">::</span><span class="fu">readMat</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:readMat">6.1</a>
@@ -1341,7 +1358,7 @@ Cytospec
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.mat.Cytospec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.mat.Cytospec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-mat-Cytospec"><strong>??</strong></a>
@@ -1363,7 +1380,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.mat.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.mat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -1439,7 +1456,7 @@ Shimadzu
 GC,GC-MS
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -1465,7 +1482,7 @@ spc
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -1487,7 +1504,7 @@ Kaiser
 Raman Map
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.KaiserMap</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.KaiserMap</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a>
@@ -1510,7 +1527,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.Kaiser</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.Kaiser</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -1532,7 +1549,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.KaiserLowHigh</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.KaiserLowHigh</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -1554,7 +1571,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -1576,7 +1593,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -1599,7 +1616,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -1622,7 +1639,7 @@ Horiba
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -1649,7 +1666,7 @@ Princeton Instruments
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spe</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spe</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spe"><strong>??</strong></a>
@@ -1677,7 +1694,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.dat.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.dat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -1705,7 +1722,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Witec.Graph</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Witec.Graph</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -1717,9 +1734,10 @@ Export Table in 3 separate files (Header, X-Axis, Y-Axis)
 </tbody>
 </table>
 </div>
-<div id="sec:manufacturer" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:manufacturer" class="anchor"></a><span class="header-section-number">9.2</span> File Import Functions by Manufacturer</h2>
+<div class="section level3" number="9.2">
+<h3 id="sec:manufacturer">
+<span class="header-section-number">9.2</span> File Import Functions by Manufacturer<a class="anchor" aria-label="anchor" href="#sec:manufacturer"></a>
+</h3>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1764,7 +1782,7 @@ Andor
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.asc.Andor</span>()</code>
+<code class="sourceCode r"><span class="fu">read.asc.Andor</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-asc-Andor">7.4</a>
@@ -1791,7 +1809,7 @@ Bruker
 Infrared Imaging
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI-Bruker"><strong>??</strong></a>
@@ -1838,7 +1856,7 @@ Cytospec
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.mat.Cytospec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.mat.Cytospec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-mat-Cytospec"><strong>??</strong></a>
@@ -1865,7 +1883,7 @@ Horiba
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -1892,7 +1910,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -1915,7 +1933,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba.xy</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba.xy</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -1938,7 +1956,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba.t</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba.t</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -1966,7 +1984,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.long</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.long</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:KaiserASCII"><strong>??</strong></a>
@@ -2011,7 +2029,7 @@ Kaiser
 Raman Map
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.KaiserMap</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.KaiserMap</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a>
@@ -2034,7 +2052,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.Kaiser</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.Kaiser</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -2056,7 +2074,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.KaiserLowHigh</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.KaiserLowHigh</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -2078,7 +2096,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -2104,7 +2122,7 @@ Matlab
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r">R.matlab<span class="op">::</span><span class="kw">readMat</span>()</code>
+<code class="sourceCode r">R.matlab<span class="sc">::</span><span class="fu">readMat</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:readMat">6.1</a>
@@ -2131,7 +2149,7 @@ Nicolet
 Infrared Imaging
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI.Nicolet</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI.Nicolet</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI-Nicolet"><strong>??</strong></a>
@@ -2158,7 +2176,7 @@ Perkin Elmer
 Fluorescence
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.PerkinElmer</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.PerkinElmer</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-PerkinElmer">8.1</a>
@@ -2186,7 +2204,7 @@ PerkinElmer
 Infrared
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -2214,7 +2232,7 @@ Princeton Instruments
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spe</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spe</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spe"><strong>??</strong></a>
@@ -2242,7 +2260,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Renishaw</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Renishaw</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -2264,7 +2282,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.zip.Renishaw</span>()</code>
+<code class="sourceCode r"><span class="fu">read.zip.Renishaw</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -2286,7 +2304,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -2308,7 +2326,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -2336,7 +2354,7 @@ Shimadzu
 GC,GC-MS
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -2359,7 +2377,7 @@ Shimadzu
 GCxGC-MS
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Shimadzu</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Shimadzu</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -2385,7 +2403,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.dat.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.dat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -2408,7 +2426,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -2431,7 +2449,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Witec.Graph</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Witec.Graph</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -2454,7 +2472,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.mat.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.mat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -2475,7 +2493,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -2496,7 +2514,7 @@ ASCII long
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.long</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.long</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:ascii">5</a>
@@ -2516,7 +2534,7 @@ ASCII wide
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.wide</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.wide</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:ascii">5</a>
@@ -2536,7 +2554,7 @@ JCAMP-DX
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -2556,7 +2574,7 @@ ENVI
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI"><strong>??</strong></a>
@@ -2576,7 +2594,7 @@ spc
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -2625,9 +2643,10 @@ matrix
 </tbody>
 </table>
 </div>
-<div id="sec:spectroscopy" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sec:spectroscopy" class="anchor"></a><span class="header-section-number">9.3</span> File Import Functions by Spectroscopy</h2>
+<div class="section level3" number="9.3">
+<h3 id="sec:spectroscopy">
+<span class="header-section-number">9.3</span> File Import Functions by Spectroscopy<a class="anchor" aria-label="anchor" href="#sec:spectroscopy"></a>
+</h3>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -2672,7 +2691,7 @@ Perkin Elmer
 Fluorescence
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.PerkinElmer</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.PerkinElmer</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-PerkinElmer">8.1</a>
@@ -2700,7 +2719,7 @@ Shimadzu
 GC,GC-MS
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -2728,7 +2747,7 @@ Shimadzu
 GCxGC-MS
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Shimadzu</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Shimadzu</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -2754,7 +2773,7 @@ PerkinElmer
 Infrared
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -2782,7 +2801,7 @@ Bruker
 Infrared Imaging
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI-Bruker"><strong>??</strong></a>
@@ -2825,7 +2844,7 @@ Nicolet
 Infrared Imaging
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI.Nicolet</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI.Nicolet</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI-Nicolet"><strong>??</strong></a>
@@ -2852,7 +2871,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -2875,7 +2894,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba.xy</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba.xy</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -2898,7 +2917,7 @@ Horiba Jobin Yvon
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Horiba.t</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Horiba.t</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Horiba">7.3</a>
@@ -2921,7 +2940,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Renishaw</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Renishaw</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -2943,7 +2962,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.zip.Renishaw</span>()</code>
+<code class="sourceCode r"><span class="fu">read.zip.Renishaw</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -2965,7 +2984,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.long</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.long</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:KaiserASCII"><strong>??</strong></a>
@@ -2988,7 +3007,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -3010,7 +3029,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.dat.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.dat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -3033,7 +3052,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -3056,7 +3075,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.Witec.Graph</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.Witec.Graph</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Witec"><strong>??</strong></a>
@@ -3079,7 +3098,7 @@ Andor
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.asc.Andor</span>()</code>
+<code class="sourceCode r"><span class="fu">read.asc.Andor</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-asc-Andor">7.4</a>
@@ -3101,7 +3120,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.mat.Witec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.mat.Witec</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -3144,7 +3163,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.Kaiser</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.Kaiser</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -3166,7 +3185,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.KaiserLowHigh</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.KaiserLowHigh</span>()</code>
 </td>
 <td style="text-align:left;">
 </td>
@@ -3188,7 +3207,7 @@ Kaiser
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -3210,7 +3229,7 @@ Renishaw
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-txt-Renishaw"><strong>??</strong></a>
@@ -3233,7 +3252,7 @@ Witec
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -3256,7 +3275,7 @@ Horiba
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -3278,7 +3297,7 @@ Princeton Instruments
 Raman
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spe</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spe</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spe"><strong>??</strong></a>
@@ -3306,7 +3325,7 @@ Kaiser
 Raman Map
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc.KaiserMap</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc.KaiserMap</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc-KaiserMap"><strong>??</strong></a>
@@ -3327,7 +3346,7 @@ ASCII long
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.long</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.long</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:ascii">5</a>
@@ -3347,7 +3366,7 @@ ASCII wide
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.txt.wide</span>()</code>
+<code class="sourceCode r"><span class="fu">read.txt.wide</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:ascii">5</a>
@@ -3367,7 +3386,7 @@ JCAMP-DX
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.jdx</span>()</code>
+<code class="sourceCode r"><span class="fu">read.jdx</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:jcamp-dx"><strong>??</strong></a>
@@ -3388,7 +3407,7 @@ Matlab
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r">R.matlab<span class="op">::</span><span class="kw">readMat</span>()</code>
+<code class="sourceCode r">R.matlab<span class="sc">::</span><span class="fu">readMat</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:readMat">6.1</a>
@@ -3409,7 +3428,7 @@ Cytospec
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.mat.Cytospec</span>()</code>
+<code class="sourceCode r"><span class="fu">read.mat.Cytospec</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-mat-Cytospec"><strong>??</strong></a>
@@ -3429,7 +3448,7 @@ ENVI
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.ENVI</span>()</code>
+<code class="sourceCode r"><span class="fu">read.ENVI</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-ENVI"><strong>??</strong></a>
@@ -3449,7 +3468,7 @@ spc
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-<code class="sourceCode r"><span class="kw">read.spc</span>()</code>
+<code class="sourceCode r"><span class="fu">read.spc</span>()</code>
 </td>
 <td style="text-align:left;">
 <a href="#sec:read-spc"><strong>??</strong></a>
@@ -3499,105 +3518,105 @@ matrix
 </table>
 </div>
 </div>
-<div id="session-info" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#session-info" class="anchor"></a>Session Info</h1>
+<div class="section level2">
+<h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+</h2>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; ─ Session info  🥋  ➰  📨   ─────────────────────────────────────────────────────────────────────</span>
-<span class="co">#&gt;  hash: martial arts uniform, curly loop, incoming envelope</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  setting  value</span>
-<span class="co">#&gt;  version  R version 4.1.2 (2021-11-01)</span>
-<span class="co">#&gt;  os       macOS Catalina 10.15.7</span>
-<span class="co">#&gt;  system   x86_64, darwin17.0</span>
-<span class="co">#&gt;  ui       X11</span>
-<span class="co">#&gt;  language (EN)</span>
-<span class="co">#&gt;  collate  en_US.UTF-8</span>
-<span class="co">#&gt;  ctype    en_US.UTF-8</span>
-<span class="co">#&gt;  tz       UTC</span>
-<span class="co">#&gt;  date     2021-12-01</span>
-<span class="co">#&gt;  pandoc   2.7.3 @ /usr/local/bin/ (via rmarkdown)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ─ Packages ───────────────────────────────────────────────────────────────────────────────────────</span>
-<span class="co">#&gt;  package        * version      date (UTC) lib source</span>
-<span class="co">#&gt;  backports        1.4.0        2021-11-23 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  bookdown         0.24         2021-09-02 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  bslib            0.3.1        2021-10-06 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  cli              3.1.0        2021-10-27 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  colorspace       2.0-2        2021-06-24 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  crayon           1.4.2        2021-10-29 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  digest           0.6.28       2021-09-23 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  dplyr            1.0.7        2021-06-18 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  ellipsis         0.3.2        2021-04-29 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  evaluate         0.14         2019-05-28 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  fansi            0.5.0        2021-05-25 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  fastmap          1.1.0        2021-01-25 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  generics         0.1.1        2021-10-25 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  ggplot2        * 3.3.5        2021-06-25 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  glue             1.5.1        2021-11-30 [1] CRAN (R 4.1.2)</span>
-<span class="co">#&gt;  gtable           0.3.0        2019-03-25 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  highr            0.9          2021-04-16 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  htmltools        0.5.2        2021-08-25 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  httr             1.4.2        2020-07-20 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  hyperSpec      * 0.200.0.9000 2021-11-30 [1] local</span>
-<span class="co">#&gt;  hySpc.testthat   0.2.1.9000   2021-11-30 [1] local</span>
-<span class="co">#&gt;  jpeg             0.1-9        2021-07-24 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  jquerylib        0.1.4        2021-04-26 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  jsonlite         1.7.2        2020-12-09 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  kableExtra       1.3.4        2021-02-20 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  knitr            1.36         2021-09-29 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  lattice        * 0.20-45      2021-09-22 [2] CRAN (R 4.1.2)</span>
-<span class="co">#&gt;  latticeExtra     0.6-29       2019-12-19 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  lazyeval         0.2.2        2019-03-15 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  lifecycle        1.0.1        2021-09-24 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  magrittr         2.0.1        2020-11-17 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  munsell          0.5.0        2018-06-12 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  pillar           1.6.4        2021-10-18 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  pkgconfig        2.0.3        2019-09-22 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  png              0.1-7        2013-12-03 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  purrr            0.3.4        2020-04-17 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  R.cache          0.15.0       2021-04-30 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  R.matlab       * 3.6.2        2018-09-27 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  R.methodsS3      1.8.1        2020-08-26 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  R.oo             1.24.0       2020-08-26 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  R.utils          2.11.0       2021-09-26 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  R6               2.5.1        2021-08-19 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  RColorBrewer     1.1-2        2014-12-07 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  rematch2         2.1.2        2020-05-01 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  rlang            0.4.12       2021-10-18 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  rmarkdown        2.11         2021-09-14 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  rstudioapi       0.13         2020-11-12 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  rvest            1.0.2        2021-10-16 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  sass             0.4.0        2021-05-12 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  scales           1.1.1        2020-05-11 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  sessioninfo      1.2.1        2021-11-02 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  stringi          1.7.6        2021-11-29 [1] CRAN (R 4.1.2)</span>
-<span class="co">#&gt;  stringr          1.4.0        2019-02-10 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  styler           1.6.2        2021-09-23 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  svglite          2.0.0        2021-02-20 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  systemfonts      1.0.3        2021-10-13 [1] CRAN (R 4.1.2)</span>
-<span class="co">#&gt;  testthat         3.1.0        2021-10-04 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  tibble           3.1.6        2021-11-07 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  tidyselect       1.1.1        2021-04-30 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  utf8             1.2.2        2021-07-24 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  vctrs            0.3.8        2021-04-29 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  viridisLite      0.4.0        2021-04-13 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  webshot          0.5.2        2019-11-22 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  withr            2.4.3        2021-11-30 [1] CRAN (R 4.1.2)</span>
-<span class="co">#&gt;  xfun             0.28         2021-11-04 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt;  xml2             1.3.3        2021-11-30 [1] CRAN (R 4.1.2)</span>
-<span class="co">#&gt;  yaml             2.2.1        2020-02-01 [1] CRAN (R 4.1.0)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  [1] /Users/runner/work/_temp/Library</span>
-<span class="co">#&gt;  [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ──────────────────────────────────────────────────────────────────────────────────────────────────</span></code></pre></div>
-
+<code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
+<span><span class="co">#&gt;  version  R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt;  os       Ubuntu 20.04.4 LTS</span></span>
+<span><span class="co">#&gt;  system   x86_64, linux-gnu</span></span>
+<span><span class="co">#&gt;  ui       X11</span></span>
+<span><span class="co">#&gt;  language en</span></span>
+<span><span class="co">#&gt;  collate  C.UTF-8</span></span>
+<span><span class="co">#&gt;  ctype    C.UTF-8</span></span>
+<span><span class="co">#&gt;  tz       UTC</span></span>
+<span><span class="co">#&gt;  date     2022-08-06</span></span>
+<span><span class="co">#&gt;  pandoc   2.14.2 @ /usr/bin/ (via rmarkdown)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">package       </span> <span style="color: #555555; font-style: italic;">*</span> <span style="color: #555555; font-style: italic;">version     </span> <span style="color: #555555; font-style: italic;">date (UTC)</span> <span style="color: #555555; font-style: italic;">lib</span> <span style="color: #555555; font-style: italic;">source</span></span></span>
+<span><span class="co">#&gt;  bookdown         0.27         <span style="color: #555555;">2022-06-14</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  brio             1.1.3        <span style="color: #555555;">2021-11-30</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  bslib            0.4.0        <span style="color: #555555;">2022-07-16</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  cachem           1.0.6        <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  cli              3.3.0        <span style="color: #555555;">2022-04-25</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  colorspace       2.0-3        <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  deldir           1.0-6        <span style="color: #555555;">2021-10-23</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  digest           0.6.29       <span style="color: #555555;">2021-12-01</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  dplyr            1.0.9        <span style="color: #555555;">2022-04-28</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  evaluate         0.15         <span style="color: #555555;">2022-02-18</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  fansi            1.0.3        <span style="color: #555555;">2022-03-24</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  fastmap          1.1.0        <span style="color: #555555;">2021-01-25</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  generics         0.1.3        <span style="color: #555555;">2022-07-05</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  ggplot2        * 3.3.6        <span style="color: #555555;">2022-05-03</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  glue             1.6.2        <span style="color: #555555;">2022-02-24</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  gtable           0.3.0        <span style="color: #555555;">2019-03-25</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  highr            0.9          <span style="color: #555555;">2021-04-16</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  htmltools        0.5.3        <span style="color: #555555;">2022-07-18</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  httr             1.4.3        <span style="color: #555555;">2022-05-04</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  hyperSpec      * <span style="color: #BB00BB; font-weight: bold;">0.200.0.9000</span> <span style="color: #555555;">2022-08-06</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">Custom</span></span></span>
+<span><span class="co">#&gt;  hySpc.testthat   0.2.1        <span style="color: #555555;">2020-06-24</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  interp           1.1-3        <span style="color: #555555;">2022-07-13</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  jpeg             0.1-9        <span style="color: #555555;">2021-07-24</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  jquerylib        0.1.4        <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  jsonlite         1.8.0        <span style="color: #555555;">2022-02-22</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  kableExtra       1.3.4        <span style="color: #555555;">2021-02-20</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  knitr            1.39         <span style="color: #555555;">2022-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  lattice        * 0.20-45      <span style="color: #555555;">2021-09-22</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.2.1)</span></span></span>
+<span><span class="co">#&gt;  latticeExtra     0.6-30       <span style="color: #555555;">2022-07-04</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  lazyeval         0.2.2        <span style="color: #555555;">2019-03-15</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  lifecycle        1.0.1        <span style="color: #555555;">2021-09-24</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  magrittr         2.0.3        <span style="color: #555555;">2022-03-30</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  munsell          0.5.0        <span style="color: #555555;">2018-06-12</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  pillar           1.8.0        <span style="color: #555555;">2022-07-18</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  pkgconfig        2.0.3        <span style="color: #555555;">2019-09-22</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  png              0.1-7        <span style="color: #555555;">2013-12-03</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  purrr            0.3.4        <span style="color: #555555;">2020-04-17</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  R.cache          0.16.0       <span style="color: #555555;">2022-07-21</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  R.matlab       * 3.6.2        <span style="color: #555555;">2018-09-27</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  R.methodsS3      1.8.2        <span style="color: #555555;">2022-06-13</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  R.oo             1.25.0       <span style="color: #555555;">2022-06-12</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  R.utils          2.12.0       <span style="color: #555555;">2022-06-28</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  R6               2.5.1        <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  RColorBrewer     1.1-3        <span style="color: #555555;">2022-04-03</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  Rcpp             1.0.9        <span style="color: #555555;">2022-07-08</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  rematch2         2.1.2        <span style="color: #555555;">2020-05-01</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  rlang            1.0.4        <span style="color: #555555;">2022-07-12</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  rmarkdown        2.14         <span style="color: #555555;">2022-04-25</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  rstudioapi       0.13         <span style="color: #555555;">2020-11-12</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  rvest            1.0.2        <span style="color: #555555;">2021-10-16</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  sass             0.4.2        <span style="color: #555555;">2022-07-16</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  scales           1.2.0        <span style="color: #555555;">2022-04-13</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  sessioninfo      1.2.2        <span style="color: #555555;">2021-12-06</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  stringi          1.7.8        <span style="color: #555555;">2022-07-11</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  stringr          1.4.0        <span style="color: #555555;">2019-02-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  styler           1.7.0        <span style="color: #555555;">2022-03-13</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  svglite          2.1.0        <span style="color: #555555;">2022-02-03</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  systemfonts      1.0.4        <span style="color: #555555;">2022-02-11</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  testthat         3.1.4        <span style="color: #555555;">2022-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  tibble           3.1.8        <span style="color: #555555;">2022-07-22</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  tidyselect       1.1.2        <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  utf8             1.2.2        <span style="color: #555555;">2021-07-24</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  vctrs            0.4.1        <span style="color: #555555;">2022-04-13</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  viridisLite      0.4.0        <span style="color: #555555;">2021-04-13</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  webshot          0.5.3        <span style="color: #555555;">2022-04-14</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  withr            2.5.0        <span style="color: #555555;">2022-03-03</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  xfun             0.31         <span style="color: #555555;">2022-05-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  xml2             1.3.3        <span style="color: #555555;">2021-11-30</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt;  yaml             2.3.5        <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [1] /tmp/RtmpTi4FRz/temp_libpath33934b3921d4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [2] /home/runner/work/_temp/Library</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [3] /opt/R/4.2.1/lib/R/library</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre></div>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 </div>
   </div>
 
@@ -3612,11 +3631,13 @@ matrix
 
 
       <footer><div class="copyright">
-  <p>Developed by Claudia Beleites, Erick Oduniyi, <a href="https://orcid.org/0000-0002-9500-5167">Vilmantas Gegzna</a>, <a href="http://academic.depauw.edu/hanson_web/">Bryan A. Hanson</a>, Marcel Dahms, Bjoern Egert.</p>
+  <p></p>
+<p>Developed by Claudia Beleites, Erick Oduniyi, <a href="https://orcid.org/0000-0002-9500-5167" class="external-link">Vilmantas Gegzna</a>, <a href="http://academic.depauw.edu/hanson_web/" class="external-link">Bryan A. Hanson</a>, Marcel Dahms, Bjoern Egert.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -3624,6 +3645,8 @@ matrix
 
   
 
+
+  
 
   </body>
 </html>
