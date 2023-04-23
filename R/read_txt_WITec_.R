@@ -44,7 +44,6 @@ read_txt_WITec <- function(file = stop("filename or connection needed"),
                            encoding = "unknown",
                            ...,
                            quiet = TRUE) {
-
   ## check for valid data connection
   check_con(file = file)
 

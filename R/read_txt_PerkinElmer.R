@@ -24,12 +24,9 @@
 #'
 #' spc_flu <- read_txt_PerkinElmer(f_flu, skip = 54)
 #' plot(spc_flu)
-
 read_txt_PerkinElmer <- function(file = stop("filenames needed"),
                                  ...,
                                  label = list()) {
-
-
   ##  set default labels
   label <- modifyList(
     list(
@@ -104,7 +101,7 @@ hySpc.testthat::test(read_txt_PerkinElmer) <- function() {
   })
 
   test_that("PerkinElmer .txt: labels are correct", {
-    expect_equal(spc@label$.wavelength, expression(lambda/nm))
+    expect_equal(spc@label$.wavelength, expression(lambda / nm))
     expect_equal(spc@label$spc, expression(I / a.u.))
     expect_equal(spc@label$filename, "filename")
   })

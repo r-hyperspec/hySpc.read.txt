@@ -70,7 +70,7 @@ hySpc.testthat::test(read_txt_WITec_Graph) <- function() {
     package = "hySpc.read.txt"
   )
 
-  expect_silent(spc <- read_txt_WITec_Graph(filename, encoding = 'latin1'))
+  expect_silent(spc <- read_txt_WITec_Graph(filename, encoding = "latin1"))
 
   n_wl <- nwl(spc)
   n_rows <- nrow(spc)
@@ -89,7 +89,7 @@ hySpc.testthat::test(read_txt_WITec_Graph) <- function() {
 
   test_that("WITec Graph .txt: labels are correct", {
     expect_equal(spc@label$.wavelength, NULL)
-    expect_equal(spc@label$spc, 'CCD cts')
+    expect_equal(spc@label$spc, "CCD cts")
     expect_equal(spc@label$filename, "filename")
   })
 

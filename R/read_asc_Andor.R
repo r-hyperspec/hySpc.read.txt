@@ -23,7 +23,6 @@
 #'
 read_asc_Andor <- function(file = stop("filename or connection needed"),
                            ..., quiet = TRUE, dec = ".", sep = ",") {
-
   ## check for valid data connection
   check_con(file = file)
 

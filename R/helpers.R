@@ -69,7 +69,6 @@ parse_hdr <- function(spc, hdr, hdr.label) {
 
 ### parsing map information
 parse_xy <- function(spc, hdr, hdr.label, points.per.line, lines.per.image, ...) {
-
   ## set points.per.line and lines.per.image, if at least one is set unequal NULL
   if (xor(
     !missing(points.per.line) && !is.null(points.per.line),

@@ -29,7 +29,6 @@
 #' @export
 #'
 read_txt_Shimadzu <- function(file, encoding = "", quiet = TRUE) {
-
   # A file consists of several sections ([Headers])
   # Each Section consists of:
   # [Header]
@@ -143,7 +142,6 @@ read_txt_Shimadzu <- function(file, encoding = "", quiet = TRUE) {
     specLi <- list() # list of all spectra in current header section
     for (i in 1:(length(pos4Li[[header]]) - 1))
     {
-
       # extract spectra
       start <- pos4Li[[header]][i] + 5 # data starts 5 rows below
       stop <- pos4Li[[header]][i + 1] - 1 # last data row before new Spectrum
@@ -279,4 +277,3 @@ hySpc.testthat::test(read_txt_Shimadzu) <- function() {
     expect_equal(spc[[3]][[56789, 2]], 72)
   })
 }
-

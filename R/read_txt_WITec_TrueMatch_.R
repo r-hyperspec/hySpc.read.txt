@@ -26,7 +26,6 @@
 #'
 #' @export
 read_txt_WITec_TrueMatch <- function(file, keys_2header = "all") {
-
   # Get file
   filename <- file
   file <- read_ini(filename)
@@ -70,8 +69,7 @@ read_txt_WITec_TrueMatch <- function(file, keys_2header = "all") {
     # Compare spectra
     if (s == 1) {
       wl <- data[, 1]
-    } else
-    if (!all(wl == data[, 1])) {
+    } else    if (!all(wl == data[, 1])) {
       stop("Spectrum ", s, " has different wavelength axis.")
     }
 
@@ -154,18 +152,18 @@ hySpc.testthat::test(read_txt_WITec_TrueMatch) <- function() {
   test_that("WITec TrueMatch .txt: extra data are correct", {
     # @data colnames
     expect_equal(colnames(spc), c("spc",
-                                  "Title", "ExcitationWavelength",
-                                  "SpectrumSize", "XDataKind", "Length",
-                                  "Width", "Aspect.Ratio", "Num.Pixels",
-                                  "Area", "Convex.Area", "Perimeter", "Convex.Perimeter",
-                                  "Feret.Max", "Feret.Min", "CE.Diameter", "Circularity",
-                                  "Convexity", "Solidity", "SE.Volume", "IsOversaturated",
-                                  "RamanSignal", "FluorescenceSignal",
-                                  "filename"))
+      "Title", "ExcitationWavelength",
+      "SpectrumSize", "XDataKind", "Length",
+      "Width", "Aspect.Ratio", "Num.Pixels",
+      "Area", "Convex.Area", "Perimeter", "Convex.Perimeter",
+      "Feret.Max", "Feret.Min", "CE.Diameter", "Circularity",
+      "Convexity", "Solidity", "SE.Volume", "IsOversaturated",
+      "RamanSignal", "FluorescenceSignal",
+      "filename"))
   })
 
   test_that("WITec TrueMatch .txt: labels are correct", {
-    expect_equal(spc@label$.wavelength, 'lambda/nm')
+    expect_equal(spc@label$.wavelength, "lambda/nm")
     expect_equal(spc@label$spc, NULL)
     expect_equal(spc@label$filename, "filename")
   })

@@ -82,7 +82,7 @@ hySpc.testthat::test(read_asc_PerkinElmer) <- function() {
   })
 
   test_that("PerkinElmer .asc: labels are correct", {
-    expect_equal(spc@label$.wavelength, expression(lambda/nm))
+    expect_equal(spc@label$.wavelength, expression(lambda / nm))
     expect_equal(spc@label$spc, expression("I / a.u."))
     expect_equal(spc@label$filename, "filename")
   })

@@ -69,7 +69,7 @@ source("vignette-default-settings.R", encoding = "UTF-8")
 
 # Temporary options ----------------------------------------------------------
 # Change the value of this option in "vignette-default-settings.R"
-show_reviewers_notes = getOption("show_reviewers_notes", TRUE)
+show_reviewers_notes <- getOption("show_reviewers_notes", TRUE)
 ```
 
 ```{r, echo=FALSE}
@@ -927,7 +927,7 @@ The rendered page looks a bit cluttered.
 
 ```{r read-fileformats-data, paged.print=FALSE, echo=FALSE, eval=TRUE}
 # ----------------------------------------------------------------------------
-options(knitr.kable.NA = '')
+options(knitr.kable.NA = "")
 # ----------------------------------------------------------------------------
 fileformats <- read.table("fileio--fileformats.txt", header = TRUE, sep = "|",
   strip.white = TRUE, na.strings = "")
@@ -938,7 +938,7 @@ fileformats$Function <-
   ifelse(
     is.na(fileformats$Function),
     "",
-   paste0("`", fileformats$Function, "()`{.r}")
+    paste0("`", fileformats$Function, "()`{.r}")
   )
 
 fileformats$Link <- ifelse(
@@ -955,9 +955,9 @@ rownames(fileformats) <- NULL
 
 ```{r by-format, paged.print=FALSE, echo=FALSE, eval=TRUE}
 kbl1 <- knitr::kable(
-  fileformats[order(fileformats$Format)[!is.na(fileformats$Format)], ]
-  , format = "html"
-  , row.names = FALSE
+  fileformats[order(fileformats$Format)[!is.na(fileformats$Format)], ],
+  format = "html",
+  row.names = FALSE
   # , caption = "File Import Functions by Format.  "
 )
 
@@ -969,9 +969,9 @@ kableExtra::pack_rows(kbl1, index = table(fileformats$Format))
 
 ```{r by-manufacturer, paged.print=FALSE, echo=FALSE, eval=TRUE}
 kbl2 <- knitr::kable(
-  fileformats[order(fileformats$Manufacturer), ]
-  , format = "html"
-  , row.names = FALSE
+  fileformats[order(fileformats$Manufacturer), ],
+  format = "html",
+  row.names = FALSE
   # , caption = "File Import Functions by Manufacturer.  "
 )
 
@@ -983,9 +983,9 @@ kableExtra::pack_rows(kbl2, index = table(fileformats$Manufacturer))
 
 ```{r by-spectroscopy, paged.print=FALSE, echo=FALSE, eval=TRUE}
 kbl <- knitr::kable(
-  fileformats[order(fileformats$Spectroscopy), ]
-  , format = "html"
-  , row.names = FALSE
+  fileformats[order(fileformats$Spectroscopy), ],
+  format = "html",
+  row.names = FALSE
   # , caption = "File Import Functions by Spectroscopy.  "
 )
 
